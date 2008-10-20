@@ -47,6 +47,12 @@ sub list
 }
 
 
+sub packages
+{
+    GENESIS3::packages();
+}
+
+
 package GENESIS3::Help;
 
 
@@ -120,13 +126,23 @@ our $all_packages
       };
 
 
+our $all_cpan_packages
+    = {
+       python => {},
+      };
+
 sub header
 {
     print "Welcome to the GENESIS 3 shell\n";
+}
 
+
+sub packages
+{
     use Data::Dumper;
 
-    print "Profile follows:\n" . Dumper($all_packages);
+    print "Core packages:\n" . Dumper($all_packages);
+    print "Other packages:\n" . Dumper($all_cpan_packages);
 }
 
 
@@ -147,12 +163,26 @@ sub profile_environment
 
 	if ($@ eq '')
 	{
-	    $package->{loaded} = 'loaded';
+	    $package->{status} = 'loaded';
 	}
 	else
 	{
-	    $package->{loaded} = $@;
+	    $package->{status} = $@;
 	}
+    }
+
+    eval
+    {
+	require GENESIS3::Python;
+    };
+
+    if ($@)
+    {
+	$all_cpan_packages->{python}->{status} = $@;
+    }
+    else
+    {
+	$all_cpan_packages->{python}->{status} = 'loaded';
     }
 
     return 1;
