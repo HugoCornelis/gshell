@@ -31,8 +31,10 @@ sub list
     }
     else
     {
+	my $subs = [ map { s/^list_// ; $_ } grep { /^list_/ } keys %{(\%{"::"})->{"GENESIS3::"}->{"Help::"}}, ];
+
 	print "synopsis: list <type>\n";
-	print "synopsis: <type> must be one of 'commands', 'packages', or 'tokens'\n";
+	print "synopsis: <type> must be one of " . (join ', ', @$subs) . "\n";
 
 	return 'incorrect usage';
     }
