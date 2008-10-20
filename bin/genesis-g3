@@ -1,0 +1,62 @@
+#!/usr/bin/perl -w
+#!/usr/bin/perl -d:ptkdb -w
+#
+
+
+use strict;
+
+
+BEGIN
+{
+    #! make check
+
+    push @INC, '../perl';
+
+    #! make distcheck
+
+    push @INC, '../../perl';
+
+    #! normal run
+
+    push @INC, './perl';
+
+    #! after install
+
+    push @INC, '/usr/local/glue/swig/perl';
+}
+
+
+use GENESIS3;
+
+use Data::Dumper;
+
+use Term::ReadLine;
+
+
+my $historyfile = $ENV{HOME} . '/.phistory';
+
+my $term = Term::ReadLine->new('genesis > ');
+
+if (open H, $historyfile)
+{
+    @h = <H>;
+    chomp @h;
+    close H;
+    $h{$_} = 1 foreach @h;
+    $term->addhistory($_) foreach keys %h;
+}
+
+while ( defined ($_ = $term->readline("genesis > ")) )
+{
+    my $res = eval($_);
+    warn $@ if $@;
+    unless ($@)
+    {
+	open H, ">>$historyfile";
+	print H "$_\n";
+	close H;
+	print "\n", Data::Dumper->Dump([$res], ['Result']);
+    }
+    $term->addhistory($_) if /\S/;
+}
+

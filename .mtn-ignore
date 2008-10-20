@@ -1,0 +1,11 @@
+^Makefile$
+^config.log$
+^config.status$
+^example.out$
+^html
+^installed
+^output
+^tests/html
+^tests/output
+gz$
+_Inline
