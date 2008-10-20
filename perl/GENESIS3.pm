@@ -21,12 +21,6 @@ sub list
 
     no strict "refs";
 
-    my $types
-	= {
-	   commands => 1,
-	   tokens => 1,
-	  };
-
     if (exists ((\%{"::"})->{"GENESIS3::"}->{"Help::"}->{"list_$type"}))
     {
 	my $sub_name = "GENESIS3::Help::list_$type";
@@ -38,18 +32,12 @@ sub list
     else
     {
 	print "synopsis: list <type>\n";
-	print "synopsis: <type> must be one of 'commands' or 'tokens'\n";
+	print "synopsis: <type> must be one of 'commands', 'packages', or 'tokens'\n";
 
 	return 'incorrect usage';
     }
 
     return undef;
-}
-
-
-sub packages
-{
-    GENESIS3::packages();
 }
 
 
@@ -63,6 +51,21 @@ sub list_commands
     print "all commands\n";
 
     print foreach map { "$_\n" } @$commands;
+}
+
+
+sub list_packages
+{
+    use Data::Dumper;
+
+    use YAML;
+
+    print Dump(
+	       {
+		"Core packages" => $GENESIS3::all_packages,
+		"Other packages" => $GENESIS3::all_cpan_packages,
+	       },
+	      );
 }
 
 
@@ -134,15 +137,6 @@ our $all_cpan_packages
 sub header
 {
     print "Welcome to the GENESIS 3 shell\n";
-}
-
-
-sub packages
-{
-    use Data::Dumper;
-
-    print "Core packages:\n" . Dumper($all_packages);
-    print "Other packages:\n" . Dumper($all_cpan_packages);
 }
 
 
