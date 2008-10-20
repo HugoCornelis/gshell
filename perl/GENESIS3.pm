@@ -27,27 +27,23 @@ sub list
 	   tokens => 1,
 	  };
 
-    my $sub_name = "GENESIS3::Help::ListCommands::list_$type";
-
     if (exists ((\%{"::"})->{"GENESIS3::"}->{"Help::"}->{"ListCommands::"}->{"list_$type"}))
-
-#     if (\&$sub_name)
     {
-    }
-    else
-#     if (!$types->{$type})
-    {
-	print "synopsis: list <type>\n";
-	print "synopsis: <type> must be one of 'commands' or 'tokens'\n";
+	my $sub_name = "GENESIS3::Help::ListCommands::list_$type";
 
-	return 1;
-    }
-
-    {
 	no strict "refs";
 
 	&$sub_name();
     }
+    else
+    {
+	print "synopsis: list <type>\n";
+	print "synopsis: <type> must be one of 'commands' or 'tokens'\n";
+
+	return 'incorrect usage';
+    }
+
+    return undef;
 }
 
 
@@ -66,15 +62,48 @@ sub list_commands
 
 sub list_tokens
 {
-    my $tokens;
+    my $filename = "$GENESIS3::configuration->{symbols}->{directory}$GENESIS3::configuration->{symbols}->{filename}";
 
-    print "all tokens\n";
+    my $symbols_definitions = do $filename;
 
-    print foreach map { "$_\n" } @$tokens;
+    my $class_hierarchy = $symbols_definitions->{class_hierarchy};
+
+    my $tokens
+	= [
+	   sort
+	   map
+	   {
+	       s/^TOKEN_// ; $_
+	   }
+	   grep
+	   {
+	       defined
+	   }
+	   map
+	   {
+	       my $class = $class_hierarchy->{$_};
+
+	       $class->{token_name};
+	   }
+	   keys %$class_hierarchy,
+	  ];
+
+    print "all tokens:\n";
+
+    print foreach map { "  - $_\n" } @$tokens;
 }
 
 
 package GENESIS3;
+
+
+our $configuration
+    = {
+       symbols => {
+		   directory => "/usr/local/neurospaces/instrumentor/hierarchy/",
+		   filename => "symbols",
+		  },
+      };
 
 
 #t this info should be coming from the installer script.
