@@ -27,9 +27,9 @@ sub list
 	   tokens => 1,
 	  };
 
-    if (exists ((\%{"::"})->{"GENESIS3::"}->{"Help::"}->{"ListCommands::"}->{"list_$type"}))
+    if (exists ((\%{"::"})->{"GENESIS3::"}->{"Help::"}->{"list_$type"}))
     {
-	my $sub_name = "GENESIS3::Help::ListCommands::list_$type";
+	my $sub_name = "GENESIS3::Help::list_$type";
 
 	no strict "refs";
 
@@ -47,7 +47,7 @@ sub list
 }
 
 
-package GENESIS3::Help::ListCommands;
+package GENESIS3::Help;
 
 
 sub list_commands
