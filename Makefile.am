@@ -14,7 +14,7 @@
 ##############################################################################
 
 
-SUBDIRS = 
+SUBDIRS = perl tests
 
 dist_bin_SCRIPTS = \
 	bin/genesis-g3

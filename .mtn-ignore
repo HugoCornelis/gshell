@@ -1,4 +1,4 @@
-^Makefile$
+Makefile$
 ^config.log$
 ^config.status$
 ^example.out$
@@ -7,5 +7,5 @@
 ^output
 ^tests/html
 ^tests/output
-gz$
 _Inline
+gz$

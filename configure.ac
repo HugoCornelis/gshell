@@ -18,7 +18,7 @@ dnl ##########################################################################
 AC_PREREQ(2.59)
 
 # $Format: "AC_INIT(${package}, ${label}, ${email})"$
-AC_INIT(installer, python-2, hugo.cornelis@gmail.com)
+AC_INIT(gshell, python-2, hugo.cornelis@gmail.com)
 
 AC_CONFIG_SRCDIR([Makefile.am])
 
@@ -27,7 +27,13 @@ dnl dnl all subdirs
 dnl AC_CONFIG_SUBDIRS()
 
 # $Format: "AM_INIT_AUTOMAKE(${package}, ${label})"$
-AM_INIT_AUTOMAKE(installer, python-2)
+AM_INIT_AUTOMAKE(gshell, python-2)
+
+PERL_MODULES=`(cd perl && find . -name "*.pm" -printf "%p ")`
+AC_SUBST(PERL_MODULES)
+
+PERL_DATA=`(cd perl && find . -name "numbers-7x11.txt" -printf "%p ")`
+AC_SUBST(PERL_DATA)
 
 # Checks for programs.
 
@@ -45,6 +51,9 @@ TEST_SPECIFICATION_FILES=`echo -n "tests/introduction.html " && find tests/speci
 AC_SUBST(TEST_SPECIFICATION_FILES)
 
 
-AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([Makefile
+		 perl/Makefile
+		 tests/Makefile
+		])
 AC_OUTPUT
 
