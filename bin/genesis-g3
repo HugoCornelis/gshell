@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl
 #!/usr/bin/perl -d:ptkdb -w
 #
 
@@ -39,24 +39,36 @@ my $term = Term::ReadLine->new('genesis > ');
 
 if (open H, $historyfile)
 {
-    @h = <H>;
+    my %h;
+
+    my @h = <H>;
     chomp @h;
     close H;
+
     $h{$_} = 1 foreach @h;
     $term->addhistory($_) foreach keys %h;
 }
 
 while ( defined ($_ = $term->readline("genesis > ")) )
 {
-    my $res = eval($_);
+    my $result;
+
+    {
+	no strict;
+
+	$result = eval($_);
+    }
+
     warn $@ if $@;
+
     unless ($@)
     {
 	open H, ">>$historyfile";
 	print H "$_\n";
 	close H;
-	print "\n", Data::Dumper->Dump([$res], ['Result']);
+	print "\n", Data::Dumper->Dump([$result], ['Result']);
     }
+
     $term->addhistory($_) if /\S/;
 }
 
