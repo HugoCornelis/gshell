@@ -159,7 +159,15 @@ sub profile_environment
 }
 
 
-profile_environment()
-    && header();
+sub version
+{
+    # $Format: "    my $version=\"${package}-${label}\";"$
+    my $version="gshell-python-2";
+
+    return $version;
+}
+
+
+profile_environment();
 
 

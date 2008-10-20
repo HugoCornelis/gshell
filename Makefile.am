@@ -52,5 +52,3 @@ html-upload: html-upload-prepare
 
 test: check
 
-TESTS = $(srcdir)/tests/neurospaces_harness
-

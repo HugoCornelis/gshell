@@ -30,45 +30,122 @@ use GENESIS3;
 
 use Data::Dumper;
 
+use Getopt::Long;
+
 use Term::ReadLine;
 
 
-my $historyfile = $ENV{HOME} . '/.phistory';
+$SIG{__DIE__}
+    = sub {
+	use Carp;
 
-my $term = Term::ReadLine->new('genesis > ');
+	confess @_;
+    };
 
-if (open H, $historyfile)
+
+our $option_verbose;
+
+my $exit_code = 0;
+
+
+sub loop
 {
-    my %h;
+    GENESIS3::header();
 
-    my @h = <H>;
-    chomp @h;
-    close H;
+    my $historyfile = $ENV{HOME} . '/.phistory';
 
-    $h{$_} = 1 foreach @h;
-    $term->addhistory($_) foreach keys %h;
-}
+    my $term = Term::ReadLine->new('genesis > ');
 
-while ( defined ($_ = $term->readline("genesis > ")) )
-{
-    my $result;
-
+    if (open H, $historyfile)
     {
-	no strict;
+	my %h;
 
-	$result = eval($_);
-    }
-
-    warn $@ if $@;
-
-    unless ($@)
-    {
-	open H, ">>$historyfile";
-	print H "$_\n";
+	my @h = <H>;
+	chomp @h;
 	close H;
-	print "\n", Data::Dumper->Dump([$result], ['Result']);
+
+	$h{$_} = 1 foreach @h;
+	$term->addhistory($_) foreach keys %h;
     }
 
-    $term->addhistory($_) if /\S/;
+    while ( defined ($_ = $term->readline("genesis > ")) )
+    {
+	my $result;
+
+	{
+	    no strict;
+
+	    $result = eval($_);
+	}
+
+	warn $@ if $@;
+
+	unless ($@)
+	{
+	    open H, ">>$historyfile";
+	    print H "$_\n";
+	    close H;
+	    print "\n", Data::Dumper->Dump([$result], ['Result']);
+	}
+
+	$term->addhistory($_) if /\S/;
+    }
 }
+
+
+sub main
+{
+    read_cmd_line();
+
+    loop();
+}
+
+
+sub read_cmd_line
+{
+    my $option_help;
+    my $option_version;
+
+    my $result
+	= GetOptions
+	    (
+	     "help!" => \$option_help,
+	     "v|verbose+" => \$option_verbose,
+	     "version" => \$option_version,
+	    );
+
+    if ($option_version)
+    {
+	my $version = GENESIS3::version();
+
+	print $version . "\n";
+
+	exit 1;
+    }
+
+    if ($option_help)
+    {
+	print
+	    "
+$0 <options>
+
+$0: configure the heccer solver.
+
+options:
+    help               print usage information.
+    verbose            set verbosity level.
+    version            give version information.
+";
+
+	exit 1;
+    }
+
+}
+
+
+main();
+
+
+exit $exit_code;
+
 
