@@ -19,6 +19,13 @@ my $test
 						   write => undef,
 						  },
 						  {
+						   description => "Can we get a useful synopsis for the list command ?",
+						   read => "synopsis: list <type>
+synopsis: <type> must be one of commands, packages, tokens
+",
+						   write => 'list',
+						  },
+						  {
 						   description => "Can we find all tokens ?",
 						   read => "
 all tokens:
@@ -46,6 +53,22 @@ all tokens:
   - SEGMENT_GROUP
 ",
 						   write => 'list tokens',
+						  },
+						  {
+						   description => "Can we find all packages ?",
+						   read => "
+Core packages:
+  SSP:
+    status: loaded
+  heccer:
+    module: Heccer
+    status: loaded
+  model-container:
+    module: Neurospaces
+    status: loaded
+Other packages:
+",
+						   write => 'list packages',
 						  },
 						 ],
 				description => "help commands",
