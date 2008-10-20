@@ -6,7 +6,7 @@
 use strict;
 
 
-package main;
+package GENESIS3::Commands;
 
 
 sub help
@@ -43,16 +43,33 @@ sub list
 }
 
 
+sub sh
+{
+    return system @_;
+}
+
+{
+    no strict "refs";
+
+    foreach my $command (keys %{(\%{"::"})->{"GENESIS3::"}->{"Commands::"}})
+    {
+	(\%{"::"})->{$command} = (\%{"::"})->{"GENESIS3::"}->{"Commands::"}->{$command};
+    }
+}
+
+
 package GENESIS3::Help;
 
 
 sub list_commands
 {
-    my $commands = [ 'blabla', ];
+    no strict "refs";
 
-    print "all commands\n";
+    my $commands = [ grep { /^[a-z]+$/ } (keys %{(\%{"::"})->{"GENESIS3::"}->{"Commands::"}}), ];
 
-    print foreach map { "$_\n" } @$commands;
+    print "all commands:\n";
+
+    print foreach map { "  - $_\n" } @$commands;
 }
 
 
@@ -188,7 +205,7 @@ sub profile_environment
 sub version
 {
     # $Format: "    my $version=\"${package}-${label}\";"$
-    my $version="gshell-888bbddf01490ddda2b3631cc2a2cafce1308470-0";
+    my $version="gshell-python-2";
 
     return $version;
 }
