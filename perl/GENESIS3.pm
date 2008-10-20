@@ -188,7 +188,7 @@ sub profile_environment
 sub version
 {
     # $Format: "    my $version=\"${package}-${label}\";"$
-    my $version="gshell-python-2";
+    my $version="gshell-888bbddf01490ddda2b3631cc2a2cafce1308470-0";
 
     return $version;
 }
