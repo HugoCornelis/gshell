@@ -26,9 +26,23 @@ synopsis: <type> must be one of commands, packages, tokens
 						   write => 'list',
 						  },
 						  {
+						   description => "Can we find all commands ?",
+						   read => "all commands:
+  - ce
+  - help
+  - list
+  - list_elements
+  - ndf_load
+  - pwe
+  - quit
+  - run
+  - sh
+",
+						   write => 'list commands',
+						  },
+						  {
 						   description => "Can we find all tokens ?",
-						   read => "
-all tokens:
+						   read => "all tokens:
   - ALGORITHM
   - ATTACHMENT_POINT
   - AXON_HILLOCK
@@ -56,8 +70,7 @@ all tokens:
 						  },
 						  {
 						   description => "Can we find all packages ?",
-						   read => "
-Core packages:
+						   read => "Core packages:
   SSP:
     status: loaded
   heccer:

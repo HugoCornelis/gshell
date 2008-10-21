@@ -94,11 +94,32 @@ sub list
 }
 
 
-sub load_ndf
+sub ndf_load
 {
     my $filename = shift;
 
     $GENESIS3::model_container->read(undef, [ 'genesis-g3', $filename, ], );
+}
+
+
+sub run
+{
+    my $model_name = shift;
+
+    my $time = shift;
+
+    if (!$model_name || !$time)
+    {
+	return '*** Error: <model_name> and <time> are required';
+    }
+
+    if ($time !~ /[0-9]*(\.[0-9]+)?(e(\+|-)?[0-9]+)?/
+	|| $time eq '')
+    {
+	return '*** Error: <time> must be numeric';
+    }
+
+    #t construct ssp schedule based on the cell buitin.
 }
 
 
@@ -142,7 +163,7 @@ sub list_commands
 
     print "all commands:\n";
 
-    print foreach map { "  - $_\n" } @$commands;
+    print foreach sort map { "  - $_\n" } @$commands;
 }
 
 

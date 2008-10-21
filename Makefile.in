@@ -109,7 +109,7 @@ TEST_SPECIFICATION_FILES = @TEST_SPECIFICATION_FILES@
 VERSION = @VERSION@
 ac_ct_STRIP = @ac_ct_STRIP@
 am__leading_dot = @am__leading_dot@
-#	release-expand installer des 10 0 des-10 hugo.cornelis@gmail.com --verbose
+#	release-expand gshell des 10 0 des-10 hugo.cornelis@gmail.com --verbose
 am__tar = ${AMTAR} chf - --format=posix "$$tardir"
 am__untar = @am__untar@
 bindir = @bindir@
