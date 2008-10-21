@@ -70,13 +70,18 @@ sub loop
 
     while ( defined ($_ = $term->readline("genesis > ")) )
     {
-	my $result;
+# 	{
+# 	    no strict;
+# 	    $result = eval($_);
+# 	}
 
-	{
-	    no strict;
+	my $line = $_;
 
-	    $result = eval($_);
-	}
+	my $arguments = [ split '\s+', $line, ];
+
+	my $quoted_line = join ' ', $arguments->[0], map { "'$_'" } (@$arguments)[1 .. $#$arguments];
+
+	my $result = eval($quoted_line);
 
 	warn $@ if $@;
 
@@ -85,7 +90,7 @@ sub loop
 	    open H, ">>$historyfile";
 	    print H "$_\n";
 	    close H;
-	    print "\n", Data::Dumper->Dump([$result], ['Result']);
+	    print Data::Dumper->Dump([$result], ['Result']);
 	}
 
 	$term->addhistory($_) if /\S/;

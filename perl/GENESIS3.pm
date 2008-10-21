@@ -9,9 +9,54 @@ use strict;
 package GENESIS3::Commands;
 
 
+our $working_element = '/';
+
+
+sub ce
+{
+    my $path = shift;
+
+    $path =~ s/\s*//g;
+
+    my $stack = [ split '/', $path, ];
+
+    while (my $element = pop @$stack)
+    {
+	if ($element eq '.'
+	    or $element eq '')
+	{
+	}
+	elsif ($element eq '..')
+	{
+	    $working_element =~ s((.*)/.*)($1);
+	}
+	else
+	{
+	    $working_element .= $element;
+	}
+    }
+}
+
+
+sub pwe
+{
+    print "$working_element\n";
+}
+
+
 sub help
 {
     print "no help yet\n";
+}
+
+
+sub list_elements
+{
+    my $elements = $GENESIS3::model_container->list_elements($working_element);
+
+    use YAML;
+
+    print Dump( { $working_element => $elements, }, );
 }
 
 
@@ -31,15 +76,29 @@ sub list
     }
     else
     {
-	my $subs = [ map { s/^list_// ; $_ } grep { /^list_/ } keys %{(\%{"::"})->{"GENESIS3::"}->{"Help::"}}, ];
+	my $subs
+	    = [
+	       map { s/^list_// ; $_ }
+	       grep { /^list_/ }
+	       keys %{(\%{"::"})->{"GENESIS3::"}->{"Help::"}},
+	      ];
 
 	print "synopsis: list <type>\n";
 	print "synopsis: <type> must be one of " . (join ', ', @$subs) . "\n";
+	print "synopsis: (you gave $type)\n";
 
-	return 'incorrect usage';
+	return '*** Error: incorrect usage';
     }
 
-    return undef;
+    return '*** Ok';
+}
+
+
+sub load_ndf
+{
+    my $filename = shift;
+
+    $GENESIS3::model_container->read(undef, [ 'genesis-g3', $filename, ], );
 }
 
 
@@ -47,6 +106,20 @@ sub sh
 {
     return system @_;
 }
+
+
+sub quit
+{
+    my $exit_code = shift;
+
+    if (!defined $exit_code)
+    {
+	$exit_code = 0;
+    }
+
+    exit $exit_code;
+}
+
 
 {
     no strict "refs";
@@ -65,7 +138,7 @@ sub list_commands
 {
     no strict "refs";
 
-    my $commands = [ grep { /^[a-z]+$/ } (keys %{(\%{"::"})->{"GENESIS3::"}->{"Commands::"}}), ];
+    my $commands = [ grep { /^[a-z_0-9]+$/ } (keys %{(\%{"::"})->{"GENESIS3::"}->{"Commands::"}}), ];
 
     print "all commands:\n";
 
@@ -153,9 +226,36 @@ our $all_cpan_packages
        python => {},
       };
 
+
+our $model_container;
+
+
 sub header
 {
     print "Welcome to the GENESIS 3 shell\n";
+}
+
+
+sub initialize
+{
+    require Heccer;
+
+    require Neurospaces;
+
+    require SSP;
+
+    my $result = 1;
+
+    $model_container = Neurospaces->new();
+
+    if (!$model_container)
+    {
+	print "Cannot instantiate a model container\n";
+
+	$result = 0;
+    }
+
+    return $result;
 }
 
 
@@ -211,6 +311,7 @@ sub version
 }
 
 
-profile_environment();
+profile_environment()
+    && initialize();
 
 
