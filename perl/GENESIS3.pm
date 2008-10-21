@@ -238,12 +238,6 @@ sub header
 
 sub initialize
 {
-    require Heccer;
-
-    require Neurospaces;
-
-    require SSP;
-
     my $result = 1;
 
     $model_container = Neurospaces->new();

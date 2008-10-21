@@ -90,7 +90,14 @@ sub loop
 	    open H, ">>$historyfile";
 	    print H "$_\n";
 	    close H;
-	    print Data::Dumper->Dump([$result], ['Result']);
+
+	    if ($result =~ /^\*\*\* Ok/)
+	    {
+	    }
+	    else
+	    {
+		print Data::Dumper->Dump( [ $result, ], [ 'Result', ]);
+	    }
 	}
 
 	$term->addhistory($_) if /\S/;
