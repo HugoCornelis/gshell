@@ -12,6 +12,222 @@ package GENESIS3::Commands;
 our $working_element = '/';
 
 
+my $example_schedule
+    = "--- !!perl/hash:SSP
+application_classes:
+  analyzers:
+    default:
+      - method: analyze
+    priority: 95
+  finishers:
+    default:
+      - method: finish
+    priority: 140
+  initializers:
+    default:
+      - method: compile
+      - method: instantiate_inputs
+      - method: instantiate_outputs
+      - method: initiate
+    priority: 80
+  modifiers:
+    default: []
+    priority: 50
+  results:
+    default: []
+    priority: 170
+  services:
+    default:
+      - method: instantiate_services
+    priority: 20
+  simulation:
+    default: []
+    priority: 110
+apply:
+  simulation:
+    - arguments:
+        - 2500
+        - verbose: 2
+      method: steps
+models:
+  - granular_parameters:
+      - component_name: /purk_test/segments/soma
+        field: INJECT
+        value: 2e-09
+    modelname: /purk_test
+    solverclass: heccer
+name: purk_test
+outputclasses:
+  double_2_ascii:
+    module_name: Heccer
+    options:
+      filename: /tmp/output
+    package: Heccer::Output
+outputs:
+  - component_name: /purk_test/segments/soma
+    field: Vm
+    outputclass: double_2_ascii
+  - component_name: /purk_test/segments/soma/ca_pool
+    field: Ca
+    outputclass: double_2_ascii
+  - component_name: /purk_test/segments/soma/km
+    field: state_n
+    outputclass: double_2_ascii
+  - component_name: /purk_test/segments/soma/kdr
+    field: state_m
+    outputclass: double_2_ascii
+  - component_name: /purk_test/segments/soma/kdr
+    field: state_h
+    outputclass: double_2_ascii
+  - component_name: /purk_test/segments/soma/ka
+    field: state_m
+    outputclass: double_2_ascii
+  - component_name: /purk_test/segments/soma/ka
+    field: state_h
+    outputclass: double_2_ascii
+  - component_name: /purk_test/segments/soma/kh
+    field: state_m
+    outputclass: double_2_ascii
+  - component_name: /purk_test/segments/soma/kh
+    field: state_h
+    outputclass: double_2_ascii
+  - component_name: /purk_test/segments/soma/nap
+    field: state_n
+    outputclass: double_2_ascii
+  - component_name: /purk_test/segments/soma/naf
+    field: state_m
+    outputclass: double_2_ascii
+  - component_name: /purk_test/segments/soma/naf
+    field: state_h
+    outputclass: double_2_ascii
+  - component_name: /purk_test/segments/soma/cat/cat_gate_activation
+    field: state_m
+    outputclass: double_2_ascii
+  - component_name: /purk_test/segments/soma/cat/cat_gate_inactivation
+    field: state_h
+    outputclass: double_2_ascii
+  - component_name: '/purk_test/segments/main[0]'
+    field: Vm
+    outputclass: double_2_ascii
+  - component_name: '/purk_test/segments/main[0]/ca_pool'
+    field: Ca
+    outputclass: double_2_ascii
+  - component_name: '/purk_test/segments/main[0]/cat/cat_gate_activation'
+    field: state_m
+    outputclass: double_2_ascii
+  - component_name: '/purk_test/segments/main[0]/cat/cat_gate_inactivation'
+    field: state_h
+    outputclass: double_2_ascii
+  - component_name: '/purk_test/segments/main[0]/cap/cap_gate_activation'
+    field: state_m
+    outputclass: double_2_ascii
+  - component_name: '/purk_test/segments/main[0]/cap/cap_gate_inactivation'
+    field: state_h
+    outputclass: double_2_ascii
+  - component_name: '/purk_test/segments/main[0]/km'
+    field: state_n
+    outputclass: double_2_ascii
+  - component_name: '/purk_test/segments/main[0]/kdr'
+    field: state_m
+    outputclass: double_2_ascii
+  - component_name: '/purk_test/segments/main[0]/kdr'
+    field: state_h
+    outputclass: double_2_ascii
+  - component_name: '/purk_test/segments/main[0]/ka'
+    field: state_m
+    outputclass: double_2_ascii
+  - component_name: '/purk_test/segments/main[0]/ka'
+    field: state_h
+    outputclass: double_2_ascii
+  - component_name: '/purk_test/segments/main[0]/kc'
+    field: state_m
+    outputclass: double_2_ascii
+  - component_name: '/purk_test/segments/main[0]/kc'
+    field: state_h
+    outputclass: double_2_ascii
+  - component_name: '/purk_test/segments/main[0]/k2'
+    field: state_m
+    outputclass: double_2_ascii
+  - component_name: '/purk_test/segments/main[0]/k2'
+    field: state_h
+    outputclass: double_2_ascii
+services:
+  neurospaces:
+    initializers:
+      - arguments:
+          -
+            - tests/perl/purk_test
+            - -P
+            - tests/cells/purk_test.ndf
+        method: read
+    module_name: Neurospaces
+solverclasses:
+  heccer:
+    constructor_settings:
+      configuration:
+        reporting:
+          granularity: 1000
+          tested_things: 6225920
+      dStep: 2e-05
+    module_name: Heccer
+    service_name: neurospaces
+";
+
+
+my $time_step = 2e-05;
+
+my $outputs = [];
+
+my $models = [];
+
+
+sub compile
+{
+    my $schedule_yaml
+	= "--- !!perl/hash:SSP
+apply:
+  simulation:
+    - arguments:
+        - 2500
+        - verbose: 2
+      method: steps
+models:
+  - granular_parameters:
+      - component_name: /purk_test/segments/soma
+        field: INJECT
+        value: 2e-09
+    modelname: /purk_test
+    solverclass: heccer
+name: GENESIS3 schedule
+outputclasses:
+  double_2_ascii:
+    module_name: Heccer
+    options:
+      filename: /tmp/output
+    package: Heccer::Output
+services:
+  neurospaces:
+    initializers:
+      - arguments:
+          -
+            - GENESIS3
+        method: empty
+    module_name: Neurospaces
+solverclasses:
+  heccer:
+    constructor_settings:
+      dStep: $time_step
+    module_name: Heccer
+    service_name: neurospaces
+";
+
+    use YAML;
+
+    my $schedule = Load($schedule_yaml);
+
+}
+
+
 sub ce
 {
     my $path = shift;
@@ -102,6 +318,20 @@ sub ndf_load
 }
 
 
+sub output
+{
+    my $component_name = shift;
+
+    my $field = shift;
+
+#     my $context = SwiggableNeurospaces::PidinStackParse($component_name);
+
+#     $context->PidinStackLookupTopSymbol();
+
+#     my $serial = $context->PidinStackToSerial();
+}
+
+
 sub run
 {
     my $model_name = shift;
@@ -167,7 +397,7 @@ sub list_commands
 }
 
 
-sub list_packages
+sub list_components
 {
     use Data::Dumper;
 
@@ -175,8 +405,8 @@ sub list_packages
 
     print Dump(
 	       {
-		"Core packages" => $GENESIS3::all_packages,
-		"Other packages" => $GENESIS3::all_cpan_packages,
+		"Core components" => $GENESIS3::all_components,
+		"Other components" => $GENESIS3::all_cpan_components,
 	       },
 	      );
 }
@@ -230,7 +460,7 @@ our $configuration
 
 #t this info should be coming from the installer script.
 
-our $all_packages
+our $all_components
     = {
        SSP => {},
        'model-container' => {
@@ -242,7 +472,7 @@ our $all_packages
       };
 
 
-our $all_cpan_packages
+our $all_cpan_components
     = {
        python => {},
       };
@@ -276,26 +506,26 @@ sub initialize
 
 sub profile_environment
 {
-    foreach my $package_name (keys %$all_packages)
+    foreach my $component_name (keys %$all_components)
     {
-	my $package = $all_packages->{$package_name};
+	my $component = $all_components->{$component_name};
 
-	my $package_module = $package->{module} || $package_name;
+	my $component_module = $component->{module} || $component_name;
 
 	eval
 	{
 	    local $SIG{__DIE__};
 
-	    require "$package_module.pm";
+	    require "$component_module.pm";
 	};
 
 	if ($@ eq '')
 	{
-	    $package->{status} = 'loaded';
+	    $component->{status} = 'loaded';
 	}
 	else
 	{
-	    $package->{status} = $@;
+	    $component->{status} = $@;
 	}
     }
 
@@ -306,11 +536,11 @@ sub profile_environment
 
     if ($@)
     {
-	$all_cpan_packages->{python}->{status} = $@;
+	$all_cpan_components->{python}->{status} = $@;
     }
     else
     {
-	$all_cpan_packages->{python}->{status} = 'loaded';
+	$all_cpan_components->{python}->{status} = 'loaded';
     }
 
     return 1;
