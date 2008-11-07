@@ -463,7 +463,7 @@ our $configuration
 our $all_components
     = {
        heccer => {
-		  description => 'single neuron solver',
+		  description => 'single neuron equation solver',
 		  module => 'Heccer',
 		 },
        'model-container' => {
