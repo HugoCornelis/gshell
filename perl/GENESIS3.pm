@@ -412,7 +412,17 @@ sub list_components
 }
 
 
-sub list_tokens
+sub list_functions
+{
+    print "all function tokens:\n";
+
+    print foreach map { "  - $_\n" } "NERNST", "MG_BLOCK", "randomized", "FIXED", "SERIAL";
+
+    undef;
+}
+
+
+sub list_physical
 {
     my $filename = "$GENESIS3::configuration->{symbols}->{directory}$GENESIS3::configuration->{symbols}->{filename}";
 
@@ -440,9 +450,31 @@ sub list_tokens
 	   keys %$class_hierarchy,
 	  ];
 
-    print "all tokens:\n";
+    print "all physical tokens:\n";
 
     print foreach map { "  - $_\n" } @$tokens;
+
+    undef;
+}
+
+
+sub list_sections
+{
+    print "all section tokens:\n";
+
+    print foreach map { "  - $_\n" } "IMPORT", "PUBLIC_MODELS", "PRIVATE_MODELS";
+
+    undef;
+}
+
+
+sub list_structure
+{
+    print "all structure tokens:\n";
+
+    print foreach map { "  - $_\n" } "CHILD", "PARAMETERS", "PARAMETER", "BINDABLES", "BINDINGS", "ALIAS";
+
+    undef;
 }
 
 
