@@ -462,19 +462,26 @@ our $configuration
 
 our $all_components
     = {
-       SSP => {},
-       'model-container' => {
-			     module => 'Neurospaces',
-			    },
        heccer => {
+		  description => 'single neuron solver',
 		  module => 'Heccer',
 		 },
+       'model-container' => {
+			     description => 'internal storage for neuronal models',
+			     module => 'Neurospaces',
+			    },
+       ssp => {
+	       description => 'binds the software components of a simulation together',
+	       module => 'SSP',
+	      },
       };
 
 
 our $all_cpan_components
     = {
-       python => {},
+       python => {
+		  description => 'interface to python scripting',
+		 },
       };
 
 
