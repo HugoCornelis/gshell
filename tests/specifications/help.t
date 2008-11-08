@@ -26,7 +26,7 @@ synopsis: <type> must be one of physical, functions, structure, commands, sectio
 						   write => 'list',
 						  },
 						  {
-						   description => "Can we find all commands ?",
+						   description => "Can we find commands ?",
 						   read => "all commands:
   - ce
   - compile
@@ -44,7 +44,31 @@ synopsis: <type> must be one of physical, functions, structure, commands, sectio
 						   write => 'list commands',
 						  },
 						  {
-						   description => "Can we find all physical tokens ?",
+						   description => "Can we find the loaded software components ?",
+						   read => "Core components:
+  heccer:
+    description: single neuron equation solver
+    module: Heccer
+    status: loaded
+  model-container:
+    description: internal storage for neuronal models
+    module: Neurospaces
+    status: loaded
+  ssp:
+    description: binds the software components of a simulation together
+    module: SSP
+    status: loaded
+Other components:
+",
+						   write => 'list components',
+						  },
+						  {
+						   description => "Can we find functions ?",
+						   read => "NERNST",
+						   write => 'list functions',
+						  },
+						  {
+						   description => "Can we find physical tokens ?",
 						   read => "all physical tokens:
   - ALGORITHM
   - ATTACHMENT_POINT
@@ -71,25 +95,6 @@ synopsis: <type> must be one of physical, functions, structure, commands, sectio
   - SEGMENT_GROUP
 ",
 						   write => 'list physical',
-						  },
-						  {
-						   description => "Can we find all components ?",
-						   read => "Core components:
-  heccer:
-    description: single neuron equation solver
-    module: Heccer
-    status: loaded
-  model-container:
-    description: internal storage for neuronal models
-    module: Neurospaces
-    status: loaded
-  ssp:
-    description: binds the software components of a simulation together
-    module: SSP
-    status: loaded
-Other components:
-",
-						   write => 'list components',
 						  },
 						 ],
 				description => "help commands",
