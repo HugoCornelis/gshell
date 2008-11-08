@@ -76,7 +76,7 @@ sub loop
 
 	if ($arguments->[1])
 	{
-	    $quoted_line .= join ' ', "(", ( map { "'$_', " } (@$arguments)[1 .. $#$arguments] ), ")";
+	    $quoted_line .= join ' ', "(", ( map { "'$_'," } (@$arguments)[1 .. $#$arguments] ), ")";
 	}
 
 	my $result = eval($quoted_line);
