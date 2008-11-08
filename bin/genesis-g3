@@ -70,20 +70,13 @@ sub loop
 
     while ( defined ($_ = $term->readline("genesis > ")) )
     {
-# 	{
-# 	    no strict;
-# 	    $result = eval($_);
-# 	}
-
-	my $line = $_;
-
-	my $arguments = [ split '\s+', $line, ];
+	my $arguments = [ split ];
 
 	my $quoted_line = $arguments->[0];
 
 	if ($arguments->[1])
 	{
-	    $quoted_line .= join ' ', "(", (map { "'$_', " } (@$arguments)[1 .. $#$arguments]), ")";
+	    $quoted_line .= join ' ', "(", ( map { "'$_', " } (@$arguments)[1 .. $#$arguments] ), ")";
 	}
 
 	my $result = eval($quoted_line);
