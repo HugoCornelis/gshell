@@ -194,6 +194,8 @@ sub create
 
     my $name = shift;
 
+    $type = lc($type);
+
     #t do something with the current working element
 
     no strict "refs";
@@ -219,7 +221,8 @@ sub create
     {
 	my $subs
 	    = [
-	       map { s/^create_// ; $_ }
+	       sort
+	       map { s/^create_// ; lc }
 	       grep { /^create_/ }
 	       keys %{(\%{"::"})->{"GENESIS3::"}->{"Tokens::"}->{"Physical::"}},
 	      ];
@@ -501,14 +504,16 @@ foreach my $token_name (@$token_names)
 
     no strict "refs";
 
-    ((\%{"::"})->{"GENESIS3::"}->{"Tokens::"}->{"Physical::"}->{"create_$token_name"})
+    my $subname = "create_" . lc $token_name;
+
+    ((\%{"::"})->{"GENESIS3::"}->{"Tokens::"}->{"Physical::"}->{$subname})
 	= sub
 	  {
 	      # get name
 
 	      my $physical_name = shift;
 
-	      print "create_$token_name: $physical_name\n";
+	      print "$subname: $physical_name\n";
 	  };
 }
 
