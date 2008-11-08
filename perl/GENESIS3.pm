@@ -283,12 +283,21 @@ sub list
     no strict "refs";
 
     if (exists ((\%{"::"})->{"GENESIS3::"}->{"Help::"}->{"list_$type"}))
+#     if (exists \&{"GENESIS3::Help::list_$type"})
     {
 	my $sub_name = "GENESIS3::Help::list_$type";
 
 	no strict "refs";
 
-	&$sub_name();
+	my $sub = (\%{"::"})->{"GENESIS3::"}->{"Help::"}->{"list_$type"};
+
+	&$sub();
+
+# 	# doesnot work for some reason
+
+# 	eval "$sub_name()";
+
+# 	print $@;
     }
     else
     {
@@ -373,6 +382,8 @@ sub quit
 
 
 {
+    # import all command subs into the main namespace
+
     no strict "refs";
 
     foreach my $command (keys %{(\%{"::"})->{"GENESIS3::"}->{"Commands::"}})
@@ -422,60 +433,129 @@ sub list_functions
 }
 
 
-sub list_physical
+package GENESIS3;
+
+
+our $configuration
+    = {
+       symbols => {
+		   directory => "/usr/local/neurospaces/instrumentor/hierarchy/",
+		   filename => "symbols",
+		  },
+      };
+
+
+package GENESIS3::Help;
+
+
+foreach my $purpose qw(
+		       physical
+		       sections
+		       structure
+		      )
 {
-    my $filename = "$GENESIS3::configuration->{symbols}->{directory}$GENESIS3::configuration->{symbols}->{filename}";
+    no strict "refs";
 
-    my $symbols_definitions = do $filename;
+    #     eval "
 
-    my $class_hierarchy = $symbols_definitions->{class_hierarchy};
+    ((\%{"::"})->{"GENESIS3::"}->{"Help::"}->{"list_$purpose"})
+	= sub
+	  {
+	      my $filename = "$GENESIS3::configuration->{symbols}->{directory}$GENESIS3::configuration->{symbols}->{filename}";
 
-    my $tokens
-	= [
-	   sort
-	   map
-	   {
-	       s/^TOKEN_// ; $_
-	   }
-	   grep
-	   {
-	       defined
-	   }
-	   map
-	   {
-	       my $class = $class_hierarchy->{$_};
+	      my $symbols_definitions = do $filename;
 
-	       $class->{token_name};
-	   }
-	   keys %$class_hierarchy,
-	  ];
+	      my $tokens = $symbols_definitions->{tokens};
 
-    print "all physical tokens:\n";
+	      my $token_names
+		  = [
+		     sort
+		     map
+		     {
+			 s/^TOKEN_// ; $_
+		     }
+		     map
+		     {
+			 my $token = $tokens->{$_};
 
-    print foreach map { "  - $_\n" } @$tokens;
+			 $token->{lexical};
+		     }
+		     grep
+		     {
+			 $tokens->{$_}->{purpose} eq $purpose
+		     }
+		     keys %$tokens,
+		    ];
 
-    undef;
+	      print "all $purpose tokens:\n";
+
+	      print foreach map { "  - $_\n" } @$token_names;
+
+	      undef;
+	  };
+
+# ";
+#     use Data::Dumper;
+
+#     print Dumper($tokens);
+
 }
 
 
-sub list_sections
-{
-    print "all section tokens:\n";
+# sub list_physical
+# {
+#     my $filename = "$GENESIS3::configuration->{symbols}->{directory}$GENESIS3::configuration->{symbols}->{filename}";
 
-    print foreach map { "  - $_\n" } "IMPORT", "PUBLIC_MODELS", "PRIVATE_MODELS";
+#     my $symbols_definitions = do $filename;
 
-    undef;
-}
+#     my $class_hierarchy = $symbols_definitions->{class_hierarchy};
+
+#     my $tokens
+# 	= [
+# 	   sort
+# 	   map
+# 	   {
+# 	       s/^TOKEN_// ; $_
+# 	   }
+# 	   grep
+# 	   {
+# 	       defined
+# 	   }
+# 	   map
+# 	   {
+# 	       my $class = $class_hierarchy->{$_};
+
+# 	       $class->{token_name};
+# 	   }
+# 	   keys %$class_hierarchy,
+# 	  ];
+
+#     print "all physical tokens:\n";
+
+#     print foreach map { "  - $_\n" } @$tokens;
+
+#     undef;
+# }
 
 
-sub list_structure
-{
-    print "all structure tokens:\n";
+# sub list_sections
+# {
+#     print "all section tokens:\n";
 
-    print foreach map { "  - $_\n" } "CHILD", "PARAMETERS", "PARAMETER", "BINDABLES", "BINDINGS", "ALIAS";
+#     print foreach map { "  - $_\n" } "IMPORT", "PUBLIC_MODELS", "PRIVATE_MODELS";
 
-    undef;
-}
+#     undef;
+# }
+
+
+# sub list_structure
+# {
+#     print "all structure tokens:\n";
+
+#     print foreach map { "  - $_\n" } "CHILD", "PARAMETERS", "PARAMETER", "BINDABLES", "BINDINGS", "ALIAS";
+
+#     undef;
+# }
 
 
 package GENESIS3;

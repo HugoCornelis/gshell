@@ -1,0 +1,16 @@
+$files = {
+           '_<bin/genesis-g3' => [
+                                   {
+                                     'expr' => undef,
+                                     'value' => '1',
+                                     'text' => '	my $result = eval($quoted_line);
+',
+                                     'fname' => 'bin/genesis-g3',
+                                     'type' => 'user',
+                                     'line' => '84'
+                                   }
+                                 ]
+         };
+$expr_list = [];
+$eval_saved_text = undef;
+$main_win_geometry = '1592x1114+0+0';
