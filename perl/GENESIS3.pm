@@ -450,7 +450,7 @@ package GENESIS3::Help;
 
 foreach my $purpose qw(
 		       physical
-		       sections
+		       section
 		       structure
 		      )
 {
@@ -538,7 +538,7 @@ foreach my $purpose qw(
 # }
 
 
-# sub list_sections
+# sub list_section
 # {
 #     print "all section tokens:\n";
 
