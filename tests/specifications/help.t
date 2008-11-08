@@ -30,6 +30,8 @@ synopsis: <type> must be one of physical, functions, structure, commands, sectio
 						   read => "all commands:
   - ce
   - compile
+  - create
+  - current_working_element
   - help
   - list
   - list_elements
@@ -39,7 +41,6 @@ synopsis: <type> must be one of physical, functions, structure, commands, sectio
   - quit
   - run
   - sh
-  - working_element
 ",
 						   write => 'list commands',
 						  },
