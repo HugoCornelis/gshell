@@ -73,84 +73,6 @@ outputs:
   - component_name: /purk_test/segments/soma/km
     field: state_n
     outputclass: double_2_ascii
-  - component_name: /purk_test/segments/soma/kdr
-    field: state_m
-    outputclass: double_2_ascii
-  - component_name: /purk_test/segments/soma/kdr
-    field: state_h
-    outputclass: double_2_ascii
-  - component_name: /purk_test/segments/soma/ka
-    field: state_m
-    outputclass: double_2_ascii
-  - component_name: /purk_test/segments/soma/ka
-    field: state_h
-    outputclass: double_2_ascii
-  - component_name: /purk_test/segments/soma/kh
-    field: state_m
-    outputclass: double_2_ascii
-  - component_name: /purk_test/segments/soma/kh
-    field: state_h
-    outputclass: double_2_ascii
-  - component_name: /purk_test/segments/soma/nap
-    field: state_n
-    outputclass: double_2_ascii
-  - component_name: /purk_test/segments/soma/naf
-    field: state_m
-    outputclass: double_2_ascii
-  - component_name: /purk_test/segments/soma/naf
-    field: state_h
-    outputclass: double_2_ascii
-  - component_name: /purk_test/segments/soma/cat/cat_gate_activation
-    field: state_m
-    outputclass: double_2_ascii
-  - component_name: /purk_test/segments/soma/cat/cat_gate_inactivation
-    field: state_h
-    outputclass: double_2_ascii
-  - component_name: '/purk_test/segments/main[0]'
-    field: Vm
-    outputclass: double_2_ascii
-  - component_name: '/purk_test/segments/main[0]/ca_pool'
-    field: Ca
-    outputclass: double_2_ascii
-  - component_name: '/purk_test/segments/main[0]/cat/cat_gate_activation'
-    field: state_m
-    outputclass: double_2_ascii
-  - component_name: '/purk_test/segments/main[0]/cat/cat_gate_inactivation'
-    field: state_h
-    outputclass: double_2_ascii
-  - component_name: '/purk_test/segments/main[0]/cap/cap_gate_activation'
-    field: state_m
-    outputclass: double_2_ascii
-  - component_name: '/purk_test/segments/main[0]/cap/cap_gate_inactivation'
-    field: state_h
-    outputclass: double_2_ascii
-  - component_name: '/purk_test/segments/main[0]/km'
-    field: state_n
-    outputclass: double_2_ascii
-  - component_name: '/purk_test/segments/main[0]/kdr'
-    field: state_m
-    outputclass: double_2_ascii
-  - component_name: '/purk_test/segments/main[0]/kdr'
-    field: state_h
-    outputclass: double_2_ascii
-  - component_name: '/purk_test/segments/main[0]/ka'
-    field: state_m
-    outputclass: double_2_ascii
-  - component_name: '/purk_test/segments/main[0]/ka'
-    field: state_h
-    outputclass: double_2_ascii
-  - component_name: '/purk_test/segments/main[0]/kc'
-    field: state_m
-    outputclass: double_2_ascii
-  - component_name: '/purk_test/segments/main[0]/kc'
-    field: state_h
-    outputclass: double_2_ascii
-  - component_name: '/purk_test/segments/main[0]/k2'
-    field: state_m
-    outputclass: double_2_ascii
-  - component_name: '/purk_test/segments/main[0]/k2'
-    field: state_h
-    outputclass: double_2_ascii
 services:
   neurospaces:
     initializers:
@@ -493,81 +415,10 @@ foreach my $purpose qw(
 
 	      undef;
 	  };
-
-# ";
-#     use Data::Dumper;
-
-#     print Dumper($tokens);
-
 }
 
 
-# sub list_physical
-# {
-#     my $filename = "$GENESIS3::configuration->{symbols}->{directory}$GENESIS3::configuration->{symbols}->{filename}";
-
-#     my $symbols_definitions = do $filename;
-
-#     my $class_hierarchy = $symbols_definitions->{class_hierarchy};
-
-#     my $tokens
-# 	= [
-# 	   sort
-# 	   map
-# 	   {
-# 	       s/^TOKEN_// ; $_
-# 	   }
-# 	   grep
-# 	   {
-# 	       defined
-# 	   }
-# 	   map
-# 	   {
-# 	       my $class = $class_hierarchy->{$_};
-
-# 	       $class->{token_name};
-# 	   }
-# 	   keys %$class_hierarchy,
-# 	  ];
-
-#     print "all physical tokens:\n";
-
-#     print foreach map { "  - $_\n" } @$tokens;
-
-#     undef;
-# }
-
-
-# sub list_sections
-# {
-#     print "all sections tokens:\n";
-
-#     print foreach map { "  - $_\n" } "IMPORT", "PUBLIC_MODELS", "PRIVATE_MODELS";
-
-#     undef;
-# }
-
-
-# sub list_structure
-# {
-#     print "all structure tokens:\n";
-
-#     print foreach map { "  - $_\n" } "CHILD", "PARAMETERS", "PARAMETER", "BINDABLES", "BINDINGS", "ALIAS";
-
-#     undef;
-# }
-
-
 package GENESIS3;
-
-
-our $configuration
-    = {
-       symbols => {
-		   directory => "/usr/local/neurospaces/instrumentor/hierarchy/",
-		   filename => "symbols",
-		  },
-      };
 
 
 #t this info should be coming from the installer script.
