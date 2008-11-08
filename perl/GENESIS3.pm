@@ -194,15 +194,34 @@ sub create
 
     my $name = shift;
 
-    $type = lc($type);
+    # if the creator function exists
 
-    #t do something with the current working element
+    $type = lc($type);
 
     no strict "refs";
 
     if (exists ((\%{"::"})->{"GENESIS3::"}->{"Tokens::"}->{"Physical::"}->{"create_$type"}))
 #     if (exists \&{"GENESIS3::Help::list_$type"})
     {
+	# current working element logic
+
+	if ($name !~ m(^/))
+	{
+	    $name = "$current_working_element/$name";
+	}
+
+	# some path logic, remove double // etc
+
+	$name =~ s(/\./)(/)g;
+
+	$name =~ s(/\.$)()g;
+
+	$name =~ s([^/]/\.\.)()g;
+
+	$name =~ s(/\.\./)(/)g;
+
+	$name =~ s(//)(/)g;
+
 	my $sub_name = "GENESIS3::Tokens::Physical::create_$type";
 
 	no strict "refs";
