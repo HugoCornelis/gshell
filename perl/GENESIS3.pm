@@ -584,9 +584,16 @@ sub initialize
 
     if (!$model_container)
     {
-	print "Cannot instantiate a model container\n";
+	die "$0: *** Error: cannot instantiate a model container\n";
+    }
 
-	$result = 0;
+    my $args = [ "$0", "utilities/empty_model.ndf" ];
+
+    my $success = $model_container->read(undef, $args);
+
+    if (!$success)
+    {
+	die "$0: *** Error: cannot initialize the model container\n";
     }
 
     return $result;
