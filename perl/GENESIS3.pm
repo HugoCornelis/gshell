@@ -450,7 +450,7 @@ package GENESIS3::Help;
 
 foreach my $purpose qw(
 		       physical
-		       section
+		       sections
 		       structure
 		      )
 {
@@ -538,9 +538,9 @@ foreach my $purpose qw(
 # }
 
 
-# sub list_section
+# sub list_sections
 # {
-#     print "all section tokens:\n";
+#     print "all sections tokens:\n";
 
 #     print foreach map { "  - $_\n" } "IMPORT", "PUBLIC_MODELS", "PRIVATE_MODELS";
 
