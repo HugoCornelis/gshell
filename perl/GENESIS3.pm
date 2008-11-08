@@ -349,7 +349,7 @@ sub list_functions
 {
     print "all function tokens:\n";
 
-    print foreach map { "  - $_\n" } "NERNST", "MG_BLOCK", "randomized", "FIXED", "SERIAL";
+    print foreach map { "  - $_\n" } "NERNST", "MGBLOCK", "RANDOMIZE", "FIXED", "SERIAL";
 
     undef;
 }
