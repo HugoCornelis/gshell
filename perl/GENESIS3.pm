@@ -9,7 +9,7 @@ use strict;
 package GENESIS3::Commands;
 
 
-our $working_element = '/';
+our $current_working_element = '/';
 
 
 my $example_schedule
@@ -166,11 +166,11 @@ sub ce
 	}
 	elsif ($element eq '..')
 	{
-	    $working_element =~ s((.*)/.*)($1);
+	    $current_working_element =~ s((.*)/.*)($1);
 	}
 	else
 	{
-	    $working_element .= $element;
+	    $current_working_element .= $element;
 	}
     }
 }
@@ -178,7 +178,7 @@ sub ce
 
 sub pwe
 {
-    print "$working_element\n";
+    print "$current_working_element\n";
 }
 
 
@@ -188,13 +188,59 @@ sub help
 }
 
 
+sub create
+{
+    my $type = shift;
+
+    my $name = shift;
+
+    #t do something with the current working element
+
+    no strict "refs";
+
+    if (exists ((\%{"::"})->{"GENESIS3::"}->{"Tokens::"}->{"Physical::"}->{"create_$type"}))
+#     if (exists \&{"GENESIS3::Help::list_$type"})
+    {
+	my $sub_name = "GENESIS3::Tokens::Physical::create_$type";
+
+	no strict "refs";
+
+	my $sub = (\%{"::"})->{"GENESIS3::"}->{"Tokens::"}->{"Physical::"}->{"create_$type"};
+
+	&$sub($name);
+
+# 	# doesnot work for some reason
+
+# 	eval "$sub_name(\$name)";
+
+# 	print $@;
+    }
+    else
+    {
+	my $subs
+	    = [
+	       map { s/^create_// ; $_ }
+	       grep { /^create_/ }
+	       keys %{(\%{"::"})->{"GENESIS3::"}->{"Tokens::"}->{"Physical::"}},
+	      ];
+
+	print "synopsis: create <type>\n";
+	print "synopsis: <type> must be one of " . (join ', ', @$subs) . "\n";
+	print "synopsis: (you gave $type)\n";
+
+	return '*** Error: incorrect usage';
+    }
+
+}
+
+
 sub list_elements
 {
-    my $elements = $GENESIS3::model_container->list_elements($working_element);
+    my $elements = $GENESIS3::model_container->list_elements($current_working_element);
 
     use YAML;
 
-    print Dump( { $working_element => $elements, }, );
+    print Dump( { $current_working_element => $elements, }, );
 }
 
 
@@ -370,15 +416,17 @@ our $configuration
 package GENESIS3::Help;
 
 
+# loop over all lexical purposes
+
 foreach my $purpose qw(
 		       physical
 		       sections
 		       structure
 		      )
 {
-    no strict "refs";
+    # construct a list function for this lexical purpose
 
-    #     eval "
+    no strict "refs";
 
     ((\%{"::"})->{"GENESIS3::"}->{"Help::"}->{"list_$purpose"})
 	= sub
@@ -414,6 +462,53 @@ foreach my $purpose qw(
 	      print foreach map { "  - $_\n" } @$token_names;
 
 	      undef;
+	  };
+}
+
+
+package GENESIS3::Tokens::Physical;
+
+
+my $filename = "$GENESIS3::configuration->{symbols}->{directory}$GENESIS3::configuration->{symbols}->{filename}";
+
+my $symbols_definitions = do $filename;
+
+my $tokens = $symbols_definitions->{tokens};
+
+my $token_names
+    = [
+       sort
+       map
+       {
+	   s/^TOKEN_// ; $_
+       }
+       map
+       {
+	   my $token = $tokens->{$_};
+
+	   $token->{lexical};
+       }
+       grep
+       {
+	   $tokens->{$_}->{purpose} eq 'physical'
+       }
+       keys %$tokens,
+      ];
+
+foreach my $token_name (@$token_names)
+{
+    # construct an create function for this token
+
+    no strict "refs";
+
+    ((\%{"::"})->{"GENESIS3::"}->{"Tokens::"}->{"Physical::"}->{"create_$token_name"})
+	= sub
+	  {
+	      # get name
+
+	      my $physical_name = shift;
+
+	      print "create_$token_name: $physical_name\n";
 	  };
 }
 

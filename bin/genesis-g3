@@ -79,11 +79,14 @@ sub loop
 
 	my $arguments = [ split '\s+', $line, ];
 
-	my $quoted_line = join ' ', $arguments->[0], map { "'$_'" } (@$arguments)[1 .. $#$arguments];
+	my $quoted_line = join ' ', $arguments->[0], "(", (map { "'$_', " } (@$arguments)[1 .. $#$arguments]), ")";
 
 	my $result = eval($quoted_line);
 
-	warn $@ if $@;
+	if ($@)
+	{
+	    warn $@
+	}
 
 	unless ($@)
 	{
