@@ -21,7 +21,7 @@ my $test
 						  {
 						   description => "Can we get a useful synopsis for the list command ?",
 						   read => "synopsis: list <type>
-synopsis: <type> must be one of commands, packages, tokens
+synopsis: <type> must be one of physical, functions, structure, commands, sections, components
 ",
 						   write => 'list',
 						  },
@@ -29,20 +29,23 @@ synopsis: <type> must be one of commands, packages, tokens
 						   description => "Can we find all commands ?",
 						   read => "all commands:
   - ce
+  - compile
   - help
   - list
   - list_elements
   - ndf_load
+  - output
   - pwe
   - quit
   - run
   - sh
+  - working_element
 ",
 						   write => 'list commands',
 						  },
 						  {
-						   description => "Can we find all tokens ?",
-						   read => "all tokens:
+						   description => "Can we find all physical tokens ?",
+						   read => "all physical tokens:
   - ALGORITHM
   - ATTACHMENT_POINT
   - AXON_HILLOCK
@@ -59,6 +62,7 @@ synopsis: <type> must be one of commands, packages, tokens
   - GROUP
   - HH_GATE
   - NETWORK
+  - PARAMETER_GROUP
   - POOL
   - POPULATION
   - PROJECTION
@@ -66,29 +70,33 @@ synopsis: <type> must be one of commands, packages, tokens
   - SEGMENT
   - SEGMENT_GROUP
 ",
-						   write => 'list tokens',
+						   write => 'list physical',
 						  },
 						  {
-						   description => "Can we find all packages ?",
-						   read => "Core packages:
-  SSP:
-    status: loaded
+						   description => "Can we find all components ?",
+						   read => "Core components:
   heccer:
+    description: single neuron equation solver
     module: Heccer
     status: loaded
   model-container:
+    description: internal storage for neuronal models
     module: Neurospaces
     status: loaded
-Other packages:
+  ssp:
+    description: binds the software components of a simulation together
+    module: SSP
+    status: loaded
+Other components:
 ",
-						   write => 'list packages',
+						   write => 'list components',
 						  },
 						 ],
 				description => "help commands",
 			       },
 			      ],
        description => "help commands",
-       name => 'version.t',
+       name => 'help.t',
       };
 
 
