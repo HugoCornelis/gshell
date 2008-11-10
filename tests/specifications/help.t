@@ -38,6 +38,7 @@ synopsis: <type> must be one of physical, functions, structure, commands, sectio
   - ndf_load
   - output
   - pwe
+  - querymachine
   - quit
   - run
   - sh

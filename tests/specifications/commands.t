@@ -25,7 +25,7 @@ my $test
 						   write => 'sh ls',
 						  },
 						 ],
-				description => "help commands",
+				description => "elementary commands",
 			       },
 			      ],
        description => "commands",

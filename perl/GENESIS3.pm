@@ -358,6 +358,16 @@ sub sh
 }
 
 
+sub querymachine
+{
+    my $query = join ' ', @_;
+
+    $GENESIS3::model_container->querymachine($query);
+
+    return undef;
+}
+
+
 sub quit
 {
     my $exit_code = shift;
