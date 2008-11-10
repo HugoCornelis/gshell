@@ -491,6 +491,9 @@ foreach my $purpose qw(
 package GENESIS3::Tokens::Physical;
 
 
+use Neurospaces::Tokens::Physical;
+
+
 my $filename = "$GENESIS3::configuration->{symbols}->{directory}$GENESIS3::configuration->{symbols}->{filename}";
 
 my $symbols_definitions = do $filename;
@@ -523,7 +526,9 @@ foreach my $token_name (@$token_names)
 
     no strict "refs";
 
-    my $subname = "create_" . lc $token_name;
+    my $lc_token_name = lc($token_name);
+
+    my $subname = "create_" . $lc_token_name;
 
     ((\%{"::"})->{"GENESIS3::"}->{"Tokens::"}->{"Physical::"}->{$subname})
 	= sub
@@ -533,6 +538,17 @@ foreach my $token_name (@$token_names)
 	      my $physical_name = shift;
 
 	      print "$subname: $physical_name\n";
+
+	      my $physical = Neurospaces::Tokens::Physical::create($lc_token_name, $GENESIS3::model_container, $physical_name);
+
+	      if (!$physical_name)
+	      {
+		  return "*** Error: creating $physical_name of type $lc_token_name";
+	      }
+	      else
+	      {
+		  return "*** Ok: creating $physical_name of type $lc_token_name";
+	      }
 	  };
 }
 
