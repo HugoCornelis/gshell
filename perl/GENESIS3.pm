@@ -327,6 +327,114 @@ sub list_elements
     my $query = "expand $element/*";
 
     querymachine($query);
+
+    return "*** ok: list_elements $element";
+}
+
+
+sub set_model_parameter
+{
+    my $element = shift;
+
+    my $parameter = shift;
+
+    my $value = shift;
+
+    my $value_type = shift;
+
+    if (!$value_type)
+    {
+	if ($value =~ /->/)
+	{
+	    $value_type = 'field';
+	}
+	elsif ($value =~ /\//)
+	{
+	    $value_type = 'symbolic';
+	}
+	elsif ($value =~ /^(\+|-)?([0-9]+)(\.[0-9]+)?(e(\+|-)?(\.[0-9]+))?$/)
+	{
+	    $value_type = 'number';
+	}
+	else
+	{
+	    $value_type = 'string';
+	}
+    }
+
+    if (!defined $element)
+    {
+	$element = $current_working_element;
+    }
+    else
+    {
+	if ($element =~ m(^/))
+	{
+	}
+	else
+	{
+	    $element = "$current_working_element/$element";
+	}
+    }
+
+    my $query = "setparameterconcept $element $parameter $value_type $value";
+
+    querymachine($query);
+
+    return "*** ok: set_runtime_parameter $element $parameter $value_type $value";
+}
+
+
+sub set_runtime_parameter
+{
+    my $element = shift;
+
+    my $parameter = shift;
+
+    my $value = shift;
+
+    my $value_type = shift;
+
+    if (!$value_type)
+    {
+	if ($value =~ /->/)
+	{
+	    $value_type = 'field';
+	}
+	elsif ($value =~ /\//)
+	{
+	    $value_type = 'symbolic';
+	}
+	elsif ($value =~ /^(\+|-)?([0-9]+)(\.[0-9]+)?(e(\+|-)?(\.[0-9]+))?$/)
+	{
+	    $value_type = 'number';
+	}
+	else
+	{
+	    $value_type = 'string';
+	}
+    }
+
+    if (!defined $element)
+    {
+	$element = $current_working_element;
+    }
+    else
+    {
+	if ($element =~ m(^/))
+	{
+	}
+	else
+	{
+	    $element = "$current_working_element/$element";
+	}
+    }
+
+    my $query = "setparameter / $element $parameter $value_type $value";
+
+    querymachine($query);
+
+    return "*** ok: set_runtime_parameter $element $parameter $value_type $value";
 }
 
 
@@ -353,7 +461,11 @@ sub show_parameter
 
     my $query = "printparameter $element $parameter";
 
-    querymachine($query);
+    if (querymachine($query))
+    {
+    }
+
+    return "*** ok: show_parameter $element $parameter";
 }
 
 
@@ -397,6 +509,8 @@ sub run
     }
 
     #t construct ssp schedule based on the cell buitin.
+
+    return '*** Error: not implemented yet';
 }
 
 
@@ -410,9 +524,7 @@ sub querymachine
 {
     my $query = join ' ', @_;
 
-    $GENESIS3::model_container->querymachine($query);
-
-    return undef;
+    return $GENESIS3::model_container->querymachine($query);
 }
 
 
