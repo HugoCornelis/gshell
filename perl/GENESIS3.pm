@@ -547,7 +547,10 @@ foreach my $token_name (@$token_names)
 
 	      my $physical_name = shift;
 
-	      print "$subname: $physical_name\n";
+	      if ($main::option_verbose ne 'errors')
+	      {
+		  print "$subname: $physical_name\n";
+	      }
 
 	      my $physical = Neurospaces::Tokens::Physical::create($lc_token_name, $GENESIS3::model_container, $physical_name);
 
@@ -570,6 +573,14 @@ package GENESIS3;
 
 our $all_components
     = {
+       gshell => {
+		  description => 'the GENESIS 3 shell',
+		  module => 'GENESIS3',
+		  status => 'loaded',
+# 		  variables => {
+# 				verbose => $main::option_verbose,
+# 			       },
+		 },
        heccer => {
 		  description => 'single neuron equation solver',
 		  module => 'Heccer',
@@ -633,6 +644,11 @@ sub profile_environment
 	my $component = $all_components->{$component_name};
 
 	my $component_module = $component->{module} || $component_name;
+
+	if ($component->{status} eq 'loaded')
+	{
+	    next;
+	}
 
 	eval
 	{

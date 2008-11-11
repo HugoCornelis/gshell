@@ -43,7 +43,7 @@ $SIG{__DIE__}
     };
 
 
-our $option_verbose;
+our $option_verbose = 'errors';
 
 my $exit_code = 0;
 
@@ -123,7 +123,7 @@ sub read_cmd_line
 	= GetOptions
 	    (
 	     "help!" => \$option_help,
-	     "v|verbose+" => \$option_verbose,
+	     "v|verbose=s" => \$option_verbose,
 	     "version" => \$option_version,
 	    );
 
@@ -146,7 +146,7 @@ $0: configure the heccer solver.
 
 options:
     help               print usage information.
-    verbose            set verbosity level.
+    verbose            set verbosity level ('errors', 'informational', 'debug').
     version            give version information.
 ";
 
