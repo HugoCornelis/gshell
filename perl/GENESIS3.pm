@@ -256,16 +256,6 @@ sub create
 }
 
 
-sub list_elements
-{
-    my $elements = $GENESIS3::model_container->list_elements($current_working_element);
-
-    use YAML;
-
-    print Dump( { $current_working_element => $elements, }, );
-}
-
-
 sub list
 {
     my $type = shift;
@@ -306,6 +296,64 @@ sub list
     }
 
     return '*** Ok';
+}
+
+
+sub list_elements
+{
+#     my $elements = $GENESIS3::model_container->list_elements($current_working_element);
+
+#     use YAML;
+
+#     print Dump( { $current_working_element => $elements, }, );
+
+    my $element = shift;
+
+    if (!defined $element)
+    {
+	$element = $current_working_element;
+    }
+    else
+    {
+	if ($element =~ m(^/))
+	{
+	}
+	else
+	{
+	    $element = "$current_working_element/$element";
+	}
+    }
+
+    my $query = "expand $element/*";
+
+    querymachine($query);
+}
+
+
+sub show_parameter
+{
+    my $element = shift;
+
+    my $parameter = shift;
+
+    if (!defined $element)
+    {
+	$element = $current_working_element;
+    }
+    else
+    {
+	if ($element =~ m(^/))
+	{
+	}
+	else
+	{
+	    $element = "$current_working_element/$element";
+	}
+    }
+
+    my $query = "printparameter $element $parameter";
+
+    querymachine($query);
 }
 
 
