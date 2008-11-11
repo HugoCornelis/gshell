@@ -41,13 +41,20 @@ synopsis: <type> must be one of physical, functions, structure, commands, sectio
   - querymachine
   - quit
   - run
+  - set_model_parameter
+  - set_runtime_parameter
   - sh
+  - show_parameter
 ",
 						   write => 'list commands',
 						  },
 						  {
 						   description => "Can we find the loaded software components ?",
 						   read => "Core components:
+  gshell:
+    description: the GENESIS 3 shell
+    module: GENESIS3
+    status: loaded
   heccer:
     description: single neuron equation solver
     module: Heccer
