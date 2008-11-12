@@ -72,6 +72,10 @@ sub loop
     {
 	my $arguments = [ split ];
 
+	#t join hash and array arguments
+
+	# create a perl function call
+
 	my $quoted_line = $arguments->[0];
 
 	if ($arguments->[1])

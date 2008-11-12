@@ -342,46 +342,65 @@ sub set_model_parameter
 
     my $value_type = shift;
 
-    if (!$value_type)
+    if (ref $parameter =~ /HASH/)
     {
-	if ($value =~ /->/)
+	foreach my $parameter_name (keys %$parameter)
 	{
-	    $value_type = 'field';
-	}
-	elsif ($value =~ /\//)
-	{
-	    $value_type = 'symbolic';
-	}
-	elsif ($value =~ /^(\+|-)?([0-9]+)(\.[0-9]+)?(e(\+|-)?(\.[0-9]+))?$/)
-	{
-	    $value_type = 'number';
-	}
-	else
-	{
-	    $value_type = 'string';
-	}
-    }
+	    my $parameter_value = $parameter->{$parameter_name};
 
-    if (!defined $element)
-    {
-	$element = $current_working_element;
+	    my $result = set_model_parameter($element, $parameter_name, $parameter_value);
+
+	    if ($result =~ /error/i)
+	    {
+		return "*** Error: set_model_parameter $element $parameter_name $parameter_value";
+	    }
+	}
+
+	return "*** ok: set_model_parameter $element $parameter $value_type $value";
     }
     else
     {
-	if ($element =~ m(^/))
+	if (!$value_type)
 	{
+	    if ($value =~ /->/)
+	    {
+		$value_type = 'field';
+	    }
+	    elsif ($value =~ /\//)
+	    {
+		$value_type = 'symbolic';
+	    }
+	    elsif ($value =~ /^(\+|-)?([0-9]+)(\.[0-9]+)?(e(\+|-)?(\.[0-9]+))?$/)
+	    {
+		$value_type = 'number';
+	    }
+	    else
+	    {
+		$value_type = 'string';
+	    }
+	}
+
+	if (!defined $element)
+	{
+	    $element = $current_working_element;
 	}
 	else
 	{
-	    $element = "$current_working_element/$element";
+	    if ($element =~ m(^/))
+	    {
+	    }
+	    else
+	    {
+		$element = "$current_working_element/$element";
+	    }
 	}
+
+	my $query = "setparameterconcept $element $parameter $value_type $value";
+
+	querymachine($query);
+
+	return "*** ok: set_model_parameter $element $parameter $value_type $value";
     }
-
-    my $query = "setparameterconcept $element $parameter $value_type $value";
-
-    querymachine($query);
-
-    return "*** ok: set_runtime_parameter $element $parameter $value_type $value";
 }
 
 
