@@ -54,7 +54,7 @@ my $test
 						   write => 'querymachine printinfo /c/s',
 						  },
 						  {
-						   description => "Can we find the parameters of the segment ?",
+						   description => "Can we obtain the value of the parameters of the segment ?",
 						   read => 'value = 0.0164
 ',
 						   write => 'show_parameter /c/s CM',
