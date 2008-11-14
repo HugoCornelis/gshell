@@ -23,26 +23,26 @@ my $test
 						   read => "
 ndf_library:
   .:
-    - algorithm_data
-    - cells
-    - channels
-    - contours
-    - conversions
-    - event_data
-    - examples
-    - fibers
-    - gates
-    - legacy
-    - mappers
-    - morphologies
-    - networks
-    - pools
-    - populations
-    - projectionqueries
-    - projections
-    - segments
-    - tests
-    - utilities
+    - algorithm_data/
+    - cells/
+    - channels/
+    - contours/
+    - conversions/
+    - event_data/
+    - examples/
+    - fibers/
+    - gates/
+    - legacy/
+    - mappers/
+    - morphologies/
+    - networks/
+    - pools/
+    - populations/
+    - projectionqueries/
+    - projections/
+    - segments/
+    - tests/
+    - utilities/
 ",
 						   write => 'show_library',
 						  },
@@ -51,26 +51,26 @@ ndf_library:
 						   read => "
 ndf_library:
   .:
-    - algorithm_data
-    - cells
-    - channels
-    - contours
-    - conversions
-    - event_data
-    - examples
-    - fibers
-    - gates
-    - legacy
-    - mappers
-    - morphologies
-    - networks
-    - pools
-    - populations
-    - projectionqueries
-    - projections
-    - segments
-    - tests
-    - utilities
+    - algorithm_data/
+    - cells/
+    - channels/
+    - contours/
+    - conversions/
+    - event_data/
+    - examples/
+    - fibers/
+    - gates/
+    - legacy/
+    - mappers/
+    - morphologies/
+    - networks/
+    - pools/
+    - populations/
+    - projectionqueries/
+    - projections/
+    - segments/
+    - tests/
+    - utilities/
 ",
 						   write => 'show_library ndf',
 						  },
@@ -101,11 +101,11 @@ ndf_library:
     - granule_gabaa.ndf
     - granule_gabab.ndf
     - granule_nmda.ndf
-    - hodgkin-huxley
+    - hodgkin-huxley/
     - hodgkin-huxley.ndf
     - nmda.ndf
     - non_nmda.ndf
-    - purkinje
+    - purkinje/
     - purkinje_basket.ndf
     - purkinje_climb.ndf
 ",
@@ -118,15 +118,26 @@ ndf_library:
   segments:
     - hodgkin_huxley.ndf
     - micron2.ndf
-    - micron2.ndf~
-    - purkinje
+    - purkinje/
     - purkinje_maind_passive.ndf
     - purkinje_soma_passive.ndf
     - purkinje_spinyd_passive.ndf
     - purkinje_thickd_passive.ndf
-    - spines
+    - spines/
 ",
 						   write => 'show_library ndf segments',
+						  },
+						  {
+						   description => "Can we find the purkinje cell segment library ?",
+						   read => "
+ndf_library:
+  segments/purkinje:
+    - maind.ndf
+    - soma.ndf
+    - spinyd.ndf
+    - thickd.ndf
+",
+						   write => 'show_library ndf segments/purkinje',
 						  },
 						  {
 						   description => "Can we find the single neuron library ?",
@@ -134,12 +145,11 @@ ndf_library:
 ndf_library:
   cells:
     - cell1.ndf
-    - hodgkin-huxley
+    - hodgkin-huxley/
     - Purk2M9s.p
-    - purk2m9s_partitioned.ndf~
     - purk2m9s.tex
     - purk2m9.tex
-    - purkinje
+    - purkinje/
     - stand_alone.ndf
 ",
 						   write => 'show_library ndf cells',

@@ -574,7 +574,7 @@ sub show_library
 	       {
 		   chomp ; $_
 	       }
-	       `ls -1 "/usr/local/neurospaces/models/library/$path"`,
+	       `ls -1F "/usr/local/neurospaces/models/library/$path"`,
 	      ];
 
 	use YAML;
