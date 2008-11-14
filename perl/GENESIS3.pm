@@ -579,7 +579,7 @@ sub show_library
 
 	use YAML;
 
-	print Dump( { ndf_library => $result, }, );
+	print Dump( { ndf_library => { $path => $result, }, }, );
     }
 }
 

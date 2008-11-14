@@ -44,6 +44,7 @@ synopsis: <type> must be one of physical, functions, structure, commands, sectio
   - set_model_parameter
   - set_runtime_parameter
   - sh
+  - show_library
   - show_parameter
 ",
 						   write => 'list commands',
