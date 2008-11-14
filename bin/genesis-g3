@@ -26,8 +26,6 @@ BEGIN
 }
 
 
-use GENESIS3;
-
 use Data::Dumper;
 
 use Getopt::Long;
@@ -50,6 +48,8 @@ my $exit_code = 0;
 
 sub loop
 {
+    require GENESIS3;
+
     GENESIS3::header();
 
     my $historyfile = $ENV{HOME} . '/.phistory';
@@ -114,6 +114,14 @@ sub main
 {
     read_cmd_line();
 
+    if (!$ENV{NEUROSPACES_NMC_USER_MODELS}
+	and !$ENV{NEUROSPACES_NMC_PROJECT_MODELS}
+	and !$ENV{NEUROSPACES_NMC_SYSTEM_MODELS}
+	and !$ENV{NEUROSPACES_NMC_MODELS})
+    {
+	$ENV{NEUROSPACES_NMC_MODELS} = '/usr/local/neurospaces/models/library';
+    }
+
     loop();
 }
 
@@ -133,6 +141,8 @@ sub read_cmd_line
 
     if ($option_version)
     {
+	require GENESIS3;
+
 	my $version = GENESIS3::version();
 
 	print $version . "\n";
