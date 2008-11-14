@@ -510,6 +510,27 @@ sub output
 }
 
 
+sub querymachine
+{
+    my $query = join ' ', @_;
+
+    return $GENESIS3::model_container->querymachine($query);
+}
+
+
+sub quit
+{
+    my $exit_code = shift;
+
+    if (!defined $exit_code)
+    {
+	$exit_code = 0;
+    }
+
+    exit $exit_code;
+}
+
+
 sub run
 {
     my $model_name = shift;
@@ -539,24 +560,27 @@ sub sh
 }
 
 
-sub querymachine
+sub show_library
 {
-    my $query = join ' ', @_;
+    my $type = shift || 'ndf';
 
-    return $GENESIS3::model_container->querymachine($query);
-}
+    my $path = shift || '.';
 
-
-sub quit
-{
-    my $exit_code = shift;
-
-    if (!defined $exit_code)
+    if ($type =~ /^ndf$/i)
     {
-	$exit_code = 0;
-    }
+	my $result
+	    = [
+	       map
+	       {
+		   chomp ; $_
+	       }
+	       `ls -1 "/usr/local/neurospaces/models/library/$path"`,
+	      ];
 
-    exit $exit_code;
+	use YAML;
+
+	print Dump( { ndf_library => $result, }, );
+    }
 }
 
 
