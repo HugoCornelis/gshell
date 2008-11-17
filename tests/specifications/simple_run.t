@@ -65,11 +65,82 @@ my $test
 						  {
 						   comment => "only testing the last line of output",
 						   description => "Can we find the output ?",
-						   read => "0.001 -0.0687098",
+						   read => "
+0.001 -0.0687098
+",
 						   write => "sh cat /tmp/output",
 						  },
 						 ],
 				description => "commands for a single passive compartment created from the shell",
+				side_effects => "creates a model in the model container",
+			       },
+			       {
+				arguments => [
+					     ],
+				command => 'bin/genesis-g3',
+				command_tests => [
+						  {
+						   description => "Is startup successful ?",
+						   read => "GENESIS 3 shell",
+						   timeout => 5,
+						   write => undef,
+						  },
+						  {
+						   description => "Can we load the purkinje cell model ?",
+						   write => 'ndf_load cells/purkinje/edsjb1994.ndf',
+						  },
+						  {
+						   description => "Can we run the simulation ?",
+						   write => "run /Purkinje 0.001",
+						  },
+						  {
+						   comment => "only testing the last line of output",
+						   description => "Can we find the output ?",
+						   read => "
+0.001 -0.0678441
+",
+						   timeout => 200,
+						   write => "sh cat /tmp/output",
+						  },
+						 ],
+				description => "commands to run the purkinje cell from an ndf file",
+				side_effects => "creates a model in the model container",
+			       },
+			       {
+				arguments => [
+					     ],
+				command => 'bin/genesis-g3',
+				command_tests => [
+						  {
+						   description => "Is startup successful ?",
+						   read => "GENESIS 3 shell",
+						   timeout => 5,
+						   write => undef,
+						  },
+						  {
+						   description => "Can we load the purkinje cell model ?",
+						   write => 'ndf_load cells/purkinje/edsjb1994.ndf',
+						  },
+						  {
+						   description => "Can we apply current injection into the soma ?",
+						   write => "set_runtime_parameter /Purkinje/segments/soma INJECT 2e-9",
+						  },
+						  {
+						   description => "Can we run the simulation ?",
+						   write => "run /Purkinje 0.001",
+						  },
+						  {
+						   comment => "only testing the last line of output",
+						   description => "Can we find the output ?",
+						   read => "
+0.001 -0.0587013
+",
+						   timeout => 200,
+						   write => "sh cat /tmp/output",
+						  },
+						 ],
+				description => "commands to run the purkinje cell from an ndf file, current injection",
+				side_effects => "creates a model in the model container",
 			       },
 			      ],
        description => "simple simulations of models",
