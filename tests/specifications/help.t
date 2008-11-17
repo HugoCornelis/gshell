@@ -29,7 +29,6 @@ synopsis: <type> must be one of physical, functions, structure, commands, sectio
 						   description => "Can we find commands ?",
 						   read => "all commands:
   - ce
-  - compile
   - create
   - current_working_element
   - help

@@ -96,58 +96,11 @@ solverclasses:
 ";
 
 
-my $time_step = 2e-05;
+my $heccer_time_step = 2e-05;
 
 my $outputs = [];
 
 my $models = [];
-
-
-sub compile
-{
-    my $schedule_yaml
-	= "--- !!perl/hash:SSP
-apply:
-  simulation:
-    - arguments:
-        - 2500
-        - verbose: 2
-      method: steps
-models:
-  - granular_parameters:
-      - component_name: /purk_test/segments/soma
-        field: INJECT
-        value: 2e-09
-    modelname: /purk_test
-    solverclass: heccer
-name: GENESIS3 schedule
-outputclasses:
-  double_2_ascii:
-    module_name: Heccer
-    options:
-      filename: /tmp/output
-    package: Heccer::Output
-services:
-  neurospaces:
-    initializers:
-      - arguments:
-          -
-            - GENESIS3
-        method: empty
-    module_name: Neurospaces
-solverclasses:
-  heccer:
-    constructor_settings:
-      dStep: $time_step
-    module_name: Heccer
-    service_name: neurospaces
-";
-
-    use YAML;
-
-    my $schedule = Load($schedule_yaml);
-
-}
 
 
 sub ce
@@ -370,7 +323,7 @@ sub set_model_parameter
 	    {
 		$value_type = 'symbolic';
 	    }
-	    elsif ($value =~ /^(\+|-)?([0-9]+)(\.[0-9]+)?(e(\+|-)?(\.[0-9]+))?$/)
+	    elsif ($value =~ /^(\+|-)?([0-9]+)(\.[0-9]+)?(e(\+|-)?([0-9]+))?$/)
 	    {
 		$value_type = 'number';
 	    }
@@ -424,7 +377,7 @@ sub set_runtime_parameter
 	{
 	    $value_type = 'symbolic';
 	}
-	elsif ($value =~ /^(\+|-)?([0-9]+)(\.[0-9]+)?(e(\+|-)?(\.[0-9]+))?$/)
+	elsif ($value =~ /^(\+|-)?([0-9]+)(\.[0-9]+)?(e(\+|-)?([0-9]+))?$/)
 	{
 	    $value_type = 'number';
 	}
@@ -449,9 +402,21 @@ sub set_runtime_parameter
 	}
     }
 
-    my $query = "setparameter / $element $parameter $value_type $value";
+#     my $query = "setparameter / $element $parameter $value_type $value";
 
-    querymachine($query);
+#     querymachine($query);
+
+    push
+	@$GENESIS3::runtime_parameters,
+	{
+	 component_name => $element,
+	 field => $parameter,
+	 value => $value,
+
+	 #t note that value_type is ignored right now
+
+	 value_type => $value_type,
+	};
 
     return "*** ok: set_runtime_parameter $element $parameter $value_type $value";
 }
@@ -488,6 +453,16 @@ sub show_parameter
 }
 
 
+sub show_runtime_parameters
+{
+    use YAML;
+
+    print Dump( { runtime_parameters => $GENESIS3::runtime_parameters, }, );
+
+    return "*** ok: show_runtime_parameters";
+}
+
+
 sub ndf_load
 {
     my $filename = shift;
@@ -496,17 +471,19 @@ sub ndf_load
 }
 
 
-sub output
+sub add_output
 {
     my $component_name = shift;
 
     my $field = shift;
 
-#     my $context = SwiggableNeurospaces::PidinStackParse($component_name);
-
-#     $context->PidinStackLookupTopSymbol();
-
-#     my $serial = $context->PidinStackToSerial();
+    push
+	@$GENESIS3::outputs,
+	{
+	 component_name => $component_name,
+	 field => $field,
+	 outputclass => "double_2_ascii",
+	};
 }
 
 
@@ -548,9 +525,148 @@ sub run
 	return '*** Error: <time> must be numeric';
     }
 
-    #t construct ssp schedule based on the cell buitin.
+    my $schedule_yaml
+	= "--- !!perl/hash:SSP
+apply:
+  simulation:
+    - arguments:
+        - 2500
+        - verbose: 2
+      method: steps
+models:
+  - granular_parameters:
+      - component_name: /purk_test/segments/soma
+        field: INJECT
+        value: 2e-09
+    modelname: /purk_test
+    solverclass: heccer
+name: GENESIS3 schedule
+outputclasses:
+  double_2_ascii:
+    module_name: Heccer
+    options:
+      filename: /tmp/output
+    package: Heccer::Output
+solverclasses:
+  heccer:
+    constructor_settings:
+      dStep: $heccer_time_step
+    module_name: Heccer
+    service_name: neurospaces
+";
 
-    return '*** Error: not implemented yet';
+#     use YAML;
+
+#     my $schedule = Load($schedule_yaml);
+
+    my $schedule
+	= {
+	   name => "GENESIS3 schedule for $model_name, $time",
+	  };
+
+    # tell ssp that the model-container service has been initialized
+
+    $schedule->{services}->{neurospaces}->{backend} = $GENESIS3::model_container;
+
+    # fill in runtime_parameters
+
+    $schedule->{models}->[0]->{granular_parameters} = $GENESIS3::runtime_parameters;
+
+    # fill in model name
+
+    $schedule->{models}->[0]->{modelname} = $model_name;
+
+    #t only heccer supported for the moment
+
+    $schedule->{models}->[0]->{solverclass} = 'heccer';
+
+    # fill in the solverclasses
+
+    #t make this configurable
+
+    my $solverclasses
+	= {
+	   heccer => {
+		      constructor_settings => {
+					       dStep => $heccer_time_step,
+					      },
+		      module_name => 'Heccer',
+		      service_name => 'neurospaces',
+		     },
+	  };
+
+    $schedule->{solverclasses} = $solverclasses;
+
+    # fill in the outputclasses
+
+    #t make this configurable
+
+    my $outputclasses
+	= {
+	   double_2_ascii => {
+			      module_name => 'Heccer',
+			      options => {
+					  filename => '/tmp/output',
+					 },
+			      package => 'Heccer::Output',
+			     },
+	  };
+
+    $schedule->{outputclasses} = $outputclasses;
+
+    # fill in the outputs
+
+    if (!@$GENESIS3::outputs)
+    {
+	# default is the soma Vm of a 'segments' group
+
+	$schedule->{outputs}
+	    = [
+	       {
+		component_name => "$model_name/segments/soma",
+		field => "Vm",
+		outputclass => "double_2_ascii",
+	       },
+	      ];
+    }
+
+    # or
+
+    else
+    {
+	# from the user settings
+
+	$schedule->{outputs} = $GENESIS3::outputs;
+    }
+
+    # application configuration
+
+    #t for the tests, should be configurable such that it can use the 'steps' method to.
+
+    $schedule->{apply}
+	= {
+	   simulation => [
+			  {
+			   arguments => [ $time, ],
+			   method => 'advance',
+			  },
+			 ],
+	  };
+
+    # run the schedule
+
+    my $scheduler = SSP->new($schedule);
+
+    my $result = $scheduler->run();
+
+    if ($result)
+    {
+	return "*** Error: running $scheduler->{name} returned $result";
+    }
+    else
+    {
+	return "*** Ok: done running $scheduler->{name}";
+    }
 }
 
 
@@ -808,6 +924,10 @@ our $all_cpan_components
 
 
 our $model_container;
+
+our $runtime_parameters = [];
+
+our $outputs = [];
 
 
 sub header
