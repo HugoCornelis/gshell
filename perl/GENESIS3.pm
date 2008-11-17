@@ -103,6 +103,22 @@ my $outputs = [];
 my $models = [];
 
 
+sub add_output
+{
+    my $component_name = shift;
+
+    my $field = shift;
+
+    push
+	@$GENESIS3::outputs,
+	{
+	 component_name => $component_name,
+	 field => $field,
+	 outputclass => "double_2_ascii",
+	};
+}
+
+
 sub ce
 {
     my $path = shift;
@@ -126,18 +142,6 @@ sub ce
 	    $current_working_element .= $element;
 	}
     }
-}
-
-
-sub pwe
-{
-    print "$current_working_element\n";
-}
-
-
-sub help
-{
-    print "no help yet\n";
 }
 
 
@@ -206,6 +210,18 @@ sub create
 	return '*** Error: incorrect usage';
     }
 
+}
+
+
+sub echo
+{
+    print join " ", @_;
+}
+
+
+sub help
+{
+    print "no help yet\n";
 }
 
 
@@ -285,184 +301,6 @@ sub list_elements
 }
 
 
-sub set_model_parameter
-{
-    my $element = shift;
-
-    my $parameter = shift;
-
-    my $value = shift;
-
-    my $value_type = shift;
-
-    if (ref $parameter =~ /HASH/)
-    {
-	foreach my $parameter_name (keys %$parameter)
-	{
-	    my $parameter_value = $parameter->{$parameter_name};
-
-	    my $result = set_model_parameter($element, $parameter_name, $parameter_value);
-
-	    if ($result =~ /error/i)
-	    {
-		return "*** Error: set_model_parameter $element $parameter_name $parameter_value";
-	    }
-	}
-
-	return "*** ok: set_model_parameter $element $parameter $value_type $value";
-    }
-    else
-    {
-	if (!$value_type)
-	{
-	    if ($value =~ /->/)
-	    {
-		$value_type = 'field';
-	    }
-	    elsif ($value =~ /\//)
-	    {
-		$value_type = 'symbolic';
-	    }
-	    elsif ($value =~ /^(\+|-)?([0-9]+)(\.[0-9]+)?(e(\+|-)?([0-9]+))?$/)
-	    {
-		$value_type = 'number';
-	    }
-	    else
-	    {
-		$value_type = 'string';
-	    }
-	}
-
-	if (!defined $element)
-	{
-	    $element = $current_working_element;
-	}
-	else
-	{
-	    if ($element =~ m(^/))
-	    {
-	    }
-	    else
-	    {
-		$element = "$current_working_element/$element";
-	    }
-	}
-
-	my $query = "setparameterconcept $element $parameter $value_type $value";
-
-	querymachine($query);
-
-	return "*** ok: set_model_parameter $element $parameter $value_type $value";
-    }
-}
-
-
-sub set_runtime_parameter
-{
-    my $element = shift;
-
-    my $parameter = shift;
-
-    my $value = shift;
-
-    my $value_type = shift;
-
-    if (!$value_type)
-    {
-	if ($value =~ /->/)
-	{
-	    $value_type = 'field';
-	}
-	elsif ($value =~ /\//)
-	{
-	    $value_type = 'symbolic';
-	}
-	elsif ($value =~ /^(\+|-)?([0-9]+)(\.[0-9]+)?(e(\+|-)?([0-9]+))?$/)
-	{
-	    $value_type = 'number';
-	}
-	else
-	{
-	    $value_type = 'string';
-	}
-    }
-
-    if (!defined $element)
-    {
-	$element = $current_working_element;
-    }
-    else
-    {
-	if ($element =~ m(^/))
-	{
-	}
-	else
-	{
-	    $element = "$current_working_element/$element";
-	}
-    }
-
-#     my $query = "setparameter / $element $parameter $value_type $value";
-
-#     querymachine($query);
-
-    push
-	@$GENESIS3::runtime_parameters,
-	{
-	 component_name => $element,
-	 field => $parameter,
-	 value => $value,
-
-	 #t note that value_type is ignored right now
-
-	 value_type => $value_type,
-	};
-
-    return "*** ok: set_runtime_parameter $element $parameter $value_type $value";
-}
-
-
-sub show_parameter
-{
-    my $element = shift;
-
-    my $parameter = shift;
-
-    if (!defined $element)
-    {
-	$element = $current_working_element;
-    }
-    else
-    {
-	if ($element =~ m(^/))
-	{
-	}
-	else
-	{
-	    $element = "$current_working_element/$element";
-	}
-    }
-
-    my $query = "printparameter $element $parameter";
-
-    if (querymachine($query))
-    {
-    }
-
-    return "*** ok: show_parameter $element $parameter";
-}
-
-
-sub show_runtime_parameters
-{
-    use YAML;
-
-    print Dump( { runtime_parameters => $GENESIS3::runtime_parameters, }, );
-
-    return "*** ok: show_runtime_parameters";
-}
-
-
 sub ndf_load
 {
     my $filename = shift;
@@ -471,19 +309,9 @@ sub ndf_load
 }
 
 
-sub add_output
+sub pwe
 {
-    my $component_name = shift;
-
-    my $field = shift;
-
-    push
-	@$GENESIS3::outputs,
-	{
-	 component_name => $component_name,
-	 field => $field,
-	 outputclass => "double_2_ascii",
-	};
+    print "$current_working_element\n";
 }
 
 
@@ -676,6 +504,143 @@ sub sh
 }
 
 
+sub set_model_parameter
+{
+    my $element = shift;
+
+    my $parameter = shift;
+
+    my $value = shift;
+
+    my $value_type = shift;
+
+    if (ref $parameter =~ /HASH/)
+    {
+	foreach my $parameter_name (keys %$parameter)
+	{
+	    my $parameter_value = $parameter->{$parameter_name};
+
+	    my $result = set_model_parameter($element, $parameter_name, $parameter_value);
+
+	    if ($result =~ /error/i)
+	    {
+		return "*** Error: set_model_parameter $element $parameter_name $parameter_value";
+	    }
+	}
+
+	return "*** ok: set_model_parameter $element $parameter $value_type $value";
+    }
+    else
+    {
+	if (!$value_type)
+	{
+	    if ($value =~ /->/)
+	    {
+		$value_type = 'field';
+	    }
+	    elsif ($value =~ /\//)
+	    {
+		$value_type = 'symbolic';
+	    }
+	    elsif ($value =~ /^(\+|-)?([0-9]+)(\.[0-9]+)?(e(\+|-)?([0-9]+))?$/)
+	    {
+		$value_type = 'number';
+	    }
+	    else
+	    {
+		$value_type = 'string';
+	    }
+	}
+
+	if (!defined $element)
+	{
+	    $element = $current_working_element;
+	}
+	else
+	{
+	    if ($element =~ m(^/))
+	    {
+	    }
+	    else
+	    {
+		$element = "$current_working_element/$element";
+	    }
+	}
+
+	my $query = "setparameterconcept $element $parameter $value_type $value";
+
+	querymachine($query);
+
+	return "*** ok: set_model_parameter $element $parameter $value_type $value";
+    }
+}
+
+
+sub set_runtime_parameter
+{
+    my $element = shift;
+
+    my $parameter = shift;
+
+    my $value = shift;
+
+    my $value_type = shift;
+
+    if (!$value_type)
+    {
+	if ($value =~ /->/)
+	{
+	    $value_type = 'field';
+	}
+	elsif ($value =~ /\//)
+	{
+	    $value_type = 'symbolic';
+	}
+	elsif ($value =~ /^(\+|-)?([0-9]+)(\.[0-9]+)?(e(\+|-)?([0-9]+))?$/)
+	{
+	    $value_type = 'number';
+	}
+	else
+	{
+	    $value_type = 'string';
+	}
+    }
+
+    if (!defined $element)
+    {
+	$element = $current_working_element;
+    }
+    else
+    {
+	if ($element =~ m(^/))
+	{
+	}
+	else
+	{
+	    $element = "$current_working_element/$element";
+	}
+    }
+
+#     my $query = "setparameter / $element $parameter $value_type $value";
+
+#     querymachine($query);
+
+    push
+	@$GENESIS3::runtime_parameters,
+	{
+	 component_name => $element,
+	 field => $parameter,
+	 value => $value,
+
+	 #t note that value_type is ignored right now
+
+	 value_type => $value_type,
+	};
+
+    return "*** ok: set_runtime_parameter $element $parameter $value_type $value";
+}
+
+
 sub show_library
 {
     my $type = shift || 'ndf';
@@ -697,6 +662,47 @@ sub show_library
 
 	print Dump( { ndf_library => { $path => $result, }, }, );
     }
+}
+
+
+sub show_parameter
+{
+    my $element = shift;
+
+    my $parameter = shift;
+
+    if (!defined $element)
+    {
+	$element = $current_working_element;
+    }
+    else
+    {
+	if ($element =~ m(^/))
+	{
+	}
+	else
+	{
+	    $element = "$current_working_element/$element";
+	}
+    }
+
+    my $query = "printparameter $element $parameter";
+
+    if (querymachine($query))
+    {
+    }
+
+    return "*** ok: show_parameter $element $parameter";
+}
+
+
+sub show_runtime_parameters
+{
+    use YAML;
+
+    print Dump( { runtime_parameters => $GENESIS3::runtime_parameters, }, );
+
+    return "*** ok: show_runtime_parameters";
 }
 
 
@@ -1011,7 +1017,7 @@ sub profile_environment
 sub version
 {
     # $Format: "    my $version=\"${package}-${label}\";"$
-    my $version="gshell-python-2";
+    my $version="gshell-e441e00ce82838764e57f49e8b31784deeb56863-0";
 
     return $version;
 }

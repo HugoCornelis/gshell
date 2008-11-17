@@ -46,12 +46,62 @@ our $option_verbose = 'errors';
 my $exit_code = 0;
 
 
+sub interprete
+{
+    my $line = shift;
+
+    my $arguments = [ split /\s/, $line, ];
+
+    #t join hash and array arguments
+
+    # create a perl function call
+
+    my $quoted_line = $arguments->[0];
+
+    if ($arguments->[1])
+    {
+	$quoted_line
+	    .= (
+		join
+		' ',
+		"(",
+		(
+		 map
+		 {
+		     (
+		      /^('|")/
+		      ? "$_, "
+		      : "'$_',"
+		     )
+		  }
+		 (@$arguments)[1 .. $#$arguments]
+		),
+		")"
+	       );
+
+	$quoted_line =~ s/\\n/\n/g;
+    }
+
+    my $result = eval($quoted_line);
+
+    if ($@)
+    {
+	warn $@;
+
+	print Data::Dumper->Dump( [ $result, ], [ 'Result', ]);
+    }
+
+    if ($result =~ /^\*\*\* Ok/)
+    {
+    }
+    else
+    {
+    }
+}
+
+
 sub loop
 {
-    require GENESIS3;
-
-    GENESIS3::header();
-
     my $historyfile = $ENV{HOME} . '/.phistory';
 
     my $term = Term::ReadLine->new('genesis > ');
@@ -70,42 +120,17 @@ sub loop
 
     while ( defined ($_ = $term->readline("genesis > ")) )
     {
-	my $arguments = [ split ];
+	my $line = $_;
 
-	#t join hash and array arguments
-
-	# create a perl function call
-
-	my $quoted_line = $arguments->[0];
-
-	if ($arguments->[1])
-	{
-	    $quoted_line .= join ' ', "(", ( map { "'$_'," } (@$arguments)[1 .. $#$arguments] ), ")";
-	}
-
-	my $result = eval($quoted_line);
-
-	if ($@)
-	{
-	    warn $@;
-
-	    print Data::Dumper->Dump( [ $result, ], [ 'Result', ]);
-	}
+	interprete($line);
 
 	{
 	    open H, ">>$historyfile";
-	    print H "$_\n";
+	    print H "$line\n";
 	    close H;
-
-	    if ($result =~ /^\*\*\* Ok/)
-	    {
-	    }
-	    else
-	    {
-	    }
 	}
 
-	$term->addhistory($_) if /\S/;
+	$term->addhistory($line) if /\S/;
     }
 }
 
@@ -121,6 +146,28 @@ sub main
     }
 
     read_cmd_line();
+
+    require GENESIS3;
+
+    GENESIS3::header();
+
+    STDOUT->autoflush(1);
+
+    foreach my $script (@ARGV)
+    {
+	use IO::File;
+
+	my $file = IO::File->new("<$script");
+
+	my $lines = [ <$file>, ];
+
+	foreach my $line (@$lines)
+	{
+	    #t do error processing
+
+	    interprete($line);
+	}
+    }
 
     loop();
 }

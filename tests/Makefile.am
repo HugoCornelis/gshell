@@ -16,6 +16,10 @@
 
 check_SCRIPTS = $(srcdir)/neurospaces_harness 
 
+noinst_SCRIPTS = \
+	$(srcdir)/scripts/simple_purkinje \
+	$(srcdir)/scripts/simple_purkinje.g3
+
 TESTS = $(srcdir)/neurospaces_harness
 
 test: check

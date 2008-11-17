@@ -1,0 +1,16 @@
+#!/usr/local/bin/genesis-g3
+#!
+
+echo loading purkinje cell\n
+ndf_load cells/purkinje/edsjb1994.ndf
+echo loaded\n
+
+echo applying current injection\n
+set_runtime_parameter /Purkinje/segments/soma INJECT 2e-9
+
+echo running for 0.001sec\n
+run /Purkinje 0.001
+
+echo output follows:\n
+sh cat /tmp/output
+

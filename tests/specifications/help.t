@@ -28,14 +28,15 @@ synopsis: <type> must be one of physical, functions, structure, commands, sectio
 						  {
 						   description => "Can we find commands ?",
 						   read => "all commands:
+  - add_output
   - ce
   - create
   - current_working_element
+  - echo
   - help
   - list
   - list_elements
   - ndf_load
-  - output
   - pwe
   - querymachine
   - quit
@@ -45,6 +46,7 @@ synopsis: <type> must be one of physical, functions, structure, commands, sectio
   - sh
   - show_library
   - show_parameter
+  - show_runtime_parameters
 ",
 						   write => 'list commands',
 						  },

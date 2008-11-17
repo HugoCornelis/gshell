@@ -18,6 +18,7 @@
 ##############################################################################
 
 #t automake does not allow to pass in arguments for tests ?
+
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
 VPATH = @srcdir@
@@ -46,6 +47,7 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES =
+SCRIPTS = $(noinst_SCRIPTS)
 SOURCES =
 DIST_SOURCES =
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -107,6 +109,10 @@ sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 check_SCRIPTS = $(srcdir)/neurospaces_harness 
+noinst_SCRIPTS = \
+	$(srcdir)/scripts/simple_purkinje \
+	$(srcdir)/scripts/simple_purkinje.g3
+
 TESTS = $(srcdir)/neurospaces_harness
 all: all-am
 
@@ -252,7 +258,7 @@ check-am: all-am
 	$(MAKE) $(AM_MAKEFLAGS) $(check_SCRIPTS)
 	$(MAKE) $(AM_MAKEFLAGS) check-TESTS
 check: check-am
-all-am: Makefile
+all-am: Makefile $(SCRIPTS)
 installdirs:
 install: install-am
 install-exec: install-exec-am

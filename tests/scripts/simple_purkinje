@@ -1,0 +1,58 @@
+#!/usr/bin/perl -w
+#!/usr/bin/perl -d:ptkdb
+#!
+
+
+use strict;
+
+
+BEGIN
+{
+    #! make check
+
+    push @INC, '../perl';
+
+    #! make distcheck
+
+    push @INC, '../../perl';
+
+    #! normal run
+
+    push @INC, './perl';
+
+    #! after install
+
+    push @INC, '/usr/local/glue/swig/perl';
+}
+
+
+BEGIN
+{
+    $ENV{NEUROSPACES_NMC_MODELS} = '/usr/local/neurospaces/models/library';
+}
+
+
+$SIG{__DIE__}
+    = sub {
+	use Carp;
+
+	confess @_;
+    };
+
+
+use GENESIS3;
+
+
+print "loading purkinje cell\n";
+ndf_load("cells/purkinje/edsjb1994.ndf");
+print "loaded\n";
+
+print "applying current injection\n";
+set_runtime_parameter("/Purkinje/segments/soma", "INJECT", 2e-9);
+
+print "running for 0.001sec\n";
+run("/Purkinje", 0.001);
+
+print "output follows:\n";
+sh("cat /tmp/output");
+
