@@ -1017,7 +1017,7 @@ sub profile_environment
 sub version
 {
     # $Format: "    my $version=\"${package}-${label}\";"$
-    my $version="gshell-e441e00ce82838764e57f49e8b31784deeb56863-0";
+    my $version="gshell-ed79d228eb561e5df70bd37e97b4dfb047c45277-0";
 
     return $version;
 }
