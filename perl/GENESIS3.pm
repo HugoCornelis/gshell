@@ -471,14 +471,24 @@ solverclasses:
 
     #t for the tests, should be configurable such that it can use the 'steps' method to.
 
+    my $simulation
+	= [
+	   {
+	    arguments => [ $time, { verbose => 2 }, ],
+	    arguments => [ $time, ],
+	    method => 'advance',
+	   },
+	  ];
+
+    if ($main::option_verbose
+	&& $main::option_verbose eq 'debug')
+    {
+	$simulation->[0]->{arguments}->[1]->{verbose} = 2;
+    }
+
     $schedule->{apply}
 	= {
-	   simulation => [
-			  {
-			   arguments => [ $time, ],
-			   method => 'advance',
-			  },
-			 ],
+	   simulation => $simulation,
 	  };
 
     # run the schedule
