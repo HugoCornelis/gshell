@@ -457,7 +457,7 @@ solverclasses:
 
 		# but we are tolerant if this output cannot be found
 
-		warn_only => "the default output ($model_name/segments/soma) was generated automatically and is not always wanted",
+		warn_only => "the default output ($model_name/segments/soma) was generated automatically and is not always available",
 	       },
 	      ];
     }
@@ -484,8 +484,8 @@ solverclasses:
 	   },
 	  ];
 
-    if ($main::option_verbose
-	&& $main::option_verbose eq 'debug')
+    if ($GENESIS3::verbose_level
+	&& $GENESIS3::verbose_level eq 'debug')
     {
 	$simulation->[0]->{arguments}->[1]->{verbose} = 2;
     }
@@ -508,6 +508,30 @@ solverclasses:
     else
     {
 	return "*** Ok: done running $scheduler->{name}";
+    }
+}
+
+
+sub set_verbose
+{
+    my $level = shift;
+
+    if (exists $GENESIS3::all_verbose->{$level})
+    {
+	$GENESIS3::verbose_level = $level;
+
+	return "*** Ok: setting verbosity to $level";
+    }
+    else
+    {
+	if (!exists $GENESIS3::all_verbose->{$GENESIS3::verbose_level})
+	{
+	    #! fall back to a default that makes sense to the current messy situation
+
+	    set_verbose('debug');
+	}
+
+	return "*** Error: verbosity $level does not exist in the current environment";
     }
 }
 
@@ -720,6 +744,12 @@ sub show_runtime_parameters
 }
 
 
+sub show_verbose
+{
+    print "---\n  verbose: $GENESIS3::verbose_level\n";
+}
+
+
 {
     # import all command subs into the main namespace
 
@@ -774,23 +804,9 @@ sub list_functions
 
 sub list_verbose
 {
-    my $descriptions_yaml =
-"errors:
-  comment: this is the default
-  description: displays only error state information
-warnings:
-  description: displays warning and error state information
-information:
-  description: displays information, warning and error messages
-debug:
-  description: used for software development and maintenance
-";
-
     use YAML;
 
-    my $descriptions = { 'verbosity levels' => Load($descriptions_yaml), };
-
-    print Dump($descriptions);
+    print Dump( { 'verbosity levels' => $GENESIS3::all_verbose, } );
 }
 
 
@@ -908,7 +924,7 @@ foreach my $token_name (@$token_names)
 
 	      my $physical_name = shift;
 
-	      if ($main::option_verbose ne 'errors')
+	      if ($GENESIS3::verbose_level ne 'errors')
 	      {
 		  print "$subname: $physical_name\n";
 	      }
@@ -939,7 +955,7 @@ our $all_components
 		  module => 'GENESIS3',
 		  status => 'loaded',
 # 		  variables => {
-# 				verbose => $main::option_verbose,
+# 				verbose => $GENESIS3::verbose_level,
 # 			       },
 		 },
        heccer => {
@@ -965,11 +981,31 @@ our $all_cpan_components
       };
 
 
+our $all_verbose
+    = {
+       errors => {
+		  comment => 'this is the default',
+		  description => 'displays only error state information',
+		 },
+       warnings => {
+		    description => 'displays warning and error state information',
+		   },
+       information => {
+		       description => 'displays information, warning and error messages',
+		      },
+       debug => {
+		 description => 'used for software development and maintenance',
+		},
+      };
+
+
 our $model_container;
 
 our $runtime_parameters = [];
 
 our $outputs = [];
+
+our $verbose_level;
 
 
 sub header

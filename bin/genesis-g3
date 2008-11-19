@@ -149,6 +149,8 @@ sub main
 
     require GENESIS3;
 
+    set_verbose($option_verbose);
+
     GENESIS3::header();
 
     STDOUT->autoflush(1);

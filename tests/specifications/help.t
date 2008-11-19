@@ -44,6 +44,7 @@ synopsis: (you gave )
   - run
   - set_model_parameter
   - set_runtime_parameter
+  - set_verbose
   - sh
   - show_library
   - show_parameter
