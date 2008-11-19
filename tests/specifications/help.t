@@ -55,7 +55,7 @@ synopsis: (you gave )
 						   description => "Can we find the loaded software components ?",
 						   read => "Core components:
   gshell:
-    description: the GENESIS 3 shell
+    description: the GENESIS 3 shell allows convenient interaction with other components
     module: GENESIS3
     status: loaded
   heccer:
