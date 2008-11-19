@@ -53,6 +53,7 @@ verbose_level: debug
 						  },
 						  {
 						   description => "Can we set the verbose_level variable to an illegal value ?",
+						   read => "*** Error: verbosity texan_deadbeaf does not exist in the current environment",
 						   write => "set_verbose texan_deadbeaf",
 						  },
 						  {

@@ -116,6 +116,8 @@ sub add_output
 	 field => $field,
 	 outputclass => "double_2_ascii",
 	};
+
+    return "*** Ok: add_output $component_name $field";
 }
 
 
@@ -142,6 +144,8 @@ sub ce
 	    $current_working_element .= $element;
 	}
     }
+
+    return "*** Ok: ce $path";
 }
 
 
@@ -192,6 +196,8 @@ sub create
 # 	eval "$sub_name(\$name)";
 
 # 	print $@;
+
+	return "*** Ok: create $type $name";
     }
     else
     {
@@ -216,12 +222,16 @@ sub create
 sub echo
 {
     print join " ", @_;
+
+    return "*** Ok: echo";
 }
 
 
 sub help
 {
     print "no help yet\n";
+
+    return "*** Error: no help yet";
 }
 
 
@@ -264,7 +274,7 @@ sub list
 	return '*** Error: incorrect usage';
     }
 
-    return '*** Ok';
+    return '*** Ok: list';
 }
 
 
@@ -297,7 +307,7 @@ sub list_elements
 
     querymachine($query);
 
-    return "*** ok: list_elements $element";
+    return "*** Ok: list_elements $element";
 }
 
 
@@ -306,12 +316,16 @@ sub ndf_load
     my $filename = shift;
 
     $GENESIS3::model_container->read(undef, [ 'genesis-g3', $filename, ], );
+
+    return "*** Ok: ndf_load $filename";
 }
 
 
 sub pwe
 {
     print "$current_working_element\n";
+
+    return "*** Ok: pwd";
 }
 
 
@@ -319,7 +333,13 @@ sub querymachine
 {
     my $query = join ' ', @_;
 
-    return $GENESIS3::model_container->querymachine($query);
+    #t return value indicates user wants to quit ?
+
+    #t good mechanism for error propagation is missing here
+
+    $GENESIS3::model_container->querymachine($query);
+
+    return "*** Ok: querymachine $query";
 }
 
 
@@ -538,7 +558,16 @@ sub set_verbose
 
 sub sh
 {
-    return system @_;
+    system @_;
+
+    if ($?)
+    {
+	return "*** Error: sh ", @_, " returned $?";
+    }
+    else
+    {
+	return "*** Ok: sh ", @_;
+    }
 }
 
 
@@ -675,7 +704,7 @@ sub set_runtime_parameter
 	 value_type => $value_type,
 	};
 
-    return "*** ok: set_runtime_parameter $element $parameter $value_type $value";
+    return "*** Ok: set_runtime_parameter $element $parameter $value_type $value";
 }
 
 
@@ -700,6 +729,8 @@ sub show_library
 
 	print Dump( { ndf_library => { $path => $result, }, }, );
     }
+
+    return "*** Ok: show_library $type $path";
 }
 
 
@@ -730,7 +761,7 @@ sub show_parameter
     {
     }
 
-    return "*** ok: show_parameter $element $parameter";
+    return "*** Ok: show_parameter $element $parameter";
 }
 
 
@@ -740,13 +771,15 @@ sub show_runtime_parameters
 
     print Dump( { runtime_parameters => $GENESIS3::runtime_parameters, }, );
 
-    return "*** ok: show_runtime_parameters";
+    return "*** Ok: show_runtime_parameters";
 }
 
 
 sub show_verbose
 {
     print "---\nverbose_level: $GENESIS3::verbose_level\n";
+
+    return "*** Ok: show_verbose";
 }
 
 
@@ -807,6 +840,8 @@ sub list_verbose
     use YAML;
 
     print Dump( { 'verbosity levels' => $GENESIS3::all_verbose, } );
+
+    return "*** Ok: list_verbose";
 }
 
 
@@ -870,7 +905,7 @@ foreach my $purpose qw(
 
 	      print foreach map { "  - $_\n" } @$token_names;
 
-	      undef;
+	      return "*** Ok: list_$purpose";
 	  };
 }
 
