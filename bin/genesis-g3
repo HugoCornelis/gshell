@@ -94,7 +94,7 @@ sub interprete
 	$quoted_line =~ s/\\n/\n/g;
     }
 
-    if ($quoted_line =~ /^\s*(#.*)$/)
+    if ($quoted_line =~ /^\s*(#.*)?$/)
     {
 	next;
     }
