@@ -109,21 +109,6 @@ Other components:
 ",
 						   write => 'list physical',
 						  },
-						  {
-						   description => "Can we find information about the different verbosity levels ?",
-						   read => "verbosity levels:
-  debug:
-    description: used for software development and maintenance
-  errors:
-    comment: this is the default
-    description: displays only error state information
-  information:
-    description: 'displays information, warning and error messages'
-  warnings:
-    description: displays warning and error state information
-",
-						   write => 'list verbose',
-						  },
 						 ],
 				description => "help commands",
 			       },

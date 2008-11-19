@@ -746,7 +746,7 @@ sub show_runtime_parameters
 
 sub show_verbose
 {
-    print "---\n  verbose: $GENESIS3::verbose_level\n";
+    print "---\nverbose_level: $GENESIS3::verbose_level\n";
 }
 
 
