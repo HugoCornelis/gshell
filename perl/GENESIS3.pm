@@ -454,6 +454,10 @@ solverclasses:
 		component_name => "$model_name/segments/soma",
 		field => "Vm",
 		outputclass => "double_2_ascii",
+
+		# but we are tolerant if this output cannot be found
+
+		warn_only => "the default output ($model_name/segments/soma) was generated automatically and is not always wanted",
 	       },
 	      ];
     }
