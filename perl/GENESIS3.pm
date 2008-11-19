@@ -258,7 +258,7 @@ sub list
 	      ];
 
 	print "synopsis: list <type>\n";
-	print "synopsis: <type> must be one of " . (join ', ', @$subs) . "\n";
+	print "synopsis: <type> must be one of " . (join ', ', sort @$subs) . "\n";
 	print "synopsis: (you gave $type)\n";
 
 	return '*** Error: incorrect usage';
@@ -769,6 +769,28 @@ sub list_functions
     print foreach map { "  - $_\n" } "NERNST", "MGBLOCK", "RANDOMIZE", "FIXED", "SERIAL";
 
     undef;
+}
+
+
+sub list_verbose
+{
+    my $descriptions_yaml =
+"errors:
+  comment: this is the default
+  description: displays only error state information
+warnings:
+  description: displays warning and error state information
+information:
+  description: displays information, warning and error messages
+debug:
+  description: used for software development and maintenance
+";
+
+    use YAML;
+
+    my $descriptions = { 'verbosity levels' => Load($descriptions_yaml), };
+
+    print Dump($descriptions);
 }
 
 

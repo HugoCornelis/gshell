@@ -21,7 +21,8 @@ my $test
 						  {
 						   description => "Can we get a useful synopsis for the list command ?",
 						   read => "synopsis: list <type>
-synopsis: <type> must be one of physical, functions, structure, commands, sections, components
+synopsis: <type> must be one of commands, components, functions, physical, sections, structure, verbose
+synopsis: (you gave )
 ",
 						   write => 'list',
 						  },
@@ -106,6 +107,21 @@ Other components:
   - SEGMENT_GROUP
 ",
 						   write => 'list physical',
+						  },
+						  {
+						   description => "Can we find information about the different verbosity levels ?",
+						   read => "verbosity levels:
+  debug:
+    description: used for software development and maintenance
+  errors:
+    comment: this is the default
+    description: displays only error state information
+  information:
+    description: 'displays information, warning and error messages'
+  warnings:
+    description: displays warning and error state information
+",
+						   write => 'list verbose',
 						  },
 						 ],
 				description => "help commands",
