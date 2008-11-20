@@ -216,6 +216,8 @@ ndf_library:
 						   write => "sh cat /tmp/output",
 						  },
 						 ],
+				},
+			      ],
        description => "simple simulations of purkinje cell models",
        name => 'simple_purkinje.t',
       };
