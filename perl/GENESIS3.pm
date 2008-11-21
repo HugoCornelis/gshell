@@ -468,15 +468,19 @@ sub run
 	    arguments => [ $time, ],
 	    method => 'advance',
 	   },
+	   {
+	    method => 'pause',
+	   },
 	  ];
 
     if ($GENESIS3::verbose_level
-	&& $GENESIS3::verbose_level eq 'debug')
+	and $GENESIS3::verbose_level eq 'debug')
     {
 	$simulation->[0]->{arguments}->[1]->{verbose} = 2;
     }
 
-#     #! finishers are set empty to preserve interactivity.
+    #! finishers are set empty to preserve interactivity.
+    #! the pause method is assumed to flush buffers where applicable.
 
     $schedule->{apply}
 	= {
