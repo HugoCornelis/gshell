@@ -46,9 +46,11 @@ synopsis: (you gave )
   - set_runtime_parameter
   - set_verbose
   - sh
+  - show_global_time
   - show_library
   - show_parameter
   - show_runtime_parameters
+  - show_verbose
 ",
 						   write => 'list commands',
 						  },

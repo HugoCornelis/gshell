@@ -373,40 +373,6 @@ sub run
 	return '*** Error: <time> must be numeric';
     }
 
-    my $schedule_yaml
-	= "--- !!perl/hash:SSP
-apply:
-  simulation:
-    - arguments:
-        - 2500
-        - verbose: 2
-      method: steps
-models:
-  - granular_parameters:
-      - component_name: /purk_test/segments/soma
-        field: INJECT
-        value: 2e-09
-    modelname: /purk_test
-    solverclass: heccer
-name: GENESIS3 schedule
-outputclasses:
-  double_2_ascii:
-    module_name: Heccer
-    options:
-      filename: /tmp/output
-    package: Heccer::Output
-solverclasses:
-  heccer:
-    constructor_settings:
-      dStep: $heccer_time_step
-    module_name: Heccer
-    service_name: neurospaces
-";
-
-#     use YAML;
-
-#     my $schedule = Load($schedule_yaml);
-
     my $schedule
 	= {
 	   name => "GENESIS3 schedule for $model_name, $time",
@@ -510,9 +476,12 @@ solverclasses:
 	$simulation->[0]->{arguments}->[1]->{verbose} = 2;
     }
 
+#     #! finishers are set empty to preserve interactivity.
+
     $schedule->{apply}
 	= {
 	   simulation => $simulation,
+	   finishers => [],
 	  };
 
     # run the schedule
@@ -521,13 +490,26 @@ solverclasses:
 
     my $result = $scheduler->run();
 
-    if ($result)
+    # if successful
+
+    if (!$result)
     {
-	return "*** Error: running $scheduler->{name} returned $result";
+	# get the simulation time from the schedule
+
+	$GENESIS3::global_time = $scheduler->{simulation_time}->{time};
+
+	# return success
+
+	return "*** Ok: done running $scheduler->{name}";
     }
     else
     {
-	return "*** Ok: done running $scheduler->{name}";
+	if (defined $scheduler->{simulation_time}->{time})
+	{
+	    $GENESIS3::global_time = $scheduler->{simulation_time}->{time};
+	}
+
+	return "*** Error: running $scheduler->{name} returned $result";
     }
 }
 
@@ -705,6 +687,14 @@ sub set_runtime_parameter
 	};
 
     return "*** Ok: set_runtime_parameter $element $parameter $value_type $value";
+}
+
+
+sub show_global_time
+{
+    print "---\nglobal_time: $GENESIS3::global_time\n";
+
+    return "*** Ok: show_global_time";
 }
 
 
@@ -1034,11 +1024,13 @@ our $all_verbose
       };
 
 
+our $global_time = 0;
+
 our $model_container;
 
-our $runtime_parameters = [];
-
 our $outputs = [];
+
+our $runtime_parameters = [];
 
 our $verbose_level;
 
