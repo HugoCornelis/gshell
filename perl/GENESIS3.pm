@@ -11,10 +11,6 @@ package GENESIS3::Commands;
 
 my $heccer_time_step = 2e-05;
 
-my $outputs = [];
-
-my $models = [];
-
 
 sub add_output
 {
@@ -964,16 +960,16 @@ sub initialize
 {
     my $result = 1;
 
-    $model_container = Neurospaces->new();
+    $GENESIS3::model_container = Neurospaces->new();
 
-    if (!$model_container)
+    if (!$GENESIS3::model_container)
     {
 	die "$0: *** Error: cannot instantiate a model container\n";
     }
 
     my $args = [ "$0", "utilities/empty_model.ndf" ];
 
-    my $success = $model_container->read(undef, $args);
+    my $success = $GENESIS3::model_container->read(undef, $args);
 
     if (!$success)
     {
@@ -986,9 +982,9 @@ sub initialize
 
 sub profile_environment
 {
-    foreach my $component_name (keys %$all_components)
+    foreach my $component_name (keys %$GENESIS3::all_components)
     {
-	my $component = $all_components->{$component_name};
+	my $component = $GENESIS3::all_components->{$component_name};
 
 	my $component_module = $component->{module} || $component_name;
 
@@ -1021,11 +1017,11 @@ sub profile_environment
 
     if ($@)
     {
-	$all_cpan_components->{python}->{status} = $@;
+	$GENESIS3::all_cpan_components->{python}->{status} = $@;
     }
     else
     {
-	$all_cpan_components->{python}->{status} = 'loaded';
+	$GENESIS3::all_cpan_components->{python}->{status} = 'loaded';
     }
 
     return 1;
