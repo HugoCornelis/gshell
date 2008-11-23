@@ -9,9 +9,6 @@ use strict;
 package GENESIS3::Commands;
 
 
-my $heccer_time_step = 2e-05;
-
-
 sub add_output
 {
     my $component_name = shift;
@@ -311,7 +308,7 @@ sub run
 	= {
 	   heccer => {
 		      constructor_settings => {
-					       dStep => $heccer_time_step,
+					       dStep => $GENESIS3::heccer_time_step,
 					      },
 		      module_name => 'Heccer',
 		      service_name => 'neurospaces',
@@ -940,6 +937,8 @@ our $all_verbose
 our $current_working_element = '/';
 
 our $global_time = 0;
+
+our $heccer_time_step = 2e-05;
 
 our $model_container;
 
