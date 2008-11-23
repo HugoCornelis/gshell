@@ -32,7 +32,6 @@ synopsis: (you gave )
   - add_output
   - ce
   - create
-  - current_working_element
   - echo
   - help
   - list

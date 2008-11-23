@@ -9,93 +9,6 @@ use strict;
 package GENESIS3::Commands;
 
 
-our $current_working_element = '/';
-
-
-my $example_schedule
-    = "--- !!perl/hash:SSP
-application_classes:
-  analyzers:
-    default:
-      - method: analyze
-    priority: 95
-  finishers:
-    default:
-      - method: finish
-    priority: 140
-  initializers:
-    default:
-      - method: compile
-      - method: instantiate_inputs
-      - method: instantiate_outputs
-      - method: initiate
-    priority: 80
-  modifiers:
-    default: []
-    priority: 50
-  results:
-    default: []
-    priority: 170
-  services:
-    default:
-      - method: instantiate_services
-    priority: 20
-  simulation:
-    default: []
-    priority: 110
-apply:
-  simulation:
-    - arguments:
-        - 2500
-        - verbose: 2
-      method: steps
-models:
-  - granular_parameters:
-      - component_name: /purk_test/segments/soma
-        field: INJECT
-        value: 2e-09
-    modelname: /purk_test
-    solverclass: heccer
-name: purk_test
-outputclasses:
-  double_2_ascii:
-    module_name: Heccer
-    options:
-      filename: /tmp/output
-    package: Heccer::Output
-outputs:
-  - component_name: /purk_test/segments/soma
-    field: Vm
-    outputclass: double_2_ascii
-  - component_name: /purk_test/segments/soma/ca_pool
-    field: Ca
-    outputclass: double_2_ascii
-  - component_name: /purk_test/segments/soma/km
-    field: state_n
-    outputclass: double_2_ascii
-services:
-  neurospaces:
-    initializers:
-      - arguments:
-          -
-            - tests/perl/purk_test
-            - -P
-            - tests/cells/purk_test.ndf
-        method: read
-    module_name: Neurospaces
-solverclasses:
-  heccer:
-    constructor_settings:
-      configuration:
-        reporting:
-          granularity: 1000
-          tested_things: 6225920
-      dStep: 2e-05
-    module_name: Heccer
-    service_name: neurospaces
-";
-
-
 my $heccer_time_step = 2e-05;
 
 my $outputs = [];
@@ -137,11 +50,11 @@ sub ce
 	}
 	elsif ($element eq '..')
 	{
-	    $current_working_element =~ s((.*)/.*)($1);
+	    $GENESIS3::current_working_element =~ s((.*)/.*)($1);
 	}
 	else
 	{
-	    $current_working_element .= $element;
+	    $GENESIS3::current_working_element .= $element;
 	}
     }
 
@@ -168,7 +81,7 @@ sub create
 
 	if ($name !~ m(^/))
 	{
-	    $name = "$current_working_element/$name";
+	    $name = "$GENESIS3::current_working_element/$name";
 	}
 
 	# some path logic, remove double // etc
@@ -280,17 +193,17 @@ sub list
 
 sub list_elements
 {
-#     my $elements = $GENESIS3::model_container->list_elements($current_working_element);
+#     my $elements = $GENESIS3::model_container->list_elements($GENESIS3::current_working_element);
 
 #     use YAML;
 
-#     print Dump( { $current_working_element => $elements, }, );
+#     print Dump( { $GENESIS3::current_working_element => $elements, }, );
 
     my $element = shift;
 
     if (!defined $element)
     {
-	$element = $current_working_element;
+	$element = $GENESIS3::current_working_element;
     }
     else
     {
@@ -299,7 +212,7 @@ sub list_elements
 	}
 	else
 	{
-	    $element = "$current_working_element/$element";
+	    $element = "$GENESIS3::current_working_element/$element";
 	}
     }
 
@@ -323,7 +236,7 @@ sub ndf_load
 
 sub pwe
 {
-    print "$current_working_element\n";
+    print "$GENESIS3::current_working_element\n";
 
     return "*** Ok: pwd";
 }
@@ -607,7 +520,7 @@ sub set_model_parameter
 
 	if (!defined $element)
 	{
-	    $element = $current_working_element;
+	    $element = $GENESIS3::current_working_element;
 	}
 	else
 	{
@@ -616,7 +529,7 @@ sub set_model_parameter
 	    }
 	    else
 	    {
-		$element = "$current_working_element/$element";
+		$element = "$GENESIS3::current_working_element/$element";
 	    }
 	}
 
@@ -661,7 +574,7 @@ sub set_runtime_parameter
 
     if (!defined $element)
     {
-	$element = $current_working_element;
+	$element = $GENESIS3::current_working_element;
     }
     else
     {
@@ -670,7 +583,7 @@ sub set_runtime_parameter
 	}
 	else
 	{
-	    $element = "$current_working_element/$element";
+	    $element = "$GENESIS3::current_working_element/$element";
 	}
     }
 
@@ -736,7 +649,7 @@ sub show_parameter
 
     if (!defined $element)
     {
-	$element = $current_working_element;
+	$element = $GENESIS3::current_working_element;
     }
     else
     {
@@ -745,7 +658,7 @@ sub show_parameter
 	}
 	else
 	{
-	    $element = "$current_working_element/$element";
+	    $element = "$GENESIS3::current_working_element/$element";
 	}
     }
 
@@ -1027,6 +940,8 @@ our $all_verbose
 		},
       };
 
+
+our $current_working_element = '/';
 
 our $global_time = 0;
 
