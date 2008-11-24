@@ -281,9 +281,9 @@ ndf_library:
 						   comment => "only testing the last line of output",
 						   description => "Can we find the output ?",
 						   read => "
-0.002 -0.0578441
+0.002 -0.0586612
 ",
-						   timeout => 100,
+						   timeout => 10,
 						   write => "sh cat /tmp/output",
 						  },
 						 ],

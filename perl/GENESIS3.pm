@@ -287,7 +287,29 @@ sub run
     {
 	# apply run time settings
 
-	my $result = $scheduler->apply_granular_parameters($scheduler, @$GENESIS3::runtime_parameters);
+	#! we check the run time parameters if they apply to the model
+	#! we are running, if so, we set ->{modelname} because SSP
+	#! expects it if we apply run time settings on a schedule (SSP
+	#! does not expect it when applying run time settings during
+	#! compilation)
+
+	my $result
+	    = $scheduler->apply_granular_parameters
+		(
+		 $scheduler,
+		 map
+		 {
+		     {
+			 modelname => $model_name,
+			 %$_,
+		     };
+		 }
+		 grep
+		 {
+		     $_->{component_name} =~ /^$model_name/
+		 }
+		 @$GENESIS3::runtime_parameters,
+		);
 
 	if (!$result)
 	{
@@ -297,6 +319,8 @@ sub run
 	# use the scheduler
 
 	$result = $scheduler->advance($scheduler, $time, ); # { verbose => 2 } );
+
+	$result &&= $scheduler->pause();
 
 	# get the simulation time from the schedule
 
