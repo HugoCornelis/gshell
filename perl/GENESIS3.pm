@@ -273,15 +273,48 @@ sub run
 	return '*** Error: <model_name> and <time> are required';
     }
 
-    if ($time !~ /[0-9]*(\.[0-9]+)?(e(\+|-)?[0-9]+)?/
+    if ($time !~ /^[0-9]*(\.[0-9]+)?(e(\+|-)?[0-9]+)?$/
 	|| $time eq '')
     {
 	return '*** Error: <time> must be numeric';
     }
 
+    # if we have a scheduler for this model
+
+    my $scheduler = $GENESIS3::schedulers->{$model_name};
+
+    if ($scheduler)
+    {
+	# apply run time settings
+
+	my $result = $scheduler->apply_granular_parameters($scheduler, @$GENESIS3::runtime_parameters);
+
+	if (!$result)
+	{
+	    return "*** Error: apply_granular_parameters() for $scheduler->{name} failed";
+	}
+
+	# use the scheduler
+
+	$result = $scheduler->advance($scheduler, $time, ); # { verbose => 2 } );
+
+	# get the simulation time from the schedule
+
+	$GENESIS3::global_time = $scheduler->{simulation_time}->{time};
+
+	if (!$result)
+	{
+	    return "*** Error: advance() for $scheduler->{name} failed";
+	}
+
+	# return success
+
+	return "*** Ok: done running $scheduler->{name}";
+    }
+
     my $schedule
 	= {
-	   name => "GENESIS3 schedule for $model_name, $time",
+	   name => "GENESIS3 SSP schedule initiated for $model_name, $time",
 	  };
 
     # tell ssp that the model-container service has been initialized
@@ -399,6 +432,10 @@ sub run
     my $scheduler = SSP->new($schedule);
 
     my $result = $scheduler->run();
+
+    # register the scheduler
+
+    $GENESIS3::schedulers->{$model_name} = $scheduler;
 
     # if successful
 
@@ -945,6 +982,8 @@ our $model_container;
 our $outputs = [];
 
 our $runtime_parameters = [];
+
+our $schedulers = {};
 
 our $verbose_level;
 

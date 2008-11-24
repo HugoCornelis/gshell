@@ -216,7 +216,80 @@ ndf_library:
 						   write => "sh cat /tmp/output",
 						  },
 						 ],
-				},
+				description => "commands for a simple simulation of the purkinje cell model",
+				side_effects => "creates a model in the model container",
+			       },
+			       {
+				arguments => [
+					     ],
+				command => 'bin/genesis-g3',
+				command_tests => [
+						  {
+						   description => "Is startup successful ?",
+						   read => "GENESIS 3 shell",
+						   timeout => 5,
+						   write => undef,
+						  },
+						  {
+						   description => "Can we load the version of the purkinje cell with the partitioned dendritic tree ?",
+						   write => "ndf_load cells/purkinje/edsjb1994_partitioned.ndf",
+						  },
+						  {
+						   description => "Can we find the root element of the model (2) ?",
+						   read => "
+- /Purkinje
+",
+						   write => "list_elements",
+						  },
+						  {
+						   description => "Can we find the segments and spines algorithm instance inside the root element ?",
+						   read => "
+- /Purkinje/segments
+- /Purkinje/SpinesNormal_13_1
+",
+						   write => "list_elements /Purkinje",
+						  },
+						  {
+						   description => "Can we run the simulation ?",
+						   write => "run /Purkinje 0.001",
+						  },
+						  {
+						   description => "Can we find the output file in the file system ?",
+						   read => " output
+",
+						   timeout => 100,
+						   write => "sh ls -l /tmp",
+						  },
+						  {
+						   comment => "only testing the last line of output",
+						   description => "Can we find the output ?",
+						   read => "
+0.001 -0.0678441
+",
+						   timeout => 100,
+						   write => "sh cat /tmp/output",
+						  },
+						  {
+						   description => "Can we apply current injection into the soma ?",
+						   write => "set_runtime_parameter /Purkinje/segments/soma INJECT 2e-9",
+						  },
+						  {
+						   description => "Can we continue the simulation ?",
+						   write => "run /Purkinje 0.001",
+						  },
+						  {
+						   comment => "only testing the last line of output",
+						   description => "Can we find the output ?",
+						   read => "
+0.002 -0.0578441
+",
+						   timeout => 100,
+						   write => "sh cat /tmp/output",
+						  },
+						 ],
+				description => "commands for a simple simulation of the purkinje cell model",
+				side_effects => "creates a model in the model container",
+			       },
 			      ],
        description => "simple simulations of purkinje cell models",
        name => 'simple_purkinje.t',
