@@ -287,7 +287,7 @@ ndf_library:
 						   write => "sh cat /tmp/output",
 						  },
 						 ],
-				description => "commands for a simple simulation of the purkinje cell model",
+				description => "commands for an interactive simulation of the purkinje cell model",
 				side_effects => "creates a model in the model container",
 			       },
 			      ],

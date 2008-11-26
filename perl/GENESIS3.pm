@@ -31,7 +31,16 @@ sub ce
 {
     my $path = shift;
 
+    my $current_working_element = $GENESIS3::current_working_element;
+
     $path =~ s/\s*//g;
+
+    if ($path =~ m(^/+$))
+    {
+	$GENESIS3::current_working_element = "/";
+
+	return "*** Ok: ce $path";
+    }
 
     my $stack = [ split '/', $path, ];
 
@@ -43,15 +52,24 @@ sub ce
 	}
 	elsif ($element eq '..')
 	{
-	    $GENESIS3::current_working_element =~ s((.*)/.*)($1);
+	    $current_working_element =~ s((.*)/.*)($1);
 	}
 	else
 	{
-	    $GENESIS3::current_working_element .= $element;
+	    $current_working_element .= $element;
 	}
     }
 
-    return "*** Ok: ce $path";
+    if (Neurospaces::exists_component($current_working_element))
+    {
+	$GENESIS3::current_working_element = $current_working_element;
+
+	return "*** Ok: ce $path";
+    }
+    else
+    {
+	return "*** Error: element $path not found";
+    }
 }
 
 
