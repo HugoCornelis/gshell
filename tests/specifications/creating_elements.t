@@ -40,6 +40,34 @@ my $test
 						   write => 'querymachine expand /**',
 						  },
 						  {
+						   description => "Can we create a second channel in the segment ?",
+						   write => 'create channel /c/s/k',
+						  },
+						  {
+						   description => "Can we delete the first channel from the segment ?",
+						   write => 'delete /c/s/na',
+						  },
+						  {
+						   description => "Can we find the first channel in the segment (should not) ?",
+						   read => '
+- /c
+- /c/s
+- /c/s/na
+- /c/s/k
+',
+						   write => 'querymachine expand /**',
+						  },
+						  {
+						   description => "Can we find the second channel in the segment ?",
+						   read => '
+- /c
+- /c/s
+- /c/s/na
+- /c/s/k
+',
+						   write => 'querymachine expand /**',
+						  },
+						  {
 						   description => "Can we set parameter CM of the segment ?",
 						   write => 'set_model_parameter /c/s CM 0.0164',
 						  },
@@ -63,7 +91,7 @@ my $test
 				description => "commands for creating a model",
 			       },
 			      ],
-       description => "creating elements",
+       description => "creating and deleting elements",
        name => 'creating_elements.t',
       };
 

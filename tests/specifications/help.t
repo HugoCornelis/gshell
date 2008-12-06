@@ -32,6 +32,7 @@ synopsis: (you gave )
   - add_output
   - ce
   - create
+  - delete
   - echo
   - help
   - list

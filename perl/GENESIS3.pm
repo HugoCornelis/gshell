@@ -113,7 +113,7 @@ sub create
 
 	my $sub = (\%{"::"})->{"GENESIS3::"}->{"Tokens::"}->{"Physical::"}->{"create_$type"};
 
-	&$sub($name);
+	my $result = &$sub($name);
 
 # 	# doesnot work for some reason
 
@@ -121,7 +121,7 @@ sub create
 
 # 	print $@;
 
-	return "*** Ok: create $type $name";
+	return $result;
     }
     else
     {
@@ -140,6 +140,55 @@ sub create
 	return '*** Error: incorrect usage';
     }
 
+}
+
+
+sub delete
+{
+    my $name = shift;
+
+    no strict "refs";
+
+    if (exists ((\%{"::"})->{"GENESIS3::"}->{"Tokens::"}->{"Physical::"}->{"delete"}))
+#     if (exists \&{"GENESIS3::Help::list_$type"})
+    {
+	# current working element logic
+
+	if ($name !~ m(^/))
+	{
+	    $name = "$GENESIS3::current_working_element/$name";
+	}
+
+	# some path logic, remove double // etc
+
+	$name =~ s(/\./)(/)g;
+
+	$name =~ s(/\.$)()g;
+
+	$name =~ s([^/]/\.\.)()g;
+
+	$name =~ s(/\.\./)(/)g;
+
+	$name =~ s(//)(/)g;
+
+	eval
+	{
+	    $GENESIS3::model_container->delete_component($name);
+	};
+
+	if ($@)
+	{
+	    return "*** Error: delete $name";
+	}
+	else
+	{
+	    return "*** Ok: delete $name";
+	}
+    }
+    else
+    {
+	return '*** Error: incorrect usage';
+    }
 }
 
 
