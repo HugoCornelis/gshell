@@ -26,8 +26,15 @@ my $test
 						  },
 						  {
 						   description => "Can we change path to a non existing element ?",
+						   disabled => "something related to buffering, the test does not work",
 						   read => "Error",
 						   write => "ce /c",
+						  },
+						  {
+						   description => "Can we get info on the current working element (2) ?",
+						   read => "/
+",
+						   write => "pwe",
 						  },
 						  {
 						   description => "Can we load a cell with many components ?",
