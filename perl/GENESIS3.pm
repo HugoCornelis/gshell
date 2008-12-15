@@ -819,6 +819,11 @@ sub simulation_state_load
 
     my $filename = shift;
 
+    if (!defined $modelname || !defined $filename)
+    {
+	return '*** Error: <modelname> and <filename> are required';
+    }
+
     # define a scheduler for this model
 
     run($modelname, 0);
@@ -867,6 +872,10 @@ sub simulation_state_save
     {
 	return '*** Error: <modelname> and <filename> are required';
     }
+
+    # define a scheduler for this model
+
+    run($modelname, 0);
 
     # if we have a scheduler for this model
 
