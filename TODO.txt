@@ -1,2 +1,8 @@
 -*- outline -*-
 
+* hierarchy/symbols
+does `cat neurospaces/config.h`
+which gives a warning when run in a arbitrary directory.
+So 'perl -e "do symbols"' gives a warning neurospaces/config.h not found.
+
+
