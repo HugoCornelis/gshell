@@ -284,6 +284,104 @@ sub list_elements
 }
 
 
+sub model_state_load
+{
+    my $modelname = shift;
+
+    my $filename = shift;
+
+    if (!defined $modelname || !defined $filename)
+    {
+	return '*** Error: <modelname> and <filename> are required';
+    }
+
+    # define a scheduler for this model
+
+    run($modelname, 0);
+
+    # if we have a scheduler for this model
+
+    my $scheduler = $GENESIS3::schedulers->{$modelname};
+
+    if (!$scheduler)
+    {
+	return "*** Error: no simulation was previously run for $modelname, no scheduler found";
+    }
+
+    my $model = $scheduler->lookup_model($modelname);
+
+    my $solverclasses = $scheduler->{solverclasses};
+
+    my $solverclass = $model->{solverclass};
+
+    my $service = $scheduler->{services}->{$solverclasses->{$solverclass}->{service_name}}->{ssp_service};
+
+    #t not sure if we should make field obligatory ?
+
+    my $solverinfo = $service->input_2_solverinfo( { component_name => $modelname, }, );
+
+    my $solver_engine = $scheduler->lookup_solver_engine($solverinfo->{solver});
+
+    if ($solver_engine->deserialize($filename))
+    {
+	return "*** Ok: model_state_load";
+    }
+    else
+    {
+	return "*** Error: model_state_load";
+    }
+}
+
+
+sub model_state_save
+{
+    my $modelname = shift;
+
+    my $filename = shift;
+
+    if (!defined $modelname || !defined $filename)
+    {
+	return '*** Error: <modelname> and <filename> are required';
+    }
+
+    # define a scheduler for this model
+
+    run($modelname, 0);
+
+    # if we have a scheduler for this model
+
+    my $scheduler = $GENESIS3::schedulers->{$modelname};
+
+    if (!$scheduler)
+    {
+	return "*** Error: no simulation was previously run for $modelname, no scheduler found";
+    }
+
+    my $model = $scheduler->lookup_model($modelname);
+
+    my $solverclasses = $scheduler->{solverclasses};
+
+    my $solverclass = $model->{solverclass};
+
+    my $service = $scheduler->{services}->{$solverclasses->{$solverclass}->{service_name}}->{ssp_service};
+
+    #t not sure if we should make field obligatory ?
+
+    my $solverinfo = $service->input_2_solverinfo( { component_name => $modelname, }, );
+
+    my $solver_engine = $scheduler->lookup_solver_engine($solverinfo->{solver});
+
+    if ($solver_engine->serialize($filename))
+    {
+	return "*** Ok: model_state_save";
+    }
+    else
+    {
+	return "*** Error: model_state_save";
+    }
+}
+
+
 sub ndf_load
 {
     my $filename = shift;
@@ -291,6 +389,16 @@ sub ndf_load
     $GENESIS3::model_container->read(undef, [ 'genesis-g3', $filename, ], );
 
     return "*** Ok: ndf_load $filename";
+}
+
+
+sub ndf_save
+{
+    my $filename = shift;
+
+    $GENESIS3::model_container->write(undef, [ 'genesis-g3', $filename, ], );
+
+    return "*** Ok: ndf_save $filename";
 }
 
 
@@ -810,104 +918,6 @@ sub show_verbose
     print "---\nverbose_level: $GENESIS3::verbose_level\n";
 
     return "*** Ok: show_verbose";
-}
-
-
-sub simulation_state_load
-{
-    my $modelname = shift;
-
-    my $filename = shift;
-
-    if (!defined $modelname || !defined $filename)
-    {
-	return '*** Error: <modelname> and <filename> are required';
-    }
-
-    # define a scheduler for this model
-
-    run($modelname, 0);
-
-    # if we have a scheduler for this model
-
-    my $scheduler = $GENESIS3::schedulers->{$modelname};
-
-    if (!$scheduler)
-    {
-	return "*** Error: no simulation was previously run for $modelname, no scheduler found";
-    }
-
-    my $model = $scheduler->lookup_model($modelname);
-
-    my $solverclasses = $scheduler->{solverclasses};
-
-    my $solverclass = $model->{solverclass};
-
-    my $service = $scheduler->{services}->{$solverclasses->{$solverclass}->{service_name}}->{ssp_service};
-
-    #t not sure if we should make field obligatory ?
-
-    my $solverinfo = $service->input_2_solverinfo( { component_name => $modelname, }, );
-
-    my $solver_engine = $scheduler->lookup_solver_engine($solverinfo->{solver});
-
-    if ($solver_engine->deserialize($filename))
-    {
-	return "*** Ok: simulation_state_load";
-    }
-    else
-    {
-	return "*** Error: simulation_state_load";
-    }
-}
-
-
-sub simulation_state_save
-{
-    my $modelname = shift;
-
-    my $filename = shift;
-
-    if (!defined $modelname || !defined $filename)
-    {
-	return '*** Error: <modelname> and <filename> are required';
-    }
-
-    # define a scheduler for this model
-
-    run($modelname, 0);
-
-    # if we have a scheduler for this model
-
-    my $scheduler = $GENESIS3::schedulers->{$modelname};
-
-    if (!$scheduler)
-    {
-	return "*** Error: no simulation was previously run for $modelname, no scheduler found";
-    }
-
-    my $model = $scheduler->lookup_model($modelname);
-
-    my $solverclasses = $scheduler->{solverclasses};
-
-    my $solverclass = $model->{solverclass};
-
-    my $service = $scheduler->{services}->{$solverclasses->{$solverclass}->{service_name}}->{ssp_service};
-
-    #t not sure if we should make field obligatory ?
-
-    my $solverinfo = $service->input_2_solverinfo( { component_name => $modelname, }, );
-
-    my $solver_engine = $scheduler->lookup_solver_engine($solverinfo->{solver});
-
-    if ($solver_engine->serialize($filename))
-    {
-	return "*** Ok: simulation_state_save";
-    }
-    else
-    {
-	return "*** Error: simulation_state_save";
-    }
 }
 
 
