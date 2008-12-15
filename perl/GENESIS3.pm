@@ -846,7 +846,7 @@ sub simulation_state_load
 
     my $solver_engine = $scheduler->lookup_solver_engine($solverinfo->{solver});
 
-    if ($solver_engine->serialize($filename))
+    if ($solver_engine->deserialize($filename))
     {
 	return "*** Ok: simulation_state_load";
     }
