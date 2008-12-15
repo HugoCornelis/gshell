@@ -29,7 +29,9 @@ sub add_output
 
 sub add_output_help
 {
-    print "synopsis: add_output <element_name> <field_name>\n";
+    print "description: add a variable to the output file
+synopsis: add_output <element_name> <field_name>
+";
 
     return "*** Ok";
 }
@@ -263,6 +265,8 @@ sub help
 	return help_help();
     }
 
+    print "---\n";
+
     # for commands
 
     if ($topic =~ m'^comm')
@@ -274,6 +278,10 @@ sub help
 
 	if (!defined $subtopic)
 	{
+	    print "description: help on a specific command
+synopsis: 'help command <command_name>'
+";
+
 	    return list("commands");
 	}
 	else
@@ -303,7 +311,38 @@ sub help
 
     elsif ($topic =~ m'^comp')
     {
-	return list("components");
+	if (!defined $subtopic)
+	{
+	    print "description: help on a specific software component
+synopsis: 'help component <component_name>'
+";
+
+	    return list("components");
+	}
+	else
+	{
+	    my $component_module = exists $GENESIS3::all_components->{$subtopic} ? $GENESIS3::all_components->{$subtopic}->{module} : '';
+
+	    no strict "refs";
+
+	    my $sub_name = "${component_module}::help";
+
+	    if ($component_module
+		and exists &$sub_name)
+	    {
+		no strict "refs";
+
+# 		my $sub = (\%{"::"})->{"GENESIS3::"}->{"Commands::"}->{"${subtopic}_help"};
+
+		return &$sub_name($topic, $subtopic, $subsubtopic, );
+	    }
+	    else
+	    {
+		my $error = "*** Error: no help found for command $subtopic\n";
+
+		return $error;
+	    }
+	}
     }
 
     # for variables
@@ -1208,16 +1247,32 @@ sub show_verbose_help
 }
 
 
-# {
-#     # import all command subs into the main namespace
+{
+    # check if all command subs have associated help subs
 
-#     no strict "refs";
+    no strict "refs";
 
-#     foreach my $command (keys %{(\%{"::"})->{"GENESIS3::"}->{"Commands::"}})
-#     {
+    foreach my $command (keys %{(\%{"::"})->{"GENESIS3::"}->{"Commands::"}})
+    {
 # 	(\%{"::"})->{$command} = (\%{"::"})->{"GENESIS3::"}->{"Commands::"}->{$command};
-#     }
-# }
+
+	if ($command =~ /_help$/)
+	{
+	    next;
+	}
+	elsif ($command eq 'BEGIN'
+	       or $command eq 'Dump'
+	       or $command eq 'Load')
+	{
+	    next;
+	}
+
+	if (!exists  ((\%{"::"})->{"GENESIS3::"}->{"Commands::"}->{"${command}_help"}))
+	{
+	    print "*** Warning: command $command found, but no help available for it\n";
+	}
+    }
+}
 
 
 package GENESIS3::Help;
@@ -1239,9 +1294,9 @@ sub list_commands
 
 sub list_components
 {
-    use Data::Dumper;
-
     use YAML;
+
+    local $YAML::UseHeader = 0;
 
     print Dump(
 	       {
@@ -1267,6 +1322,8 @@ sub list_functions
 sub list_verbose
 {
     use YAML;
+
+    local $YAML::UseHeader = 0;
 
     print Dump( { 'verbosity levels' => $GENESIS3::all_verbose, } );
 
@@ -1366,7 +1423,12 @@ my $token_names
        }
        grep
        {
-	   $tokens->{$_}->{purpose} eq 'physical'
+	   #! note that not all tokens have a purposed that is defined
+	   #! (which does not necessarily mean they don't have a
+	   #! purpose).
+
+	   defined $tokens->{$_}->{purpose}
+	       and $tokens->{$_}->{purpose} eq 'physical'
        }
        keys %$tokens,
       ];
@@ -1933,7 +1995,8 @@ sub profile_environment
 
 	my $component_module = $component->{module} || $component_name;
 
-	if ($component->{status} eq 'loaded')
+	if (defined $component->{status}
+	    and $component->{status} eq 'loaded')
 	{
 	    next;
 	}
