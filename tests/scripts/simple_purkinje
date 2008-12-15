@@ -44,15 +44,15 @@ use GENESIS3;
 
 
 print "loading purkinje cell\n";
-ndf_load("cells/purkinje/edsjb1994.ndf");
+GENESIS3::Commands::ndf_load("cells/purkinje/edsjb1994.ndf");
 print "loaded\n";
 
 print "applying current injection\n";
-set_runtime_parameter("/Purkinje/segments/soma", "INJECT", 2e-9);
+GENESIS3::Commands::set_runtime_parameter("/Purkinje/segments/soma", "INJECT", 2e-9);
 
 print "running for 0.001sec\n";
-run("/Purkinje", 0.001);
+GENESIS3::Commands::run("/Purkinje", 0.001);
 
 print "output follows:\n";
-sh("cat /tmp/output");
+GENESIS3::Commands::sh("cat /tmp/output");
 

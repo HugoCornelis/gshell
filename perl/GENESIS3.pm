@@ -27,6 +27,12 @@ sub add_output
 }
 
 
+sub add_output_help
+{
+    return "*** Ok";
+}
+
+
 sub ce
 {
     my $path = shift;
@@ -70,6 +76,12 @@ sub ce
     {
 	return "*** Error: element $path not found";
     }
+}
+
+
+sub ce_help
+{
+    return "*** Ok";
 }
 
 
@@ -143,6 +155,12 @@ sub create
 }
 
 
+sub create_help
+{
+    return "*** Ok";
+}
+
+
 sub delete
 {
     my $name = shift;
@@ -192,6 +210,12 @@ sub delete
 }
 
 
+sub delete_help
+{
+    return "*** Ok";
+}
+
+
 sub echo
 {
     print join " ", @_;
@@ -200,11 +224,92 @@ sub echo
 }
 
 
+sub echo_help
+{
+    print "synopsis: echo <arguments>\n";
+
+    return "*** Ok";
+}
+
+
 sub help
 {
-    print "no help yet\n";
+    my $topic = shift;
 
-    return "*** Error: no help yet";
+    my $subtopic = shift;
+
+    my $subsubtopic = shift;
+
+    if (!defined $topic)
+    {
+	return help_help();
+    }
+
+    # for commands
+
+    if ($topic =~ m'^comm')
+    {
+# 	foreach my $command (keys %{(\%{"::"})->{"GENESIS3::"}->{"Commands::"}})
+# 	{
+# 	    (\%{"::"})->{$command} = (\%{"::"})->{"GENESIS3::"}->{"Commands::"}->{$command};
+# 	}
+
+	if (!defined $subtopic)
+	{
+	    return list("commands");
+	}
+	else
+	{
+	    no strict "refs";
+
+	    if (exists ((\%{"::"})->{"GENESIS3::"}->{"Commands::"}->{"${subtopic}_help"}))
+	    {
+		my $sub_name = "GENESIS3::Commands::help_$subtopic";
+
+		no strict "refs";
+
+		my $sub = (\%{"::"})->{"GENESIS3::"}->{"Commands::"}->{"${subtopic}_help"};
+
+		return &$sub($topic, $subtopic, $subsubtopic, );
+	    }
+	    else
+	    {
+		my $error = "*** Error: no help found for command $subtopic\n";
+
+		return $error;
+	    }
+	}
+    }
+
+    # for components
+
+    elsif ($topic =~ m'^comp')
+    {
+	return list("components");
+    }
+
+    # for variables
+
+    elsif ($topic =~ m'^var')
+    {
+    }
+
+    # for libraries
+
+    elsif ($topic =~ m'^lib')
+    {
+    }
+
+    return "*** Error: no help for topic $topic yet";
+}
+
+
+sub help_help
+{
+    print "synopsis: help <topic>\n";
+    print "synopsis: <topic> must be one of commands, components, variables, libraries\n";
+
+    return "*** Ok";
 }
 
 
@@ -233,21 +338,39 @@ sub list
     }
     else
     {
-	my $subs
-	    = [
-	       map { s/^list_// ; $_ }
-	       grep { /^list_/ }
-	       keys %{(\%{"::"})->{"GENESIS3::"}->{"Help::"}},
-	      ];
-
-	print "synopsis: list <type>\n";
-	print "synopsis: <type> must be one of " . (join ', ', sort @$subs) . "\n";
-	print "synopsis: (you gave $type)\n";
+	list_help( { type => $type, }, );
 
 	return '*** Error: incorrect usage';
     }
 
     return '*** Ok: list';
+}
+
+
+sub list_help
+{
+    my $topic = shift;
+
+    no strict "refs";
+
+    my $subs
+	= [
+	   map { s/^list_// ; $_ }
+	   grep { /^list_/ }
+	   keys %{(\%{"::"})->{"GENESIS3::"}->{"Help::"}},
+	  ];
+
+    print "synopsis: list <type>\n";
+    print "synopsis: <type> must be one of " . (join ', ', sort @$subs) . "\n";
+
+    if ($topic =~ m/HASH/)
+    {
+	my $type = $topic->{type};
+
+	print "synopsis: (you gave $type)\n";
+    }
+
+    return "*** Ok";
 }
 
 
@@ -281,6 +404,12 @@ sub list_elements
     querymachine($query);
 
     return "*** Ok: list_elements $element";
+}
+
+
+sub list_elements_help
+{
+    return "*** Ok";
 }
 
 
@@ -333,6 +462,12 @@ sub model_state_load
 }
 
 
+sub model_state_load_help
+{
+    return "*** Ok";
+}
+
+
 sub model_state_save
 {
     my $modelname = shift;
@@ -382,6 +517,12 @@ sub model_state_save
 }
 
 
+sub model_state_save_help
+{
+    return "*** Ok";
+}
+
+
 sub ndf_load
 {
     my $filename = shift;
@@ -389,6 +530,12 @@ sub ndf_load
     $GENESIS3::model_container->read(undef, [ 'genesis-g3', $filename, ], );
 
     return "*** Ok: ndf_load $filename";
+}
+
+
+sub ndf_load_help
+{
+    return "*** Ok";
 }
 
 
@@ -402,11 +549,23 @@ sub ndf_save
 }
 
 
+sub ndf_save_help
+{
+    return "*** Ok";
+}
+
+
 sub pwe
 {
     print "$GENESIS3::current_working_element\n";
 
     return "*** Ok: pwd";
+}
+
+
+sub pwe_help
+{
+    return "*** Ok";
 }
 
 
@@ -424,6 +583,12 @@ sub querymachine
 }
 
 
+sub querymachine_help
+{
+    return "*** Ok";
+}
+
+
 sub quit
 {
     my $exit_code = shift;
@@ -434,6 +599,12 @@ sub quit
     }
 
     exit $exit_code;
+}
+
+
+sub quit_help
+{
+    return "*** Ok";
 }
 
 
@@ -662,6 +833,12 @@ sub run
 }
 
 
+sub run_help
+{
+    return "*** Ok";
+}
+
+
 sub set_verbose
 {
     my $level = shift;
@@ -686,6 +863,12 @@ sub set_verbose
 }
 
 
+sub set_verbose_help
+{
+    return "*** Ok";
+}
+
+
 sub sh
 {
     system @_;
@@ -698,6 +881,12 @@ sub sh
     {
 	return "*** Ok: sh ", @_;
     }
+}
+
+
+sub sh_help
+{
+    return "*** Ok";
 }
 
 
@@ -773,6 +962,12 @@ sub set_model_parameter
 }
 
 
+sub set_model_parameter_help
+{
+    return "*** Ok";
+}
+
+
 sub set_runtime_parameter
 {
     my $element = shift;
@@ -838,11 +1033,23 @@ sub set_runtime_parameter
 }
 
 
+sub set_runtime_parameter_help
+{
+    return "*** Ok";
+}
+
+
 sub show_global_time
 {
     print "---\nglobal_time: $GENESIS3::global_time\n";
 
     return "*** Ok: show_global_time";
+}
+
+
+sub show_global_time_help
+{
+    return "*** Ok";
 }
 
 
@@ -869,6 +1076,12 @@ sub show_library
     }
 
     return "*** Ok: show_library $type $path";
+}
+
+
+sub show_library_help
+{
+    return "*** Ok";
 }
 
 
@@ -903,6 +1116,12 @@ sub show_parameter
 }
 
 
+sub show_parameter_help
+{
+    return "*** Ok";
+}
+
+
 sub show_runtime_parameters
 {
     use YAML;
@@ -910,6 +1129,12 @@ sub show_runtime_parameters
     print Dump( { runtime_parameters => $GENESIS3::runtime_parameters, }, );
 
     return "*** Ok: show_runtime_parameters";
+}
+
+
+sub show_runtime_parameters_help
+{
+    return "*** Ok";
 }
 
 
@@ -921,16 +1146,22 @@ sub show_verbose
 }
 
 
+sub show_verbose_help
 {
-    # import all command subs into the main namespace
-
-    no strict "refs";
-
-    foreach my $command (keys %{(\%{"::"})->{"GENESIS3::"}->{"Commands::"}})
-    {
-	(\%{"::"})->{$command} = (\%{"::"})->{"GENESIS3::"}->{"Commands::"}->{$command};
-    }
+    return "*** Ok";
 }
+
+
+# {
+#     # import all command subs into the main namespace
+
+#     no strict "refs";
+
+#     foreach my $command (keys %{(\%{"::"})->{"GENESIS3::"}->{"Commands::"}})
+#     {
+# 	(\%{"::"})->{$command} = (\%{"::"})->{"GENESIS3::"}->{"Commands::"}->{$command};
+#     }
+# }
 
 
 package GENESIS3::Help;
@@ -944,7 +1175,9 @@ sub list_commands
 
     print "all commands:\n";
 
-    print foreach sort map { "  - $_\n" } @$commands;
+    print foreach sort map { "  - $_\n" } grep { $_ !~ /_help$/ } @$commands;
+
+    return "*** Ok: list_commands";
 }
 
 
@@ -960,6 +1193,8 @@ sub list_components
 		"Other components" => $GENESIS3::all_cpan_components,
 	       },
 	      );
+
+    return "*** Ok: list_components";
 }
 
 
@@ -969,7 +1204,7 @@ sub list_functions
 
     print foreach map { "  - $_\n" } "NERNST", "MGBLOCK", "RANDOMIZE", "FIXED", "SERIAL";
 
-    undef;
+    return "*** Ok: list_functions";
 }
 
 

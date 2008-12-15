@@ -112,11 +112,11 @@ sub interprete
 	}
     }
 
-    my $package = "
-package GENESIS3::Commands;
-";
+    my $package = "GENESIS3::Commands::";
 
-    my $result = eval($package . $quoted_line);
+    $quoted_line =~ s/^\s*/$package/;
+
+    my $result = eval($quoted_line);
 
     if ($@)
     {
@@ -184,7 +184,7 @@ sub main
 
     require GENESIS3;
 
-    set_verbose($option_verbose);
+    GENESIS3::Commands::set_verbose($option_verbose);
 
     GENESIS3::header();
 
