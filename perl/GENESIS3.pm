@@ -331,13 +331,13 @@ sub quit
 
 sub run
 {
-    my $model_name = shift;
+    my $modelname = shift;
 
     my $time = shift;
 
-    if (!$model_name || !$time)
+    if (!defined $modelname || !defined $time)
     {
-	return '*** Error: <model_name> and <time> are required';
+	return '*** Error: <modelname> and <time> are required';
     }
 
     if ($time !~ /^[0-9]*(\.[0-9]+)?(e(\+|-)?[0-9]+)?$/
@@ -348,7 +348,7 @@ sub run
 
     # if we have a scheduler for this model
 
-    my $scheduler = $GENESIS3::schedulers->{$model_name};
+    my $scheduler = $GENESIS3::schedulers->{$modelname};
 
     if ($scheduler)
     {
@@ -367,13 +367,13 @@ sub run
 		 map
 		 {
 		     {
-			 modelname => $model_name,
+			 modelname => $modelname,
 			 %$_,
 		     };
 		 }
 		 grep
 		 {
-		     $_->{component_name} =~ /^$model_name/
+		     $_->{component_name} =~ /^$modelname/
 		 }
 		 @$GENESIS3::runtime_parameters,
 		);
@@ -402,152 +402,154 @@ sub run
 
 	return "*** Ok: done running $scheduler->{name}";
     }
-
-    my $schedule
-	= {
-	   name => "GENESIS3 SSP schedule initiated for $model_name, $time",
-	  };
-
-    # tell ssp that the model-container service has been initialized
-
-    $schedule->{services}->{neurospaces}->{backend} = $GENESIS3::model_container;
-
-    # fill in runtime_parameters
-
-    $schedule->{models}->[0]->{granular_parameters} = $GENESIS3::runtime_parameters;
-
-    # fill in model name
-
-    $schedule->{models}->[0]->{modelname} = $model_name;
-
-    #t only heccer supported for the moment
-
-    $schedule->{models}->[0]->{solverclass} = 'heccer';
-
-    # fill in the solverclasses
-
-    #t make this configurable
-
-    my $solverclasses
-	= {
-	   heccer => {
-		      constructor_settings => {
-					       dStep => $GENESIS3::heccer_time_step,
-					      },
-		      module_name => 'Heccer',
-		      service_name => 'neurospaces',
-		     },
-	  };
-
-    $schedule->{solverclasses} = $solverclasses;
-
-    # fill in the outputclasses
-
-    #t make this configurable
-
-    my $outputclasses
-	= {
-	   double_2_ascii => {
-			      module_name => 'Heccer',
-			      options => {
-					  filename => '/tmp/output',
-					 },
-			      package => 'Heccer::Output',
-			     },
-	  };
-
-    $schedule->{outputclasses} = $outputclasses;
-
-    # fill in the outputs
-
-    if (!@$GENESIS3::outputs)
-    {
-	# default is the soma Vm of a 'segments' group
-
-	$schedule->{outputs}
-	    = [
-	       {
-		component_name => "$model_name/segments/soma",
-		field => "Vm",
-		outputclass => "double_2_ascii",
-
-		# but we are tolerant if this output cannot be found
-
-		warn_only => "the default output ($model_name/segments/soma) was generated automatically and is not always available",
-	       },
-	      ];
-    }
-
-    # or
-
     else
     {
-	# from the user settings
+	my $schedule
+	    = {
+	       name => "GENESIS3 SSP schedule initiated for $modelname, $time",
+	      };
 
-	$schedule->{outputs} = $GENESIS3::outputs;
-    }
+	# tell ssp that the model-container service has been initialized
 
-    # application configuration
+	$schedule->{services}->{neurospaces}->{backend} = $GENESIS3::model_container;
 
-    #t for the tests, should be configurable such that it can use the 'steps' method to.
+	# fill in runtime_parameters
 
-    my $simulation
-	= [
-	   {
-	    arguments => [ $time, { verbose => 2 }, ],
-	    arguments => [ $time, ],
-	    method => 'advance',
-	   },
-	   {
-	    method => 'pause',
-	   },
-	  ];
+	$schedule->{models}->[0]->{granular_parameters} = $GENESIS3::runtime_parameters;
 
-    if ($GENESIS3::verbose_level
-	and $GENESIS3::verbose_level eq 'debug')
-    {
-	$simulation->[0]->{arguments}->[1]->{verbose} = 2;
-    }
+	# fill in model name
 
-    #! finishers are set empty to preserve interactivity.
-    #! the pause method is assumed to flush buffers where applicable.
+	$schedule->{models}->[0]->{modelname} = $modelname;
 
-    $schedule->{apply}
-	= {
-	   simulation => $simulation,
-	   finishers => [],
-	  };
+	#t only heccer supported for the moment
 
-    # run the schedule
+	$schedule->{models}->[0]->{solverclass} = 'heccer';
 
-    my $scheduler = SSP->new($schedule);
+	# fill in the solverclasses
 
-    my $result = $scheduler->run();
+	#t make this configurable
 
-    # register the scheduler
+	my $solverclasses
+	    = {
+	       heccer => {
+			  constructor_settings => {
+						   dStep => $GENESIS3::heccer_time_step,
+						  },
+			  module_name => 'Heccer',
+			  service_name => 'neurospaces',
+			 },
+	      };
 
-    $GENESIS3::schedulers->{$model_name} = $scheduler;
+	$schedule->{solverclasses} = $solverclasses;
 
-    # if successful
+	# fill in the outputclasses
 
-    if (!$result)
-    {
-	# get the simulation time from the schedule
+	#t make this configurable
 
-	$GENESIS3::global_time = $scheduler->{simulation_time}->{time};
+	my $outputclasses
+	    = {
+	       double_2_ascii => {
+				  module_name => 'Heccer',
+				  options => {
+					      filename => '/tmp/output',
+					     },
+				  package => 'Heccer::Output',
+				 },
+	      };
 
-	# return success
+	$schedule->{outputclasses} = $outputclasses;
 
-	return "*** Ok: done running $scheduler->{name}";
-    }
-    else
-    {
-	if (defined $scheduler->{simulation_time}->{time})
+	# fill in the outputs
+
+	if (!@$GENESIS3::outputs)
 	{
-	    $GENESIS3::global_time = $scheduler->{simulation_time}->{time};
+	    # default is the soma Vm of a 'segments' group
+
+	    $schedule->{outputs}
+		= [
+		   {
+		    component_name => "$modelname/segments/soma",
+		    field => "Vm",
+		    outputclass => "double_2_ascii",
+
+		    # but we are tolerant if this output cannot be found
+
+		    warn_only => "the default output ($modelname/segments/soma) was generated automatically and is not always available",
+		   },
+		  ];
 	}
 
-	return "*** Error: running $scheduler->{name} returned $result";
+	# or
+
+	else
+	{
+	    # from the user settings
+
+	    $schedule->{outputs} = $GENESIS3::outputs;
+	}
+
+	# application configuration
+
+	#t for the tests, should be configurable such that it can use the 'steps' method to.
+
+	my $simulation
+	    = [
+	       {
+		arguments => [ $time, { verbose => 2 }, ],
+		arguments => [ $time, ],
+		method => 'advance',
+	       },
+	       {
+		method => 'pause',
+	       },
+	      ];
+
+	if ($GENESIS3::verbose_level
+	    and $GENESIS3::verbose_level eq 'debug')
+	{
+	    $simulation->[0]->{arguments}->[1]->{verbose} = 2;
+	}
+
+	#! finishers are set empty to preserve interactivity.
+	#! the pause method is assumed to flush buffers where applicable.
+
+	$schedule->{apply}
+	    = {
+	       simulation => $simulation,
+	       finishers => [],
+	      };
+
+	# run the schedule
+
+	my $scheduler = SSP->new($schedule);
+
+	my $result = $scheduler->run();
+
+	# register the scheduler
+
+	$GENESIS3::schedulers->{$modelname} = $scheduler;
+
+	# if successful
+
+	if (!$result)
+	{
+	    # get the simulation time from the schedule
+
+	    $GENESIS3::global_time = $scheduler->{simulation_time}->{time};
+
+	    # return success
+
+	    return "*** Ok: done running $scheduler->{name}";
+	}
+	else
+	{
+	    if (defined $scheduler->{simulation_time}->{time})
+	    {
+		$GENESIS3::global_time = $scheduler->{simulation_time}->{time};
+	    }
+
+	    return "*** Error: running $scheduler->{name} returned $result";
+	}
     }
 }
 
@@ -615,7 +617,7 @@ sub set_model_parameter
 	    }
 	}
 
-	return "*** ok: set_model_parameter $element $parameter $value_type $value";
+	return "*** Ok: set_model_parameter $element $parameter $value_type $value";
     }
     else
     {
@@ -658,7 +660,7 @@ sub set_model_parameter
 
 	querymachine($query);
 
-	return "*** ok: set_model_parameter $element $parameter $value_type $value";
+	return "*** Ok: set_model_parameter $element $parameter $value_type $value";
     }
 }
 
@@ -808,6 +810,95 @@ sub show_verbose
     print "---\nverbose_level: $GENESIS3::verbose_level\n";
 
     return "*** Ok: show_verbose";
+}
+
+
+sub simulation_state_load
+{
+    my $modelname = shift;
+
+    my $filename = shift;
+
+    # define a scheduler for this model
+
+    run($modelname, 0);
+
+    # if we have a scheduler for this model
+
+    my $scheduler = $GENESIS3::schedulers->{$modelname};
+
+    if (!$scheduler)
+    {
+	return "*** Error: no simulation was previously run for $modelname, no scheduler found";
+    }
+
+    my $model = $scheduler->lookup_model($modelname);
+
+    my $solverclasses = $scheduler->{solverclasses};
+
+    my $solverclass = $model->{solverclass};
+
+    my $service = $scheduler->{services}->{$solverclasses->{$solverclass}->{service_name}}->{ssp_service};
+
+    #t not sure if we should make field obligatory ?
+
+    my $solverinfo = $service->input_2_solverinfo( { component_name => $modelname, }, );
+
+    my $solver_engine = $scheduler->lookup_solver_engine($solverinfo->{solver});
+
+    if ($solver_engine->serialize($filename))
+    {
+	return "*** Ok: simulation_state_load";
+    }
+    else
+    {
+	return "*** Error: simulation_state_load";
+    }
+}
+
+
+sub simulation_state_save
+{
+    my $modelname = shift;
+
+    my $filename = shift;
+
+    if (!defined $modelname || !defined $filename)
+    {
+	return '*** Error: <modelname> and <filename> are required';
+    }
+
+    # if we have a scheduler for this model
+
+    my $scheduler = $GENESIS3::schedulers->{$modelname};
+
+    if (!$scheduler)
+    {
+	return "*** Error: no simulation was previously run for $modelname, no scheduler found";
+    }
+
+    my $model = $scheduler->lookup_model($modelname);
+
+    my $solverclasses = $scheduler->{solverclasses};
+
+    my $solverclass = $model->{solverclass};
+
+    my $service = $scheduler->{services}->{$solverclasses->{$solverclass}->{service_name}}->{ssp_service};
+
+    #t not sure if we should make field obligatory ?
+
+    my $solverinfo = $service->input_2_solverinfo( { component_name => $modelname, }, );
+
+    my $solver_engine = $scheduler->lookup_solver_engine($solverinfo->{solver});
+
+    if ($solver_engine->serialize($filename))
+    {
+	return "*** Ok: simulation_state_save";
+    }
+    else
+    {
+	return "*** Error: simulation_state_save";
+    }
 }
 
 
