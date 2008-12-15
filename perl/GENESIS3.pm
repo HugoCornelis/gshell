@@ -29,6 +29,8 @@ sub add_output
 
 sub add_output_help
 {
+    print "synopsis: add_output <element_name> <field_name>\n";
+
     return "*** Ok";
 }
 
@@ -81,6 +83,8 @@ sub ce
 
 sub ce_help
 {
+    print "synopsis: ce <element_name>\n";
+
     return "*** Ok";
 }
 
@@ -137,17 +141,7 @@ sub create
     }
     else
     {
-	my $subs
-	    = [
-	       sort
-	       map { s/^create_// ; lc }
-	       grep { /^create_/ }
-	       keys %{(\%{"::"})->{"GENESIS3::"}->{"Tokens::"}->{"Physical::"}},
-	      ];
-
-	print "synopsis: create <type>\n";
-	print "synopsis: <type> must be one of " . (join ', ', @$subs) . "\n";
-	print "synopsis: (you gave $type)\n";
+	create_help( { type => $type, }, );
 
 	return '*** Error: incorrect usage';
     }
@@ -157,6 +151,28 @@ sub create
 
 sub create_help
 {
+    my $topic = shift;
+
+    no strict "refs";
+
+    my $subs
+	= [
+	   sort
+	   map { s/^create_// ; lc }
+	   grep { /^create_/ }
+	   keys %{(\%{"::"})->{"GENESIS3::"}->{"Tokens::"}->{"Physical::"}},
+	  ];
+
+    print "synopsis: create <type> <element_name>\n";
+    print "synopsis: <type> must be one of " . (join ', ', @$subs) . "\n";
+
+    if ($topic =~ /HASH/)
+    {
+	my $type = $topic->{type};
+
+	print "synopsis: (you gave $type)\n";
+    }
+
     return "*** Ok";
 }
 
@@ -212,6 +228,8 @@ sub delete
 
 sub delete_help
 {
+    print "synopsis: delete <element_name>\n";
+
     return "*** Ok";
 }
 
@@ -409,6 +427,8 @@ sub list_elements
 
 sub list_elements_help
 {
+    print "synopsis: list_elements [ <element_name> ]\n";
+
     return "*** Ok";
 }
 
@@ -464,6 +484,8 @@ sub model_state_load
 
 sub model_state_load_help
 {
+    print "synopsis: model_state_load <element_name> <filename>\n";
+
     return "*** Ok";
 }
 
@@ -519,6 +541,8 @@ sub model_state_save
 
 sub model_state_save_help
 {
+    print "synopsis: model_state_save <element_name> <filename>\n";
+
     return "*** Ok";
 }
 
@@ -535,12 +559,16 @@ sub ndf_load
 
 sub ndf_load_help
 {
+    print "synopsis: ndf_load <filename>\n";
+
     return "*** Ok";
 }
 
 
 sub ndf_save
 {
+    my $modelname = shift;
+
     my $filename = shift;
 
     $GENESIS3::model_container->write(undef, [ 'genesis-g3', $filename, ], );
@@ -551,6 +579,8 @@ sub ndf_save
 
 sub ndf_save_help
 {
+    print "synopsis: ndf_save <element_name> <filename>\n";
+
     return "*** Ok";
 }
 
@@ -565,6 +595,8 @@ sub pwe
 
 sub pwe_help
 {
+    print "synopsis: pwe\n";
+
     return "*** Ok";
 }
 
@@ -585,6 +617,8 @@ sub querymachine
 
 sub querymachine_help
 {
+    print "synopsis: querymachine <command> [ <arguments> ... ]\n";
+
     return "*** Ok";
 }
 
@@ -604,6 +638,8 @@ sub quit
 
 sub quit_help
 {
+    print "synopsis: quit <element_name>\n";
+
     return "*** Ok";
 }
 
@@ -835,6 +871,8 @@ sub run
 
 sub run_help
 {
+    print "synopsis: run <element_name> <time>\n";
+
     return "*** Ok";
 }
 
@@ -865,6 +903,8 @@ sub set_verbose
 
 sub set_verbose_help
 {
+    print "synopsis: set_verbose <level>\n";
+
     return "*** Ok";
 }
 
@@ -886,6 +926,8 @@ sub sh
 
 sub sh_help
 {
+    print "synopsis: sh <command> [ <arguments> ... ]\n";
+
     return "*** Ok";
 }
 
@@ -964,6 +1006,8 @@ sub set_model_parameter
 
 sub set_model_parameter_help
 {
+    print "synopsis: set_model_parameter <element_name> <parameter_name> <value> [ <value_type> ]\n";
+
     return "*** Ok";
 }
 
@@ -1035,6 +1079,8 @@ sub set_runtime_parameter
 
 sub set_runtime_parameter_help
 {
+    print "synopsis: set_runtime_parameter <element_name> <parameter_name> <value> [ <value_type> ]\n";
+
     return "*** Ok";
 }
 
@@ -1049,6 +1095,8 @@ sub show_global_time
 
 sub show_global_time_help
 {
+    print "synopsis: show_global_time\n";
+
     return "*** Ok";
 }
 
@@ -1081,6 +1129,8 @@ sub show_library
 
 sub show_library_help
 {
+    print "synopsis: show_library [ <library_type> ] [ <library_path> ]\n";
+
     return "*** Ok";
 }
 
@@ -1118,6 +1168,8 @@ sub show_parameter
 
 sub show_parameter_help
 {
+    print "synopsis: show_parameter <element_name> <parameter_name>\n";
+
     return "*** Ok";
 }
 
@@ -1134,6 +1186,8 @@ sub show_runtime_parameters
 
 sub show_runtime_parameters_help
 {
+    print "synopsis: show_runtime_parameters <element_name>\n";
+
     return "*** Ok";
 }
 
@@ -1148,6 +1202,8 @@ sub show_verbose
 
 sub show_verbose_help
 {
+    print "synopsis: show_verbose\n";
+
     return "*** Ok";
 }
 
