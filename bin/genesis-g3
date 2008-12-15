@@ -64,19 +64,6 @@ sub interprete
 
     my $arguments = [ split /\s/, $line, ];
 
-    {
-	my $genesis_command = $arguments->[0];
-
-	no strict "refs";
-
-	if (!exists ((\%{"::"})->{"GENESIS3::"}->{"Commands::"}->{$genesis_command}))
-	{
-	    print "*** Error: command $genesis_command not found,\n*** Error: use 'list commands' to get a list of available commands,\n*** Error: use the help function to obtain help about each command\n";
-
-	    return;
-	}
-    }
-
     #t join hash and array arguments
 
     # create a perl function call
@@ -109,7 +96,20 @@ sub interprete
 
     if ($quoted_line =~ /^\s*(#.*)?$/)
     {
-	next;
+	return;
+    }
+
+    {
+	my $genesis_command = $arguments->[0];
+
+	no strict "refs";
+
+	if (!exists ((\%{"::"})->{"GENESIS3::"}->{"Commands::"}->{$genesis_command}))
+	{
+	    print "*** Error: command $genesis_command not found,\n*** Error: use 'list commands' to get a list of available commands,\n*** Error: use the help function to obtain help about each command\n";
+
+	    return;
+	}
     }
 
     my $package = "
