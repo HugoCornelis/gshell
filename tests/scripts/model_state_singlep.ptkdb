@@ -1,0 +1,27 @@
+$files = {
+           '_<perl/GENESIS3.pm' => [
+                                     {
+                                       'expr' => undef,
+                                       'value' => '1',
+                                       'text' => '    if ($solver_engine->deserialize($filename))
+',
+                                       'fname' => 'perl/GENESIS3.pm',
+                                       'type' => 'user',
+                                       'line' => '854'
+                                     }
+                                   ],
+           '_<tests/scripts/model_state_singlep' => [
+                                                           {
+                                                             'expr' => undef,
+                                                             'value' => '1',
+                                                             'text' => 'ndf_load("tests/cells/singlep.ndf");
+',
+                                                             'fname' => 'tests/scripts/model_state_singlep',
+                                                             'type' => 'user',
+                                                             'line' => 47
+                                                           }
+                                                         ]
+         };
+$expr_list = [];
+$eval_saved_text = undef;
+$main_win_geometry = '1592x1114+0+0';

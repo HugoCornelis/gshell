@@ -510,8 +510,10 @@ sub model_state_load
 
     my $solver_engine = $scheduler->lookup_solver_engine($solverinfo->{solver});
 
-    if ($solver_engine->deserialize($filename))
+    if ($solver_engine->deserialize_state($filename))
     {
+	#t rewire the outputs
+
 	return "*** Ok: model_state_load";
     }
     else
@@ -567,7 +569,7 @@ sub model_state_save
 
     my $solver_engine = $scheduler->lookup_solver_engine($solverinfo->{solver});
 
-    if ($solver_engine->serialize($filename))
+    if ($solver_engine->serialize_state($filename))
     {
 	return "*** Ok: model_state_save";
     }

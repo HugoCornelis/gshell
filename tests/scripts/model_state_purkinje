@@ -1,0 +1,94 @@
+#!/usr/bin/perl -w
+#!/usr/bin/perl -d:ptkdb
+#!
+
+
+use strict;
+
+
+BEGIN
+{
+    #! make check
+
+    push @INC, '../perl';
+
+    #! make distcheck
+
+    push @INC, '../../perl';
+
+    #! normal run
+
+    push @INC, './perl';
+
+    #! after install
+
+    push @INC, '/usr/local/glue/swig/perl';
+}
+
+
+BEGIN
+{
+    $ENV{NEUROSPACES_NMC_MODELS} = '/usr/local/neurospaces/models/library';
+}
+
+
+$SIG{__DIE__}
+    = sub {
+	use Carp;
+
+	confess @_;
+    };
+
+
+use GENESIS3;
+
+
+package GENESIS3::Commands;
+
+
+ndf_load("cells/purkinje/edsjb1994.ndf");
+
+# set_runtime_parameter("/Purkinje/segments/soma", "INJECT", 2e-9);
+
+my $modelname = "/Purkinje";
+
+model_state_save($modelname, "/tmp/state");
+
+my $heccer;
+
+{
+    my $scheduler = $GENESIS3::schedulers->{$modelname};
+
+    my $model = $scheduler->lookup_model($modelname);
+
+    my $solverclasses = $scheduler->{solverclasses};
+
+    my $solverclass = $model->{solverclass};
+
+    my $service = $scheduler->{services}->{$solverclasses->{$solverclass}->{service_name}}->{ssp_service};
+
+    #t not sure if we should make field obligatory ?
+
+    my $solverinfo = $service->input_2_solverinfo( { component_name => $modelname, }, );
+
+    my $solver_engine = $scheduler->lookup_solver_engine($solverinfo->{solver});
+
+    $heccer = $solver_engine->backend();
+}
+
+# $heccer->dump();
+
+run($modelname, 0.1);
+
+# $heccer->dump();
+
+model_state_load($modelname, "/tmp/state");
+
+# $heccer->dump();
+
+run($modelname, 0.1);
+
+# $heccer->dump();
+
+system "cat /tmp/output";
+
