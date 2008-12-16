@@ -48,28 +48,27 @@ my $test
 						  {
 						   description => "Can we reinitialize using the serialized state of the purkinje cell, saved state ?",
 						   read => '
-0.09992 -0.0799729
-0.09994 -0.0799729
-0.09996 -0.079973
-0.09998 -0.079973
-0.1 -0.079973
+0.09992 -0.0677051
+0.09994 -0.0677051
+0.09996 -0.0677051
+0.09998 -0.0677051
+0.1 -0.0677051
 ',
 						   timeout => 100,
 						  },
 						  {
 						   description => "Can we reinitialize using the serialized state of the purkinje cell, computed state ?",
 						   read => '
-0.19992 -0.0799729
-0.19994 -0.0799729
-0.19996 -0.079973
-0.19998 -0.079973
-0.2 -0.079973
+0.19992 -0.0677051
+0.19994 -0.0677051
+0.19996 -0.0677051
+0.19998 -0.0677051
+0.2 -0.0677051
 ',
 						   timeout => 10,
 						  },
 						 ],
 				description => "reinitializing using the serialized state of the purkinje cell",
-# 				disabled => "testing only, should be enabled again",
 			       },
 			      ],
        description => "model state saving and loading",
