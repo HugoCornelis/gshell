@@ -2046,6 +2046,6 @@ sub version
 
 
 profile_environment()
-    && initialize();
+    and initialize();
 
 
