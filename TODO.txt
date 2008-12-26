@@ -1,5 +1,9 @@
 -*- outline -*-
 
+* tests_2_html
+does not convert perl scripts to html,
+eg. tests/scripts/model_state_purkinje.
+
 * hierarchy/symbols
 does `cat neurospaces/config.h`
 which gives a warning when run in a arbitrary directory.
