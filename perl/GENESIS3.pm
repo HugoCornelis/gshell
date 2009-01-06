@@ -2041,7 +2041,7 @@ sub profile_environment
 sub version
 {
     # $Format: "    my $version=\"${package}-${label}\";"$
-    my $version="gshell-ed79d228eb561e5df70bd37e97b4dfb047c45277-0";
+    my $version="gshell-python-3";
 
     return $version;
 }
