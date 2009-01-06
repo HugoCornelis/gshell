@@ -14,9 +14,14 @@
 
 #t automake does not allow to pass in arguments for tests ?
 
-check_SCRIPTS = $(srcdir)/neurospaces_harness 
+check_SCRIPTS = \
+	$(srcdir)/neurospaces_harness
 
 noinst_SCRIPTS = \
+	$(srcdir)/scripts/add_command_warning \
+	$(srcdir)/scripts/model_state_purkinje \
+	$(srcdir)/scripts/model_state_singlep \
+	$(srcdir)/scripts/model_state_singlep.ptkdb \
 	$(srcdir)/scripts/simple_purkinje \
 	$(srcdir)/scripts/simple_purkinje.g3
 
