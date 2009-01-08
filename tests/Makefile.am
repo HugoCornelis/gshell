@@ -17,7 +17,7 @@
 check_SCRIPTS = \
 	$(srcdir)/neurospaces_harness
 
-noinst_SCRIPTS = \
+dist_noinst_SCRIPTS = \
 	$(srcdir)/scripts/add_command_warning \
 	$(srcdir)/scripts/model_state_purkinje \
 	$(srcdir)/scripts/model_state_singlep \
