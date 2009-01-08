@@ -15,9 +15,9 @@ my $test
 				command_tests => [
 						  {
 						   # $Format: "description => \"Does the version information match with ${package}-${label} ?\","$
-description => "Does the version information match with gshell-python-5 ?",
+description => "Does the version information match with gshell-python-6 ?",
 						   # $Format: "read => \"${package}-${label}\","$
-read => "gshell-python-5",
+read => "gshell-python-6",
 						   write => "version",
 						  },
 						 ],
