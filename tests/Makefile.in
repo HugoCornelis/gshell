@@ -108,8 +108,14 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
-check_SCRIPTS = $(srcdir)/neurospaces_harness 
+check_SCRIPTS = \
+	$(srcdir)/neurospaces_harness
+
 noinst_SCRIPTS = \
+	$(srcdir)/scripts/add_command_warning \
+	$(srcdir)/scripts/model_state_purkinje \
+	$(srcdir)/scripts/model_state_singlep \
+	$(srcdir)/scripts/model_state_singlep.ptkdb \
 	$(srcdir)/scripts/simple_purkinje \
 	$(srcdir)/scripts/simple_purkinje.g3
 
