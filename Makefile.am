@@ -19,6 +19,9 @@ SUBDIRS = perl tests
 dist_bin_SCRIPTS = \
 	bin/genesis-g3
 
+gshelltestdir=$(prefix)/gshell
+nobase_dist_gshelltest_DATA=@TEST_SPECIFICATION_FILES@
+
 RELEASE_MAJOR=`release-extract --major`
 RELEASE_MINOR=`release-extract --minor`
 RELEASE_MICRO=`release-extract --micro`
