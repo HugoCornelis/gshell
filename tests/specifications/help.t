@@ -149,7 +149,7 @@ Other components:
 						   description => "Can we find physical tokens ?",
 						   read => "all physical tokens:
   - ALGORITHM
-  - ATTACHMENT_POINT
+  - ATTACHMENT
   - AXON_HILLOCK
   - CELL
   - CHANNEL
@@ -159,12 +159,12 @@ Other components:
   - CONTOUR_GROUP
   - CONTOUR_POINT
   - EM_CONTOUR
-  - EXPONENTIAL_EQUATION
+  - EQUATION_EXPONENTIAL
   - FIBER
   - GROUP
+  - GROUPED_PARAMETERS
   - HH_GATE
   - NETWORK
-  - PARAMETER_GROUP
   - POOL
   - POPULATION
   - PROJECTION
