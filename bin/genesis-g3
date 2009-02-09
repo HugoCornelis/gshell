@@ -240,7 +240,7 @@ sub read_cmd_line
 	    "
 $0 <options>
 
-$0: GENESIS3 simplified command shell.
+$0: GENESIS 3 shell.
 
 options:
     help               print usage information.

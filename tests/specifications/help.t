@@ -15,7 +15,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Do we get an informative help message when the help command line option is given?",
-						   read => "GENESIS3 simplified command shell.
+						   read => "GENESIS 3 shell.
 
 options:
     help               print usage information.
