@@ -66,6 +66,37 @@ my $test
 						   write => 'querymachine expand /**',
 						  },
 						  {
+						   description => "Can we delete the segment and its remaining channel?",
+						   write => 'delete /c/s',
+						  },
+						  {
+						   comment => 'Note that for some reason this test always succeeds, likely a problem with the regular expression of the test.',
+						   description => "Has the segment been removed ?",
+						   read => [
+							    '-re',
+							    '/c
+(?!/c/s).',
+							   ],
+# 						   read => '
+# - /c
+# - /c/s
+# - /c/s/k
+# ',
+						   write => 'querymachine expand /**',
+						  },
+						  {
+						   description => "Can we create a new segment ?",
+						   write => 'create segment /c/s',
+						  },
+						  {
+						   description => "Can we find the second channel in the segment ?",
+						   read => '
+- /c
+- /c/s
+',
+						   write => 'querymachine expand /**',
+						  },
+						  {
 						   description => "Can we set parameter CM of the segment ?",
 						   write => 'set_model_parameter /c/s CM 0.0164',
 						  },

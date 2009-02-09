@@ -202,6 +202,12 @@ sub delete
 
     $name =~ s(//)(/)g;
 
+    if ($GENESIS3::verbose_level ne 'errors'
+	and $GENESIS3::verbose_level ne 'warnings')
+    {
+	print "delete: $name\n";
+    }
+
     eval
     {
 	$GENESIS3::model_container->delete_component($name);
