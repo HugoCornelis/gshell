@@ -19,7 +19,7 @@ my $test
 
 options:
     help               print usage information.
-    verbose            set verbosity level ('errors', 'informational', 'debug').
+    verbose            set verbosity level ('errors', 'information', 'debug', default is 'errors').
     version            give version information.
 ",
 						   timeout => 5,
