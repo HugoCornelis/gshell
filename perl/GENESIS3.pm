@@ -183,47 +183,37 @@ sub delete
 {
     my $name = shift;
 
-    no strict "refs";
-
-    if (exists ((\%{"::"})->{"GENESIS3::"}->{"Tokens::"}->{"Physical::"}->{"delete"}))
-#     if (exists \&{"GENESIS3::Help::list_$type"})
-    {
 	# current working element logic
 
-	if ($name !~ m(^/))
-	{
-	    $name = "$GENESIS3::current_working_element/$name";
-	}
+    if ($name !~ m(^/))
+    {
+	$name = "$GENESIS3::current_working_element/$name";
+    }
 
-	# some path logic, remove double // etc
+    # some path logic, remove double // etc
 
-	$name =~ s(/\./)(/)g;
+    $name =~ s(/\./)(/)g;
 
-	$name =~ s(/\.$)()g;
+    $name =~ s(/\.$)()g;
 
-	$name =~ s([^/]/\.\.)()g;
+    $name =~ s([^/]/\.\.)()g;
 
-	$name =~ s(/\.\./)(/)g;
+    $name =~ s(/\.\./)(/)g;
 
-	$name =~ s(//)(/)g;
+    $name =~ s(//)(/)g;
 
-	eval
-	{
-	    $GENESIS3::model_container->delete_component($name);
-	};
+    eval
+    {
+	$GENESIS3::model_container->delete_component($name);
+    };
 
-	if ($@)
-	{
-	    return "*** Error: delete $name";
-	}
-	else
-	{
-	    return "*** Ok: delete $name";
-	}
+    if ($@)
+    {
+	return "*** Error: delete $name";
     }
     else
     {
-	return '*** Error: incorrect usage';
+	return "*** Ok: delete $name";
     }
 }
 
@@ -1769,18 +1759,21 @@ foreach my $token_name (@$token_names)
     ((\%{"::"})->{"GENESIS3::"}->{"Tokens::"}->{"Physical::"}->{$subname})
 	= sub
 	  {
-	      # get name
+	      # get name of element to create
 
 	      my $physical_name = shift;
 
-	      if ($GENESIS3::verbose_level ne 'errors')
+	      # create the element in the model container
+
+	      if ($GENESIS3::verbose_level ne 'errors'
+		  and $GENESIS3::verbose_level ne 'warnings')
 	      {
 		  print "$subname: $physical_name\n";
 	      }
 
 	      my $physical = Neurospaces::Tokens::Physical::create($lc_token_name, $GENESIS3::model_container, $physical_name);
 
-	      if (!$physical_name)
+	      if (!$physical)
 	      {
 		  return "*** Error: creating $physical_name of type $lc_token_name";
 	      }

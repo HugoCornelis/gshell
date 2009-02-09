@@ -52,7 +52,6 @@ my $test
 						   read => '
 - /c
 - /c/s
-- /c/s/na
 - /c/s/k
 ',
 						   write => 'querymachine expand /**',
@@ -62,7 +61,6 @@ my $test
 						   read => '
 - /c
 - /c/s
-- /c/s/na
 - /c/s/k
 ',
 						   write => 'querymachine expand /**',
