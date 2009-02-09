@@ -9,6 +9,27 @@ my $test
        command_definitions => [
 			       {
 				arguments => [
+					      '--help',
+					     ],
+				command => 'bin/genesis-g3',
+				command_tests => [
+						  {
+						   description => "Do we get an informative help message when the help command line option is given?",
+						   read => "GENESIS3 simplified command shell.
+
+options:
+    help               print usage information.
+    verbose            set verbosity level ('errors', 'informational', 'debug').
+    version            give version information.
+",
+						   timeout => 5,
+						   write => undef,
+						  },
+						 ],
+				description => "the help command line option",
+			       },
+			       {
+				arguments => [
 					     ],
 				command => 'bin/genesis-g3',
 				command_tests => [

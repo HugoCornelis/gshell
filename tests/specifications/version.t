@@ -18,7 +18,7 @@ my $test
 description => "Does the version information match with gshell-python-7 ?",
 						   # $Format: "read => \"${package}-${label}\","$
 read => "gshell-python-7",
-						   write => "version",
+# 						   write => "version",
 						  },
 						 ],
 				description => "check version information",
