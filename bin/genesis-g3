@@ -53,7 +53,7 @@ $SIG{INT}
     };
 
 
-our $option_verbose = 'errors';
+our $option_verbose = 'warnings';
 
 my $exit_code = 0;
 
@@ -244,7 +244,7 @@ $0: GENESIS 3 shell.
 
 options:
     --help               print usage information.
-    --verbose            set verbosity level ('errors', 'information', 'debug', default is 'errors').
+    --verbose            set verbosity level ('errors', 'warnings', 'information', 'debug', default is 'warnings').
     --version            give version information.
 ";
 
