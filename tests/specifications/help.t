@@ -18,9 +18,9 @@ my $test
 						   read => "GENESIS 3 shell.
 
 options:
-    help               print usage information.
-    verbose            set verbosity level ('errors', 'information', 'debug', default is 'errors').
-    version            give version information.
+    --help               print usage information.
+    --verbose            set verbosity level ('errors', 'information', 'debug', default is 'errors').
+    --version            give version information.
 ",
 						   timeout => 5,
 						   write => undef,

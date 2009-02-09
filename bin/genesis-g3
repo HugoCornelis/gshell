@@ -243,9 +243,9 @@ $0 <options>
 $0: GENESIS 3 shell.
 
 options:
-    help               print usage information.
-    verbose            set verbosity level ('errors', 'information', 'debug', default is 'errors').
-    version            give version information.
+    --help               print usage information.
+    --verbose            set verbosity level ('errors', 'information', 'debug', default is 'errors').
+    --version            give version information.
 ";
 
 	exit 1;
