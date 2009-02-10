@@ -91,6 +91,51 @@ sub ce_help
 }
 
 
+sub check
+{
+    my $modelname = shift;
+
+    if (!defined $modelname)
+    {
+	return '*** Error: <modelname> is required';
+    }
+
+    # define a scheduler for this model
+
+    run($modelname, 0);
+
+    # get scheduler for this model
+
+    my $scheduler = $GENESIS3::schedulers->{$modelname};
+
+    if (!$scheduler)
+    {
+	return "*** Error: no simulation was previously run for $modelname, no scheduler found";
+    }
+
+    # reset the schedule
+
+    if (!$scheduler->analyze())
+    {
+	return "*** Error: scheduler analysis failed";
+    }
+    else
+    {
+	print "Simulation check ok\n";
+	
+	return "*** Ok";
+    }
+}
+
+
+sub check_help
+{
+    print "synopsis: check\n";
+
+    return "*** Ok";
+}
+
+
 sub create
 {
     my $type = shift;
@@ -676,6 +721,49 @@ sub quit
 sub quit_help
 {
     print "synopsis: quit <element_name>\n";
+
+    return "*** Ok";
+}
+
+
+sub reset
+{
+    my $modelname = shift;
+
+    if (!defined $modelname)
+    {
+	return '*** Error: <modelname> is required';
+    }
+
+    # define a scheduler for this model
+
+    run($modelname, 0);
+
+    # get scheduler for this model
+
+    my $scheduler = $GENESIS3::schedulers->{$modelname};
+
+    if (!$scheduler)
+    {
+	return "*** Error: no simulation was previously run for $modelname, no scheduler found";
+    }
+
+    # reset the schedule
+
+    if (!$scheduler->initiate())
+    {
+	return "*** Error: scheduler initiation failed";
+    }
+    else
+    {
+	return "*** Ok";
+    }
+}
+
+
+sub reset_help
+{
+    print "synopsis: reset\n";
 
     return "*** Ok";
 }

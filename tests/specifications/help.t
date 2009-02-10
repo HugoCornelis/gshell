@@ -112,6 +112,7 @@ synopsis: (you gave )
 						   read => "all commands:
   - add_output
   - ce
+  - check
   - create
   - delete
   - echo
@@ -125,6 +126,7 @@ synopsis: (you gave )
   - pwe
   - querymachine
   - quit
+  - reset
   - run
   - set_model_parameter
   - set_runtime_parameter

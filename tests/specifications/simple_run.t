@@ -118,6 +118,10 @@ my $test
 						   write => "add_output /c/s Vm",
 						  },
 						  {
+						   description => "Can we check the simulation ?",
+						   write => "check /c",
+						  },
+						  {
 						   description => "Can we run the simulation ?",
 						   write => "run /c 0.001",
 						  },
@@ -147,6 +151,10 @@ my $test
 						  {
 						   description => "Can we load the purkinje cell model ?",
 						   write => 'ndf_load cells/purkinje/edsjb1994.ndf',
+						  },
+						  {
+						   description => "Can we check the simulation ?",
+						   write => "check /Purkinje",
 						  },
 						  {
 						   description => "Can we run the simulation ?",
@@ -196,6 +204,10 @@ runtime_parameters:
 						   write => "show_runtime_parameters",
 						  },
 						  {
+						   description => "Can we check the simulation ?",
+						   write => "check /Purkinje",
+						  },
+						  {
 						   description => "Can we run the simulation ?",
 						   write => "run /Purkinje 0.001",
 						  },
@@ -239,8 +251,98 @@ runtime_parameters:
 						 ],
 				description => "running the purkinje cell with current injection from a perl script",
 			       },
+			       {
+				arguments => [
+					     ],
+				command => 'bin/genesis-g3',
+				command_tests => [
+						  {
+						   description => "Is startup successful ?",
+						   read => "GENESIS 3 shell",
+						   timeout => 5,
+						   write => undef,
+						  },
+						  {
+						   description => "Can we load a single passive compartment model ?",
+						   write => 'ndf_load tests/cells/singlep.ndf',
+						  },
+						  {
+						   description => "Can we check the simulation ?",
+						   write => "check /singlep",
+						  },
+						  {
+						   description => "Can we run the simulation ?",
+						   write => "run /singlep 0.001",
+						  },
+						  {
+						   comment => 'note that the expected output is badly anchored, so the test can possibly succeed in circumstances were we would really like it to fail',
+						   description => "Can we determine the size of the output ?",
+						   read => "50 /tmp/output
+",
+						   write => "sh wc -l /tmp/output",
+						  },
+						  {
+						   comment => "only testing the last line of output",
+						   description => "Can we find the output ?",
+						   read => "
+0.001 -0.0687098
+",
+						   write => "sh cat /tmp/output",
+						  },
+						  {
+						   description => "Can we check the simulation again ?",
+						   write => "check /singlep",
+						  },
+						  {
+						   description => "Can we reset the simulation ?",
+						   write => "reset /singlep",
+						  },
+						  {
+						   description => "Is the output file empty ?",
+						   read => "0 /tmp/output
+",
+						   write => "sh wc -l /tmp/output",
+						  },
+						  {
+						   description => "Can we rerun the simulation ?",
+						   write => "run /singlep 0.001",
+						  },
+						  {
+						   comment => 'note that the expected output is badly anchored, so the test can possibly succeed in circumstances were we would really like it to fail',
+						   description => "Has output been reproduced again?",
+						   read => "50 /tmp/output
+",
+						   write => "sh wc -l /tmp/output",
+						  },
+						  {
+						   comment => "only testing the last line of output",
+						   description => "Do we find the same output ?",
+						   read => "
+0.001 -0.0687098
+",
+						   write => "sh cat /tmp/output",
+						  },
+						  {
+						   description => "Can we check the simulation once more ?",
+						   write => "check /singlep",
+						  },
+						  {
+						   description => "Can we reset the simulation once more ?",
+						   write => "reset /singlep",
+						  },
+						  {
+						   comment => 'note that the expected output is badly anchored, so the test can possibly succeed in circumstances were we would really like it to fail',
+						   description => "Is the output file again empty ?",
+						   read => "0 /tmp/output
+",
+						   write => "sh wc -l /tmp/output",
+						  },
+						 ],
+				description => "run, checking and reseting a simulation",
+				side_effects => "creates a model in the model container",
+			       },
 			      ],
-       description => "simple simulations of models",
+       description => "simple simulations of models, checking and reseting a simulation",
        name => 'simple_run.t',
       };
 
