@@ -9,6 +9,91 @@ use strict;
 package GENESIS3::Commands;
 
 
+sub add_input
+{
+    my $class_name = shift;
+
+    my $component_name = shift;
+
+    my $field = shift;
+
+    my $options = { @_, };
+
+    # find the input class
+
+    if (!exists $GENESIS3::inputclasses->{$class_name})
+    {
+	return "*** Error: inputclass_template $class_name not found";
+    }
+
+    my $inputclass = $GENESIS3::inputclasses->{$class_name};
+
+    # use it to create an actual input
+
+    push
+	@$GENESIS3::inputs,
+	{
+	 component_name => $component_name,
+	 field => $field,
+	 inputclass => $class_name,
+	};
+
+    return "*** Ok: add_input $component_name $field";
+}
+
+
+sub add_input_help
+{
+    print "description: connect an input with a model variable.
+synopsis: add_input <class_name> <element_name> <field_name>
+";
+
+    return "*** Ok";
+}
+
+
+sub add_inputclass
+{
+    my $template_name = shift;
+
+    my $class_name = shift;
+
+    my $options = { @_, };
+
+    # find the input class template
+
+    if (!exists $GENESIS3::all_inputclass_templates->{$template_name})
+    {
+	return "*** Error: inputclass_template $template_name not found";
+    }
+
+    my $inputclass_template = $GENESIS3::all_inputclass_templates->{$template_name};
+
+    # use it to create an actual input class and override the options
+
+    $GENESIS3::inputclasses->{$class_name}
+	= {
+	   %$inputclass_template,
+	   options => {
+		       %{$inputclass_template->{options}},
+		       %$options,
+		      },
+	  };
+
+    return "*** Ok: add_inputclass $template_name";
+}
+
+
+sub add_inputclass_help
+{
+    print "description: define an input class for subsequent use in a simulation.
+synopsis: add_inputclass <template_name> <class_name> <option> ...
+";
+
+    return "*** Ok";
+}
+
+
 sub add_output
 {
     my $component_name = shift;
@@ -29,7 +114,7 @@ sub add_output
 
 sub add_output_help
 {
-    print "description: add a variable to the output file
+    print "description: add a variable to the output file.
 synopsis: add_output <element_name> <field_name>
 ";
 
@@ -85,6 +170,8 @@ sub ce
 
 sub ce_help
 {
+    print "description: change the current working element\n";
+
     print "synopsis: ce <element_name>\n";
 
     return "*** Ok";
@@ -130,6 +217,9 @@ sub check
 
 sub check_help
 {
+    print "description: check as much as we can\n";
+    print "long_description: check the internal state of the software run-time environment, model consistency, solver consistency, I/O consistency and scheduler consistency\n";
+
     print "synopsis: check\n";
 
     return "*** Ok";
@@ -210,6 +300,7 @@ sub create_help
 	   keys %{(\%{"::"})->{"GENESIS3::"}->{"Tokens::"}->{"Physical::"}},
 	  ];
 
+    print "description: create a model element\n";
     print "synopsis: create <type> <element_name>\n";
     print "synopsis: <type> must be one of " . (join ', ', @$subs) . "\n";
 
@@ -271,6 +362,8 @@ sub delete
 
 sub delete_help
 {
+    print "description: delete parts of the model\n";
+
     print "synopsis: delete <element_name>\n";
 
     return "*** Ok";
@@ -287,6 +380,8 @@ sub echo
 
 sub echo_help
 {
+    print "description: echo to the terminal\n";
+
     print "synopsis: echo <arguments>\n";
 
     return "*** Ok";
@@ -404,6 +499,8 @@ synopsis: 'help component <component_name>'
 
 sub help_help
 {
+    print "description: use the builtin help facility to explore self-documenting functions\n";
+
     print "synopsis: help <topic>\n";
     print "synopsis: <topic> must be one of commands, components, variables, libraries\n";
 
@@ -458,6 +555,8 @@ sub list_help
 	   keys %{(\%{"::"})->{"GENESIS3::"}->{"Help::"}},
 	  ];
 
+    print "description: list available items.\n";
+
     print "synopsis: list <type>\n";
     print "synopsis: <type> must be one of " . (join ', ', sort @$subs) . "\n";
 
@@ -507,6 +606,8 @@ sub list_elements
 
 sub list_elements_help
 {
+    print "description: list model elements.\n";
+
     print "synopsis: list_elements [ <element_name> ]\n";
 
     return "*** Ok";
@@ -566,6 +667,8 @@ sub model_state_load
 
 sub model_state_load_help
 {
+    print "description: load the model state (solved variables) from a file.\n";
+
     print "synopsis: model_state_load <element_name> <filename>\n";
 
     return "*** Ok";
@@ -623,6 +726,8 @@ sub model_state_save
 
 sub model_state_save_help
 {
+    print "description: save the model state (solved variables) to a file.\n";
+
     print "synopsis: model_state_save <element_name> <filename>\n";
 
     return "*** Ok";
@@ -641,6 +746,8 @@ sub ndf_load
 
 sub ndf_load_help
 {
+    print "description: load an ndf file and reconstruct the model it describes.\n";
+
     print "synopsis: ndf_load <filename>\n";
 
     return "*** Ok";
@@ -661,6 +768,8 @@ sub ndf_save
 
 sub ndf_save_help
 {
+    print "description: save a model to an ndf file.\n";
+
     print "synopsis: ndf_save <element_name> <filename>\n";
 
     return "*** Ok";
@@ -677,6 +786,8 @@ sub pwe
 
 sub pwe_help
 {
+    print "description: print the current working element.\n";
+
     print "synopsis: pwe\n";
 
     return "*** Ok";
@@ -699,6 +810,8 @@ sub querymachine
 
 sub querymachine_help
 {
+    print "description: execute a model-container querymachine command.\n";
+
     print "synopsis: querymachine <command> [ <arguments> ... ]\n";
 
     return "*** Ok";
@@ -720,7 +833,9 @@ sub quit
 
 sub quit_help
 {
-    print "synopsis: quit <element_name>\n";
+    print "description: quit the simulator.\n";
+
+    print "synopsis: quit [ <exit_code> ]\n";
 
     return "*** Ok";
 }
@@ -763,7 +878,9 @@ sub reset
 
 sub reset_help
 {
-    print "synopsis: reset\n";
+    print "description: reset an existing model.\n";
+
+    print "synopsis: reset <modelname>\n";
 
     return "*** Ok";
 }
@@ -996,6 +1113,8 @@ sub run
 
 sub run_help
 {
+    print "description: run an existing model for a given amount of time.\n";
+
     print "synopsis: run <element_name> <time>\n";
 
     return "*** Ok";
@@ -1028,6 +1147,8 @@ sub set_verbose
 
 sub set_verbose_help
 {
+    print "description: set the verbosity level.\n";
+
     print "synopsis: set_verbose <level>\n";
 
     return "*** Ok";
@@ -1051,6 +1172,8 @@ sub sh
 
 sub sh_help
 {
+    print "description: run a shell command.\n";
+
     print "synopsis: sh <command> [ <arguments> ... ]\n";
 
     return "*** Ok";
@@ -1131,6 +1254,8 @@ sub set_model_parameter
 
 sub set_model_parameter_help
 {
+    print "description: set a model parameter to a specific value.\n";
+
     print "synopsis: set_model_parameter <element_name> <parameter_name> <value> [ <value_type> ]\n";
 
     return "*** Ok";
@@ -1204,6 +1329,8 @@ sub set_runtime_parameter
 
 sub set_runtime_parameter_help
 {
+    print "description: set a run-time parameter to a specific value.\n";
+
     print "synopsis: set_runtime_parameter <element_name> <parameter_name> <value> [ <value_type> ]\n";
 
     return "*** Ok";
@@ -1220,6 +1347,8 @@ sub show_global_time
 
 sub show_global_time_help
 {
+    print "description: show the global simulation time.\n";
+
     print "synopsis: show_global_time\n";
 
     return "*** Ok";
@@ -1254,6 +1383,8 @@ sub show_library
 
 sub show_library_help
 {
+    print "description: browse the online library of models\n";
+
     print "synopsis: show_library [ <library_type> ] [ <library_path> ]\n";
 
     return "*** Ok";
@@ -1293,6 +1424,8 @@ sub show_parameter
 
 sub show_parameter_help
 {
+    print "description: show the value of a model parameter.\n";
+
     print "synopsis: show_parameter <element_name> <parameter_name>\n";
 
     return "*** Ok";
@@ -1311,6 +1444,8 @@ sub show_runtime_parameters
 
 sub show_runtime_parameters_help
 {
+    print "description: show the value of a run-time parameter.\n";
+
     print "synopsis: show_runtime_parameters <element_name>\n";
 
     return "*** Ok";
@@ -1327,6 +1462,8 @@ sub show_verbose
 
 sub show_verbose_help
 {
+    print "description: show the verbosity level.\n";
+
     print "synopsis: show_verbose\n";
 
     return "*** Ok";
@@ -1402,6 +1539,38 @@ sub list_functions
     print foreach map { "  - $_\n" } "NERNST", "MGBLOCK", "RANDOMIZE", "FIXED", "SERIAL";
 
     return "*** Ok: list_functions";
+}
+
+
+sub list_inputclasses
+{
+    print "all input classes:\n";
+
+    use YAML;
+
+    local $YAML::UseHeader = 0;
+
+    print Dump(
+	       $GENESIS3::inputclasses,
+	      );
+
+    return "*** Ok: list_inputclass_templates";
+}
+
+
+sub list_inputclass_templates
+{
+    print "all input class templates:\n";
+
+    use YAML;
+
+    local $YAML::UseHeader = 0;
+
+    print Dump(
+	       $GENESIS3::all_inputclass_templates,
+	      );
+
+    return "*** Ok: list_inputclass_templates";
 }
 
 
@@ -2332,6 +2501,15 @@ our $all_cpan_components
       };
 
 
+our $all_inputclass_templates
+    = {
+       perfectclamp => {
+			module_name => 'Heccer',
+			options => {},
+			package => 'Heccer::PerfectClamp',
+		       },
+      };
+
 our $all_verbose
     = {
        debug => {
@@ -2357,6 +2535,10 @@ our $global_time = 0;
 our $heccer_time_step = 2e-05;
 
 our $model_container;
+
+our $inputclasses = {};
+
+our $inputs = [];
 
 our $outputs = [];
 

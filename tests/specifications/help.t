@@ -58,7 +58,7 @@ all commands:
 						  {
 						   description => "Can we find the command help for a specific command ?",
 						   read => "
-description: add a variable to the output file
+description: add a variable to the output file.
 synopsis: add_output <element_name> <field_name>
 ",
 						   write => "help command add_output",
@@ -73,7 +73,7 @@ Core components:
 						   write => "help component",
 						  },
 						  {
-						   description => "Can we find the component help subtopics ?",
+						   description => "Can we find the component help for a specific component ?",
 						   read => "
 description: simple scheduler in perl
 usage: |-
@@ -102,7 +102,7 @@ usage: |-
 						  {
 						   description => "Can we get a useful synopsis for the list command ?",
 						   read => "synopsis: list <type>
-synopsis: <type> must be one of commands, components, functions, physical, sections, structure, verbose
+synopsis: <type> must be one of commands, components, functions, inputclass_templates, inputclasses, physical, sections, structure, verbose
 synopsis: (you gave )
 ",
 						   write => 'list',
@@ -110,6 +110,8 @@ synopsis: (you gave )
 						  {
 						   description => "Can we find commands ?",
 						   read => "all commands:
+  - add_input
+  - add_inputclass
   - add_output
   - ce
   - check
