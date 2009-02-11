@@ -1355,6 +1355,28 @@ sub show_global_time_help
 }
 
 
+sub show_inputs
+{
+    use YAML;
+
+    print Dump(
+	       $GENESIS3::inputs,
+	      );
+
+    return "*** Ok";
+}
+
+
+sub show_inputs_help
+{
+    print "description: show input applied to the model.\n";
+
+    print "synopsis: show_inputs\n";
+
+    return "*** Ok";
+}
+
+
 sub show_library
 {
     my $type = shift || 'ndf';
@@ -1544,14 +1566,14 @@ sub list_functions
 
 sub list_inputclasses
 {
-    print "all input classes:\n";
-
     use YAML;
 
     local $YAML::UseHeader = 0;
 
     print Dump(
-	       $GENESIS3::inputclasses,
+	       {
+		"all input classes" => $GENESIS3::inputclasses,
+	       },
 	      );
 
     return "*** Ok: list_inputclass_templates";
@@ -1560,14 +1582,14 @@ sub list_inputclasses
 
 sub list_inputclass_templates
 {
-    print "all input class templates:\n";
-
     use YAML;
 
     local $YAML::UseHeader = 0;
 
     print Dump(
-	       $GENESIS3::all_inputclass_templates,
+	       {
+		"all input class templates" => $GENESIS3::all_inputclass_templates,
+	       },
 	      );
 
     return "*** Ok: list_inputclass_templates";
@@ -2505,7 +2527,10 @@ our $all_inputclass_templates
     = {
        perfectclamp => {
 			module_name => 'Heccer',
-			options => {},
+			options => {
+				    name => 'name of this inputclass',
+				    command => 'command voltage',
+				   },
 			package => 'Heccer::PerfectClamp',
 		       },
       };
