@@ -97,14 +97,11 @@ my $test
 						  },
 						  {
 						   description => "Can we run the simulation ?",
-						   write => "run /Purkinje 0.5",
+						   write => "run /Purkinje 0.001",
 						  },
 						  {
-						   comment => "only testing the last line of output",
 						   description => "Can we find the output ?",
-						   read => "
-0.001 -0.0587013
-",
+						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-perfectclamp.txt`),
 						   timeout => 200,
 						   write => "sh cat /tmp/output",
 						  },

@@ -1016,6 +1016,12 @@ sub run
 
 	$schedule->{outputclasses} = $outputclasses;
 
+	# fill in the intput classes and inputs
+
+	$schedule->{inputclasses} = $GENESIS3::inputclasses;
+
+	$schedule->{inputs} = $GENESIS3::inputs;
+
 	# fill in the outputs
 
 	if (!@$GENESIS3::outputs)
