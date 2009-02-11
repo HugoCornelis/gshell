@@ -135,6 +135,7 @@ synopsis: (you gave )
   - set_verbose
   - sh
   - show_global_time
+  - show_inputs
   - show_library
   - show_parameter
   - show_runtime_parameters
