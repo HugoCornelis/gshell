@@ -1,4 +1,15 @@
 $files = {
+           '_<perl/GENESIS3.pm' => [
+                                     {
+                                       'expr' => undef,
+                                       'value' => '1',
+                                       'text' => '    $path =~ s/\\s*//g;
+',
+                                       'fname' => 'perl/GENESIS3.pm',
+                                       'type' => 'user',
+                                       'line' => '131'
+                                     }
+                                   ],
            '_<bin/genesis-g3' => [
                                    {
                                      'expr' => undef,
@@ -9,18 +20,7 @@ $files = {
                                      'type' => 'user',
                                      'line' => 65
                                    }
-                                 ],
-           '_</usr/local/glue/swig/perl/SSP.pm' => [
-                                                     {
-                                                       'expr' => undef,
-                                                       'value' => '1',
-                                                       'text' => '	my $success = $object->$method($peer, @$arguments);
-',
-                                                       'fname' => '/usr/local/glue/swig/perl/SSP.pm',
-                                                       'type' => 'user',
-                                                       'line' => '1544'
-                                                     }
-                                                   ]
+                                 ]
          };
 $expr_list = [
                {

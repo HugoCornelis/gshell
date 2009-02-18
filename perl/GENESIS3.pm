@@ -143,9 +143,16 @@ sub ce
 	return "*** Ok: ce $path";
     }
 
+    if ($path =~ /^\//)
+    {
+	$current_working_element = '';
+
+	$path =~ s(^/)();
+    }
+
     my $stack = [ split '/', $path, ];
 
-    while (my $element = pop @$stack)
+    while (my $element = shift @$stack)
     {
 	if ($element eq '.'
 	    or $element eq '')
@@ -157,7 +164,9 @@ sub ce
 	}
 	else
 	{
-	    $current_working_element .= $element;
+	    $current_working_element .= "/$element";
+
+	    $current_working_element =~ s(//)(/)g;
 	}
     }
 
@@ -337,7 +346,7 @@ sub delete
 {
     my $name = shift;
 
-	# current working element logic
+    # current working element logic
 
     if ($name !~ m(^/))
     {
@@ -1719,11 +1728,22 @@ sub assign_token_names
 
 	my $specific_token = $grammar_symbol->{specific_token};
 
+	# compute a token_name
+
+	my $token_name = $specific_token->{lexical};
+
+	$token_name =~ s/^TOKEN_//i;
+
+	$token_name = lc($token_name);
+
+	if (exists $tokens->{$token_name})
+	{
+	    die "$0: in hierarchy $definitions->{name}: trying to assign_token_names for $token_name but it already exists";
+	}
+
 	# add the token information to the token specs
 
-	#! simply use the token name for key, gets ignored.
-
-	$tokens->{$specific_token->{lexical}} = $specific_token;
+	$tokens->{$token_name} = $specific_token;
     }
 
     # loop over all tokens
