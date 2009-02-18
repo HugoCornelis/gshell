@@ -134,6 +134,12 @@ sub ce
     {
 	$GENESIS3::current_working_element = "/";
 
+	if ($GENESIS3::verbose_level ne 'errors'
+	    and $GENESIS3::verbose_level ne 'warnings')
+	{
+	    GENESIS3::Commands::pwe();
+	}
+
 	return "*** Ok: ce $path";
     }
 
@@ -159,10 +165,22 @@ sub ce
     {
 	$GENESIS3::current_working_element = $current_working_element;
 
+	if ($GENESIS3::verbose_level ne 'errors'
+	    and $GENESIS3::verbose_level ne 'warnings')
+	{
+	    GENESIS3::Commands::pwe();
+	}
+
 	return "*** Ok: ce $path";
     }
     else
     {
+	if ($GENESIS3::verbose_level ne 'errors'
+	    and $GENESIS3::verbose_level ne 'warnings')
+	{
+	    GENESIS3::Commands::pwe();
+	}
+
 	return "*** Error: element $path not found";
     }
 }
