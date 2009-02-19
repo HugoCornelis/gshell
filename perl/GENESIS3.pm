@@ -170,6 +170,11 @@ sub ce
 	}
     }
 
+    if ($current_working_element eq '')
+    {
+	$current_working_element = '/';
+    }
+
     if (Neurospaces::exists_component($current_working_element))
     {
 	$GENESIS3::current_working_element = $current_working_element;
