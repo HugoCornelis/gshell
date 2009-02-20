@@ -45,10 +45,12 @@ my $test
 						  },
 						  {
 						   description => "Can we delete the first channel from the segment ?",
+						   disabled => (`cat /usr/local/include/neurospaces/config.h` =~ /define DELETE_OPERATION 1/ ? '' : 'the model-container was not configured to include the delete operation'),
 						   write => 'delete /c/s/na',
 						  },
 						  {
 						   description => "Can we find the first channel in the segment (should not) ?",
+						   disabled => (`cat /usr/local/include/neurospaces/config.h` =~ /define DELETE_OPERATION 1/ ? '' : 'the model-container was not configured to include the delete operation'),
 						   read => '
 - /c
 - /c/s
@@ -58,6 +60,7 @@ my $test
 						  },
 						  {
 						   description => "Can we find the second channel in the segment ?",
+						   disabled => (`cat /usr/local/include/neurospaces/config.h` =~ /define DELETE_OPERATION 1/ ? '' : 'the model-container was not configured to include the delete operation'),
 						   read => '
 - /c
 - /c/s
@@ -67,11 +70,13 @@ my $test
 						  },
 						  {
 						   description => "Can we delete the segment and its remaining channel?",
+						   disabled => (`cat /usr/local/include/neurospaces/config.h` =~ /define DELETE_OPERATION 1/ ? '' : 'the model-container was not configured to include the delete operation'),
 						   write => 'delete /c/s',
 						  },
 						  {
 						   comment => 'Note that for some reason this test always succeeds, likely a problem with the regular expression of the test.',
 						   description => "Has the segment been removed ?",
+						   disabled => (`cat /usr/local/include/neurospaces/config.h` =~ /define DELETE_OPERATION 1/ ? '' : 'the model-container was not configured to include the delete operation'),
 						   read => [
 							    '-re',
 							    '/c
