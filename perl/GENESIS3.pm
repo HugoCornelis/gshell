@@ -1451,6 +1451,33 @@ sub show_library_help
 }
 
 
+sub show_model_parameters
+{
+    my $element = shift;
+
+    my $parameter = shift;
+
+    if (defined $element
+	and defined $parameter)
+    {
+	show_parameter($element, $parameter);
+    }
+
+    if (!defined $element)
+    {
+	$element = $GENESIS3::current_working_element;
+    }
+
+    my $query = "symbolparameters $element";
+
+    if (querymachine($query))
+    {
+    }
+
+    return "*** Ok: show_parameter $element $parameter";
+}
+
+
 sub show_parameter
 {
     my $element = shift;

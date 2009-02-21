@@ -137,6 +137,7 @@ synopsis: (you gave )
   - show_global_time
   - show_inputs
   - show_library
+  - show_model_parameters
   - show_parameter
   - show_runtime_parameters
   - show_verbose
