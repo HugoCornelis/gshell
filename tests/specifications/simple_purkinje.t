@@ -120,6 +120,63 @@ ndf_library:
 						   write => "list_elements /Purkinje/segments",
 						  },
 						  {
+						   description => "Can we switch to the soma as current working element ?",
+						   write => "ce /Purkinje/segments/soma",
+						  },
+						  {
+						   description => "Is the soma now our current working element ?",
+						   read => "/Purkinje/segments/soma
+",
+						   write => "pwe",
+						  },
+						  {
+						   description => "Can we obtain the value of the CM parameter of the soma ?",
+						   read => 'value = 0.0164
+',
+						   write => 'show_parameter . CM',
+						  },
+						  {
+						   description => "Can we obtain the value of the parameters of the soma segment ?",
+						   read => "  -
+    'parameter name': rel_X
+    type: number
+    value: 0
+  -
+    'parameter name': rel_Y
+    type: number
+    value: 0
+  -
+    'parameter name': rel_Z
+    type: number
+    value: 0
+  -
+    'parameter name': DIA
+    type: number
+    value: 2.98e-05
+  -
+    'parameter name': Vm_init
+    type: number
+    value: -0.068
+  -
+    'parameter name': RM
+    type: number
+    value: 1
+  -
+    'parameter name': RA
+    type: number
+    value: 2.5
+  -
+    'parameter name': CM
+    type: number
+    value: 0.0164
+  -
+    'parameter name': ELEAK
+    type: number
+    value: -0.08
+",
+						   write => 'show_model_parameters',
+						  },
+						  {
 						   description => "Can we find the segments in /Purkinje/segments/main ?",
 						   read => "
 - /Purkinje/segments/main/main[0]

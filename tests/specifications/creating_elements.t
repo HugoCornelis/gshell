@@ -116,10 +116,35 @@ my $test
 						   write => 'querymachine printinfo /c/s',
 						  },
 						  {
-						   description => "Can we obtain the value of the parameters of the segment ?",
+						   description => "Can we obtain the value of the CM parameter of the segment ?",
 						   read => 'value = 0.0164
 ',
 						   write => 'show_parameter /c/s CM',
+						  },
+						  {
+						   description => "Can we set parameter RM of the segment ?",
+						   write => 'set_model_parameter /c/s RM 1.0',
+						  },
+						  {
+						   description => "Can we set parameter RA of the segment ?",
+						   write => 'set_model_parameter /c/s RA 2.5',
+						  },
+						  {
+						   description => "Can we obtain the value of the parameters of the segment ?",
+						   read => "  -
+    'parameter name': RA
+    type: number
+    value: 2.5
+  -
+    'parameter name': RM
+    type: number
+    value: 1
+  -
+    'parameter name': CM
+    type: number
+    value: 0.0164
+",
+						   write => 'show_model_parameters /c/s',
 						  },
 						 ],
 				description => "commands for creating a model",
