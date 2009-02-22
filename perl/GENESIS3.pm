@@ -1467,6 +1467,17 @@ sub show_model_parameters
     {
 	$element = $GENESIS3::current_working_element;
     }
+    else
+    {
+	if ($element =~ m(^/))
+	{
+	}
+	else
+	{
+	    $element = "$GENESIS3::current_working_element/$element";
+	}
+    }
+
 
     my $query = "symbolparameters $element";
 

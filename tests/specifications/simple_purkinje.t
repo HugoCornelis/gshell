@@ -177,6 +177,41 @@ ndf_library:
 						   write => 'show_model_parameters',
 						  },
 						  {
+						   description => "Can we obtain the value of the parameters of the cat channel inside the soma segment ?",
+						   read => "  -
+    'parameter name': G_MAX
+    type: number
+    value: 5
+  -
+    'parameter name': Erev
+    type: function
+    'function name': NERNST
+    'function parameters':
+
+      -
+        'parameter name': Cin
+        'field name': concen
+        type: field
+        value: ../ca_pool->concen
+        'resolved value': /Purkinje/segments/soma/ca_pool->concen
+      -
+        'parameter name': Cout
+        type: number
+        value: 2.4
+      -
+        'parameter name': valency
+        'field name': VAL
+        type: field
+        value: ../ca_pool->VAL
+        'resolved value': /Purkinje/segments/soma/ca_pool->VAL
+      -
+        'parameter name': T
+        type: number
+        value: 37
+",
+						   write => 'show_model_parameters cat',
+						  },
+						  {
 						   description => "Can we find the segments in /Purkinje/segments/main ?",
 						   read => "
 - /Purkinje/segments/main/main[0]
