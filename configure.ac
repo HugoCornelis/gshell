@@ -29,10 +29,10 @@ dnl AC_CONFIG_SUBDIRS()
 # $Format: "AM_INIT_AUTOMAKE(${package}, ${label})"$
 AM_INIT_AUTOMAKE(gshell, python-7)
 
-PERL_MODULES=`(cd perl && find . -name "*.pm" -printf "%p ")`
+PERL_MODULES=`(cd perl && find . -name "*.pm" | perl -pe 's/\n/ /g')`
 AC_SUBST(PERL_MODULES)
 
-PERL_DATA=`(cd perl && find . -name "numbers-7x11.txt" -printf "%p ")`
+PERL_DATA=`(cd perl && find . -name "numbers-7x11.txt" | perl -pe 's/\n/ /g')`
 AC_SUBST(PERL_DATA)
 
 # Checks for programs.
@@ -47,7 +47,7 @@ AC_SUBST(PERL_DATA)
 
 # determine the test library to install
 
-TEST_SPECIFICATION_FILES=`echo -n "tests/introduction.html " && find tests/specifications -name "*.t" -printf "%p " && find tests/specifications/strings -name "*.txt" -printf "%p " && find tests/data -name "*.yml" -printf "%p "`
+TEST_SPECIFICATION_FILES=`/bin/echo -n "tests/introduction.html " && find tests/specifications -name "*.t" | perl -pe 's/\n/ /g' && find tests/specifications/strings -name "*.txt" | perl -pe 's/\n/ /g' && find tests/data -name "*.yml" | perl -pe 's/\n/ /g'`
 AC_SUBST(TEST_SPECIFICATION_FILES)
 
 
