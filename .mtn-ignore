@@ -1,4 +1,6 @@
 Makefile$
+.*Makefile\.in$
+^missing$
 ^config.log$
 ^config.status$
 ^example.out$
