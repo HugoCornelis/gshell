@@ -1,11 +1,13 @@
 Makefile$
-.*Makefile\.in$
-^missing$
+Makefile\.in$
+^aclocal.m4$
 ^config.log$
 ^config.status$
+^configure$
 ^example.out$
 ^html
 ^installed
+^missing$
 ^output
 ^tests/html
 ^tests/output
