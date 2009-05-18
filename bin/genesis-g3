@@ -57,6 +57,7 @@ our $option_verbose = 'warnings';
 
 my $exit_code = 0;
 
+my $gui = 0;
 
 sub interprete
 {
@@ -99,14 +100,28 @@ sub interprete
 	return;
     }
 
+
+    my $genesis_command;
+
     {
-	my $genesis_command = $arguments->[0];
+	$genesis_command = $arguments->[0];
+
+	if($gui)
+	{
+	  print "<" .  $genesis_command . ">\n";
+
+	}
 
 	no strict "refs";
 
 	if (!exists ((\%{"::"})->{"GENESIS3::"}->{"Commands::"}->{$genesis_command}))
 	{
 	    print "*** Error: command $genesis_command not found,\n*** Error: use 'list commands' to get a list of available commands,\n*** Error: use the help function to obtain help about each command\n";
+	    
+	    if($gui)
+	    {
+	      print "</" .  $genesis_command . ">\n";
+	    }
 
 	    return;
 	}
@@ -127,10 +142,16 @@ sub interprete
 
     if ($result =~ /^\*\*\* Ok/)
     {
+
     }
     else
     {
 	print "$result\n";
+    }
+
+    if($gui)
+    {
+      print "</" .  $genesis_command . ">\n";
     }
 }
 
@@ -170,6 +191,8 @@ sub loop
 }
 
 
+
+
 sub main
 {
     if (!$ENV{NEUROSPACES_NMC_USER_MODELS}
@@ -201,7 +224,7 @@ sub main
 	foreach my $line (@$lines)
 	{
 	    #t do error processing
-
+	  
 	    interprete($line);
 	}
     }
@@ -214,13 +237,14 @@ sub read_cmd_line
 {
     my $option_help;
     my $option_version;
-
+    my $option_gui;
     my $result
 	= GetOptions
 	    (
 	     "help!" => \$option_help,
 	     "v|verbose=s" => \$option_verbose,
 	     "version" => \$option_version,
+	     "guimode" => \$option_gui,
 	    );
 
     if ($option_version)
@@ -249,6 +273,14 @@ options:
 ";
 
 	exit 1;
+    }
+
+
+    if($option_gui)
+    {
+
+      $gui = 1;
+      
     }
 
 }
