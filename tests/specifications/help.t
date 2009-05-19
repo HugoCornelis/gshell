@@ -18,6 +18,7 @@ my $test
 						   read => "GENESIS 3 shell.
 
 options:
+    --output-tags        Adds XML-like tags to diagnostic messages.
     --help               print usage information.
     --verbose            set verbosity level ('errors', 'warnings', 'information', 'debug', default is 'warnings').
     --version            give version information.
