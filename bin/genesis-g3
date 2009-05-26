@@ -57,11 +57,12 @@ our $option_verbose = 'warnings';
 
 my $exit_code = 0;
 
-my $gui = 0;
+my $output_tags = 0;
 
 sub interprete
 {
-    my $line = shift;
+
+    my $line = shift ;
 
     my $arguments = [ split /\s/, $line, ];
 
@@ -106,7 +107,7 @@ sub interprete
     {
 	$genesis_command = $arguments->[0];
 
-	if($gui)
+	if($output_tags)
 	{
 	  print "<" .  $genesis_command . ">\n";
 
@@ -117,8 +118,8 @@ sub interprete
 	if (!exists ((\%{"::"})->{"GENESIS3::"}->{"Commands::"}->{$genesis_command}))
 	{
 	    print "*** Error: command $genesis_command not found,\n*** Error: use 'list commands' to get a list of available commands,\n*** Error: use the help function to obtain help about each command\n";
-	    
-	    if($gui)
+
+	    if($output_tags)
 	    {
 	      print "</" .  $genesis_command . ">\n";
 	    }
@@ -149,9 +150,11 @@ sub interprete
 	print "$result\n";
     }
 
-    if($gui)
+    if($output_tags)
     {
       print "</" .  $genesis_command . ">\n";
+ 
+      
     }
 }
 
@@ -173,6 +176,31 @@ sub loop
 	$h{$_} = 1 foreach @h;
 	$term->addhistory($_) foreach keys %h;
     }
+
+
+    if($output_tags)
+    {
+
+      my $line;
+
+      while(<>){
+
+	$line = $_;
+
+	interprete($line);
+
+	{
+	    open H, ">>$historyfile";
+	    print H "$line\n";
+	    close H;
+	}
+
+	$term->addhistory($line) if /\S/;
+
+      }
+
+    }
+
 
     while ( defined ($_ = $term->readline("genesis > ")) )
     {
@@ -223,6 +251,7 @@ sub main
 
 	foreach my $line (@$lines)
 	{
+
 	    #t do error processing
 	  
 	    interprete($line);
@@ -237,14 +266,14 @@ sub read_cmd_line
 {
     my $option_help;
     my $option_version;
-    my $option_gui;
+    my $option_tags;
     my $result
 	= GetOptions
 	    (
 	     "help!" => \$option_help,
 	     "v|verbose=s" => \$option_verbose,
 	     "version" => \$option_version,
-	     "guimode" => \$option_gui,
+	     "output-tags" => \$option_tags,
 	    );
 
     if ($option_version)
@@ -278,10 +307,10 @@ options:
     }
 
 
-    if($option_gui)
+    if($option_tags)
     {
 
-      $gui = 1;
+      $output_tags = 1;
       
     }
 

@@ -46,7 +46,7 @@ my $test
 							disabled => ($model_name eq 'tensizesp' ? 'the tensizesp model needs improvements of the numerical_compare heuristic' : 0),
 							numerical_compare => 1,
 							read => (join '', `cat /usr/local/heccer/tests/specifications/strings/$model_name.txt`),
-							timeout => 15,
+							timeout => 50,
 							write => "run /$model_name 0.0002",
 						       },
 						      ],
