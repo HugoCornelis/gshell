@@ -47,7 +47,7 @@ ndf_library:
 						   write => "show_library",
 						  },
 						  {
-						   description => "Can we find the single neurons in the library ?",
+						   description => "Can we find the single neuron library ?",
 						   read => "
 ndf_library:
   cells:
