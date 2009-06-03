@@ -52,10 +52,6 @@ ndf_library:
 ndf_library:
   cells:
     - cell1.ndf
-    - hodgkin-huxley/
-    - Purk2M9s.p
-    - purk2m9s.tex
-    - purk2m9.tex
     - purkinje/
     - stand_alone.ndf
 ",
