@@ -201,11 +201,11 @@ my $test
 						   write => "sh wc -l /tmp/output",
 						  },
 						 ],
-				description => "run, checking and reseting a simulation",
+				description => "run, checking and resetting a simulation",
 				side_effects => "creates a model in the model container",
 			       },
 			      ],
-       description => "simple simulations of models, checking and reseting a simulation",
+       description => "simple simulations of models, checking and resetting a simulation",
        name => 'simple_run.t',
       };
 
