@@ -1485,7 +1485,17 @@ sub show_model_parameters
     {
     }
 
-    return "*** Ok: show_parameter $element $parameter";
+    return "*** Ok: show_model_parameters $element $parameter";
+}
+
+
+sub show_model_parameters_help
+{
+    print "description: show the value of a series of model parameters.\n";
+
+    print "synopsis: show_model_parameters [ <element_name> [ <parameter_name> ] ]\n";
+
+    return "*** Ok";
 }
 
 
