@@ -1694,7 +1694,7 @@ sub list_documentation
     #t the userdocs-gui tag name should be configurable, using a
     #t variable accessible over 'help var'.
 
-    my $gui_docs = "gui documentation:\n" . `userdocs-tag-filter userdocs-gui`;
+    my $gui_docs = "gui documentation:\n" . `userdocs-tag-filter gshell-interactive`;
 
     $gui_docs =~ s(---\n)();
     $gui_docs =~ s($userdocs_source/?)()g;
