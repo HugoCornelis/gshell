@@ -513,6 +513,39 @@ synopsis: 'help component <component_name>'
 	}
     }
 
+    # for documentation
+
+    elsif ($topic =~ m'^doc')
+    {
+	if (!defined $subtopic)
+	{
+	    print "description: general GENESIS3 documentation
+synopsis: 'help documentation <document_name>'
+";
+
+	    return list("documentation");
+	}
+	else
+	{
+	    #t this should come from a query using neurospaces_build because
+	    #t it is the only one that knows about the project layout.
+
+	    my $userdocs_source = "$ENV{HOME}/neurospaces_project/userdocs/source/snapshots/0";
+
+	    my $exists;
+
+	    if ($exists)
+	    {
+	    }
+	    else
+	    {
+		my $error = "*** Error: document $subtopic not found\n";
+
+		return $error;
+	    }
+	}
+    }
+
     # for variables
 
     elsif ($topic =~ m'^var')
@@ -1637,6 +1670,32 @@ sub list_components
 	      );
 
     return "*** Ok: list_components";
+}
+
+
+sub list_documentation
+{
+    use YAML;
+
+    local $YAML::UseHeader = 0;
+
+    #t this should come from a query using neurospaces_build because
+    #t it is the only one that knows about the project layout.
+
+    my $userdocs_source = "$ENV{HOME}/neurospaces_project/userdocs/source/snapshots/0";
+
+    #t the userdocs-gui tag name should be configurable, using a
+    #t variable accessible over 'help var'.
+
+    my $gui_docs = "gui documentation:\n" . `userdocs-tag-filter userdocs-gui`;
+
+    $gui_docs =~ s(---\n)();
+    $gui_docs =~ s($source/?)()g;
+    $gui_docs =~ s((^|\n)-)($1  -)g;
+
+    print $gui_docs;
+
+    return "*** Ok: list_documentation";
 }
 
 
