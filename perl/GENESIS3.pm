@@ -532,10 +532,17 @@ synopsis: 'help documentation <document_name>'
 
 	    my $userdocs_source = "$ENV{HOME}/neurospaces_project/userdocs/source/snapshots/0";
 
-	    my $exists;
+#     '/local_home/local_home/hugo/neurospaces_project/userdocs/source/snapshots/0/html/htdocs/neurospaces_project/userdocs/documentation-overview/documentation-overview.html'
 
-	    if ($exists)
+	    my $filename = "$userdocs_source/html/htdocs/neurospaces_project/userdocs/$subtopic/$subtopic.html";
+
+	    if (-e $filename)
 	    {
+		my $command = "firefox \"$filename\" &";
+
+		my $error = `$command`;
+
+		return "*** Ok: $command";
 	    }
 	    else
 	    {
