@@ -1690,7 +1690,7 @@ sub list_documentation
     my $gui_docs = "gui documentation:\n" . `userdocs-tag-filter userdocs-gui`;
 
     $gui_docs =~ s(---\n)();
-    $gui_docs =~ s($source/?)()g;
+    $gui_docs =~ s($userdocs_source/?)()g;
     $gui_docs =~ s((^|\n)-)($1  -)g;
 
     print $gui_docs;
