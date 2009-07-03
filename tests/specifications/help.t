@@ -103,7 +103,7 @@ usage: |-
 						  {
 						   description => "Can we get a useful synopsis for the list command ?",
 						   read => "synopsis: list <type>
-synopsis: <type> must be one of commands, components, functions, inputclass_templates, inputclasses, physical, sections, structure, verbose
+synopsis: <type> must be one of commands, components, documentation, functions, inputclass_templates, inputclasses, physical, sections, structure, verbose
 synopsis: (you gave )
 ",
 						   write => 'list',
