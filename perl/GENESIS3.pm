@@ -1233,31 +1233,6 @@ sub set_verbose_help
 }
 
 
-sub sh
-{
-    system @_;
-
-    if ($?)
-    {
-	return "*** Error: sh ", @_, " returned $?";
-    }
-    else
-    {
-	return "*** Ok: sh ", @_;
-    }
-}
-
-
-sub sh_help
-{
-    print "description: run a shell command.\n";
-
-    print "synopsis: sh <command> [ <arguments> ... ]\n";
-
-    return "*** Ok";
-}
-
-
 sub set_model_parameter
 {
     my $element = shift;
@@ -1410,6 +1385,31 @@ sub set_runtime_parameter_help
     print "description: set a run-time parameter to a specific value.\n";
 
     print "synopsis: set_runtime_parameter <element_name> <parameter_name> <value> [ <value_type> ]\n";
+
+    return "*** Ok";
+}
+
+
+sub sh
+{
+    system @_;
+
+    if ($?)
+    {
+	return "*** Error: sh ", @_, " returned $?";
+    }
+    else
+    {
+	return "*** Ok: sh ", @_;
+    }
+}
+
+
+sub sh_help
+{
+    print "description: run a shell command.\n";
+
+    print "synopsis: sh <command> [ <arguments> ... ]\n";
 
     return "*** Ok";
 }
@@ -1643,6 +1643,26 @@ sub show_verbose_help
 	    print "*** Warning: command $command found, but no help available for it\n";
 	}
     }
+}
+
+
+sub sli_load
+{
+    my $filename = shift;
+
+    SLI::include_script($filename);
+
+    return "*** Ok: sli_load $filename";
+}
+
+
+sub sli_load_help
+{
+    print "description: load and run a GENESIS 2 .g file.\n";
+
+    print "synopsis: sli_load <filename>\n";
+
+    return "*** Ok";
 }
 
 
