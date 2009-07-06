@@ -2671,6 +2671,10 @@ our $all_components
 			     description => 'internal storage for neuronal models',
 			     module => 'Neurospaces',
 			    },
+       sli => {
+	       description => "GENESIS 2 backward compatible scripting interface",
+	       module => "SLI",
+	      },
        ssp => {
 	       description => 'binds the software components of a simulation together',
 	       module => 'SSP',

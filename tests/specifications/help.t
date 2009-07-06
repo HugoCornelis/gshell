@@ -160,6 +160,10 @@ synopsis: (you gave )
     description: internal storage for neuronal models
     module: Neurospaces
     status: loaded
+  sli:
+    description: GENESIS 2 backward compatible scripting interface
+    module: SLI
+    status: loaded
   ssp:
     description: binds the software components of a simulation together
     module: SSP
