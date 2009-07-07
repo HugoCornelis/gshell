@@ -1,5 +1,5 @@
-#!/usr/bin/perl
 #!/usr/bin/perl -d:ptkdb -w
+#!/usr/bin/perl
 #
 
 
@@ -109,6 +109,15 @@ sub interprete
 
 	if($output_tags)
 	{
+	  #
+	  # Here we will need the gshell to do a join on the arguments
+	  # so that the tags can differentiate which list command was called,
+	  # which show, etc. The gshell bridge does not support this yet so 
+	  # just marking this for now. 
+	  #
+	  # need to see if having it in a top tag is good enough or maybe making a
+	  # seperate <args></args> tag.
+	  #
 	  print "<" .  $genesis_command . ">\n";
 
 	}
