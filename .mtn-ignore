@@ -9,6 +9,7 @@ Makefile\.in$
 ^installed
 ^missing$
 ^output
+^results
 ^tests/html
 ^tests/output
 _Inline
