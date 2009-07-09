@@ -1658,9 +1658,29 @@ sub sli_load
 
 sub sli_load_help
 {
-    print "description: load and run a GENESIS 2 .g file.\n";
+    print "description: load extract models from a GENESIS 2 .g file.\n";
 
     print "synopsis: sli_load <filename>\n";
+
+    return "*** Ok";
+}
+
+
+sub sli_run
+{
+    my $filename = shift;
+
+    SLI::run_model($filename, $GENESIS3::model_container);
+
+    return "*** Ok: sli_run $filename";
+}
+
+
+sub sli_run_help
+{
+    print "description: load and run a GENESIS 2 .g file.\n";
+
+    print "synopsis: sli_run <filename>\n";
 
     return "*** Ok";
 }
