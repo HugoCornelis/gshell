@@ -1650,7 +1650,7 @@ sub sli_load
 {
     my $filename = shift;
 
-    SLI::include_model($filename);
+    SLI::include_model($filename, $GENESIS3::model_container);
 
     return "*** Ok: sli_load $filename";
 }
@@ -1848,7 +1848,7 @@ sub assign_grammar_symbols
 
 	my $name = identifier_perl_to_xml($type);
 
-	print "Creating grammar_symbol for $name\n";
+# 	print "Creating grammar_symbol for $name\n";
 
 	$grammar_symbols->{$name} = $class->{grammar};
 
@@ -1883,7 +1883,7 @@ sub assign_token_names
 
 	# get the token information assigned to this symbol
 
-	print "Creating lexical token for $symbol_name\n";
+# 	print "Creating lexical token for $symbol_name\n";
 
 	my $specific_token = $grammar_symbol->{specific_token};
 

@@ -1,15 +1,4 @@
 $files = {
-           '_<perl/GENESIS3.pm' => [
-                                     {
-                                       'expr' => undef,
-                                       'value' => '1',
-                                       'text' => '    $path =~ s/\\s*//g;
-',
-                                       'fname' => 'perl/GENESIS3.pm',
-                                       'type' => 'user',
-                                       'line' => '131'
-                                     }
-                                   ],
            '_<bin/genesis-g3' => [
                                    {
                                      'expr' => undef,
@@ -18,7 +7,16 @@ $files = {
 ',
                                      'fname' => 'bin/genesis-g3',
                                      'type' => 'user',
-                                     'line' => 65
+                                     'line' => 67
+                                   },
+                                   {
+                                     'expr' => undef,
+                                     'value' => '1',
+                                     'text' => '    my $result = eval($quoted_line);
+',
+                                     'fname' => 'bin/genesis-g3',
+                                     'type' => 'user',
+                                     'line' => '144'
                                    }
                                  ]
          };
