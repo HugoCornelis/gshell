@@ -142,6 +142,9 @@ synopsis: (you gave )
   - show_parameter
   - show_runtime_parameters
   - show_verbose
+  - sli_load
+  - sli_run
+  - sli_script
 ",
 						   write => 'list commands',
 						  },
