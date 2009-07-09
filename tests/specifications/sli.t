@@ -46,7 +46,7 @@ my $test
 						   },
 						   {
 						    description => 'Do we see the simulation time after the simulation has finished ?',
-						    read => 'time = 0.301160 ; step = 15058',
+						    read => 'time = 0.500060 ; step = 25003',
 						    timeout => 200,
 						   },
 						   {
@@ -54,8 +54,8 @@ my $test
 						    description => "Is the generated output correct ?",
 						    numerical_compare => 'small differences between the output of different architectures',
 						    read => {
-							     application_output_file => "$::config->{core_directory}/results/PurkM9_CS",
-							     expected_output_file => '/usr/local/nsgenesis/tests/../tests/specifications/strings/PurkM9_CS.g3',
+							     application_output_file => "$::config->{core_directory}/results/PurkM9_soma_1.5nA",
+							     expected_output_file => "$::config->{core_directory}/tests/specifications/strings/PurkM9_soma_1.5nA.g3",
 							    },
 						    wait => 1,
 						   },
@@ -76,7 +76,7 @@ my $test
 					       reparer =>
 					       sub
 					       {
- 						   `rm "$::config->{core_directory}/results/PurkM9_CS"`;
+ 						   `rm "$::config->{core_directory}/results/PurkM9_soma_1.5nA"`;
 						   `rmdir results`;
 					       },
 					      },
