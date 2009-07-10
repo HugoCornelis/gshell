@@ -832,7 +832,7 @@ sub ndf_save
 
     my $filename = shift;
 
-    $GENESIS3::model_container->write(undef, [ 'genesis-g3', $filename, ], );
+    $GENESIS3::model_container->write(undef, $modelname, 'ndf', $filename, );
 
     return "*** Ok: ndf_save $filename";
 }
