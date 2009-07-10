@@ -538,7 +538,18 @@ synopsis: 'help documentation <document_name>'
 
 	    if (-e $filename)
 	    {
-		my $command = "firefox \"$filename\" &";
+	        my $os = $^O;
+		
+		my $command = "";
+
+		if( $os eq "darwin")
+		{
+		  $command = "/Applications/Firefox.app/Contents/MacOS/firefox \"$filename\" &";
+		}
+		else
+		{
+		  $command = "firefox \"$filename\" &";
+	        }
 
 		my $error = `$command`;
 
