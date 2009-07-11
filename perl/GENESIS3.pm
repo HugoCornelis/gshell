@@ -1706,6 +1706,28 @@ sub sli_script_help
 }
 
 
+sub xml_save
+{
+    my $modelname = shift;
+
+    my $filename = shift;
+
+    $GENESIS3::model_container->write(undef, $modelname, 'xml', $filename, );
+
+    return "*** Ok: xml_save $filename";
+}
+
+
+sub xml_save_help
+{
+    print "description: save a model to an xml file.\n";
+
+    print "synopsis: xml_save <element_name> <filename>\n";
+
+    return "*** Ok";
+}
+
+
 package GENESIS3::Help;
 
 

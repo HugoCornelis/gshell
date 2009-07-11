@@ -145,6 +145,7 @@ synopsis: (you gave )
   - sli_load
   - sli_run
   - sli_script
+  - xml_save
 ",
 						   write => 'list commands',
 						  },
