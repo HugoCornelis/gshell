@@ -80,6 +80,7 @@ my $test
 						   `rmdir results`;
 					       },
 					      },
+				side_effects => 'loads a model into the model-contaier',
 			       },
 			       {
 				arguments => [
@@ -199,6 +200,7 @@ END PUBLIC_MODELS
 # 						   `rmdir results`;
 # 					       },
 # 					      },
+				side_effects => 'loads a model into the model-contaier',
 			       },
 			      ],
        description => "running GENESIS 2 scripts and importing their models",
