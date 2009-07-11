@@ -820,7 +820,7 @@ sub ndf_load_help
 {
     print "description: load an ndf file and reconstruct the model it describes.\n";
 
-    print "synopsis: ndf_load <filename>\n";
+    print "synopsis: ndf_load <filename.ndf>\n";
 
     return "*** Ok";
 }
@@ -1660,7 +1660,7 @@ sub sli_load_help
 {
     print "description: load extract models from a GENESIS 2 .g file.\n";
 
-    print "synopsis: sli_load <filename>\n";
+    print "synopsis: sli_load <filename.g>\n";
 
     return "*** Ok";
 }
@@ -1701,6 +1701,26 @@ sub sli_script_help
     print "description: load and run a GENESIS 2 .g add-on.\n";
 
     print "synopsis: sli_script <filename>\n";
+
+    return "*** Ok";
+}
+
+
+sub xml_load
+{
+    my $filename = shift;
+
+    $GENESIS3::model_container->read(undef, [ 'genesis-g3', $filename, ], );
+
+    return "*** Ok: xml_load $filename";
+}
+
+
+sub xml_load_help
+{
+    print "description: load an xml file and reconstruct the model it describes.\n";
+
+    print "synopsis: xml_load <filename.xml>\n";
 
     return "*** Ok";
 }
