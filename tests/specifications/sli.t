@@ -171,7 +171,7 @@ END PUBLIC_MODELS
 </private_models>
 
 <public_models>
-  <alias> <namespace>Purk_soma/NaF</namespace><prototype>/Purk_NaF</prototype> <name>NaF</name>
+  <alias> <namespace>Purk_soma/NaF::</namespace><prototype>/Purk_NaF</prototype> <name>NaF</name>
     <parameters>
       <parameter> <name>G_MAX</name><value>74999.9</value> </parameter>
     </parameters>
