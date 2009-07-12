@@ -1000,6 +1000,22 @@ sub run
 	#! does not expect it when applying run time settings during
 	#! compilation)
 
+	my $conceptual_parameters
+	    = [
+	       grep
+	       {
+		   $_->{component_name} =~ /::/
+	       }
+	       @$GENESIS3::runtime_parameters,
+	      ];
+
+	if (@$conceptual_parameters)
+	{
+	    print "warning: ignoring parameter settings that contain a namespace in their address\n";
+
+	    print Dump( { conceptual_parameters => $conceptual_parameters, }, );
+	}
+
 	my $result
 	    = $scheduler->apply_granular_parameters
 		(
@@ -1014,6 +1030,10 @@ sub run
 		 grep
 		 {
 		     $_->{component_name} =~ /^$modelname/
+		 }
+		 grep
+		 {
+		     $_->{component_name} !~ /::/
 		 }
 		 @$GENESIS3::runtime_parameters,
 		);
@@ -1055,7 +1075,23 @@ sub run
 
 	# fill in runtime_parameters
 
-	$schedule->{models}->[0]->{granular_parameters} = $GENESIS3::runtime_parameters;
+	$schedule->{models}->[0]->{conceptual_parameters}
+	    = [
+	       grep
+	       {
+		   $_->{component_name} =~ /::/
+	       }
+	       @$GENESIS3::runtime_parameters,
+	      ];
+
+	$schedule->{models}->[0]->{granular_parameters}
+	    = [
+	       grep
+	       {
+		   $_->{component_name} !~ /::/
+	       }
+	       @$GENESIS3::runtime_parameters,
+	      ];
 
 	# fill in model name
 
@@ -1362,7 +1398,8 @@ sub set_runtime_parameter
     }
     else
     {
-	if ($element =~ m(^/))
+	if ($element =~ m(^/)
+	    || $element =~ m(::))
 	{
 	}
 	else
