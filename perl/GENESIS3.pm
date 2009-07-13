@@ -420,6 +420,26 @@ sub echo_help
 }
 
 
+sub explore
+{
+    require Neurospaces::GUI;
+
+    Neurospaces::GUI::gui($0);
+
+    return "*** Ok: explore";
+}
+
+
+sub explore_help
+{
+    print "description: graphically explore the models that have been loaded\n";
+
+    print "synopsis: explore <arguments>\n";
+
+    return "*** Ok";
+}
+
+
 sub help
 {
     my $topic = shift;
@@ -2901,6 +2921,10 @@ our $all_components
 	       description => "GENESIS 2 backward compatible scripting interface",
 	       module => "SLI",
 	      },
+       studio => {
+		  description => "something",
+		  module => "Neurospaces::Studio",
+		 },
        ssp => {
 	       description => 'binds the software components of a simulation together',
 	       module => 'SSP',
@@ -3014,6 +3038,8 @@ sub profile_environment
 	eval
 	{
 	    local $SIG{__DIE__};
+
+	    $component_module =~ s/::/\//g;
 
 	    require "$component_module.pm";
 	};
