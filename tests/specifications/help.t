@@ -141,6 +141,7 @@ synopsis: (you gave )
   - show_library
   - show_model_parameters
   - show_parameter
+  - show_parameter_scaled
   - show_runtime_parameters
   - show_verbose
   - sli_load

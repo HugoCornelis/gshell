@@ -1648,6 +1648,47 @@ sub show_parameter_help
 }
 
 
+sub show_parameter_scaled
+{
+    my $element = shift;
+
+    my $parameter = shift;
+
+    if (!defined $element)
+    {
+	$element = $GENESIS3::current_working_element;
+    }
+    else
+    {
+	if ($element =~ m(^/))
+	{
+	}
+	else
+	{
+	    $element = "$GENESIS3::current_working_element/$element";
+	}
+    }
+
+    my $query = "printparameterscaled $element $parameter";
+
+    if (querymachine($query))
+    {
+    }
+
+    return "*** Ok: show_parameter_scaled $element $parameter";
+}
+
+
+sub show_parameter_scaled_help
+{
+    print "description: show the value of a model parameter.\n";
+
+    print "synopsis: show_parameter_scaled <element_name> <parameter_name>\n";
+
+    return "*** Ok";
+}
+
+
 sub show_runtime_parameters
 {
     use YAML;
