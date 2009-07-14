@@ -119,6 +119,7 @@ synopsis: (you gave )
   - create
   - delete
   - echo
+  - explore
   - help
   - list
   - list_elements
@@ -172,6 +173,10 @@ synopsis: (you gave )
   ssp:
     description: binds the software components of a simulation together
     module: SSP
+    status: loaded
+  studio:
+    description: something
+    module: Neurospaces::Studio
     status: loaded
 Other components:
 ",

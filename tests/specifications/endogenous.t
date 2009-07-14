@@ -81,6 +81,7 @@ runtime_parameters:
 						 ],
 				description => "commands to run the purkinje cell from an ndf file, endogenous / poissonian activation",
 				disabled => 'the gshell hangs after execution of one of the command ...',
+				numerical_compare => 'arithmetic rounding differences between different architectures',
 				side_effects => "creates a model in the model container",
 				todo => 'the gshell hangs after execution of one of the command ...',
 			       },
@@ -100,6 +101,7 @@ runtime_parameters:
 						  },
 						 ],
 				description => "running the purkinje cell with endogenous / poissonian activation from a G3 batch file",
+				numerical_compare => 'arithmetic rounding differences between different architectures',
 			       },
 			       {
 				arguments => [
@@ -116,6 +118,7 @@ runtime_parameters:
 						  },
 						 ],
 				description => "running the purkinje cell with current injection from a perl script",
+				numerical_compare => 'arithmetic rounding differences between different architectures',
 			       },
 			      ],
        description => "poissonian / endogenous synaptic activation",
