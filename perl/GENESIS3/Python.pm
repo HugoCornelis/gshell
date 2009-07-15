@@ -9,7 +9,22 @@ use strict;
 package GENESIS3::Python;
 
 
+BEGIN
+{
+    if (defined $ENV{PYTHONPATH})
+    {
+	$ENV{PYTHONPATH} .= ":/usr/local/glue/swig/python";
+    }
+    else
+    {
+	$ENV{PYTHONPATH} = "/usr/local/glue/swig/python";
+    }
+}
+
+
 use Inline Python => <<'END';
+import Neurospaces
+
 class Foo(object):
    def __init__(self):
       print "new Foo object being created"

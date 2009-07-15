@@ -3035,7 +3035,7 @@ our $all_components
 	       module => "SLI",
 	      },
        studio => {
-		  description => "something",
+		  description => "Graphical interface that allows to explore models",
 		  module => "Neurospaces::Studio",
 		 },
        ssp => {
