@@ -127,7 +127,10 @@ synopsis: (you gave )
   - model_state_save
   - ndf_load
   - ndf_save
+  - npl_load
+  - npy_load
   - pwe
+  - pynn_load
   - querymachine
   - quit
   - reset
@@ -147,6 +150,7 @@ synopsis: (you gave )
   - sli_load
   - sli_run
   - sli_script
+  - swc_load
   - xml_load
   - xml_save
 ",

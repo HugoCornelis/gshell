@@ -879,6 +879,42 @@ sub ndf_save_help
 }
 
 
+sub npl_load
+{
+    print "Not implemented yet.  Please contribute by providing a use case.\n";
+
+    return "*** Ok: pwd";
+}
+
+
+sub npl_load_help
+{
+    print "description: load a model encoded in Perl.\n";
+
+    print "synopsis: npl_load\n";
+
+    return "*** Ok";
+}
+
+
+sub npy_load
+{
+    print "Not implemented yet.  Please contribute by providing a use case.\n";
+
+    return "*** Ok: pwd";
+}
+
+
+sub npy_load_help
+{
+    print "description: load a model encoded in Python.\n";
+
+    print "synopsis: npy_load\n";
+
+    return "*** Ok";
+}
+
+
 sub pwe
 {
     print "$GENESIS3::current_working_element\n";
@@ -892,6 +928,24 @@ sub pwe_help
     print "description: print the current working element.\n";
 
     print "synopsis: pwe\n";
+
+    return "*** Ok";
+}
+
+
+sub pynn_load
+{
+    print "Not implemented yet.  Please contribute by providing a use case.\n";
+
+    return "*** Ok: pwd";
+}
+
+
+sub pynn_load_help
+{
+    print "description: load a model encoded in PyNN.\n";
+
+    print "synopsis: pynn_load\n";
 
     return "*** Ok";
 }
@@ -1767,7 +1821,7 @@ sub sli_load
 
 sub sli_load_help
 {
-    print "description: load extract models from a GENESIS 2 .g file.\n";
+    print "description: load and extract models from a GENESIS 2 .g file.\n";
 
     print "synopsis: sli_load <filename.g>\n";
 
@@ -1889,6 +1943,24 @@ sub sli_script_help
 
 #     return "*** Ok";
 # }
+
+
+sub swc_load
+{
+    print "Not implemented yet.  Please contribute by providing a use case.\n";
+
+    return "*** Ok: pwd";
+}
+
+
+sub swc_load_help
+{
+    print "description: load a morphology from a SWC file.\n";
+
+    print "synopsis: swc_load\n";
+
+    return "*** Ok";
+}
 
 
 sub xml_load
