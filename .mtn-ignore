@@ -12,5 +12,6 @@ Makefile\.in$
 ^results
 ^tests/html
 ^tests/output
+^tests/results
 _Inline
 gz$

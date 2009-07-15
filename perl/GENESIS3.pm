@@ -420,6 +420,26 @@ sub echo_help
 }
 
 
+sub explore
+{
+    require Neurospaces::GUI;
+
+    Neurospaces::GUI::gui($0);
+
+    return "*** Ok: explore";
+}
+
+
+sub explore_help
+{
+    print "description: graphically explore the models that have been loaded\n";
+
+    print "synopsis: explore <arguments>\n";
+
+    return "*** Ok";
+}
+
+
 sub help
 {
     my $topic = shift;
@@ -831,7 +851,7 @@ sub ndf_load_help
 {
     print "description: load an ndf file and reconstruct the model it describes.\n";
 
-    print "synopsis: ndf_load <filename>\n";
+    print "synopsis: ndf_load <filename.ndf>\n";
 
     return "*** Ok";
 }
@@ -1000,6 +1020,22 @@ sub run
 	#! does not expect it when applying run time settings during
 	#! compilation)
 
+	my $conceptual_parameters
+	    = [
+	       grep
+	       {
+		   $_->{component_name} =~ /::/
+	       }
+	       @$GENESIS3::runtime_parameters,
+	      ];
+
+	if (@$conceptual_parameters)
+	{
+	    print "warning: ignoring parameter settings that contain a namespace in their address\n";
+
+	    print Dump( { conceptual_parameters => $conceptual_parameters, }, );
+	}
+
 	my $result
 	    = $scheduler->apply_granular_parameters
 		(
@@ -1014,6 +1050,10 @@ sub run
 		 grep
 		 {
 		     $_->{component_name} =~ /^$modelname/
+		 }
+		 grep
+		 {
+		     $_->{component_name} !~ /::/
 		 }
 		 @$GENESIS3::runtime_parameters,
 		);
@@ -1055,7 +1095,23 @@ sub run
 
 	# fill in runtime_parameters
 
-	$schedule->{models}->[0]->{granular_parameters} = $GENESIS3::runtime_parameters;
+	$schedule->{models}->[0]->{conceptual_parameters}
+	    = [
+	       grep
+	       {
+		   $_->{component_name} =~ /::/
+	       }
+	       @$GENESIS3::runtime_parameters,
+	      ];
+
+	$schedule->{models}->[0]->{granular_parameters}
+	    = [
+	       grep
+	       {
+		   $_->{component_name} !~ /::/
+	       }
+	       @$GENESIS3::runtime_parameters,
+	      ];
 
 	# fill in model name
 
@@ -1362,7 +1418,8 @@ sub set_runtime_parameter
     }
     else
     {
-	if ($element =~ m(^/))
+	if ($element =~ m(^/)
+	    || $element =~ m(::))
 	{
 	}
 	else
@@ -1591,6 +1648,47 @@ sub show_parameter_help
 }
 
 
+sub show_parameter_scaled
+{
+    my $element = shift;
+
+    my $parameter = shift;
+
+    if (!defined $element)
+    {
+	$element = $GENESIS3::current_working_element;
+    }
+    else
+    {
+	if ($element =~ m(^/))
+	{
+	}
+	else
+	{
+	    $element = "$GENESIS3::current_working_element/$element";
+	}
+    }
+
+    my $query = "printparameterscaled $element $parameter";
+
+    if (querymachine($query))
+    {
+    }
+
+    return "*** Ok: show_parameter_scaled $element $parameter";
+}
+
+
+sub show_parameter_scaled_help
+{
+    print "description: show the value of a model parameter.\n";
+
+    print "synopsis: show_parameter_scaled <element_name> <parameter_name>\n";
+
+    return "*** Ok";
+}
+
+
 sub show_runtime_parameters
 {
     use YAML;
@@ -1671,7 +1769,7 @@ sub sli_load_help
 {
     print "description: load extract models from a GENESIS 2 .g file.\n";
 
-    print "synopsis: sli_load <filename>\n";
+    print "synopsis: sli_load <filename.g>\n";
 
     return "*** Ok";
 }
@@ -1712,6 +1810,124 @@ sub sli_script_help
     print "description: load and run a GENESIS 2 .g add-on.\n";
 
     print "synopsis: sli_script <filename>\n";
+
+    return "*** Ok";
+}
+
+
+# sub ssp_load
+# {
+#     my $filename = shift;
+
+#     my $scheduler = SSP->load($filename);
+
+#     # extract the schedule name
+
+#     my $schedulename = $scheduler->{name};
+
+#     if (!$schedulename)
+#     {
+# 	return "*** Error: loading schedule failed: unable to determine a schedulename";
+#     }
+
+#     # register the scheduler
+
+#     $GENESIS3::schedulers->{$modelname} = $scheduler;
+
+#     return "*** Ok: ssp_load $filename";
+# }
+
+
+# sub ssp_load_help
+# {
+#     print "description: load an ssp file and reconstruct the model it describes.\n";
+
+#     print "synopsis: ssp_load <filename.ssp>\n";
+
+#     return "*** Ok";
+# }
+
+
+# sub ssp_save
+# {
+#     my $modelname = shift;
+
+#     my $filename = shift;
+
+#     run($modelname, 0);
+
+#     # get scheduler for this model
+
+#     my $scheduler = $GENESIS3::schedulers->{$modelname};
+
+#     if (!$scheduler)
+#     {
+# 	return "*** Error: no simulation was previously run for $modelname, no scheduler found";
+#     }
+
+#     # reset the schedule
+
+#     if (!$scheduler->save())
+#     {
+# 	return "*** Error: saving schedule failed";
+#     }
+#     else
+#     {
+# 	print "Schedule saved ok\n";
+	
+# 	return "*** Ok";
+#     }
+#     return "*** Ok: ssp_save $filename";
+# }
+
+
+# sub ssp_save_help
+# {
+#     print "description: save a model to an ssp file.\n";
+
+#     print "synopsis: ssp_save <element_name> <filename>\n";
+
+#     return "*** Ok";
+# }
+
+
+sub xml_load
+{
+    my $filename = shift;
+
+    $GENESIS3::model_container->read(undef, [ 'genesis-g3', $filename, ], );
+
+    return "*** Ok: xml_load $filename";
+}
+
+
+sub xml_load_help
+{
+    print "description: load an xml file and reconstruct the model it describes.\n";
+
+    print "synopsis: xml_load <filename.xml>\n";
+
+    return "*** Ok";
+}
+
+
+sub xml_save
+{
+    my $modelname = shift;
+
+    my $filename = shift;
+
+    $GENESIS3::model_container->write(undef, $modelname, 'xml', $filename, );
+
+    return "*** Ok: xml_save $filename";
+}
+
+
+sub xml_save_help
+{
+    print "description: save a model to an xml file.\n";
+
+    print "synopsis: xml_save <element_name> <filename>\n";
 
     return "*** Ok";
 }
@@ -2746,6 +2962,10 @@ our $all_components
 	       description => "GENESIS 2 backward compatible scripting interface",
 	       module => "SLI",
 	      },
+       studio => {
+		  description => "something",
+		  module => "Neurospaces::Studio",
+		 },
        ssp => {
 	       description => 'binds the software components of a simulation together',
 	       module => 'SSP',
@@ -2859,6 +3079,8 @@ sub profile_environment
 	eval
 	{
 	    local $SIG{__DIE__};
+
+	    $component_module =~ s/::/\//g;
 
 	    require "$component_module.pm";
 	};

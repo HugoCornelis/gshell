@@ -122,6 +122,16 @@ my $test
 						   write => 'show_parameter /c/s CM',
 						  },
 						  {
+						   description => "Can we set the surface of the segment ?",
+						   write => 'set_model_parameter /c/s SURFACE 2',
+						  },
+						  {
+						   description => "Can we obtain the scaled value of the CM parameter of the segment ?",
+						   read => 'scaled value = 0.0328
+',
+						   write => 'show_parameter_scaled /c/s CM',
+						  },
+						  {
 						   description => "Can we set parameter RM of the segment ?",
 						   write => 'set_model_parameter /c/s RM 1.0',
 						  },
@@ -139,6 +149,10 @@ my $test
     'parameter name': RM
     type: number
     value: 1
+  -
+    'parameter name': SURFACE
+    type: number
+    value: 2
   -
     'parameter name': CM
     type: number

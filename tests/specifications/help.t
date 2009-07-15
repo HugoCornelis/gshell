@@ -119,6 +119,7 @@ synopsis: (you gave )
   - create
   - delete
   - echo
+  - explore
   - help
   - list
   - list_elements
@@ -140,11 +141,14 @@ synopsis: (you gave )
   - show_library
   - show_model_parameters
   - show_parameter
+  - show_parameter_scaled
   - show_runtime_parameters
   - show_verbose
   - sli_load
   - sli_run
   - sli_script
+  - xml_load
+  - xml_save
 ",
 						   write => 'list commands',
 						  },
@@ -170,6 +174,10 @@ synopsis: (you gave )
   ssp:
     description: binds the software components of a simulation together
     module: SSP
+    status: loaded
+  studio:
+    description: something
+    module: Neurospaces::Studio
     status: loaded
 Other components:
 ",
