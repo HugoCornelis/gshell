@@ -3150,6 +3150,9 @@ sub initialize
 
     # if the python module was loaded successfully
 
+    #t this test seems not to work under all circumstances, needs to
+    #t be figured out some time.
+
     no strict "refs";
 
     if (exists ((\%{"::"})->{"GENESIS3::"}->{"Python::"}->{"initialize"}))
