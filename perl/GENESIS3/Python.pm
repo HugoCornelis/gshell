@@ -25,6 +25,9 @@ BEGIN
 use Inline Python => <<'END';
 import Neurospaces
 
+def set_model_container(backend):
+    nmc = Neurospaces.ModelContainer(backend)
+
 class Foo(object):
    def __init__(self):
       print "new Foo object being created"
@@ -33,6 +36,14 @@ class Foo(object):
    def set_data(self,dat): 
       self.data = dat
 END
+
+
+sub initialize
+{
+    my $model_container = shift;
+
+    set_model_container($model_container->backend());
+}
 
 
 1;

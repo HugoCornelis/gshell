@@ -3016,6 +3016,7 @@ our $all_components
     = {
        gshell => {
 		  description => 'the GENESIS 3 shell allows convenient interaction with other components',
+		  disabled => 0,
 		  module => 'GENESIS3',
 		  status => 'loaded',
 # 		  variables => {
@@ -3049,6 +3050,7 @@ our $all_cpan_components
     = {
        python => {
 		  description => 'interface to python scripting',
+		  module => 'GENESIS3::Python',
 		 },
       };
 
@@ -3130,6 +3132,12 @@ sub initialize
 	die "$0: *** Error: cannot initialize the model container\n";
     }
 
+    # let the python module know about the model container
+
+    GENESIS3::Python::initialize($GENESIS3::model_container);
+
+    #t not sure about error processing here
+
     return $result;
 }
 
@@ -3144,6 +3152,11 @@ sub profile_environment
 
 	if (defined $component->{status}
 	    and $component->{status} eq 'loaded')
+	{
+	    next;
+	}
+
+	if ($component->{disabled})
 	{
 	    next;
 	}
