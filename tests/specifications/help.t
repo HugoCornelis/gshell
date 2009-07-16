@@ -161,6 +161,7 @@ synopsis: (you gave )
 						   read => "Core components:
   gshell:
     description: the GENESIS 3 shell allows convenient interaction with other components
+    disabled: 0
     module: GENESIS3
     status: loaded
   heccer:
@@ -180,10 +181,13 @@ synopsis: (you gave )
     module: SSP
     status: loaded
   studio:
-    description: something
+    description: Graphical interface that allows to explore models
     module: Neurospaces::Studio
     status: loaded
 Other components:
+  python:
+    description: interface to python scripting
+    module: GENESIS3::Python
 ",
 						   write => 'list components',
 						  },
