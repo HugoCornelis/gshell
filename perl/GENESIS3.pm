@@ -881,9 +881,11 @@ sub ndf_save_help
 
 sub npl_load
 {
+    my $filename = shift;
+
     print "Not implemented yet.  Please contribute by providing a use case.\n";
 
-    return "*** Ok: pwd";
+    return "*** Ok: npl_load $filename";
 }
 
 
@@ -899,9 +901,11 @@ sub npl_load_help
 
 sub npy_load
 {
-    print "Not implemented yet.  Please contribute by providing a use case.\n";
+    my $filename = shift;
 
-    return "*** Ok: pwd";
+    GENESIS3::Python::npy_load($filename);
+
+    return "*** Ok: npy_load $filename";
 }
 
 
@@ -935,9 +939,11 @@ sub pwe_help
 
 sub pynn_load
 {
+    my $filename = shift;
+
     print "Not implemented yet.  Please contribute by providing a use case.\n";
 
-    return "*** Ok: pwd";
+    return "*** Ok: pynn_load $filename";
 }
 
 
