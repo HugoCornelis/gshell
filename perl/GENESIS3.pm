@@ -2521,75 +2521,91 @@ foreach my $purpose qw(
 package GENESIS3::Tokens::Physical;
 
 
-use Neurospaces::Tokens::Physical;
-
-
-my $symbols_definitions = $GENESIS3::Configuration::symbols_definitions;
-
-my $tokens = $symbols_definitions->{tokens};
-
-my $token_names
-    = [
-       sort
-       map
-       {
-	   s/^TOKEN_// ; $_
-       }
-       map
-       {
-	   my $token = $tokens->{$_};
-
-	   $token->{lexical};
-       }
-       grep
-       {
-	   #! note that not all tokens have a purpose that is defined
-	   #! (which does not necessarily mean they don't have a
-	   #! purpose).
-
-	   defined $tokens->{$_}->{purpose}
-	       and $tokens->{$_}->{purpose} eq 'physical'
-       }
-       keys %$tokens,
-      ];
-
-foreach my $token_name (@$token_names)
+sub create_all_tokens
 {
-    # construct an create function for this token
+    eval
+    {
+	require Neurospaces::Tokens::Physical;
+    };
 
-    no strict "refs";
+    if ($@ eq '')
+    {
+    }
+    else
+    {
+	print STDERR "$0: warning: could not load Neurospaces::Tokens::Physical\n";
+    }
 
-    my $lc_token_name = lc($token_name);
+    my $symbols_definitions = $GENESIS3::Configuration::symbols_definitions;
 
-    my $subname = "create_" . $lc_token_name;
+    my $tokens = $symbols_definitions->{tokens};
 
-    ((\%{"::"})->{"GENESIS3::"}->{"Tokens::"}->{"Physical::"}->{$subname})
-	= sub
-	  {
-	      # get name of element to create
+    my $token_names
+	= [
+	   sort
+	   map
+	   {
+	       s/^TOKEN_// ; $_
+	   }
+	   map
+	   {
+	       my $token = $tokens->{$_};
 
-	      my $physical_name = shift;
+	       $token->{lexical};
+	   }
+	   grep
+	   {
+	       #! note that not all tokens have a purpose that is defined
+	       #! (which does not necessarily mean they don't have a
+	       #! purpose).
 
-	      # create the element in the model container
+	       defined $tokens->{$_}->{purpose}
+		   and $tokens->{$_}->{purpose} eq 'physical'
+	       }
+	   keys %$tokens,
+	  ];
 
-	      if ($GENESIS3::verbose_level ne 'errors'
-		  and $GENESIS3::verbose_level ne 'warnings')
-	      {
-		  print "$subname: $physical_name\n";
-	      }
+    foreach my $token_name (@$token_names)
+    {
+	# construct an create function for this token
 
-	      my $physical = Neurospaces::Tokens::Physical::create($lc_token_name, $GENESIS3::model_container, $physical_name);
+	no strict "refs";
 
-	      if (!$physical)
-	      {
-		  return "*** Error: creating $physical_name of type $lc_token_name";
-	      }
-	      else
-	      {
-		  return "*** Ok: creating $physical_name of type $lc_token_name";
-	      }
-	  };
+	my $lc_token_name = lc($token_name);
+
+	my $subname = "create_" . $lc_token_name;
+
+	((\%{"::"})->{"GENESIS3::"}->{"Tokens::"}->{"Physical::"}->{$subname})
+	    = sub
+	    {
+		# get name of element to create
+
+		my $physical_name = shift;
+
+		# create the element in the model container
+
+		if ($GENESIS3::verbose_level ne 'errors'
+		    and $GENESIS3::verbose_level ne 'warnings')
+		{
+		    print "$subname: $physical_name\n";
+		}
+
+		my $physical = Neurospaces::Tokens::Physical::create($lc_token_name, $GENESIS3::model_container, $physical_name);
+
+		if (!$physical)
+		{
+		    return "*** Error: creating $physical_name of type $lc_token_name";
+		}
+		else
+		{
+		    return "*** Ok: creating $physical_name of type $lc_token_name";
+		}
+	    };
+    }
 }
+
+
+create_all_tokens();
 
 
 package GENESIS3::Objects;
@@ -3132,11 +3148,18 @@ sub initialize
 	die "$0: *** Error: cannot initialize the model container\n";
     }
 
-    # let the python module know about the model container
+    # if the python module was loaded successfully
 
-    GENESIS3::Python::initialize($GENESIS3::model_container);
+    if (exists ((\%{"::"})->{"GENESIS3::"}->{"Python::"}->{"initialize"}))
+    {
+	# let the python module know about the model container
 
-    #t not sure about error processing here
+	#t not sure about error processing here
+
+	GENESIS3::Python::initialize($GENESIS3::model_container);
+    }
+
+    # return result, seems to be always 1
 
     return $result;
 }
