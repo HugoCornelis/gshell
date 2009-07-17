@@ -43,7 +43,7 @@ options:
 						  {
 						   description => "Can we find the top level help topics ?",
 						   read => "synopsis: help <topic>
-synopsis: <topic> must be one of commands, components, variables, libraries
+synopsis: <topic> must be one of commands, components, documentation, variables, libraries
 ",
 						   write => "help",
 						  },
