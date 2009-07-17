@@ -33,7 +33,7 @@ def set_model_container(backend):
 
 def npy_load(path):
     global nmcGlobal
-    nmcGlobal.read(path)
+    nmcGlobal.read_python(path)
 
 class Foo(object):
    def __init__(self):
