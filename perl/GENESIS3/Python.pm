@@ -25,13 +25,15 @@ BEGIN
 use Inline Python => <<'END';
 import Neurospaces
 
-nmc = None
+nmcGlobal = None
 
 def set_model_container(backend):
-    nmc = Neurospaces.ModelContainer(backend)
+    global nmcGlobal
+    nmcGlobal = Neurospaces.ModelContainer(backend)
 
 def npy_load(path):
-    nmc.read(path)
+    global nmcGlobal
+    nmcGlobal.read_python(path)
 
 class Foo(object):
    def __init__(self):

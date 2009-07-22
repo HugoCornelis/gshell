@@ -605,7 +605,7 @@ sub help_help
     print "description: use the builtin help facility to explore self-documenting functions\n";
 
     print "synopsis: help <topic>\n";
-    print "synopsis: <topic> must be one of commands, components, variables, libraries\n";
+    print "synopsis: <topic> must be one of commands, components, documentation, variables, libraries\n";
 
     return "*** Ok";
 }
