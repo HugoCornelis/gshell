@@ -3161,7 +3161,7 @@ sub initialize
 
     no strict "refs";
 
-    if (exists ((\%{"::"})->{"GENESIS3::"}->{"Python::"}->{"initialize"}))
+    if ($GENESIS3::Python::loaded)
     {
 	# let the python module know about the model container
 

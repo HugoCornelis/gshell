@@ -45,11 +45,16 @@ class Foo(object):
 END
 
 
+our $loaded = 0;
+
+
 sub initialize
 {
     my $model_container = shift;
 
     set_model_container($model_container->backend());
+
+    $loaded = 1;
 }
 
 
