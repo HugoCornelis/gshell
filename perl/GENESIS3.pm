@@ -232,7 +232,7 @@ sub check
 	return "*** Error: no simulation was previously run for $modelname, no scheduler found";
     }
 
-    # reset the schedule
+    # analyze the schedule
 
     if (!$scheduler->analyze())
     {
