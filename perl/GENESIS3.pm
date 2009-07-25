@@ -1593,6 +1593,7 @@ sub show_library
     {
 	my $result
 	    = [
+	       sort
 	       map
 	       {
 		   chomp ; $_

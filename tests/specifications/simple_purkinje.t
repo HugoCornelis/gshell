@@ -62,8 +62,8 @@ ndf_library:
 						   read => "
 ndf_library:
   cells/purkinje:
-    - edsjb1994_dendrogram.ndf
     - edsjb1994.ndf
+    - edsjb1994_dendrogram.ndf
     - edsjb1994_partitioned.ndf
     - edsjb1994_spinesurface.ndf
 ",

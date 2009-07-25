@@ -101,8 +101,8 @@ ndf_library:
     - granule_gabaa.ndf
     - granule_gabab.ndf
     - granule_nmda.ndf
-    - hodgkin-huxley/
     - hodgkin-huxley.ndf
+    - hodgkin-huxley/
     - nmda.ndf
     - non_nmda.ndf
     - purkinje/
