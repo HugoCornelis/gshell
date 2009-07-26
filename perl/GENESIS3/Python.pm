@@ -60,9 +60,13 @@ sub initialize
 {
     my $model_container = shift;
 
-    set_model_container($model_container->backend());
+    my $backend = $model_container->backend();
 
-    $loaded = 1;
+#     use YAML;
+
+#     print Dump($model_container);
+
+    set_model_container($backend);
 }
 
 
