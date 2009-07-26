@@ -24,6 +24,7 @@ BEGIN
 
 use Inline Python => <<'END';
 import Neurospaces
+import yaml
 
 nmcGlobal = None
 
@@ -34,6 +35,10 @@ def set_model_container(backend):
 def npy_load(path):
     global nmcGlobal
     nmcGlobal.read_python(path)
+
+def nmcDiagnose(path):
+    global nmcGlobal
+    nmcGlobal.query("serialMapping /")
 
 class Foo(object):
    def __init__(self):

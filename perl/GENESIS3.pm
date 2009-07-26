@@ -895,6 +895,26 @@ sub pwe_help
 }
 
 
+sub py_diagnose
+{
+    my $path = shift;
+
+    GENESIS3::Python::nmcDiagnose($path);
+
+    return "*** Ok: py_diagnose $path";
+}
+
+
+sub py_diagnose_help
+{
+    print "description: diagnosis on the python interface.\n";
+
+    print "synopsis: py_diagnose\n";
+
+    return "*** Ok";
+}
+
+
 sub pynn_load
 {
     my $filename = shift;
