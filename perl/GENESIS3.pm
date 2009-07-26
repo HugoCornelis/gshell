@@ -2530,10 +2530,7 @@ package GENESIS3::Tokens::Physical;
 
 sub create_all_tokens
 {
-    eval
-    {
-	require Neurospaces::Tokens::Physical;
-    };
+    eval "require Neurospaces::Tokens::Physical";
 
     if ($@ eq '')
     {
@@ -2556,6 +2553,8 @@ sub create_all_tokens
 	   }
 	   map
 	   {
+	       #! map the token to its lexical NDF ascii representation
+
 	       my $token = $tokens->{$_};
 
 	       $token->{lexical};
@@ -2567,14 +2566,14 @@ sub create_all_tokens
 	       #! purpose).
 
 	       defined $tokens->{$_}->{purpose}
-		   and $tokens->{$_}->{purpose} eq 'physical'
-	       }
+		   and $tokens->{$_}->{purpose} eq 'physical';
+	   }
 	   keys %$tokens,
 	  ];
 
     foreach my $token_name (@$token_names)
     {
-	# construct an create function for this token
+	# construct a create function for this token
 
 	no strict "refs";
 
@@ -2584,30 +2583,30 @@ sub create_all_tokens
 
 	((\%{"::"})->{"GENESIS3::"}->{"Tokens::"}->{"Physical::"}->{$subname})
 	    = sub
-	    {
-		# get name of element to create
+	      {
+		  # get name of element to create
 
-		my $physical_name = shift;
+		  my $physical_name = shift;
 
-		# create the element in the model container
+		  # create the element in the model container
 
-		if ($GENESIS3::verbose_level ne 'errors'
-		    and $GENESIS3::verbose_level ne 'warnings')
-		{
-		    print "$subname: $physical_name\n";
-		}
+		  if ($GENESIS3::verbose_level ne 'errors'
+		      and $GENESIS3::verbose_level ne 'warnings')
+		  {
+		      print "$subname: $physical_name\n";
+		  }
 
-		my $physical = Neurospaces::Tokens::Physical::create($lc_token_name, $GENESIS3::model_container, $physical_name);
+		  my $physical = Neurospaces::Tokens::Physical::create($lc_token_name, $GENESIS3::model_container, $physical_name);
 
-		if (!$physical)
-		{
-		    return "*** Error: creating $physical_name of type $lc_token_name";
-		}
-		else
-		{
-		    return "*** Ok: creating $physical_name of type $lc_token_name";
-		}
-	    };
+		  if (!$physical)
+		  {
+		      return "*** Error: creating $physical_name of type $lc_token_name";
+		  }
+		  else
+		  {
+		      return "*** Ok: creating $physical_name of type $lc_token_name";
+		  }
+	      };
     }
 }
 
@@ -3215,10 +3214,7 @@ sub profile_environment
 	}
     }
 
-    eval
-    {
-	require GENESIS3::Python;
-    };
+    eval "require GENESIS3::Python";
 
     if ($@)
     {
