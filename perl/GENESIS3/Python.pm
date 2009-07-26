@@ -45,7 +45,10 @@ class Foo(object):
 END
 
 
-our $loaded = 0;
+our $loaded = 1;
+
+
+print "Python loaded\n";
 
 
 sub initialize

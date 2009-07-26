@@ -3126,7 +3126,15 @@ sub initialize
 
 	#t not sure about error processing here
 
-	GENESIS3::Python::initialize($GENESIS3::model_container);
+	eval
+	{
+	    GENESIS3::Python::initialize($GENESIS3::model_container);
+	};
+
+	if ($@)
+	{
+	    print "$0: *** Warning: GENESIS3::Python loaded, but its initialize() method failed\n";
+	}
     }
 
     # return result, seems to be always 1
