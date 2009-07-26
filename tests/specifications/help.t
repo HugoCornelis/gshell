@@ -170,6 +170,7 @@ synopsis: (you gave )
     status: loaded
   model-container:
     description: internal storage for neuronal models
+    integrator: Neurospaces::Integrators::Commands
     module: Neurospaces
     status: loaded
   sli:
