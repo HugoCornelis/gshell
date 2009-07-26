@@ -837,48 +837,6 @@ sub model_state_save_help
 }
 
 
-sub ndf_load
-{
-    my $filename = shift;
-
-    $GENESIS3::model_container->read(undef, [ 'genesis-g3', $filename, ], );
-
-    return "*** Ok: ndf_load $filename";
-}
-
-
-sub ndf_load_help
-{
-    print "description: load an ndf file and reconstruct the model it describes.\n";
-
-    print "synopsis: ndf_load <filename.ndf>\n";
-
-    return "*** Ok";
-}
-
-
-sub ndf_save
-{
-    my $modelname = shift;
-
-    my $filename = shift;
-
-    $GENESIS3::model_container->write(undef, $modelname, 'ndf', $filename, );
-
-    return "*** Ok: ndf_save $filename";
-}
-
-
-sub ndf_save_help
-{
-    print "description: save a model to an ndf file.\n";
-
-    print "synopsis: ndf_save <element_name> <filename>\n";
-
-    return "*** Ok";
-}
-
-
 sub npl_load
 {
     my $filename = shift;
@@ -3051,6 +3009,7 @@ our $all_components
 		 },
        'model-container' => {
 			     description => 'internal storage for neuronal models',
+			     integrator => 'Neurospaces::Integrators::Commands',
 			     module => 'Neurospaces',
 			    },
        sli => {
@@ -3211,6 +3170,27 @@ sub profile_environment
 	else
 	{
 	    $component->{status} = $@;
+	}
+
+	if ($component->{integrator})
+	{
+	    eval "require $component->{integrator}";
+
+	    if ($@)
+	    {
+		die "$0: *** Error: $component_name loaded, but its integrator cannot be loaded\n";
+	    }
+
+	    #! nicely based on Exporter
+
+	    no strict "refs";
+
+	    my $commands = eval "\$$component->{integrator}::g3_commands";
+
+	    foreach my $command (@$commands)
+	    {
+		*{"GENESIS3::Commands::$command"} = \&{"$component->{integrator}\::$command"};
+	    }
 	}
     }
 
