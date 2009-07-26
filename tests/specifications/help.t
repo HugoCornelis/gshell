@@ -130,6 +130,7 @@ synopsis: (you gave )
   - npl_load
   - npy_load
   - pwe
+  - py_diagnose
   - pynn_load
   - querymachine
   - quit
