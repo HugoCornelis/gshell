@@ -151,6 +151,8 @@ synopsis: (you gave )
   - sli_load
   - sli_run
   - sli_script
+  - ssp_load
+  - ssp_save
   - swc_load
   - xml_load
   - xml_save
