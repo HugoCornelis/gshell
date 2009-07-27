@@ -130,6 +130,153 @@ my $test
 						   write => 'ndf_load tests/cells/singlep.ndf',
 						  },
 						  {
+						   description => "Can we save the simulation ?",
+						   write => 'ssp_save /singlep /tmp/singlep.ssp',
+						  },
+						  {
+						   description => "Has the simulation been saved correctly ?",
+						   read => "
+analyzers: {}
+application_classes:
+  analyzers:
+    default: &2
+      - method: analyze
+    priority: 95
+  finishers:
+    default:
+      - method: finish
+    priority: 140
+  initializers:
+    default: &3
+      - method: compile
+      - method: instantiate_inputs
+      - method: instantiate_outputs
+      - method: initiate
+      - method: optimize
+    priority: 80
+  modifiers:
+    default: &4 []
+    priority: 50
+  results:
+    default: &5 []
+    priority: 170
+  services:
+    default: &6
+      - method: instantiate_services
+    priority: 20
+  simulation:
+    default: []
+    priority: 110
+apply:
+  analyzers: *2
+  finishers: []
+  initializers: *3
+  modifiers: *4
+  results: *5
+  services: *6
+  simulation:
+    - arguments: &7
+        - 0
+      method: advance
+    - method: pause
+inputclasses: {}
+inputs: []
+models:
+  - conceptual_parameters: []
+    granular_parameters: []
+    modelname: /singlep
+    solverclass: heccer
+name: 'GENESIS3 SSP schedule initiated for /singlep, 0'
+outputclasses:
+  double_2_ascii:
+    module_name: Heccer
+    options: &8
+      filename: /tmp/output
+    package: Heccer::Output
+    ssp_outputclass: &9 !!perl/hash:SSP::Output
+      backend: !!perl/hash:Heccer::Output
+        backend: !!perl/hash:SwiggableHeccer::OutputGenerator {}
+        filename: /tmp/output
+        module_name: Heccer
+        name: double_2_ascii
+        options: *8
+        package: Heccer::Output
+        scheduler: *1
+      module_name: Heccer
+      name: double_2_ascii
+      options: *8
+      package: Heccer::Output
+      scheduler: *1
+outputs:
+  - component_name: /singlep/segments/soma
+    field: Vm
+    outputclass: double_2_ascii
+    warn_only: the default output (/singlep/segments/soma) was generated automatically and is not always available
+schedule:
+  - !!perl/hash:SSP::Engine
+    backend: !!perl/hash:Heccer
+      event_distributor:
+        event_distributor_backend: ~
+        event_distributor_name: ~
+      heccer: !!perl/hash:SwiggableHeccer::Heccer {}
+      model_source:
+        modelname: /singlep
+        service_backend: &10 !!perl/hash:Neurospaces
+          neurospaces: !!perl/hash:SwiggableNeurospaces::Neurospaces {}
+        service_name: neurospaces
+    constructor_settings: &11
+      dStep: 2e-05
+    event_distributor: {}
+    modelname: /singlep
+    module_name: Heccer
+    scheduler: *1
+    service: &12
+      backend: *10
+      ssp_service: !!perl/hash:SSP::Service
+        backend: *10
+        scheduler: *1
+    service_name: neurospaces
+    solverclass: heccer
+  - *9
+services:
+  neurospaces: *12
+simulation_time:
+  steps: 0
+  time: 0
+solverclasses:
+  heccer:
+    constructor_settings: *11
+    module_name: Heccer
+    service_name: neurospaces
+status:
+  advance:
+    - *7
+  analyze:
+    - []
+  compile:
+    - []
+  initiate:
+    - []
+  instantiate_inputs:
+    - []
+  instantiate_outputs:
+    - []
+  instantiate_services:
+    - []
+  optimize:
+    - []
+  pause:
+    - []
+",
+						   write => 'sh cat /tmp/singlep.ssp',
+						  },
+						  {
+						   description => 'Can we reload the saved simulation ?',
+						   disabled => 'ssp_load does not work yet, todo.',
+						   todo => 'ssp_load needs implementation',
+						   write => 'ssp_load /singlep /tmp/singlep.ssp',
+						  },
+						  {
 						   description => "Can we check the simulation ?",
 						   write => "check /singlep",
 						  },
@@ -201,7 +348,7 @@ my $test
 						   write => "sh wc -l /tmp/output",
 						  },
 						 ],
-				description => "run, checking and resetting a simulation",
+				description => "running, checking, saving, loading and resetting a simulation",
 				side_effects => "creates a model in the model container",
 			       },
 			      ],

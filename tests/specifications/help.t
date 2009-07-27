@@ -180,6 +180,7 @@ synopsis: (you gave )
     status: loaded
   ssp:
     description: binds the software components of a simulation together
+    integrator: SSP::Integrators::Commands
     module: SSP
     status: loaded
   studio:
