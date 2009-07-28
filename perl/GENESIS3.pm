@@ -1794,66 +1794,6 @@ sub show_verbose_help
 }
 
 
-sub sli_load
-{
-    my $filename = shift;
-
-    SLI::include_model($filename, $GENESIS3::model_container);
-
-    return "*** Ok: sli_load $filename";
-}
-
-
-sub sli_load_help
-{
-    print "description: load and extract models from a GENESIS 2 .g file.\n";
-
-    print "synopsis: sli_load <filename.g>\n";
-
-    return "*** Ok";
-}
-
-
-sub sli_run
-{
-    my $filename = shift;
-
-    SLI::run_model($filename, $GENESIS3::model_container);
-
-    return "*** Ok: sli_run $filename";
-}
-
-
-sub sli_run_help
-{
-    print "description: load and run a GENESIS 2 .g file.\n";
-
-    print "synopsis: sli_run <filename>\n";
-
-    return "*** Ok";
-}
-
-
-sub sli_script
-{
-    my $filename = shift;
-
-    SLI::include_script($filename);
-
-    return "*** Ok: sli_script $filename";
-}
-
-
-sub sli_script_help
-{
-    print "description: load and run a GENESIS 2 .g add-on.\n";
-
-    print "synopsis: sli_script <filename>\n";
-
-    return "*** Ok";
-}
-
-
 sub swc_load
 {
     print "Not implemented yet.  Please contribute by providing a use case.\n";
@@ -2916,6 +2856,7 @@ our $all_components
 			    },
        sli => {
 	       description => "GENESIS 2 backward compatible scripting interface",
+	       integrator => 'SLI::Integrators::Commands',
 	       module => "SLI",
 	      },
        studio => {

@@ -178,6 +178,7 @@ synopsis: (you gave )
     status: loaded
   sli:
     description: GENESIS 2 backward compatible scripting interface
+    integrator: SLI::Integrators::Commands
     module: SLI
     status: loaded
   ssp:
