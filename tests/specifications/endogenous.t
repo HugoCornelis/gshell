@@ -72,15 +72,17 @@ runtime_parameters:
 						  },
 						  {
 						   description => "Can we find the output ?",
+						   disabled => (`cat /usr/local/include/heccer/config.h` !~ m/define RANDOM.*ran1/ ? 'not using ran1() as heccer random number generator' : 0),
 						   read => {
 							    application_output_file => "/tmp/output",
 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-endogenous.txt",
 							   },
+						   todo => "make this test work with the other heccer rng",
 						   wait => 100,
 						  },
 						 ],
 				description => "commands to run the purkinje cell from an ndf file, endogenous / poissonian activation",
-				disabled => 'the gshell hangs after execution of one of the command ...',
+				disabled => 'the gshell hangs after execution of one of the commands ...',
 				numerical_compare => 'arithmetic rounding differences between different architectures',
 				side_effects => "creates a model in the model container",
 				todo => 'the gshell hangs after execution of one of the command ...',
@@ -93,10 +95,12 @@ runtime_parameters:
 				command_tests => [
 						  {
 						   description => "Can we run the purkinje cell with endogenous / poissonian activation from a G3 batch file ?",
+						   disabled => (`cat /usr/local/include/heccer/config.h` !~ m/define RANDOM.*ran1/ ? 'not using ran1() as heccer random number generator' : 0),
 						   read => {
 							    application_output_file => "/tmp/output",
 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-endogenous.txt",
 							   },
+						   todo => "make this test work with the other heccer rng",
 						   wait => 100,
 						  },
 						 ],
@@ -110,6 +114,7 @@ runtime_parameters:
 				command_tests => [
 						  {
 						   description => "Can we run the purkinje cell with endogenous / poissonian activation from a perl script ?",
+						   disabled => (`cat /usr/local/include/heccer/config.h` !~ m/define RANDOM.*ran1/ ? 'not using ran1() as heccer random number generator' : 0),
 						   read => {
 							    application_output_file => "/tmp/output",
 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-endogenous.txt",
