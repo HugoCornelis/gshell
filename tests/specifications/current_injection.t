@@ -75,7 +75,6 @@ my $test
 						   description => "Is startup successful ?",
 						   read => "GENESIS 3 shell",
 						   timeout => 5,
-						   write => undef,
 						  },
 						  {
 						   description => "Can we load the purkinje cell model ?",
