@@ -2977,7 +2977,7 @@ sub initialize
 
 	if ($@)
 	{
-	    print "$0: *** Warning: GENESIS3::Python loaded, but its initialize() method failed\n";
+	    print "$0: *** Warning: GENESIS3::Python loaded, but its initialize() method failed ($@)\n";
 	}
     }
 

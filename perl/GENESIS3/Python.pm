@@ -24,11 +24,13 @@ BEGIN
 
 use Inline Python => <<'END';
 import Neurospaces
+import SwiggableNeurospaces
 import yaml
 
 nmcGlobal = None
 
-def set_model_container(backend):
+def set_model_container(void):
+    backend = SwiggableNeurospaces.NeurospacesSetObject(void)
     global nmcGlobal
     nmcGlobal = Neurospaces.ModelContainer(backend)
 
@@ -66,7 +68,9 @@ sub initialize
 
 #     print Dump($model_container);
 
-    set_model_container($backend);
+    my $void = $backend->NeurospacesGetObject();
+
+    set_model_container($void);
 }
 
 
