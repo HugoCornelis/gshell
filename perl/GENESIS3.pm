@@ -3030,7 +3030,7 @@ sub profile_environment
 
 	    if ($@)
 	    {
-		die "$0: *** Error: $component_name loaded, but its integrator cannot be loaded\n";
+		die "$0: *** Error: $component_name loaded, but its integrator cannot be loaded ($@)\n";
 	    }
 
 	    #! nicely based on Exporter
