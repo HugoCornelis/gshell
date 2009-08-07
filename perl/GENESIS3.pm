@@ -1129,7 +1129,7 @@ sub run
 
 	# tell ssp that the model-container service has been initialized
 
-	$schedule->{services}->{neurospaces}->{backend} = $GENESIS3::model_container;
+	$schedule->{services}->{model_container}->{backend} = $GENESIS3::model_container;
 
 	# fill in runtime_parameters
 
@@ -1170,7 +1170,7 @@ sub run
 						   dStep => $GENESIS3::heccer_time_step,
 						  },
 			  module_name => 'Heccer',
-			  service_name => 'neurospaces',
+			  service_name => 'model_container',
 			 },
 	      };
 
