@@ -223,7 +223,7 @@ schedule:
         modelname: /singlep
         service_backend: &10 !!perl/hash:Neurospaces
           neurospaces: !!perl/hash:SwiggableNeurospaces::Neurospaces {}
-        service_name: neurospaces
+        service_name: model_container
     constructor_settings: &11
       dStep: 2e-05
     event_distributor: {}
@@ -235,11 +235,11 @@ schedule:
       ssp_service: !!perl/hash:SSP::Service
         backend: *10
         scheduler: *1
-    service_name: neurospaces
+    service_name: model_container
     solverclass: heccer
   - *9
 services:
-  neurospaces: *12
+  model_container: *12
 simulation_time:
   steps: 0
   time: 0
@@ -247,7 +247,7 @@ solverclasses:
   heccer:
     constructor_settings: *11
     module_name: Heccer
-    service_name: neurospaces
+    service_name: model_container
 status:
   advance:
     - *7
