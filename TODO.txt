@@ -3,6 +3,12 @@
 * ssp_load and ssp_save
 load and save a ssp configuration file into / from the current settings.
 
+* ndf_save
+should perhaps be mapped to specific commands:
+** ndf_save_morphology
+** ndf_save_channel
+** ndf_save
+
 * tests_2_html
 does not convert perl scripts to html,
 eg. tests/scripts/model_state_purkinje.
