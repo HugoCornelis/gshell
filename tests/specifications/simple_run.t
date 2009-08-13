@@ -136,75 +136,44 @@ my $test
 						  {
 						   description => "Has the simulation been saved correctly ?",
 						   read => "
-analyzers: {}
-application_classes:
-  analyzers:
-    default: &2
-      - method: analyze
-    priority: 95
-  finishers:
-    default:
-      - method: finish
-    priority: 140
-  initializers:
-    default: &3
-      - method: compile
-      - method: instantiate_inputs
-      - method: instantiate_outputs
-      - method: initiate
-      - method: optimize
-    priority: 80
-  modifiers:
-    default: &4 []
-    priority: 50
-  results:
-    default: &5 []
-    priority: 170
-  services:
-    default: &6
-      - method: instantiate_services
-    priority: 20
-  simulation:
-    default: []
-    priority: 110
 apply:
-  analyzers: *2
-  finishers: []
-  initializers: *3
-  modifiers: *4
-  results: *5
-  services: *6
+  analyzers:
+    - method: analyze
+  initializers:
+    - method: compile
+    - method: instantiate_inputs
+    - method: instantiate_outputs
+    - method: initiate
+    - method: optimize
+  services:
+    - method: instantiate_services
   simulation:
-    - arguments: &7
+    - arguments: &2
         - 0
       method: advance
     - method: pause
-inputclasses: {}
-inputs: []
 models:
-  - conceptual_parameters: []
-    granular_parameters: []
-    modelname: /singlep
+  - modelname: /singlep
     solverclass: heccer
 name: 'GENESIS3 SSP schedule initiated for /singlep, 0'
 outputclasses:
   double_2_ascii:
     module_name: Heccer
-    options: &8
+    options: &3
       filename: /tmp/output
     package: Heccer::Output
-    ssp_outputclass: &9 !!perl/hash:SSP::Output
+    ssp_outputclass: &4 !!perl/hash:SSP::Output
       backend: !!perl/hash:Heccer::Output
         backend: !!perl/hash:SwiggableHeccer::OutputGenerator {}
         filename: /tmp/output
         module_name: Heccer
         name: double_2_ascii
-        options: *8
+        options: *3
         package: Heccer::Output
         scheduler: *1
       module_name: Heccer
       name: double_2_ascii
-      options: *8
+      options: *3
       package: Heccer::Output
       scheduler: *1
 outputs:
@@ -221,36 +190,36 @@ schedule:
       heccer: !!perl/hash:SwiggableHeccer::Heccer {}
       model_source:
         modelname: /singlep
-        service_backend: &10 !!perl/hash:Neurospaces
+        service_backend: &5 !!perl/hash:Neurospaces
           neurospaces: !!perl/hash:SwiggableNeurospaces::Neurospaces {}
         service_name: model_container
-    constructor_settings: &11
+    constructor_settings: &6
       dStep: 2e-05
     event_distributor: {}
     modelname: /singlep
     module_name: Heccer
     scheduler: *1
-    service: &12
-      backend: *10
+    service: &7
+      backend: *5
       ssp_service: !!perl/hash:SSP::Service
-        backend: *10
+        backend: *5
         scheduler: *1
     service_name: model_container
     solverclass: heccer
-  - *9
+  - *4
 services:
-  model_container: *12
+  model_container: *7
 simulation_time:
   steps: 0
   time: 0
 solverclasses:
   heccer:
-    constructor_settings: *11
+    constructor_settings: *6
     module_name: Heccer
     service_name: model_container
 status:
   advance:
-    - *7
+    - *2
   analyze:
     - []
   compile:
