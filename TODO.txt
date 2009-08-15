@@ -2,6 +2,12 @@
 
 * ssp_load and ssp_save
 load and save a ssp configuration file into / from the current settings.
+** must serialize model reference
+** must serialize model state
+** must serialize inputs / outputs
+** must serialize input / output state ?
+** must serialize ssp status
+** must add an entry to ssp status
 
 * ndf_save
 should perhaps be mapped to specific commands:
