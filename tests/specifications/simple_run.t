@@ -241,8 +241,8 @@ status:
 						  },
 						  {
 						   description => 'Can we reload the saved simulation ?',
-						   disabled => 'ssp_load does not work yet, todo.',
-						   todo => 'ssp_load needs implementation',
+						   disabled => 'ssp_load works, but "run /singlep 1" fails because Heccer is not initialized correctly (must be recompiled from the model)',
+						   todo => 'ssp_load works, but "run /singlep 1" fails because Heccer is not initialized correctly (must be recompiled from the model)',
 						   write => 'ssp_load /singlep /tmp/singlep.ssp',
 						  },
 						  {
