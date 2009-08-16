@@ -312,7 +312,7 @@ sub create
     {
 	create_help( { type => $type, }, );
 
-	return '*** Error: incorrect usage';
+	return "*** Error: incorrect usage (create_$type does not exist)";
     }
 
 }
@@ -638,7 +638,7 @@ sub list
     {
 	list_help( { type => $type, }, );
 
-	return '*** Error: incorrect usage';
+	return "*** Error: incorrect usage (list_$type does not exist)";
     }
 
     return '*** Ok: list';
