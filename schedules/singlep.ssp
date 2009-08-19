@@ -1,0 +1,101 @@
+--- &1 !!perl/hash:SSP
+apply:
+  analyzers:
+    - method: analyze
+  initializers:
+    - method: compile
+    - method: instantiate_inputs
+    - method: instantiate_outputs
+    - method: initiate
+    - method: optimize
+  services:
+    - method: instantiate_services
+  simulation:
+    - arguments: &2
+        - 0
+      method: advance
+    - method: pause
+models:
+  - modelname: /singlep
+    solverclass: heccer
+name: 'GENESIS3 SSP schedule initiated for /singlep, 0'
+outputclasses:
+  double_2_ascii:
+    module_name: Heccer
+    options: &3
+      filename: /tmp/output
+    package: Heccer::Output
+    ssp_outputclass: &4 !!perl/hash:SSP::Output
+      backend: !!perl/hash:Heccer::Output
+        backend: !!perl/hash:SwiggableHeccer::OutputGenerator {}
+        filename: /tmp/output
+        module_name: Heccer
+        name: double_2_ascii
+        options: *3
+        package: Heccer::Output
+        scheduler: *1
+      module_name: Heccer
+      name: double_2_ascii
+      options: *3
+      package: Heccer::Output
+      scheduler: *1
+outputs:
+  - component_name: /singlep/segments/soma
+    field: Vm
+    outputclass: double_2_ascii
+    warn_only: the default output (/singlep/segments/soma) was generated automatically and is not always available
+schedule:
+  - !!perl/hash:SSP::Engine
+    backend: !!perl/hash:Heccer
+      event_distributor:
+        event_distributor_backend: ~
+        event_distributor_name: ~
+      heccer: !!perl/hash:SwiggableHeccer::Heccer {}
+      model_source:
+        modelname: /singlep
+        service_backend: &5 !!perl/hash:Neurospaces
+          neurospaces: !!perl/hash:SwiggableNeurospaces::Neurospaces {}
+        service_name: model_container
+    constructor_settings: &6
+      dStep: 2e-05
+    event_distributor: {}
+    modelname: /singlep
+    module_name: Heccer
+    scheduler: *1
+    service: &7
+      backend: *5
+      ssp_service: !!perl/hash:SSP::Service
+        backend: *5
+        scheduler: *1
+    service_name: model_container
+    solverclass: heccer
+  - *4
+services:
+  model_container: *7
+simulation_time:
+  steps: 0
+  time: 0
+solverclasses:
+  heccer:
+    constructor_settings: *6
+    module_name: Heccer
+    service_name: model_container
+status:
+  advance:
+    - *2
+  analyze:
+    - []
+  compile:
+    - []
+  initiate:
+    - []
+  instantiate_inputs:
+    - []
+  instantiate_outputs:
+    - []
+  instantiate_services:
+    - []
+  optimize:
+    - []
+  pause:
+    - []
