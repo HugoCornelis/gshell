@@ -14,7 +14,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Can we run the current injection script?",
-						   write => 'sli_run /usr/local/nsgenesis/tests/scripts/PurkM9_model/CURRENT9.g',
+						   write => 'sli_run /usr/local/ns-sli/tests/scripts/PurkM9_model/CURRENT9.g',
 						  },
 						  (
 						   {
@@ -89,7 +89,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Can we load the model of the current injection script into the model container without running the simulation?",
-						   write => 'sli_load /usr/local/nsgenesis/tests/scripts/PurkM9_model/CURRENT9.g',
+						   write => 'sli_load /usr/local/ns-sli/tests/scripts/PurkM9_model/CURRENT9.g',
 						  },
 						  (
 						   {
