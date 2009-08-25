@@ -26,6 +26,10 @@ RELEASE_MAJOR=`release-extract --major`
 RELEASE_MINOR=`release-extract --minor`
 RELEASE_MICRO=`release-extract --micro`
 
+clean-local:
+	$(RM) -rf $(top_srcdir)/docs/html
+	$(RM) -rf $(top_srcdir)/tests/html
+
 show-release-labels:
 	echo "Release information (major-minor-micro): $(RELEASE_MAJOR)-$(RELEASE_MINOR)-$(RELEASE_MICRO)"
 
@@ -49,7 +53,7 @@ dist-hook: dist-keywords
 
 html-upload-prepare:
 	rm -fr html/htdocs/neurospaces_project/gshell
-	mkdir --parents html/htdocs/neurospaces_project/gshell
+	mkdir -p html/htdocs/neurospaces_project/gshell
 # $Format: "	( cd tests && ./tests_2_html --header '<img src=\"ns-main-logo-dark2-notext-32x32.jpg\" alt=\"Main Neurospaces logo\"> ${package}, ${label}, ${email} <hr>' --introduction introduction.html )" $
 	( cd tests && ./tests_2_html --header '<img src="ns-main-logo-dark2-notext-32x32.jpg" alt="Main Neurospaces logo"> neurospaces 0.1675 Thu, 27 Dec 2007 15:58:18 -0600 hugo<hr>' --introduction introduction.html )
 	tar cfh - tests/html | ( cd html/htdocs/neurospaces_project/gshell && tar vxf - )
