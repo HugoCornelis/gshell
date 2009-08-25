@@ -62,4 +62,5 @@ html-upload: html-upload-prepare
 test: check
 
 docs: html-upload-prepare
+	echo "Generated regression tests"
 
