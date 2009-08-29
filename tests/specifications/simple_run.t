@@ -152,6 +152,25 @@ apply:
         - 0
       method: advance
     - method: pause
+history:
+  - arguments: []
+    method: instantiate_services
+  - arguments: []
+    method: compile
+  - arguments: []
+    method: instantiate_inputs
+  - arguments: []
+    method: instantiate_outputs
+  - arguments: []
+    method: initiate
+  - arguments: []
+    method: optimize
+  - arguments: []
+    method: analyze
+  - arguments: *2
+    method: advance
+  - arguments: []
+    method: pause
 models:
   - modelname: /singlep
     solverclass: heccer
@@ -217,25 +236,6 @@ solverclasses:
     constructor_settings: *6
     module_name: Heccer
     service_name: model_container
-status:
-  advance:
-    - *2
-  analyze:
-    - []
-  compile:
-    - []
-  initiate:
-    - []
-  instantiate_inputs:
-    - []
-  instantiate_outputs:
-    - []
-  instantiate_services:
-    - []
-  optimize:
-    - []
-  pause:
-    - []
 ",
 						   write => 'sh cat /tmp/singlep.ssp',
 						  },
