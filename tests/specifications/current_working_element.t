@@ -59,8 +59,8 @@ my $test
 						  {
 						   description => "Can we find the 2nd level elements in the model ?",
 						   read => "
-- /Purkinje/segments
 - /Purkinje/SpinesNormal_13_1
+- /Purkinje/segments
 ",
 						   write => "list_elements",
 						  },
@@ -82,8 +82,8 @@ my $test
 						  {
 						   description => "Can we find the 2nd level elements in the model (2) ?",
 						   read => "
-- /Purkinje/segments
 - /Purkinje/SpinesNormal_13_1
+- /Purkinje/segments
 ",
 						   write => "list_elements",
 						  },

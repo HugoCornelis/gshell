@@ -83,8 +83,8 @@ ndf_library:
 						  {
 						   description => "Can we find the segments and spines algorithm instance inside the root element ?",
 						   read => "
-- /Purkinje/segments
 - /Purkinje/SpinesNormal_13_1
+- /Purkinje/segments
 ",
 						   write => "list_elements /Purkinje",
 						  },
@@ -102,8 +102,8 @@ ndf_library:
 						  {
 						   description => "Can we find the segments and spines algorithm instance inside the root element ?",
 						   read => "
-- /Purkinje/segments
 - /Purkinje/SpinesNormal_13_1
+- /Purkinje/segments
 ",
 						   write => "list_elements /Purkinje",
 						  },
@@ -334,8 +334,8 @@ ndf_library:
 						  {
 						   description => "Can we find the segments and spines algorithm instance inside the root element ?",
 						   read => "
-- /Purkinje/segments
 - /Purkinje/SpinesNormal_13_1
+- /Purkinje/segments
 ",
 						   write => "list_elements /Purkinje",
 						  },
