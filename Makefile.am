@@ -65,6 +65,21 @@ html-upload: html-upload-prepare
 
 test: check
 
-docs: html-upload-prepare
-	echo "Generated regression tests"
+docs-level1:
+
+docs-level2:
+
+docs-level3: html-upload-prepare
+	echo "Converted the regression tests to HTML"
+
+docs-level4:
+
+docs-level5:
+
+docs-level6:
+
+docs-level7:
+
+docs: docs-level1 docs-level2 docs-level3 docs-level4 docs-level5 docs-level6 docs-level7
+
 
