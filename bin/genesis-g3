@@ -326,6 +326,9 @@ options:
     --verbose            set verbosity level ('errors', 'warnings', 'information', 'debug', default is 'warnings').
     --version            give version information.
 
+examples:
+$0 --batch --execute \"echo '---\\n'\" --execute 'list commands'
+
 ";
 
 	exit 1;
