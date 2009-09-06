@@ -331,7 +331,7 @@ $0 --batch --execute \"echo '---\\n'\" --execute 'list commands'
 
 ";
 
-	exit 1;
+	exit 0;
     }
 }
 
