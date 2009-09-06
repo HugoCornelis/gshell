@@ -55,9 +55,12 @@ $SIG{INT}
 
 our $option_verbose = 'warnings';
 
+my $option_batch_mode;
+my $option_execute = [];
+my $option_output_tags = 0;
+
 my $exit_code = 0;
 
-my $output_tags = 0;
 
 sub interprete
 {
@@ -101,25 +104,24 @@ sub interprete
 	return;
     }
 
+    # start to prepare to execute of the command
 
     my $genesis_command;
 
     {
 	$genesis_command = $arguments->[0];
 
-	if($output_tags)
+	if ($option_output_tags)
 	{
+	    print "<" .  $genesis_command . ">\n";
 
-	  print "<" .  $genesis_command . ">\n";
+	    my @args = @$arguments;
 
-	  my @args = @$arguments;
+	    shift @args;
 
-	  shift @args;
-	  
-	  my $genesis_command_args = join " ",@args;
-	  
-	  print "<args>\n" . $genesis_command_args . "\n</args>\n"
+	    my $genesis_command_args = join " ", @args;
 
+	    print "<args>\n" . $genesis_command_args . "\n</args>\n"
 	}
 
 	no strict "refs";
@@ -128,9 +130,9 @@ sub interprete
 	{
 	    print "*** Error: command $genesis_command not found,\n*** Error: use 'list commands' to get a list of available commands,\n*** Error: use the help function to obtain help about each command\n";
 
-	    if($output_tags)
+	    if ($option_output_tags)
 	    {
-	      print "</" .  $genesis_command . ">\n";
+		print "</" .  $genesis_command . ">\n";
 	    }
 
 	    return;
@@ -159,11 +161,9 @@ sub interprete
 	print "$result\n";
     }
 
-    if($output_tags)
+    if ($option_output_tags)
     {
-      print "</" .  $genesis_command . ">\n";
- 
-      
+	print "</" .  $genesis_command . ">\n";
     }
 }
 
@@ -186,8 +186,7 @@ sub loop
 	$term->addhistory($_) foreach keys %h;
     }
 
-
-    if($output_tags)
+    if ($option_output_tags)
     {
 
       my $line;
@@ -250,6 +249,8 @@ sub main
 
     STDOUT->autoflush(1);
 
+    # process scripts given on the command line
+
     foreach my $script (@ARGV)
     {
 	use IO::File;
@@ -260,14 +261,25 @@ sub main
 
 	foreach my $line (@$lines)
 	{
-
 	    #t do error processing
-	  
+
 	    interprete($line);
 	}
     }
 
-    loop();
+    # process --execute arguments
+
+    foreach my $line (@$option_execute)
+    {
+	#t do error processing
+
+	interprete($line);
+    }
+
+    if (!$option_batch_mode)
+    {
+	loop();
+    }
 }
 
 
@@ -275,14 +287,16 @@ sub read_cmd_line
 {
     my $option_help;
     my $option_version;
-    my $option_tags;
+
     my $result
 	= GetOptions
 	    (
+	     "batch-mode!" => \$option_batch_mode,
+	     "execute=s" => $option_execute,
 	     "help!" => \$option_help,
 	     "v|verbose=s" => \$option_verbose,
 	     "version" => \$option_version,
-	     "output-tags" => \$option_tags,
+	     "output-tags" => \$option_output_tags,
 	    );
 
     if ($option_version)
@@ -305,8 +319,10 @@ $0 <options>
 $0: GENESIS 3 shell.
 
 options:
-    --output-tags        Adds XML-like tags to diagnostic messages.
+    --batch-mode         batch mode, means that interactive mode is disabled.
+    --execute            execute this string, may be given multiple times.
     --help               print usage information.
+    --output-tags        Adds XML-like tags to diagnostic messages.
     --verbose            set verbosity level ('errors', 'warnings', 'information', 'debug', default is 'warnings').
     --version            give version information.
 
@@ -314,15 +330,6 @@ options:
 
 	exit 1;
     }
-
-
-    if($option_tags)
-    {
-
-      $output_tags = 1;
-      
-    }
-
 }
 
 
