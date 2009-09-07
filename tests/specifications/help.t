@@ -18,8 +18,10 @@ my $test
 						   read => "GENESIS 3 shell.
 
 options:
-    --output-tags        Adds XML-like tags to diagnostic messages.
+    --batch-mode         batch mode, means that interactive mode is disabled.
+    --execute            execute this string, may be given multiple times.
     --help               print usage information.
+    --output-tags        Adds XML-like tags to diagnostic messages.
     --verbose            set verbosity level ('errors', 'warnings', 'information', 'debug', default is 'warnings').
     --version            give version information.
 ",
