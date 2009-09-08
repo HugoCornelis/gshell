@@ -15,9 +15,9 @@ my $test
 				command_tests => [
 						  {
 						   # $Format: "description => \"Does the version information match with ${package}-${label} ?\","$
-description => "Does the version information match with gshell-userdocs-4 ?",
+description => "Does the version information match with gshell-userdocs-6 ?",
 						   # $Format: "read => \"${package}-${label}\","$
-read => "gshell-userdocs-4",
+read => "gshell-userdocs-6",
 # 						   write => "version",
 						  },
 						 ],
