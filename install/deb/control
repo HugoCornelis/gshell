@@ -1,0 +1,12 @@
+Source: gshell
+Section: Science 
+Priority: optional
+Maintainer: Hugo Cornelis [hugo.cornelis@gmail.com]
+Build-Depends: python2.5(>=2.5),libc6(>=2.3.6),libgcc1 (>=4.1.1)
+Homepage: http://www.neurospaces.org/
+
+Package: gshell
+Architecture: any
+Depends: python2.5(>=2.5),libc6(>=2.3.6),libgcc1 (>=4.1.1)
+Suggests: gnuplot
+Description: The GENESIS Interactive Shell, referred to as the G-Shell, provides an interactive command line interface that replaces the GENESIS-2 Script Language Interpreter.
