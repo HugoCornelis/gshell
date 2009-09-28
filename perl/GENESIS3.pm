@@ -234,9 +234,11 @@ sub check
 
     # analyze the schedule
 
-    if (!$scheduler->analyze())
+    my $error = $scheduler->analyze();
+
+    if ($error)
     {
-	return "*** Error: scheduler analysis failed";
+	return "*** Error: scheduler analysis failed ($error)";
     }
     else
     {
@@ -1006,9 +1008,11 @@ sub reset
 
     # reset the schedule
 
-    if (!$scheduler->initiate())
+    my $error = $scheduler->initiate();
+
+    if ($error)
     {
-	return "*** Error: scheduler initiation failed";
+	return "*** Error: scheduler initiation failed ($error)";
     }
     else
     {
@@ -1096,24 +1100,29 @@ sub run
 		 @$GENESIS3::runtime_parameters,
 		);
 
-	if (!$result)
+	if ($result)
 	{
-	    return "*** Error: apply_granular_parameters() for $scheduler->{name} failed";
+	    return "*** Error: apply_granular_parameters() for $scheduler->{name} failed ($result)";
 	}
 
 	# use the scheduler
 
 	$result = $scheduler->advance($scheduler, $time, ); # { verbose => 2 } );
 
-	$result &&= $scheduler->pause();
+	if ($result)
+	{
+	    return "*** Error: advance() for $scheduler->{name} failed ($result)";
+	}
+
+	$result = $scheduler->pause();
 
 	# get the simulation time from the schedule
 
 	$GENESIS3::global_time = $scheduler->{simulation_time}->{time};
 
-	if (!$result)
+	if ($result)
 	{
-	    return "*** Error: advance() for $scheduler->{name} failed";
+	    return "*** Error: pause() for $scheduler->{name} failed ($result)";
 	}
 
 	# return success
