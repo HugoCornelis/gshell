@@ -2869,6 +2869,7 @@ our $all_components
 	       module => "SLI",
 	      },
        studio => {
+		  disabled => "the Neurospaces studio is an experimental feature",
 		  description => "Graphical interface that allows to explore models",
 		  module => "Neurospaces::Studio",
 		 },
@@ -3012,6 +3013,8 @@ sub profile_environment
 
 	if ($component->{disabled})
 	{
+	    $component->{status} = "disabled ($component->{disabled})";
+
 	    next;
 	}
 
