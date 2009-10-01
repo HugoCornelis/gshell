@@ -163,9 +163,7 @@ synopsis: (you gave )
 						  },
 						  {
 						   description => "Can we find the loaded software components ?",
-						   read => [
-							    "-re",
-							    "Core components:
+						   read => "Core components:
   gshell:
     description: the GENESIS 3 shell allows convenient interaction with other components
     disabled: 0
@@ -192,14 +190,14 @@ synopsis: (you gave )
     status: loaded
   studio:
     description: Graphical interface that allows to explore models
+    disabled: the Neurospaces studio is an experimental feature
     module: Neurospaces::Studio
-    status: (.|\\n)*?
+    status: disabled (the Neurospaces studio is an experimental feature)
 Other components:
   python:
     description: interface to python scripting
     module: GENESIS3::Python
 ",
-							   ],
 						   write => 'list components',
 						  },
 						  {
