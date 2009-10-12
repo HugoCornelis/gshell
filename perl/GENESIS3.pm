@@ -260,6 +260,24 @@ sub check_help
 }
 
 
+sub component_load
+{
+    my $component_name = shift;
+
+    return GENESIS3::component_load($component_name);
+}
+
+
+sub component_load_help
+{
+    print "description: load a software component\n";
+
+    print "synopsis: component_load <component-name>\n";
+
+    return "*** Ok";
+}
+
+
 sub create
 {
     my $type = shift;
@@ -2869,7 +2887,7 @@ our $all_components
 	       module => "SLI",
 	      },
        studio => {
-		  disabled => "the Neurospaces studio is an experimental feature",
+		  disabled => "the Neurospaces studio is an experimental feature, try enabling it with the 'enable' command",
 		  description => "Graphical interface that allows to explore models",
 		  module => "Neurospaces::Studio",
 		 },
@@ -2997,13 +3015,75 @@ sub initialize
 }
 
 
+sub component_load
+{
+    my $component_name = shift;
+
+    my $component = $GENESIS3::all_components->{$component_name};
+
+    my $component_module = $component->{module} || $component_name;
+
+    my $errors;
+
+    eval
+    {
+	local $SIG{__DIE__};
+
+	$component_module =~ s/::/\//g;
+
+	require "$component_module.pm";
+    };
+
+    if ($@ eq '')
+    {
+	$component->{status} = 'loaded';
+    }
+    else
+    {
+	$component->{status} = $@;
+
+	$errors = 1;
+    }
+
+    if ($component->{integrator})
+    {
+	eval "require $component->{integrator}";
+
+	if ($@)
+	{
+	    $component->{status} = "$0: *** Error: $component_name loaded, but its integrator cannot be loaded ($@)\n";
+
+	    $errors = 1;
+	}
+
+	#! nicely based on Exporter
+
+	no strict "refs";
+
+	my $commands = eval "\$$component->{integrator}::g3_commands";
+
+	foreach my $command (@$commands)
+	{
+	    *{"GENESIS3::Commands::$command"} = \&{"$component->{integrator}\::$command"};
+	}
+    }
+
+    if ($errors)
+    {
+	return "*** Error: failed to load $component_name";
+    }
+    else
+    {
+	return "*** Ok: loading $component_name";
+    }
+}
+
+
 sub profile_environment
 {
     foreach my $component_name (keys %$GENESIS3::all_components)
     {
 	my $component = $GENESIS3::all_components->{$component_name};
-
-	my $component_module = $component->{module} || $component_name;
 
 	if (defined $component->{status}
 	    and $component->{status} eq 'loaded')
@@ -3018,44 +3098,7 @@ sub profile_environment
 	    next;
 	}
 
-	eval
-	{
-	    local $SIG{__DIE__};
-
-	    $component_module =~ s/::/\//g;
-
-	    require "$component_module.pm";
-	};
-
-	if ($@ eq '')
-	{
-	    $component->{status} = 'loaded';
-	}
-	else
-	{
-	    $component->{status} = $@;
-	}
-
-	if ($component->{integrator})
-	{
-	    eval "require $component->{integrator}";
-
-	    if ($@)
-	    {
-		die "$0: *** Error: $component_name loaded, but its integrator cannot be loaded ($@)\n";
-	    }
-
-	    #! nicely based on Exporter
-
-	    no strict "refs";
-
-	    my $commands = eval "\$$component->{integrator}::g3_commands";
-
-	    foreach my $command (@$commands)
-	    {
-		*{"GENESIS3::Commands::$command"} = \&{"$component->{integrator}\::$command"};
-	    }
-	}
+	component_load($component_name);
     }
 
     eval "require GENESIS3::Python";

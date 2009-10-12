@@ -118,6 +118,7 @@ synopsis: (you gave )
   - add_output
   - ce
   - check
+  - component_load
   - create
   - delete
   - echo
@@ -190,9 +191,9 @@ synopsis: (you gave )
     status: loaded
   studio:
     description: Graphical interface that allows to explore models
-    disabled: the Neurospaces studio is an experimental feature
+    disabled: \"the Neurospaces studio is an experimental feature, try enabling it with the 'enable' command\"
     module: Neurospaces::Studio
-    status: disabled (the Neurospaces studio is an experimental feature)
+    status: \"disabled (the Neurospaces studio is an experimental feature, try enabling it with the 'enable' command)\"
 Other components:
   python:
     description: interface to python scripting
