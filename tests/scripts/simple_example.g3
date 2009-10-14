@@ -1,0 +1,23 @@
+#!/usr/local/bin/genesis-g3
+#!
+
+create cell /neuron
+create segment /neuron/soma
+
+set_model_parameter /neuron/soma Vm_init -0.068
+set_model_parameter /neuron/soma CM 0.01
+set_model_parameter /neuron/soma RM 0.01
+set_model_parameter /neuron/soma RA 0.01
+set_model_parameter /neuron/soma ELEAK 0.01
+
+set_model_parameter /neuron/soma SURFACE 1
+set_model_parameter /neuron/soma LENGTH 1
+set_model_parameter /neuron/soma DIA 1
+
+set_runtime_parameter /neuron/soma INJECT 2e-9
+
+run /neuron 0.001
+
+echo output follows:\n
+sh cat /tmp/output
+
