@@ -440,6 +440,29 @@ sub echo_help
 }
 
 
+sub exit
+{
+    my $exit_code = shift;
+
+    if (!defined $exit_code)
+    {
+	$exit_code = 0;
+    }
+
+    exit $exit_code;
+}
+
+
+sub exit_help
+{
+    print "description: exit the simulator.\n";
+
+    print "synopsis: exit [ <exit_code> ]\n";
+
+    return "*** Ok";
+}
+
+
 sub explore
 {
     require Neurospaces::GUI;
