@@ -226,6 +226,7 @@ Other components:
   - GROUPED_PARAMETERS
   - HH_GATE
   - NETWORK
+  - NEURON
   - POOL
   - POPULATION
   - PROJECTION
