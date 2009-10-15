@@ -122,6 +122,7 @@ synopsis: (you gave )
   - create
   - delete
   - echo
+  - exit
   - explore
   - help
   - list
