@@ -1011,7 +1011,7 @@ sub quit
 	$exit_code = 0;
     }
 
-    exit $exit_code;
+    CORE::exit $exit_code;
 }
 
 
