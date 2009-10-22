@@ -2378,92 +2378,6 @@ foreach my $purpose qw(
 package GENESIS3::Tokens::Physical;
 
 
-sub create_all_tokens
-{
-    eval "require Neurospaces::Tokens::Physical";
-
-    if ($@ eq '')
-    {
-    }
-    else
-    {
-	print STDERR "$0: warning: could not load Neurospaces::Tokens::Physical\n";
-    }
-
-    my $symbols_definitions = $GENESIS3::Configuration::symbols_definitions;
-
-    my $tokens = $symbols_definitions->{tokens};
-
-    my $token_names
-	= [
-	   sort
-	   map
-	   {
-	       s/^TOKEN_// ; $_
-	   }
-	   map
-	   {
-	       #! map the token to its lexical NDF ascii representation
-
-	       my $token = $tokens->{$_};
-
-	       $token->{lexical};
-	   }
-	   grep
-	   {
-	       #! note that not all tokens have a purpose that is defined
-	       #! (which does not necessarily mean they don't have a
-	       #! purpose).
-
-	       defined $tokens->{$_}->{purpose}
-		   and $tokens->{$_}->{purpose} eq 'physical';
-	   }
-	   keys %$tokens,
-	  ];
-
-    foreach my $token_name (@$token_names)
-    {
-	# construct a create function for this token
-
-	no strict "refs";
-
-	my $lc_token_name = lc($token_name);
-
-	my $subname = "create_" . $lc_token_name;
-
-	((\%{"::"})->{"GENESIS3::"}->{"Tokens::"}->{"Physical::"}->{$subname})
-	    = sub
-	      {
-		  # get name of element to create
-
-		  my $physical_name = shift;
-
-		  # create the element in the model container
-
-		  if ($GENESIS3::verbose_level ne 'errors'
-		      and $GENESIS3::verbose_level ne 'warnings')
-		  {
-		      print "$subname: $physical_name\n";
-		  }
-
-		  my $physical = Neurospaces::Tokens::Physical::create($lc_token_name, $GENESIS3::model_container, $physical_name);
-
-		  if (!$physical)
-		  {
-		      return "*** Error: creating $physical_name of type $lc_token_name";
-		  }
-		  else
-		  {
-		      return "*** Ok: creating $physical_name of type $lc_token_name";
-		  }
-	      };
-    }
-}
-
-
-create_all_tokens();
-
-
 package GENESIS3::Objects;
 
 
@@ -2982,6 +2896,89 @@ our $schedulers = {};
 our $verbose_level;
 
 
+sub create_all_tokens
+{
+    eval "require Neurospaces::Tokens::Physical";
+
+    if ($@ eq '')
+    {
+    }
+    else
+    {
+	print STDERR "$0: warning: could not load Neurospaces::Tokens::Physical\n";
+    }
+
+    my $symbols_definitions = $GENESIS3::Configuration::symbols_definitions;
+
+    my $tokens = $symbols_definitions->{tokens};
+
+    my $token_names
+	= [
+	   sort
+	   map
+	   {
+	       s/^TOKEN_// ; $_
+	   }
+	   map
+	   {
+	       #! map the token to its lexical NDF ascii representation
+
+	       my $token = $tokens->{$_};
+
+	       $token->{lexical};
+	   }
+	   grep
+	   {
+	       #! note that not all tokens have a purpose that is defined
+	       #! (which does not necessarily mean they don't have a
+	       #! purpose).
+
+	       defined $tokens->{$_}->{purpose}
+		   and $tokens->{$_}->{purpose} eq 'physical';
+	   }
+	   keys %$tokens,
+	  ];
+
+    foreach my $token_name (@$token_names)
+    {
+	# construct a create function for this token
+
+	no strict "refs";
+
+	my $lc_token_name = lc($token_name);
+
+	my $subname = "create_" . $lc_token_name;
+
+	((\%{"::"})->{"GENESIS3::"}->{"Tokens::"}->{"Physical::"}->{$subname})
+	    = sub
+	      {
+		  # get name of element to create
+
+		  my $physical_name = shift;
+
+		  # create the element in the model container
+
+		  if ($GENESIS3::verbose_level ne 'errors'
+		      and $GENESIS3::verbose_level ne 'warnings')
+		  {
+		      print "$subname: $physical_name\n";
+		  }
+
+		  my $physical = Neurospaces::Tokens::Physical::create($lc_token_name, $GENESIS3::model_container, $physical_name);
+
+		  if (!$physical)
+		  {
+		      return "*** Error: creating $physical_name of type $lc_token_name";
+		  }
+		  else
+		  {
+		      return "*** Ok: creating $physical_name of type $lc_token_name";
+		  }
+	      };
+    }
+}
+
+
 sub header
 {
     print "Welcome to the GENESIS 3 shell\n";
@@ -3031,6 +3028,10 @@ sub initialize
 	    print "$0: *** Warning: GENESIS3::Python loaded, but its initialize() method failed ($@)\n";
 	}
     }
+
+    # create all tokens
+
+    create_all_tokens();
 
     # return result, seems to be always 1
 
