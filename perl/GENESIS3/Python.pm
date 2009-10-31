@@ -27,20 +27,18 @@ import Neurospaces
 import SwiggableNeurospaces
 import yaml
 
-nmcGlobal = None
-
 def set_model_container(void):
     backend = SwiggableNeurospaces.NeurospacesSetObject(void)
-    global nmcGlobal
-    nmcGlobal = Neurospaces.ModelContainer(backend)
+    nmc = Neurospaces.ModelContainer(backend)
+    Neurospaces.setModelContainer(nmc)
 
 def npy_load(path):
-    global nmcGlobal
-    nmcGlobal.read_python(path)
+    nmc = Neurospaces.getModelContainer()
+    nmc.read_python(path)
 
 def nmcDiagnose(path):
-    global nmcGlobal
-    nmcGlobal.query("serialMapping /")
+    nmc = Neurospaces.getModelContainer()
+    nmc.query("serialMapping /")
 
 class Foo(object):
    def __init__(self):
@@ -68,9 +66,9 @@ sub initialize
 
 #     print Dump($model_container);
 
-    my $void = $backend->NeurospacesGetObject();
+    my $reference = $backend->NeurospacesGetObject();
 
-    set_model_container($void);
+    set_model_container($reference);
 }
 
 
