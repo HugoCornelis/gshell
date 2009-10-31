@@ -2805,6 +2805,10 @@ our $all_components
 		  disabled => 0,
 		  module => 'GENESIS3',
 		  status => 'loaded',
+		  type => {
+			   description => 'scriptable user interface',
+			   layer => 2,
+			  },
 # 		  variables => {
 # 				verbose => $GENESIS3::verbose_level,
 # 			       },
@@ -2812,26 +2816,46 @@ our $all_components
        heccer => {
 		  description => 'single neuron equation solver',
 		  module => 'Heccer',
+		  type => {
+			   description => 'simulation object',
+			   layer => 1,
+			  },
 		 },
        'model-container' => {
 			     description => 'internal storage for neuronal models',
 			     integrator => 'Neurospaces::Integrators::Commands',
 			     module => 'Neurospaces',
+			     type => {
+				      description => 'intermediary',
+				      layer => 2,
+				     },
 			    },
        sli => {
 	       description => "GENESIS 2 backward compatible scripting interface",
 	       integrator => 'SLI::Integrators::Commands',
 	       module => "SLI",
+	       type => {
+			description => 'scriptable user interface',
+			layer => 2,
+		       },
 	      },
        studio => {
 		  disabled => "the Neurospaces studio is an experimental feature, try enabling it with the 'enable' command",
 		  description => "Graphical interface that allows to explore models",
 		  module => "Neurospaces::Studio",
+		  type => {
+			   description => 'graphical user interface',
+			   layer => 2,
+			  },
 		 },
        ssp => {
 	       description => 'binds the software components of a simulation together',
 	       integrator => 'SSP::Integrators::Commands',
 	       module => 'SSP',
+	       type => {
+			description => 'simulation controller',
+			layer => 1,
+		       },
 	      },
       };
 
@@ -2841,6 +2865,10 @@ our $all_cpan_components
        python => {
 		  description => 'interface to python scripting',
 		  module => 'GENESIS3::Python',
+		  type => {
+			   description => 'scriptable user interface',
+			   layer => 2,
+			  },
 		 },
       };
 

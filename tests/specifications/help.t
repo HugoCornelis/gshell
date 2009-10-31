@@ -152,6 +152,8 @@ synopsis: (you gave )
   - show_parameter_scaled
   - show_runtime_parameters
   - show_verbose
+  - sli_listcommands
+  - sli_listobjects
   - sli_load
   - sli_run
   - sli_script
@@ -171,34 +173,56 @@ synopsis: (you gave )
     disabled: 0
     module: GENESIS3
     status: loaded
+    type:
+      description: scriptable user interface
+      layer: 2
   heccer:
     description: single neuron equation solver
     module: Heccer
     status: loaded
+    type:
+      description: simulation object
+      layer: 1
   model-container:
     description: internal storage for neuronal models
     integrator: Neurospaces::Integrators::Commands
     module: Neurospaces
     status: loaded
+    type:
+      description: intermediary
+      layer: 2
   sli:
     description: GENESIS 2 backward compatible scripting interface
     integrator: SLI::Integrators::Commands
     module: SLI
     status: loaded
+    type:
+      description: scriptable user interface
+      layer: 2
   ssp:
     description: binds the software components of a simulation together
     integrator: SSP::Integrators::Commands
     module: SSP
     status: loaded
+    type:
+      description: simulation controller
+      layer: 1
   studio:
     description: Graphical interface that allows to explore models
     disabled: \"the Neurospaces studio is an experimental feature, try enabling it with the 'enable' command\"
     module: Neurospaces::Studio
     status: \"disabled (the Neurospaces studio is an experimental feature, try enabling it with the 'enable' command)\"
+    type:
+      description: graphical user interface
+      layer: 2
 Other components:
   python:
     description: interface to python scripting
     module: GENESIS3::Python
+    status: loaded
+    type:
+      description: scriptable user interface
+      layer: 2
 ",
 						   write => 'list components',
 						  },
