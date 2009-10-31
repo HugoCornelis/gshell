@@ -17,6 +17,36 @@ my $test
 						   read => 'Welcome to the GENESIS 3 shell',
 						  },
 						  {
+						   description => "Can we find a python based model in the model library?",
+						   read => '#!/usr/bin/python
+
+import Neurospaces
+
+nmc = Neurospaces.getModelContainer()
+
+c = nmc.Channel("/k")
+
+gka = nmc.GateKinetic("/k/a")
+
+gka.parameter("HH_AB_Scale", -600.0 )
+gka.parameter("HH_AB_Mult", 10000 )
+gka.parameter("HH_AB_Factor_Flag", -1.0 )
+gka.parameter("HH_AB_Add", -1.0 )
+gka.parameter("HH_AB_Offset_E", 60e-3 )
+gka.parameter("HH_AB_Tau", -10.0e-3 )
+
+gkb = nmc.GateKinetic("/k/b")
+
+gkb.parameter("HH_AB_Scale", 125.0 )
+gkb.parameter("HH_AB_Mult", 0.0 )
+gkb.parameter("HH_AB_Factor_Flag", -1.0 )
+gkb.parameter("HH_AB_Add", 0.0 )
+gkb.parameter("HH_AB_Offset_E", 70e-3 )
+gkb.parameter("HH_AB_Tau", 80e-3 )
+',
+						   write => "sh cat /usr/local/neurospaces/models/library/channels/hodgkin-huxley/k.npy",
+						  },
+						  {
 						   description => "Can we load a npy model ?",
 						   write => 'npy_load channels/hodgkin-huxley/k.npy',
 						  },
