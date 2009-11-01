@@ -18,10 +18,12 @@ my $test
 						  },
 						  {
 						   description => "Can we load a xml model ?",
+						   read => 'genesis',
 						   write => 'xml_load channels/gaba.xml',
 						  },
 						  {
 						   description => "Can we export the model to an NDF file ?",
+						   read => 'genesis',
 						   wait => 1,
 						   write => "ndf_save /** /tmp/1.ndf",
 						  },
@@ -75,6 +77,7 @@ END PUBLIC_MODELS
 						  },
 						  {
 						   description => "Can we export the model to an XML file ?",
+						   read => 'genesis',
 						   wait => 1,
 						   write => "xml_save /** /tmp/1.xml",
 						  },
