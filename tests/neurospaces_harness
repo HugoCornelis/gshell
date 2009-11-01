@@ -118,6 +118,7 @@ my $option_regex_selector = ".*";
 my $option_report_disabled;
 my $option_timeout_multiplier = 1;
 my $option_timings;
+my $option_trace;
 my $option_verbose;
 
 
@@ -492,8 +493,17 @@ Total of $test_report->{global}->{test_count} tests (encountered $error_count er
 
 # 		    $exp->slave->stty(qw(raw -echo));
 
-		    $exp->spawn($command, @$arguments)
-			or die "$0: cannot spawn $command: $!\n";
+		    $exp->spawn
+			(
+			 (
+			  $option_trace
+			  ? ("strace", "-f")
+			  : ()
+			 ),
+			 $command,
+			 @$arguments
+			)
+			    or die "$0: cannot spawn $command: $!\n";
 
 		    # set the running_command_definition
 
@@ -955,6 +965,7 @@ sub read_cmd_line
 	     "report-disabled" => \$option_report_disabled,
 	     "timeout-multiplier=s" => \$option_timeout_multiplier,
 	     "timings!" => \$option_timings,
+	     "trace!" => \$option_trace,
 	     "v|verbose+" => \$option_verbose,
 	    );
 
@@ -974,6 +985,7 @@ sub read_cmd_line
 	   report_disabled => $option_report_disabled,
 	   timeout_multiplier => $option_timeout_multiplier,
 	   timings => $option_timings,
+	   trace => $option_trace,
 	   verbose => $option_verbose,
 	  };
 
@@ -995,6 +1007,7 @@ options:
     --report-disabled    include information of disabled tests in the test report.
     --timeout-multiplier multiply all timeout values with this constant.
     --timings            add timing information about the tests to the report.
+    --trace              enable tracing using the strace unix shell command.
     --verbose            set verbosity level.
 ";
 
