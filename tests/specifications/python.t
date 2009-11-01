@@ -100,6 +100,9 @@ END PUBLIC_MODELS
 			       },
 			      ],
        description => "importing and processing of a model in python",
+       disabled => ((`perl -e 'use Inline::Python' 2>&1`)
+		    ? 'the perl environment cannot load the module Inline::Python'
+		    : ''),
        name => 'python.t',
       };
 

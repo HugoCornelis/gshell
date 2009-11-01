@@ -1,15 +1,15 @@
 $files = {
-           '_<tests/run' => [
-                              {
-                                'expr' => undef,
-                                'value' => '1',
-                                'text' => '		my $differences
+           '_<tests/neurospaces_harness' => [
+                                              {
+                                                'expr' => undef,
+                                                'value' => '1',
+                                                'text' => '    my $test_modules = test_library_construct();
 ',
-                                'fname' => 'tests/run',
-                                'type' => 'user',
-                                'line' => '323'
-                              }
-                            ]
+                                                'fname' => 'tests/neurospaces_harness',
+                                                'type' => 'user',
+                                                'line' => '250'
+                                              }
+                                            ]
          };
 $expr_list = [
                {
