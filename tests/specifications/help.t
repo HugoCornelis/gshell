@@ -219,10 +219,6 @@ Other components:
   python:
     description: interface to python scripting
     module: GENESIS3::Python
-    status: loaded
-    type:
-      description: scriptable user interface
-      layer: 2
 ",
 						   write => 'list components',
 						  },
