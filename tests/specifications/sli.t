@@ -139,52 +139,17 @@ my $test
 						    wait => 1,
 						   },
 						  ),
-						  {
-						   description => "Can we export a channel of the model to NDF format?",
-						   read => '#!neurospacesparse
-// -*- NEUROSPACES -*-
 
-NEUROSPACES NDF
 
-IMPORT
-END IMPORT
 
-PRIVATE_MODELS
-END PRIVATE_MODELS
-
-PUBLIC_MODELS
-  ALIAS Purk_soma/NaF::/Purk_NaF NaF
-    PARAMETERS
-      PARAMETER ( G_MAX = 74999.9 ),
-    END PARAMETERS
-  END ALIAS
-END PUBLIC_MODELS
-',
-						   write => 'ndf_save /Purkinje/soma/NaF/** STDOUT',
-						  },
-						  {
-						   description => "Can we export a channel of the model to XML format?",
-						   read => '<import>
-</import>
-
-<private_models>
-</private_models>
-
-<public_models>
-  <alias> <namespace>Purk_soma/NaF::</namespace><prototype>/Purk_NaF</prototype> <name>NaF</name>
-    <parameters>
-      <parameter> <name>G_MAX</name><value>74999.9</value> </parameter>
-    </parameters>
-  </alias>
-</public_models>
-',
-						   write => 'xml_save /Purkinje/soma/NaF/** STDOUT',
-						  },
 
 
 						  {
 						   description => "Can we list avaialable GENESIS 2 commands?",
-						   read => 'Available commands:
+
+						   write => 'sli_listcommands',
+						   read => '
+Available commands:
 abort               abs                 acos                addaction           
 addalias            addclass            addescape           addfield            
 addforwmsg          addglobal           addjob              addmsg              
@@ -227,20 +192,64 @@ strlen              strncmp             strsub              substituteinfo
 substring           swapdump            tan                 tau_tweak_tabchan   
 trunc               tset                tweak_tabchan       tweakalpha          
 tweaktau            useclock            version             warning             
-where               writefile 
-',
-						   write => 'sli_listcommands',
+where               writefile',
+						   timeout => 20 ,
+					     
+					        
 						  },
 
 						  {
 						   description => "Can we get a list of available objects?",
+						   write => 'sli_listobjects',
 						   read => 'AVAILABLE OBJECTS:
 asc_file            hsolve              neurospaces         neutral             
-nsintegrator   
-',
-						   write => 'sli_listobjects',
+nsintegrator',
+						   
 						  },
 
+
+
+						  {
+						   description => "Can we export a channel of the model to NDF format?",
+						   read => '#!neurospacesparse
+// -*- NEUROSPACES -*-
+
+NEUROSPACES NDF
+
+IMPORT
+END IMPORT
+
+PRIVATE_MODELS
+END PRIVATE_MODELS
+
+PUBLIC_MODELS
+  ALIAS Purk_soma/NaF::/Purk_NaF NaF
+    PARAMETERS
+      PARAMETER ( G_MAX = 74999.9 ),
+    END PARAMETERS
+  END ALIAS
+END PUBLIC_MODELS
+',
+						   write => 'ndf_save /Purkinje/soma/NaF/** STDOUT',
+						  },
+						  {
+						   description => "Can we export a channel of the model to XML format?",
+						   read => '<import>
+</import>
+
+<private_models>
+</private_models>
+
+<public_models>
+  <alias> <namespace>Purk_soma/NaF::</namespace><prototype>/Purk_NaF</prototype> <name>NaF</name>
+    <parameters>
+      <parameter> <name>G_MAX</name><value>74999.9</value> </parameter>
+    </parameters>
+  </alias>
+</public_models>
+',
+						   write => 'xml_save /Purkinje/soma/NaF/** STDOUT',
+						  },
 
 
 						 ],
