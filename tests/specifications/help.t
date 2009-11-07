@@ -251,6 +251,7 @@ Other components:
   - POOL
   - POPULATION
   - PROJECTION
+  - PULSE
   - RANDOMVALUE
   - SEGMENT
   - SEGMENT_GROUP

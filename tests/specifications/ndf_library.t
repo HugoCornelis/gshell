@@ -40,6 +40,7 @@ ndf_library:
     - populations/
     - projectionqueries/
     - projections/
+    - pulse/
     - segments/
     - tests/
     - utilities/
@@ -68,6 +69,7 @@ ndf_library:
     - populations/
     - projectionqueries/
     - projections/
+    - pulse/
     - segments/
     - tests/
     - utilities/
