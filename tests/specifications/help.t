@@ -269,7 +269,17 @@ Other components:
 						  {
 						   description => "Is startup successful ?",
 						   read => "GENESIS 3 shell",
+						   wait => 1,
 						  },
+
+						  {
+						   description => "Can we start up the ns-sli from the gshell?",
+						   read => "Starting Genesis",
+						   write => "sli_run",
+						   timeout => 5,
+						   wait => 1,
+						  },
+
 						  {
 						   description => "Can we list avaialable GENESIS 2 commands?",
 						   write => 'sli_listcommands',
@@ -307,17 +317,16 @@ readfile            reclaim             resched             reset
 restore             round               save                set_nsintegrator_verbose_level
 setclock            setdefault          setenv              setfield            
 setfieldprot        setglobal           setmethod           setpriority         
-setprompt           setrand             setup_tabchan       setupalpha          
-sh                  showclocks          showcommand         showfield           
-showjobs            showmsg             showobject          showsched           
-showstat            silent              simdump             simobjdump          
-simundump           sin                 sqrt                stack               
-step                stop                strcat              strcmp              
-strlen              strncmp             strsub              substituteinfo      
-substring           swapdump            tan                 tau_tweak_tabchan   
-trunc               tset                tweak_tabchan       tweakalpha          
-tweaktau            useclock            version             warning             
-where               writefile',
+setprompt           setrand             setupalpha          sh                  
+showclocks          showcommand         showfield           showjobs            
+showmsg             showobject          showsched           showstat            
+silent              simdump             simobjdump          simundump           
+sin                 sqrt                stack               step                
+stop                strcat              strcmp              strlen              
+strncmp             strsub              substituteinfo      substring           
+swapdump            tan                 trunc               tset                
+tweakalpha          tweaktau            useclock            version             
+warning             where               writefile',
 						  },
 						  {
 						   description => "Can we get a list of available GENESIS 2 objects?",
