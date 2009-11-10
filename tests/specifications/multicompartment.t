@@ -42,7 +42,7 @@ Number of segments: 4548
 Number of segments without parents: 1
 Number of segment tips: 1474
 ',
-						   write => 'querymachine segmenterlinearize /Purkinje',
+						   write => 'morphology_summarize /Purkinje',
 						  },
 						  {
 						   description => 'Can we ask for the dendritic tips of the morphology ?',
@@ -1526,7 +1526,7 @@ tips:
     - /Purkinje/segments/b3s46[15]/Purkinje_spine_0/head
 ',
 						   timeout => 30,
-						   write => 'querymachine segmentertips /Purkinje',
+						   write => 'morphology_list_spine_heads /Purkinje',
 						  },
 						 ],
 				description => "commands for working with and analyzing a multicompartmental model",
