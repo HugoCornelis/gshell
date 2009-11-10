@@ -211,7 +211,7 @@ my $test
 						   write => "sh cat /tmp/output",
 						  },
 						 ],
-				description => "commands to run the purkinje cell from an ndf file, voltage clamp",
+				description => "commands to run the purkinje cell from an ndf file, current clamp",
 				side_effects => "creates a model in the model container",
 			       },
 			      ],
