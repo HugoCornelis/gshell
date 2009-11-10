@@ -2879,7 +2879,7 @@ our $all_inputclass_templates
 			module_name => 'Heccer',
 			options => {
 				    name => 'name of this inputclass',
-				    command => 'command voltage',
+				    command => 'command value',
 				   },
 			package => 'Heccer::PerfectClamp',
 		       },
