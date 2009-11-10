@@ -271,15 +271,6 @@ Other components:
 						   read => "GENESIS 3 shell",
 						   wait => 1,
 						  },
-
-						  {
-						   description => "Can we start up the ns-sli from the gshell?",
-						   read => "Starting Genesis",
-						   write => "sli_run",
-						   timeout => 5,
-						   wait => 1,
-						  },
-
 						  {
 						   description => "Can we list avaialable GENESIS 2 commands?",
 						   write => 'sli_listcommands',
