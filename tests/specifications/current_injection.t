@@ -4,8 +4,7 @@
 use strict;
 
 
-my $simple_purkinje_txt = '
-loading purkinje cell
+my $simple_purkinje_txt = 'loading purkinje cell
 loaded
 applying current injection
 running for 0.001sec
