@@ -53,7 +53,7 @@ END
 our $loaded = 1;
 
 
-print "Python loaded\n";
+# print "Python loaded\n";
 
 
 sub initialize
