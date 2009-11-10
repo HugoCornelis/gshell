@@ -129,6 +129,8 @@ synopsis: (you gave )
   - list_elements
   - model_state_load
   - model_state_save
+  - morphology_list_spine_heads
+  - morphology_summarize
   - ndf_load
   - ndf_save
   - npl_load
