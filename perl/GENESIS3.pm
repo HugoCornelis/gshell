@@ -3170,7 +3170,7 @@ sub profile_environment
 
 sub version
 {
-    # $Format: "    my $version=\"${package}-${label}\";"$
+    # $Format: "    my $version = \"${package}-${label}\";"$
     my $version="gshell-userdocs-6";
 
     return $version;
