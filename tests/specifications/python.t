@@ -64,13 +64,13 @@ PRIVATE_MODELS
 END PRIVATE_MODELS
 
 PUBLIC_MODELS
-  CHANNEL k
+  CHANNEL \"k\"
     BINDABLES
       INPUT Vm,
       OUTPUT G,
       OUTPUT I,
     END BINDABLES
-    gate_kinetic a
+    gate_kinetic \"a\"
       PARAMETERS
         PARAMETER ( HH_AB_Tau = -0.01 ),
         PARAMETER ( HH_AB_Offset_E = 0.06 ),
@@ -80,7 +80,7 @@ PUBLIC_MODELS
         PARAMETER ( HH_AB_Scale = -600 ),
       END PARAMETERS
     END gate_kinetic
-    gate_kinetic b
+    gate_kinetic \"b\"
       PARAMETERS
         PARAMETER ( HH_AB_Tau = 0.08 ),
         PARAMETER ( HH_AB_Offset_E = 0.07 ),
