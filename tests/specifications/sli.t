@@ -13,6 +13,72 @@ my $test
 				command => 'bin/genesis-g3',
 				command_tests => [
 						  {
+						   description => "Can we show the root of the library with the backward compatibility scripts?",
+						   read => 'PurkM9_model',
+						   write => 'show_library sli',
+						  },
+						  {
+						   description => "Can we show the purkinje cell model subdirectory of the library with the backward compatibility scripts?",
+						   read => '
+    - ACTIVE-main1.g
+    - ACTIVE-soma1.g
+    - CLIMB9.g
+    - CLIMBSPINE9.g
+    - CURRENT9.g
+    - ISPINE9.g
+    - PASSIVE9-current.g
+    - PASSIVE9-current1.g
+    - PASSIVE9-current2.g
+    - Purk2M0.p
+    - Purk2M0s.p
+    - Purk2M0sA.p
+    - Purk2M9.p
+    - Purk2M9_main1.p
+    - Purk2M9_soma.p
+    - Purk2M9s.p
+    - Purk2M9s1.p
+    - Purk2M9s10.p
+    - Purk2M9s14.p
+    - Purk2M9s19.p
+    - Purk2M9s2.p
+    - Purk2M9s25.p
+    - Purk2M9s29.p
+    - Purk2M9s3.p
+    - Purk2M9s37.p
+    - Purk2M9s4.p
+    - Purk2M9s44.p
+    - Purk2M9s45.p
+    - Purk2M9s6.p
+    - Purk2M9s8b.p
+    - Purk2M9sA.p
+    - Purk_chan.g
+    - Purk_chanload.g
+    - Purk_chansave.g
+    - Purk_cicomp.g
+    - Purk_cicomp_passive.g
+    - Purk_comp.g
+    - Purk_const.g
+    - Purk_icomp.g
+    - Purk_spicomp.g
+    - Purk_syn.g
+    - SYNCHRONORM9.g
+    - SYNCHROPASS9.g
+    - defaults.g
+    - purkinje_simplifying.g
+    - schedule.g
+',
+						   write => 'show_library sli PurkM9_model',
+						  },
+						 ],
+				comment => 'Likely this test needs to be reworked a little bit because some features of the backward compatibility module are still under development.',
+				description => "exploring the GENESIS 2 backward compatibility library",
+			       },
+			       {
+				arguments => [
+					     ],
+				command => 'bin/genesis-g3',
+				command_tests => [
+						  {
 						   description => "Can we run the current injection script?",
 						   write => 'sli_run /usr/local/ns-sli/tests/scripts/PurkM9_model/CURRENT9.g',
 						  },

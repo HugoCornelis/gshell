@@ -1633,6 +1633,23 @@ sub show_library
 
 	print Dump( { ndf_library => { $path => $result, }, }, );
     }
+    elsif ($type =~ /^sli$/i
+	   || $type =~ /^g2$/i)
+    {
+	my $result
+	    = [
+	       sort
+	       map
+	       {
+		   chomp ; $_
+	       }
+	       `ls -1F "/usr/local/ns-sli/tests/scripts/$path"`,
+	      ];
+
+	use YAML;
+
+	print Dump( { g2_library => { $path => $result, }, }, );
+    }
 
     return "*** Ok: show_library $type $path";
 }
