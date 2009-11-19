@@ -103,7 +103,6 @@ runtime_parameters:
 						   write => "run /Purkinje 0.001",
 						  },
 						  {
-						   comment => "only testing the last line of output",
 						   description => "Can we find the output ?",
 						   read => "
 0.001 -0.0587013
