@@ -1833,34 +1833,6 @@ sub show_verbose_help
 }
 
 
-{
-    # check if all command subs have associated help subs
-
-    no strict "refs";
-
-    foreach my $command (keys %{(\%{"::"})->{"GENESIS3::"}->{"Commands::"}})
-    {
-# 	(\%{"::"})->{$command} = (\%{"::"})->{"GENESIS3::"}->{"Commands::"}->{$command};
-
-	if ($command =~ /_help$/)
-	{
-	    next;
-	}
-	elsif ($command eq 'BEGIN'
-	       or $command eq 'Dump'
-	       or $command eq 'Load')
-	{
-	    next;
-	}
-
-	if (!exists  ((\%{"::"})->{"GENESIS3::"}->{"Commands::"}->{"${command}_help"}))
-	{
-	    print "*** Warning: command $command found, but no help available for it\n";
-	}
-    }
-}
-
-
 sub swc_load
 {
     print "Not implemented yet.  Please contribute by providing a use case.\n";
@@ -2941,6 +2913,37 @@ our $schedulers = {};
 our $verbose_level;
 
 
+sub check_runtime_environment
+{
+    # check if all command subs have associated help subs
+
+    no strict "refs";
+
+    foreach my $command (keys %{(\%{"::"})->{"GENESIS3::"}->{"Commands::"}})
+    {
+# 	(\%{"::"})->{$command} = (\%{"::"})->{"GENESIS3::"}->{"Commands::"}->{$command};
+
+	if ($command =~ /_help$/)
+	{
+	    next;
+	}
+	elsif ($command eq 'BEGIN'
+	       or $command eq 'Dump'
+	       or $command eq 'Load')
+	{
+	    next;
+	}
+
+	if (!exists  ((\%{"::"})->{"GENESIS3::"}->{"Commands::"}->{"${command}_help"}))
+	{
+	    print "*** Warning: command $command found, but no help available for it\n";
+	}
+    }
+
+    return 1;
+}
+
+
 sub create_all_tokens
 {
     eval "require Neurospaces::Tokens::Physical";
@@ -3195,6 +3198,7 @@ sub version
 
 
 profile_environment()
-    and initialize();
+    and initialize()
+    and check_runtime_environment();
 
 
