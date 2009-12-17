@@ -422,6 +422,49 @@ sub delete_help
 }
 
 
+# sub delete_input
+# {
+#     my $class_name = shift;
+
+#     my $component_name = shift;
+
+#     my $field = shift;
+
+#     my $options = { @_, };
+
+#     # find the input class
+
+#     if (!exists $GENESIS3::inputclasses->{$class_name})
+#     {
+# 	return "*** Error: inputclass_template $class_name not found";
+#     }
+
+#     my $inputclass = $GENESIS3::inputclasses->{$class_name};
+
+#     # use it to create an actual input
+
+#     push
+# 	@$GENESIS3::inputs,
+# 	{
+# 	 component_name => $component_name,
+# 	 field => $field,
+# 	 inputclass => $class_name,
+# 	};
+
+#     return "*** Ok: delete_input $component_name $field";
+# }
+
+
+# sub delete_input_help
+# {
+#     print "description: connect an input with a model variable.
+# synopsis: delete_input <class_name> <element_name> <field_name>
+# ";
+
+#     return "*** Ok";
+# }
+
+
 sub echo
 {
     print join " ", @_;
@@ -1953,6 +1996,49 @@ sub list_inputclass_templates
 }
 
 
+sub list_section
+{
+#     my $symbols_definitions = $GENESIS3::Configuration::symbols_definitions;
+
+#     my $tokens = $symbols_definitions->{tokens};
+
+#     my $token_names
+# 	= [
+# 	   sort
+# 	   map
+# 	   {
+# 	       s/^TOKEN_// ; $_
+# 	   }
+# 	   map
+# 	   {
+# 	       my $token = $tokens->{$_};
+
+# 	       $token->{lexical};
+# 	   }
+# 	   grep
+# 	   {
+# 	       $tokens->{$_}->{purpose} eq $purpose
+# 	   }
+# 	   keys %$tokens,
+# 	  ];
+
+    my $purpose = 'section';
+
+    my $token_names
+	= [
+	   'IMPORT',
+	   'PRIVATE_MODELS',
+	   'PUBLIC_MODELS',
+	  ];
+
+    print "all $purpose tokens:\n";
+
+    print foreach map { "  - $_\n" } @$token_names;
+
+    return "*** Ok: list_$purpose";
+}
+
+
 sub list_verbose
 {
     use YAML;
@@ -2320,7 +2406,6 @@ package GENESIS3::Help;
 
 foreach my $purpose qw(
 		       physical
-		       sections
 		       structure
 		      )
 {
