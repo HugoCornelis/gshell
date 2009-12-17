@@ -260,6 +260,15 @@ Other components:
 ",
 						   write => 'list physical',
 						  },
+						  {
+						   description => "Can we find section tokens ?",
+						   read => "all section tokens:
+  - IMPORT
+  - PRIVATE_MODELS
+  - PUBLIC_MODELS
+",
+						   write => 'list section',
+						  },
 						 ],
 				description => "list commands",
 			       },
