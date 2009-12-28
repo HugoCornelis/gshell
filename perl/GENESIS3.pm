@@ -1397,40 +1397,6 @@ sub run_help
 }
 
 
-sub set_verbose
-{
-    my $level = shift;
-
-    if (exists $GENESIS3::all_verbose->{$level})
-    {
-	$GENESIS3::verbose_level = $level;
-
-	return "*** Ok: setting verbosity to $level";
-    }
-    else
-    {
-	if (!exists $GENESIS3::all_verbose->{$GENESIS3::verbose_level})
-	{
-	    #! fall back to a default that makes sense to the current messy situation
-
-	    set_verbose('debug');
-	}
-
-	return "*** Error: verbosity $level does not exist in the current environment";
-    }
-}
-
-
-sub set_verbose_help
-{
-    print "description: set the verbosity level.\n";
-
-    print "synopsis: set_verbose <level>\n";
-
-    return "*** Ok";
-}
-
-
 sub set_model_parameter
 {
     my $element = shift;
@@ -1584,6 +1550,40 @@ sub set_runtime_parameter_help
     print "description: set a run-time parameter to a specific value.\n";
 
     print "synopsis: set_runtime_parameter <element_name> <parameter_name> <value> [ <value_type> ]\n";
+
+    return "*** Ok";
+}
+
+
+sub set_verbose
+{
+    my $level = shift;
+
+    if (exists $GENESIS3::all_verbose->{$level})
+    {
+	$GENESIS3::verbose_level = $level;
+
+	return "*** Ok: setting verbosity to $level";
+    }
+    else
+    {
+	if (!exists $GENESIS3::all_verbose->{$GENESIS3::verbose_level})
+	{
+	    #! fall back to a default that makes sense to the current messy situation
+
+	    set_verbose('debug');
+	}
+
+	return "*** Error: verbosity $level does not exist in the current environment";
+    }
+}
+
+
+sub set_verbose_help
+{
+    print "description: set the verbosity level.\n";
+
+    print "synopsis: set_verbose <level>\n";
 
     return "*** Ok";
 }
