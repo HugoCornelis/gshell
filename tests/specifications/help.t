@@ -162,6 +162,7 @@ synopsis: (you gave )
   - ssp_load
   - ssp_save
   - swc_load
+  - tabulate
   - xml_load
   - xml_save
 ",
