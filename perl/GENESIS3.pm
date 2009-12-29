@@ -243,7 +243,7 @@ sub check
     else
     {
 	print "Simulation check ok\n";
-	
+
 	return "*** Ok";
     }
 }
@@ -1213,8 +1213,13 @@ sub run
 
 	return "*** Ok: done running $scheduler->{name}";
     }
+
+    # else
+
     else
     {
+	# construct a simulation schedule
+
 	my $schedule
 	    = {
 	       name => "GENESIS3 SSP schedule initiated for $modelname, $time",
@@ -1394,6 +1399,74 @@ sub run_help
     print "synopsis: run <element_name> <time>\n";
 
     return "*** Ok";
+}
+
+
+sub tabulate
+{
+    my $modelname = shift;
+
+# 					  format => 'alpha-beta',
+# 					  format => 'steadystate-tau',
+# 					  format => 'A-B',
+# 					  format => 'internal',
+
+    my $source = shift;
+
+    my $format = shift || 'steadystate-tau';
+
+    if (!defined $modelname || !defined $format)
+    {
+	return '*** Error: <modelname> and <format> are required';
+    }
+
+    # define a scheduler for this model
+
+    run($modelname, 0);
+
+    # get scheduler for this model
+
+    my $scheduler = $GENESIS3::schedulers->{$modelname};
+
+    if (!$scheduler)
+    {
+	return "*** Error: no simulation was previously run for $modelname, no scheduler found";
+    }
+
+    # construct the tabulator interface
+
+    my $tabulator = Heccer::Tabulator->new();
+
+    my $ssp_analyzer = SSP::Analyzer->new( { backend => $tabulator, scheduler => $scheduler, }, );
+
+    $tabulator->serve( $ssp_analyzer, { source => "model_container::$modelname", }, );
+
+    my $error
+	= $tabulator->dump
+	    (
+	     $ssp_analyzer,
+	     {
+	      format => $format,
+	      output => 'stdout',
+	      source => "$modelname/$source/A",
+	     },
+	     {
+	      format => $format,
+	      output => 'stdout',
+	      source => "$modelname/$source/B",
+	     },
+	    );
+
+    if ($error)
+    {
+	return "*** Error: exporting tables failed ($error)";
+    }
+    else
+    {
+	print "Simulation check ok\n";
+
+	return "*** Ok";
+    }
 }
 
 
