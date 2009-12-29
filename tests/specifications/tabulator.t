@@ -12039,6 +12039,7 @@ tau:
 						  },
 						 ],
 				description => "tabulation of channel kinetics",
+				side_effects => 'loads a model into the model-contaier',
 			       },
 			      ],
        description => "tabulation",
