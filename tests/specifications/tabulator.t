@@ -12034,6 +12034,7 @@ tau:
   - 1.17938093530715e-07
   - 1.17349877150765e-07
 ",
+						   timeout => 50,
 						   write => "tabulate /Purkinje segments/soma/naf/naf_gate_activation",
 						  },
 						 ],
