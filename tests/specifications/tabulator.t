@@ -21,7 +21,7 @@ my $test
 						   write => "ndf_load cells/purkinje/edsjb1994.ndf",
 						  },
 						  {
-						   description => "Can get access to the fast sodium activation tables ?",
+						   description => "Can we get access to the fast sodium activation tables ?",
 						   numerical_compare => "arithmetic rounding differences on the tester",
 						   read => "
 --- !!perl/hash:Heccer::Tabulator::Result
