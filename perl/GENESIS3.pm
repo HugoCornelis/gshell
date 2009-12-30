@@ -1470,6 +1470,18 @@ sub tabulate
 }
 
 
+sub tabulate_help
+{
+    print "description: export the tabulated form of the kinetics of a model's channel.\n";
+
+    print "synopsis: tabulate <modelname> <source> <format>\n";
+
+    print "comment: format is one of 'alpha-beta', 'steadystate-tau', 'A-B', 'internal'\n";
+
+    return "*** Ok";
+}
+
+
 sub set_model_parameter
 {
     my $element = shift;
