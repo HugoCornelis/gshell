@@ -1415,6 +1415,8 @@ sub tabulate
 
     my $format = shift || 'steadystate-tau';
 
+    my $increment = shift || 50;
+
     if (!defined $modelname || !defined $format)
     {
 	return '*** Error: <modelname> and <format> are required';
@@ -1447,11 +1449,15 @@ sub tabulate
 	     $ssp_analyzer,
 	     {
 	      format => $format,
+	      increment => $increment,
+	      output => 'file:///tmp/tabulator-A.out',
 	      output => 'stdout',
 	      source => "$modelname/$source/A",
 	     },
 	     {
 	      format => $format,
+	      increment => $increment,
+	      output => 'file:///tmp/tabulator-B.out',
 	      output => 'stdout',
 	      source => "$modelname/$source/B",
 	     },
@@ -1474,7 +1480,7 @@ sub tabulate_help
 {
     print "description: export the tabulated form of the kinetics of a model's channel.\n";
 
-    print "synopsis: tabulate <modelname> <source> <format>\n";
+    print "synopsis: tabulate <modelname> <source> <format> <increment>\n";
 
     print "comment: format is one of 'alpha-beta', 'steadystate-tau', 'A-B', 'internal'\n";
 
@@ -2999,7 +3005,7 @@ our $all_components
 		       },
 	      },
        studio => {
-		  disabled => "the Neurospaces studio is an experimental feature, try enabling it with the 'enable' command",
+		  disabled => "the Neurospaces studio is an experimental feature, try loading it with the 'component_load' command",
 		  description => "Graphical interface that allows to explore models",
 		  module => "Neurospaces::Studio",
 		  type => {
