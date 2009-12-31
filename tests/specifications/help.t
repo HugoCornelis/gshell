@@ -212,9 +212,9 @@ synopsis: (you gave )
       layer: 1
   studio:
     description: Graphical interface that allows to explore models
-    disabled: \"the Neurospaces studio is an experimental feature, try enabling it with the 'enable' command\"
+    disabled: \"the Neurospaces studio is an experimental feature, try loading it with the 'component_load' command\"
     module: Neurospaces::Studio
-    status: \"disabled (the Neurospaces studio is an experimental feature, try enabling it with the 'enable' command)\"
+    status: \"disabled (the Neurospaces studio is an experimental feature, try loading it with the 'component_load' command)\"
     type:
       description: graphical user interface
       layer: 2
