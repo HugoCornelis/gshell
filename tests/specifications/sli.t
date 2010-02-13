@@ -219,7 +219,7 @@ PRIVATE_MODELS
 END PRIVATE_MODELS
 
 PUBLIC_MODELS
-  ALIAS "/library/Purk_soma/NaF::/Purk_NaF" "NaF"
+  ALIAS /library/Purk_soma/NaF::/Purk_NaF NaF
     PARAMETERS
       PARAMETER ( G_MAX = 74999.9 ),
     END PARAMETERS
