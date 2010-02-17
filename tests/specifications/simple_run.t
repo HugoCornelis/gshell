@@ -212,6 +212,7 @@ schedule:
         service_backend: &5 !!perl/hash:Neurospaces
           neurospaces: !!perl/hash:SwiggableNeurospaces::Neurospaces {}
         service_name: model_container
+    compilation_priority: numerical
     constructor_settings: &6
       dStep: 2e-05
     event_distributor: {}
