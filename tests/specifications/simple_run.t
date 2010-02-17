@@ -203,9 +203,6 @@ outputs:
 schedule:
   - !!perl/hash:SSP::Engine
     backend: !!perl/hash:Heccer
-      event_distributor:
-        event_distributor_backend: ~
-        event_distributor_name: ~
       heccer: !!perl/hash:SwiggableHeccer::Heccer {}
       model_source:
         modelname: /singlep
@@ -215,7 +212,6 @@ schedule:
     compilation_priority: numerical
     constructor_settings: &6
       dStep: 2e-05
-    event_distributor: {}
     modelname: /singlep
     module_name: Heccer
     scheduler: *1
@@ -234,6 +230,7 @@ simulation_time:
   time: 0
 solverclasses:
   heccer:
+    compilation_priority: numerical
     constructor_settings: *6
     module_name: Heccer
     service_name: model_container
