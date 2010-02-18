@@ -141,6 +141,7 @@ apply:
     - method: analyze
   initializers:
     - method: compile
+    - method: connect
     - method: instantiate_inputs
     - method: instantiate_outputs
     - method: initiate
