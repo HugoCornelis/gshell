@@ -1443,39 +1443,6 @@ sub tabulate
 
     $tabulator->serve( $ssp_analyzer, { source => "model_container::$modelname", }, );
 
-    # construct a mapping from channel_type to gate names
-
-    my $gate_names
-	= {
-	   ChannelAct => {
-			  activation => [ "A", "B", ],
-			 },
-	   ChannelActConc => {
-			      activation => [ "A", "B", ],
-			      concentration => "concentration_kinetic",
-			     },
-	   ChannelActInact => {
-			       activation => [ "A", "B", ],
-			       inactivation => [ "A", "B", ],
-			      },
-	   ChannelConc => {
-			   concentration => "concentration_kinetic",
-			  },
-	   ChannelPersistentSteadyStateDualTau => {
-						   kh_gate => [ 'tau1', 'tau2', ],
-						  },
-	   ChannelPersistentSteadyStateTau => {
-					       km_gate => [ 'a', 'b', ],
-					      },
-	   ChannelSteadyStateSteppedTau => {
-					    steady_state => {
-							     A => [ 'a', 'b', ],
-							     B => [ 'a', 'b', ],
-							    },
-					    tau => [ 'a', 'b', ],
-					   },
-	  };
-
     my $error
 	= $tabulator->dump
 	    (
@@ -3245,8 +3212,6 @@ sub header
 sub initialize
 {
     my $result = 1;
-
-    require Neurospaces;
 
     $GENESIS3::model_container = Neurospaces->new();
 
