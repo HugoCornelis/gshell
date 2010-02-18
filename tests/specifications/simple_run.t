@@ -158,6 +158,8 @@ history:
   - arguments: []
     method: compile
   - arguments: []
+    method: connect
+  - arguments: []
     method: instantiate_inputs
   - arguments: []
     method: instantiate_outputs
