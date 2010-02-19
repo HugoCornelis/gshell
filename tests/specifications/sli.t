@@ -219,7 +219,7 @@ PRIVATE_MODELS
 END PRIVATE_MODELS
 
 PUBLIC_MODELS
-  ALIAS /library/Purk_soma/NaF::/Purk_NaF NaF
+  ALIAS Purk_NaF NaF
     PARAMETERS
       PARAMETER ( G_MAX = 74999.9 ),
     END PARAMETERS
@@ -237,7 +237,7 @@ END PUBLIC_MODELS
 </private_models>
 
 <public_models>
-  <alias> <namespace>/library/Purk_soma/NaF::</namespace><prototype>/Purk_NaF</prototype> <name>NaF</name>
+  <alias> <prototype>Purk_NaF</prototype> <name>NaF</name>
     <parameters>
       <parameter> <name>G_MAX</name><value>74999.9</value> </parameter>
     </parameters>
