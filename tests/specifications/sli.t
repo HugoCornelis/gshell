@@ -220,6 +220,9 @@ END PRIVATE_MODELS
 
 PUBLIC_MODELS
   ALIAS Purk_NaF NaF
+    BINDINGS
+      INPUT ..->Vm,
+    END BINDINGS
     PARAMETERS
       PARAMETER ( G_MAX = 74999.9 ),
     END PARAMETERS
@@ -238,6 +241,9 @@ END PUBLIC_MODELS
 
 <public_models>
   <alias> <prototype>Purk_NaF</prototype> <name>NaF</name>
+    <bindings>
+      <input> <name>..->Vm</name> </input>
+    </bindings>
     <parameters>
       <parameter> <name>G_MAX</name><value>74999.9</value> </parameter>
     </parameters>
