@@ -16,7 +16,7 @@ perldir = $(prefix)/glue/swig/perl
 
 nobase_dist_perl_DATA = @PERL_MODULES@
 
-perldatadir = $(prefix)/neurospaces/ssp
+perldatadir = $(prefix)/neurospaces/gshell
 
 nobase_dist_perldata_DATA = @PERL_DATA@
 
