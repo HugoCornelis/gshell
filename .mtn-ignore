@@ -1,3 +1,7 @@
+.changes$
+.deb$
+.dsc$
+.log$
 Makefile$
 Makefile\.in$
 ^aclocal.m4$
@@ -15,8 +19,3 @@ Makefile\.in$
 ^tests/results
 _Inline
 gz$
-.deb$
-.changes$
-.dsc$
-.log$
-
