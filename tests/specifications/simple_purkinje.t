@@ -295,7 +295,7 @@ ndf_library:
 						   read => " output
 ",
 						   timeout => 100,
-						   write => "sh ls -l /tmp/*",
+						   write => "sh ls -l /tmp",
 						  },
 						  {
 						   comment => "only testing the last line of output",
@@ -349,7 +349,7 @@ ndf_library:
 						   read => " output
 ",
 						   timeout => 100,
-						   write => "sh ls -l /tmp/*",
+						   write => "sh ls -l /tmp",
 						  },
 						  {
 						   comment => "only testing the last line of output",
