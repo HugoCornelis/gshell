@@ -627,12 +627,47 @@ synopsis: input_add <class_name> <element_name> <field_name>
 }
 
 
+sub input_delete
+{
+    my $input_name = shift;
+
+#     delete $GENESIS3::inputs->{$input_name};
+
+    return "*** Error: input_delete $input_name";
+}
+
+
+sub input_delete_help
+{
+    print "description: delete an input.
+synopsis: input_delete [ <input_name> [ <option> ... ] ]
+";
+
+    return "*** Ok";
+}
+
+
 sub input_show
 {
+    my $component_name = shift;
+
     use YAML;
 
     print Dump(
-	       $GENESIS3::inputs,
+	       [
+		grep
+		{
+		    my $result = 1;
+
+		    if (defined $component_name)
+		    {
+			$result = $_->{component_name} =~ /$component_name/;
+		    }
+
+		    $result;
+		}
+		@{ $GENESIS3::inputs, },
+	       ],
 	      );
 
     return "*** Ok: input_show";
@@ -685,6 +720,96 @@ sub inputclass_add_help
 {
     print "description: define an input class for subsequent use in a simulation.
 synopsis: inputclass_add <template_name> <class_name> <option> ...
+";
+
+    return "*** Ok";
+}
+
+
+sub inputclass_delete
+{
+    my $inputclass_name = shift;
+
+    delete $GENESIS3::all_inputclasses->{$inputclass_name};
+
+    return "*** Ok: inputclass_delete $inputclass_name";
+}
+
+
+sub inputclass_delete_help
+{
+    print "description: delete an inputclass.
+synopsis: inputclass_delete [ <class_name> [ <option> ... ] ]
+";
+
+    return "*** Ok";
+}
+
+
+sub inputclass_show
+{
+    my $inputclass_name = shift;
+
+    if ( GENESIS3::Help::list_inputclasses($inputclass_name, @_) =~ /error/i )
+    {
+	return "*** Error: inputclass_show $inputclass_name";
+    }
+    else
+    {
+	return "*** Ok: inputclass_show $inputclass_name";
+    }
+}
+
+
+sub inputclass_show_help
+{
+    print "description: show the available inputclasses.
+synopsis: inputclass_show [ <class_name> [ <option> ... ] ]
+";
+
+    return "*** Ok";
+}
+
+
+# sub inputclass_template_delete
+# {
+#     my $inputclass_template_name = shift;
+
+#     delete $GENESIS3::all_inputclass_templates->{$inputclass_template_name};
+
+#     return "*** Ok: inputclass_template_delete $inputclass_template_name";
+# }
+
+
+# sub inputclass_template_delete_help
+# {
+#     print "description: delete an inputclass templates.
+# synopsis: inputclass_template_delete [ <template_name> [ <option> ... ] ]
+# ";
+
+#     return "*** Ok";
+# }
+
+
+sub inputclass_template_show
+{
+    my $inputclass_template_name = shift;
+
+    if ( GENESIS3::Help::list_inputclass_templates($inputclass_template_name, @_) =~ /error/i )
+    {
+	return "*** Error: inputclass_template_show $inputclass_template_name";
+    }
+    else
+    {
+	return "*** Ok: inputclass_template_show $inputclass_template_name";
+    }
+}
+
+
+sub inputclass_template_show_help
+{
+    print "description: show the available inputclass templates.
+synopsis: inputclass_template_show [ <template_name> [ <option> ... ] ]
 ";
 
     return "*** Ok";
@@ -1766,6 +1891,26 @@ sub runtime_parameter_add_help
 }
 
 
+sub runtime_parameter_delete
+{
+    my $runtime_parameter_name = shift;
+
+#     delete $GENESIS3::inputs->{$runtime_parameter_name};
+
+    return "*** Error: runtime_parameter_delete $runtime_parameter_name";
+}
+
+
+sub runtime_parameter_delete_help
+{
+    print "description: delete an input.
+synopsis: runtime_parameter_delete [ <runtime_parameter_name> [ <option> ... ] ]
+";
+
+    return "*** Ok";
+}
+
+
 sub runtime_parameters_show
 {
     use YAML;
@@ -2057,29 +2202,47 @@ sub list_functions
 
 sub list_inputclasses
 {
+    my $inputclass_name = shift;
+
+    my $inputclasses = { %{ $GENESIS3::inputclasses, }, };
+
+    foreach (%$inputclasses)
+    {
+	delete $inputclasses->{$_} if not /$inputclass_name/;
+    }
+
     use YAML;
 
     local $YAML::UseHeader = 0;
 
     print Dump(
 	       {
-		"all input classes" => $GENESIS3::inputclasses,
+		"all input classes" => $inputclasses,
 	       },
 	      );
 
-    return "*** Ok: list_inputclass_templates";
+    return "*** Ok: list_inputclasses";
 }
 
 
 sub list_inputclass_templates
 {
+    my $inputclass_template_name = shift;
+
+    my $inputclass_templates = { %{ $GENESIS3::all_inputclass_templates, }, };
+
+    foreach (%$inputclass_templates)
+    {
+	delete $inputclass_templates->{$_} if not /$inputclass_template_name/;
+    }
+
     use YAML;
 
     local $YAML::UseHeader = 0;
 
     print Dump(
 	       {
-		"all input class templates" => $GENESIS3::all_inputclass_templates,
+		"all input class templates" => $inputclass_templates,
 	       },
 	      );
 

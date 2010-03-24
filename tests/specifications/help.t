@@ -123,8 +123,12 @@ synopsis: (you gave )
   - explore
   - help
   - input_add
+  - input_delete
   - input_show
   - inputclass_add
+  - inputclass_delete
+  - inputclass_show
+  - inputclass_template_show
   - library_show
   - list
   - list_elements
@@ -149,6 +153,7 @@ synopsis: (you gave )
   - reset
   - run
   - runtime_parameter_add
+  - runtime_parameter_delete
   - runtime_parameters_show
   - set_verbose
   - sh
