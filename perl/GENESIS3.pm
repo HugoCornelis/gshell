@@ -627,6 +627,28 @@ synopsis: input_add <class_name> <element_name> <field_name>
 }
 
 
+sub input_show
+{
+    use YAML;
+
+    print Dump(
+	       $GENESIS3::inputs,
+	      );
+
+    return "*** Ok: input_show";
+}
+
+
+sub input_show_help
+{
+    print "description: show input applied to the model.\n";
+
+    print "synopsis: input_show\n";
+
+    return "*** Ok";
+}
+
+
 sub inputclass_add
 {
     my $template_name = shift;
@@ -664,6 +686,60 @@ sub inputclass_add_help
     print "description: define an input class for subsequent use in a simulation.
 synopsis: inputclass_add <template_name> <class_name> <option> ...
 ";
+
+    return "*** Ok";
+}
+
+
+sub library_show
+{
+    my $type = shift || 'ndf';
+
+    my $path = shift || '.';
+
+    if ($type =~ /^ndf$/i)
+    {
+	my $result
+	    = [
+	       sort
+	       map
+	       {
+		   chomp ; $_
+	       }
+	       `ls -1F "/usr/local/neurospaces/models/library/$path"`,
+	      ];
+
+	use YAML;
+
+	print Dump( { ndf_library => { $path => $result, }, }, );
+    }
+    elsif ($type =~ /^sli$/i
+	   || $type =~ /^g2$/i)
+    {
+	my $result
+	    = [
+	       sort
+	       map
+	       {
+		   chomp ; $_
+	       }
+	       `ls -1F "/usr/local/ns-sli/tests/scripts/$path"`,
+	      ];
+
+	use YAML;
+
+	print Dump( { g2_library => { $path => $result, }, }, );
+    }
+
+    return "*** Ok: library_show $type $path";
+}
+
+
+sub library_show_help
+{
+    print "description: browse the online library of models\n";
+
+    print "synopsis: library_show [ <library_type> ] [ <library_path> ]\n";
 
     return "*** Ok";
 }
@@ -770,6 +846,136 @@ sub list_elements_help
     print "description: list model elements.\n";
 
     print "synopsis: list_elements [ <element_name> ]\n";
+
+    return "*** Ok";
+}
+
+
+sub model_parameter_add
+{
+    my $element = shift;
+
+    my $parameter = shift;
+
+    my $value = shift;
+
+    my $value_type = shift;
+
+    if (ref $parameter =~ /HASH/)
+    {
+	foreach my $parameter_name (keys %$parameter)
+	{
+	    my $parameter_value = $parameter->{$parameter_name};
+
+	    my $result = model_parameter_add($element, $parameter_name, $parameter_value);
+
+	    if ($result =~ /error/i)
+	    {
+		return "*** Error: model_parameter_add $element $parameter_name $parameter_value";
+	    }
+	}
+
+	return "*** Ok: model_parameter_add $element $parameter $value_type $value";
+    }
+    else
+    {
+	if (!$value_type)
+	{
+	    if ($value =~ /->/)
+	    {
+		$value_type = 'field';
+	    }
+	    elsif ($value =~ /\//)
+	    {
+		$value_type = 'symbolic';
+	    }
+	    elsif ($value =~ /^(\+|-)?([0-9]+)(\.[0-9]+)?(e(\+|-)?([0-9]+))?$/)
+	    {
+		$value_type = 'number';
+	    }
+	    else
+	    {
+		$value_type = 'string';
+	    }
+	}
+
+	if (!defined $element)
+	{
+	    $element = $GENESIS3::current_working_element;
+	}
+	else
+	{
+	    if ($element =~ m(^/))
+	    {
+	    }
+	    else
+	    {
+		$element = "$GENESIS3::current_working_element/$element";
+	    }
+	}
+
+	my $query = "setparameterconcept $element $parameter $value_type $value";
+
+	querymachine($query);
+
+	return "*** Ok: model_parameter_add $element $parameter $value_type $value";
+    }
+}
+
+
+sub model_parameter_add_help
+{
+    print "description: set a model parameter to a specific value.\n";
+
+    print "synopsis: model_parameter_add <element_name> <parameter_name> <value> [ <value_type> ]\n";
+
+    return "*** Ok";
+}
+
+
+sub model_parameter_show
+{
+    my $element = shift;
+
+    my $parameter = shift;
+
+    if (defined $element
+	and defined $parameter)
+    {
+	parameter_show($element, $parameter);
+    }
+
+    if (!defined $element)
+    {
+	$element = $GENESIS3::current_working_element;
+    }
+    else
+    {
+	if ($element =~ m(^/))
+	{
+	}
+	else
+	{
+	    $element = "$GENESIS3::current_working_element/$element";
+	}
+    }
+
+
+    my $query = "symbolparameters $element";
+
+    if (querymachine($query))
+    {
+    }
+
+    return "*** Ok: model_parameter_show $element $parameter";
+}
+
+
+sub model_parameter_show_help
+{
+    print "description: show the value of a series of model parameters.\n";
+
+    print "synopsis: model_parameter_show [ <element_name> [ <parameter_name> ] ]\n";
 
     return "*** Ok";
 }
@@ -958,6 +1164,88 @@ sub output_add_help
     print "description: add a variable to the output file.
 synopsis: output_add <element_name> <field_name>
 ";
+
+    return "*** Ok";
+}
+
+
+sub parameter_show
+{
+    my $element = shift;
+
+    my $parameter = shift;
+
+    if (!defined $element)
+    {
+	$element = $GENESIS3::current_working_element;
+    }
+    else
+    {
+	if ($element =~ m(^/))
+	{
+	}
+	else
+	{
+	    $element = "$GENESIS3::current_working_element/$element";
+	}
+    }
+
+    my $query = "printparameter $element $parameter";
+
+    if (querymachine($query))
+    {
+    }
+
+    return "*** Ok: parameter_show $element $parameter";
+}
+
+
+sub parameter_show_help
+{
+    print "description: show the value of a model parameter.\n";
+
+    print "synopsis: parameter_show <element_name> <parameter_name>\n";
+
+    return "*** Ok";
+}
+
+
+sub parameter_scaled_show
+{
+    my $element = shift;
+
+    my $parameter = shift;
+
+    if (!defined $element)
+    {
+	$element = $GENESIS3::current_working_element;
+    }
+    else
+    {
+	if ($element =~ m(^/))
+	{
+	}
+	else
+	{
+	    $element = "$GENESIS3::current_working_element/$element";
+	}
+    }
+
+    my $query = "printparameterscaled $element $parameter";
+
+    if (querymachine($query))
+    {
+    }
+
+    return "*** Ok: parameter_scaled_show $element $parameter";
+}
+
+
+sub parameter_scaled_show_help
+{
+    print "description: show the value of a model parameter.\n";
+
+    print "synopsis: show_parameter_scaled <element_name> <parameter_name>\n";
 
     return "*** Ok";
 }
@@ -1402,175 +1690,7 @@ sub run_help
 }
 
 
-sub tabulate
-{
-    my $modelname = shift;
-
-# 					  format => 'alpha-beta',
-# 					  format => 'steadystate-tau',
-# 					  format => 'A-B',
-# 					  format => 'internal',
-
-    my $source = shift;
-
-    my $format = shift || 'steadystate-tau';
-
-    my $increment = shift || 50;
-
-    if (!defined $modelname || !defined $format)
-    {
-	return '*** Error: <modelname> and <format> are required';
-    }
-
-    # define a scheduler for this model
-
-    run($modelname, 0);
-
-    # get scheduler for this model
-
-    my $scheduler = $GENESIS3::schedulers->{$modelname};
-
-    if (!$scheduler)
-    {
-	return "*** Error: no simulation was previously run for $modelname, no scheduler found";
-    }
-
-    # construct the tabulator interface
-
-    my $tabulator = Heccer::Tabulator->new();
-
-    my $ssp_analyzer = SSP::Analyzer->new( { backend => $tabulator, scheduler => $scheduler, }, );
-
-    $tabulator->serve( $ssp_analyzer, { source => "model_container::$modelname", }, );
-
-    my $error
-	= $tabulator->dump
-	    (
-	     $ssp_analyzer,
-	     {
-	      format => $format,
-	      increment => $increment,
-	      output => 'file:///tmp/tabulator-A.out',
-	      output => 'stdout',
-	      source => "$modelname/$source/A",
-	     },
-	     {
-	      format => $format,
-	      increment => $increment,
-	      output => 'file:///tmp/tabulator-B.out',
-	      output => 'stdout',
-	      source => "$modelname/$source/B",
-	     },
-	    );
-
-    if ($error)
-    {
-	return "*** Error: exporting tables failed ($error)";
-    }
-    else
-    {
-	print "Simulation check ok\n";
-
-	return "*** Ok";
-    }
-}
-
-
-sub tabulate_help
-{
-    print "description: export the tabulated form of the kinetics of a model's channel.\n";
-
-    print "synopsis: tabulate <modelname> <source> <format> <increment>\n";
-
-    print "comment: format is one of 'alpha-beta', 'steadystate-tau', 'A-B', 'internal'\n";
-
-    return "*** Ok";
-}
-
-
-sub set_model_parameter
-{
-    my $element = shift;
-
-    my $parameter = shift;
-
-    my $value = shift;
-
-    my $value_type = shift;
-
-    if (ref $parameter =~ /HASH/)
-    {
-	foreach my $parameter_name (keys %$parameter)
-	{
-	    my $parameter_value = $parameter->{$parameter_name};
-
-	    my $result = set_model_parameter($element, $parameter_name, $parameter_value);
-
-	    if ($result =~ /error/i)
-	    {
-		return "*** Error: set_model_parameter $element $parameter_name $parameter_value";
-	    }
-	}
-
-	return "*** Ok: set_model_parameter $element $parameter $value_type $value";
-    }
-    else
-    {
-	if (!$value_type)
-	{
-	    if ($value =~ /->/)
-	    {
-		$value_type = 'field';
-	    }
-	    elsif ($value =~ /\//)
-	    {
-		$value_type = 'symbolic';
-	    }
-	    elsif ($value =~ /^(\+|-)?([0-9]+)(\.[0-9]+)?(e(\+|-)?([0-9]+))?$/)
-	    {
-		$value_type = 'number';
-	    }
-	    else
-	    {
-		$value_type = 'string';
-	    }
-	}
-
-	if (!defined $element)
-	{
-	    $element = $GENESIS3::current_working_element;
-	}
-	else
-	{
-	    if ($element =~ m(^/))
-	    {
-	    }
-	    else
-	    {
-		$element = "$GENESIS3::current_working_element/$element";
-	    }
-	}
-
-	my $query = "setparameterconcept $element $parameter $value_type $value";
-
-	querymachine($query);
-
-	return "*** Ok: set_model_parameter $element $parameter $value_type $value";
-    }
-}
-
-
-sub set_model_parameter_help
-{
-    print "description: set a model parameter to a specific value.\n";
-
-    print "synopsis: set_model_parameter <element_name> <parameter_name> <value> [ <value_type> ]\n";
-
-    return "*** Ok";
-}
-
-
-sub set_runtime_parameter
+sub runtime_parameter_add
 {
     my $element = shift;
 
@@ -1632,15 +1752,35 @@ sub set_runtime_parameter
 	 value_type => $value_type,
 	};
 
-    return "*** Ok: set_runtime_parameter $element $parameter $value_type $value";
+    return "*** Ok: runtime_parameter_add $element $parameter $value_type $value";
 }
 
 
-sub set_runtime_parameter_help
+sub runtime_parameter_add_help
 {
     print "description: set a run-time parameter to a specific value.\n";
 
-    print "synopsis: set_runtime_parameter <element_name> <parameter_name> <value> [ <value_type> ]\n";
+    print "synopsis: runtime_parameter_add <element_name> <parameter_name> <value> [ <value_type> ]\n";
+
+    return "*** Ok";
+}
+
+
+sub runtime_parameters_show
+{
+    use YAML;
+
+    print Dump( { runtime_parameters => $GENESIS3::runtime_parameters, }, );
+
+    return "*** Ok: runtime_parameters_show";
+}
+
+
+sub runtime_parameters_show_help
+{
+    print "description: show the value of a run-time parameter.\n";
+
+    print "synopsis: runtime_parameters_show <element_name>\n";
 
     return "*** Ok";
 }
@@ -1723,232 +1863,6 @@ sub show_global_time_help
 }
 
 
-sub show_inputs
-{
-    use YAML;
-
-    print Dump(
-	       $GENESIS3::inputs,
-	      );
-
-    return "*** Ok";
-}
-
-
-sub show_inputs_help
-{
-    print "description: show input applied to the model.\n";
-
-    print "synopsis: show_inputs\n";
-
-    return "*** Ok";
-}
-
-
-sub show_library
-{
-    my $type = shift || 'ndf';
-
-    my $path = shift || '.';
-
-    if ($type =~ /^ndf$/i)
-    {
-	my $result
-	    = [
-	       sort
-	       map
-	       {
-		   chomp ; $_
-	       }
-	       `ls -1F "/usr/local/neurospaces/models/library/$path"`,
-	      ];
-
-	use YAML;
-
-	print Dump( { ndf_library => { $path => $result, }, }, );
-    }
-    elsif ($type =~ /^sli$/i
-	   || $type =~ /^g2$/i)
-    {
-	my $result
-	    = [
-	       sort
-	       map
-	       {
-		   chomp ; $_
-	       }
-	       `ls -1F "/usr/local/ns-sli/tests/scripts/$path"`,
-	      ];
-
-	use YAML;
-
-	print Dump( { g2_library => { $path => $result, }, }, );
-    }
-
-    return "*** Ok: show_library $type $path";
-}
-
-
-sub show_library_help
-{
-    print "description: browse the online library of models\n";
-
-    print "synopsis: show_library [ <library_type> ] [ <library_path> ]\n";
-
-    return "*** Ok";
-}
-
-
-sub show_model_parameters
-{
-    my $element = shift;
-
-    my $parameter = shift;
-
-    if (defined $element
-	and defined $parameter)
-    {
-	show_parameter($element, $parameter);
-    }
-
-    if (!defined $element)
-    {
-	$element = $GENESIS3::current_working_element;
-    }
-    else
-    {
-	if ($element =~ m(^/))
-	{
-	}
-	else
-	{
-	    $element = "$GENESIS3::current_working_element/$element";
-	}
-    }
-
-
-    my $query = "symbolparameters $element";
-
-    if (querymachine($query))
-    {
-    }
-
-    return "*** Ok: show_model_parameters $element $parameter";
-}
-
-
-sub show_model_parameters_help
-{
-    print "description: show the value of a series of model parameters.\n";
-
-    print "synopsis: show_model_parameters [ <element_name> [ <parameter_name> ] ]\n";
-
-    return "*** Ok";
-}
-
-
-sub show_parameter
-{
-    my $element = shift;
-
-    my $parameter = shift;
-
-    if (!defined $element)
-    {
-	$element = $GENESIS3::current_working_element;
-    }
-    else
-    {
-	if ($element =~ m(^/))
-	{
-	}
-	else
-	{
-	    $element = "$GENESIS3::current_working_element/$element";
-	}
-    }
-
-    my $query = "printparameter $element $parameter";
-
-    if (querymachine($query))
-    {
-    }
-
-    return "*** Ok: show_parameter $element $parameter";
-}
-
-
-sub show_parameter_help
-{
-    print "description: show the value of a model parameter.\n";
-
-    print "synopsis: show_parameter <element_name> <parameter_name>\n";
-
-    return "*** Ok";
-}
-
-
-sub show_parameter_scaled
-{
-    my $element = shift;
-
-    my $parameter = shift;
-
-    if (!defined $element)
-    {
-	$element = $GENESIS3::current_working_element;
-    }
-    else
-    {
-	if ($element =~ m(^/))
-	{
-	}
-	else
-	{
-	    $element = "$GENESIS3::current_working_element/$element";
-	}
-    }
-
-    my $query = "printparameterscaled $element $parameter";
-
-    if (querymachine($query))
-    {
-    }
-
-    return "*** Ok: show_parameter_scaled $element $parameter";
-}
-
-
-sub show_parameter_scaled_help
-{
-    print "description: show the value of a model parameter.\n";
-
-    print "synopsis: show_parameter_scaled <element_name> <parameter_name>\n";
-
-    return "*** Ok";
-}
-
-
-sub show_runtime_parameters
-{
-    use YAML;
-
-    print Dump( { runtime_parameters => $GENESIS3::runtime_parameters, }, );
-
-    return "*** Ok: show_runtime_parameters";
-}
-
-
-sub show_runtime_parameters_help
-{
-    print "description: show the value of a run-time parameter.\n";
-
-    print "synopsis: show_runtime_parameters <element_name>\n";
-
-    return "*** Ok";
-}
-
-
 sub show_verbose
 {
     print "---\nverbose_level: $GENESIS3::verbose_level\n";
@@ -1980,6 +1894,92 @@ sub swc_load_help
     print "description: load a morphology from a SWC file.\n";
 
     print "synopsis: swc_load\n";
+
+    return "*** Ok";
+}
+
+
+sub tabulate
+{
+    my $modelname = shift;
+
+# 					  format => 'alpha-beta',
+# 					  format => 'steadystate-tau',
+# 					  format => 'A-B',
+# 					  format => 'internal',
+
+    my $source = shift;
+
+    my $format = shift || 'steadystate-tau';
+
+    my $increment = shift || 50;
+
+    if (!defined $modelname || !defined $format)
+    {
+	return '*** Error: <modelname> and <format> are required';
+    }
+
+    # define a scheduler for this model
+
+    run($modelname, 0);
+
+    # get scheduler for this model
+
+    my $scheduler = $GENESIS3::schedulers->{$modelname};
+
+    if (!$scheduler)
+    {
+	return "*** Error: no simulation was previously run for $modelname, no scheduler found";
+    }
+
+    # construct the tabulator interface
+
+    my $tabulator = Heccer::Tabulator->new();
+
+    my $ssp_analyzer = SSP::Analyzer->new( { backend => $tabulator, scheduler => $scheduler, }, );
+
+    $tabulator->serve( $ssp_analyzer, { source => "model_container::$modelname", }, );
+
+    my $error
+	= $tabulator->dump
+	    (
+	     $ssp_analyzer,
+	     {
+	      format => $format,
+	      increment => $increment,
+	      output => 'file:///tmp/tabulator-A.out',
+	      output => 'stdout',
+	      source => "$modelname/$source/A",
+	     },
+	     {
+	      format => $format,
+	      increment => $increment,
+	      output => 'file:///tmp/tabulator-B.out',
+	      output => 'stdout',
+	      source => "$modelname/$source/B",
+	     },
+	    );
+
+    if ($error)
+    {
+	return "*** Error: exporting tables failed ($error)";
+    }
+    else
+    {
+	print "Simulation check ok\n";
+
+	return "*** Ok";
+    }
+}
+
+
+sub tabulate_help
+{
+    print "description: export the tabulated form of the kinetics of a model's channel.\n";
+
+    print "synopsis: tabulate <modelname> <source> <format> <increment>\n";
+
+    print "comment: format is one of 'alpha-beta', 'steadystate-tau', 'A-B', 'internal'\n";
 
     return "*** Ok";
 }

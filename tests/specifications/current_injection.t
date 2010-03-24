@@ -81,7 +81,7 @@ my $test
 						  },
 						  {
 						   description => "Can we apply current injection into the soma ?",
-						   write => "set_runtime_parameter /Purkinje/segments/soma INJECT 2e-9",
+						   write => "runtime_parameter_add /Purkinje/segments/soma INJECT 2e-9",
 						  },
 						  {
 						   description => "Can we get information about the runtime_parameters ?",
@@ -92,7 +92,7 @@ runtime_parameters:
     value: 2e-9
     value_type: number
 ",
-						   write => "show_runtime_parameters",
+						   write => "runtime_parameters_show",
 						  },
 						  {
 						   description => "Can we check the simulation ?",

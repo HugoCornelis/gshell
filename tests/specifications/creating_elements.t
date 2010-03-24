@@ -103,7 +103,7 @@ my $test
 						  },
 						  {
 						   description => "Can we set parameter CM of the segment ?",
-						   write => 'set_model_parameter /c/s CM 0.0164',
+						   write => 'model_parameter_add /c/s CM 0.0164',
 						  },
 						  {
 						   description => "Can we find the parameters of the segment ?",
@@ -119,25 +119,25 @@ my $test
 						   description => "Can we obtain the value of the CM parameter of the segment ?",
 						   read => 'value = 0.0164
 ',
-						   write => 'show_parameter /c/s CM',
+						   write => 'parameter_show /c/s CM',
 						  },
 						  {
 						   description => "Can we set the surface of the segment ?",
-						   write => 'set_model_parameter /c/s SURFACE 2',
+						   write => 'model_parameter_add /c/s SURFACE 2',
 						  },
 						  {
 						   description => "Can we obtain the scaled value of the CM parameter of the segment ?",
 						   read => 'scaled value = 0.0328
 ',
-						   write => 'show_parameter_scaled /c/s CM',
+						   write => 'parameter_scaled_show /c/s CM',
 						  },
 						  {
 						   description => "Can we set parameter RM of the segment ?",
-						   write => 'set_model_parameter /c/s RM 1.0',
+						   write => 'model_parameter_add /c/s RM 1.0',
 						  },
 						  {
 						   description => "Can we set parameter RA of the segment ?",
-						   write => 'set_model_parameter /c/s RA 2.5',
+						   write => 'model_parameter_add /c/s RA 2.5',
 						  },
 						  {
 						   description => "Can we obtain the value of the parameters of the segment ?",
@@ -158,7 +158,7 @@ my $test
     type: number
     value: 0.0164
 ",
-						   write => 'show_model_parameters /c/s',
+						   write => 'model_parameter_show /c/s',
 						  },
 						 ],
 				description => "commands for creating a model",

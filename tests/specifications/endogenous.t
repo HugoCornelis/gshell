@@ -24,11 +24,11 @@ my $test
 						  },
 						  {
 						   description => "Can we set the endogenous frequency for inhibitory channels ?",
-						   write => "set_runtime_parameter thickd::gaba::/Purk_GABA FREQUENCY 1",
+						   write => "runtime_parameter_add thickd::gaba::/Purk_GABA FREQUENCY 1",
 						  },
 						  {
 						   description => "Can we set the endogenous frequency for excitatory channels ?",
-						   write => "set_runtime_parameter spine::/Purk_spine/head/par FREQUENCY 25",
+						   write => "runtime_parameter_add spine::/Purk_spine/head/par FREQUENCY 25",
 						  },
 						  {
 						   description => "Can we get information about the runtime_parameters ?",
@@ -43,7 +43,7 @@ runtime_parameters:
     value: 25
     value_type: number
 ",
-						   write => "show_runtime_parameters",
+						   write => "runtime_parameters_show",
 						  },
 						  {
 						   description => "Can we define the output /Purkinje/segments/soma ?",

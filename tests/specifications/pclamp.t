@@ -61,7 +61,7 @@ my $test
   field: Vm
   inputclass: voltage_clamp_protocol
 ",
-						   write => "show_inputs",
+						   write => "input_show",
 						  },
 						  {
 						   description => 'Can we add an output for /Purkinje/segments/soma->Vm ?',
@@ -163,7 +163,7 @@ my $test
   field: INJECT
   inputclass: current_clamp_protocol
 ",
-						   write => "show_inputs",
+						   write => "input_show",
 						  },
 						  {
 						   description => 'Can we add an output for /Purkinje/segments/soma->Vm ?',

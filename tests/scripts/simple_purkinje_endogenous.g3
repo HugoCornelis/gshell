@@ -6,12 +6,12 @@ ndf_load cells/purkinje/edsjb1994.ndf
 echo loaded\n
 
 echo setting endogenous frequencies\n
-set_runtime_parameter thickd::gaba::/Purk_GABA FREQUENCY 1
-set_runtime_parameter spine::/Purk_spine/head/par FREQUENCY 25
+runtime_parameter_add thickd::gaba::/Purk_GABA FREQUENCY 1
+runtime_parameter_add spine::/Purk_spine/head/par FREQUENCY 25
 
-add_output /Purkinje/segments/soma Vm
-add_output /Purkinje/segments/soma/ca_pool Ca
-add_output /Purkinje/segments/b0s01[0] Vm
+output_add /Purkinje/segments/soma Vm
+output_add /Purkinje/segments/soma/ca_pool Ca
+output_add /Purkinje/segments/b0s01[0] Vm
 
 echo running for 0.1sec\n
 run /Purkinje 0.1

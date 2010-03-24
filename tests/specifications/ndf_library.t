@@ -45,7 +45,7 @@ ndf_library:
     - tests/
     - utilities/
 ",
-						   write => 'show_library',
+						   write => 'library_show',
 						  },
 						  {
 						   description => "Can we find the NDF library ?",
@@ -74,7 +74,7 @@ ndf_library:
     - tests/
     - utilities/
 ",
-						   write => 'show_library ndf',
+						   write => 'library_show ndf',
 						  },
 						  {
 						   description => "Can we find the examples in the library ?",
@@ -86,7 +86,7 @@ ndf_library:
     - hh_soma_syns.ndf
     - nmda.ndf
 ",
-						   write => 'show_library ndf examples',
+						   write => 'library_show ndf examples',
 						  },
 						  {
 						   description => "Can we find the channel library ?",
@@ -111,7 +111,7 @@ ndf_library:
     - purkinje_basket.ndf
     - purkinje_climb.ndf
 ",
-						   write => 'show_library ndf channels',
+						   write => 'library_show ndf channels',
 						  },
 						  {
 						   description => "Can we find the segment library ?",
@@ -127,7 +127,7 @@ ndf_library:
     - purkinje_thickd_passive.ndf
     - spines/
 ",
-						   write => 'show_library ndf segments',
+						   write => 'library_show ndf segments',
 						  },
 						  {
 						   description => "Can we find the purkinje cell segment library ?",
@@ -139,7 +139,7 @@ ndf_library:
     - spinyd.ndf
     - thickd.ndf
 ",
-						   write => 'show_library ndf segments/purkinje',
+						   write => 'library_show ndf segments/purkinje',
 						  },
 						  {
 						   description => "Can we find the single neuron library ?",
@@ -150,7 +150,7 @@ ndf_library:
     - purkinje/
     - stand_alone.ndf
 ",
-						   write => 'show_library ndf cells',
+						   write => 'library_show ndf cells',
 						  },
 						 ],
 				description => "ndf library",

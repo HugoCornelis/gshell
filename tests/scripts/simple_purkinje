@@ -48,7 +48,7 @@ GENESIS3::Commands::ndf_load("cells/purkinje/edsjb1994.ndf");
 print "loaded\n";
 
 print "applying current injection\n";
-GENESIS3::Commands::set_runtime_parameter("/Purkinje/segments/soma", "INJECT", 2e-9);
+GENESIS3::Commands::runtime_parameter_add("/Purkinje/segments/soma", "INJECT", 2e-9);
 
 print "running for 0.001sec\n";
 GENESIS3::Commands::run("/Purkinje", 0.001);

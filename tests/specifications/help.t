@@ -123,9 +123,13 @@ synopsis: (you gave )
   - explore
   - help
   - input_add
+  - input_show
   - inputclass_add
+  - library_show
   - list
   - list_elements
+  - model_parameter_add
+  - model_parameter_show
   - model_state_load
   - model_state_save
   - morphology_list_spine_heads
@@ -135,6 +139,8 @@ synopsis: (you gave )
   - npl_load
   - npy_load
   - output_add
+  - parameter_scaled_show
+  - parameter_show
   - pwe
   - py_diagnose
   - pynn_load
@@ -142,17 +148,11 @@ synopsis: (you gave )
   - quit
   - reset
   - run
-  - set_model_parameter
-  - set_runtime_parameter
+  - runtime_parameter_add
+  - runtime_parameters_show
   - set_verbose
   - sh
   - show_global_time
-  - show_inputs
-  - show_library
-  - show_model_parameters
-  - show_parameter
-  - show_parameter_scaled
-  - show_runtime_parameters
   - show_verbose
   - sli_listcommands
   - sli_listobjects

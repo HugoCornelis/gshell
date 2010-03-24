@@ -45,7 +45,7 @@ ndf_library:
     - tests/
     - utilities/
 ",
-						   write => "show_library",
+						   write => "library_show",
 						  },
 						  {
 						   description => "Can we find the single neuron library ?",
@@ -56,7 +56,7 @@ ndf_library:
     - purkinje/
     - stand_alone.ndf
 ",
-						   write => "show_library ndf cells",
+						   write => "library_show ndf cells",
 						  },
 						  {
 						   description => "Can we find the purkinje cell models in the single neuron library ?",
@@ -68,7 +68,7 @@ ndf_library:
     - edsjb1994_partitioned.ndf
     - edsjb1994_spinesurface.ndf
 ",
-						   write => "show_library ndf cells/purkinje",
+						   write => "library_show ndf cells/purkinje",
 						  },
 						  {
 						   description => "Can we load the standard purkinje cell model ?",
@@ -132,7 +132,7 @@ ndf_library:
 						   description => "Can we obtain the value of the CM parameter of the soma ?",
 						   read => 'value = 0.0164
 ',
-						   write => 'show_parameter . CM',
+						   write => 'parameter_show . CM',
 						  },
 						  {
 						   description => "Can we obtain the value of the parameters of the soma segment ?",
@@ -173,7 +173,7 @@ ndf_library:
     type: number
     value: -0.08
 ",
-						   write => 'show_model_parameters',
+						   write => 'model_parameter_show',
 						  },
 						  {
 						   description => "Can we obtain the value of the parameters of the cat channel inside the soma segment ?",
@@ -208,7 +208,7 @@ ndf_library:
         type: number
         value: 37
 ",
-						   write => 'show_model_parameters cat',
+						   write => 'model_parameter_show cat',
 						  },
 						  {
 						   description => "Can we find the segments in /Purkinje/segments/main ?",
@@ -362,7 +362,7 @@ ndf_library:
 						  },
 						  {
 						   description => "Can we apply current injection into the soma ?",
-						   write => "set_runtime_parameter /Purkinje/segments/soma INJECT 2e-9",
+						   write => "runtime_parameter_add /Purkinje/segments/soma INJECT 2e-9",
 						  },
 						  {
 						   description => "Can we continue the simulation ?",

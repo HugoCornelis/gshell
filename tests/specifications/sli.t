@@ -15,7 +15,7 @@ my $test
 						  {
 						   description => "Can we show the root of the library with the backward compatibility scripts?",
 						   read => 'PurkM9_model',
-						   write => 'show_library sli',
+						   write => 'library_show sli',
 						  },
 						  {
 						   description => "Can we show the purkinje cell model subdirectory of the library with the backward compatibility scripts?",
@@ -67,7 +67,7 @@ my $test
     - purkinje_simplifying.g
     - schedule.g
 ',
-						   write => 'show_library sli PurkM9_model',
+						   write => 'library_show sli PurkM9_model',
 						  },
 						 ],
 				comment => 'Likely this test needs to be reworked a little bit because some features of the backward compatibility module are still under development.',

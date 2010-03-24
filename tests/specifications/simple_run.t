@@ -28,31 +28,31 @@ my $test
 						  },
 						  {
 						   description => "Can we set parameter CM of the segment ?",
-						   write => 'set_model_parameter /c/s CM 0.0164',
+						   write => 'model_parameter_add /c/s CM 0.0164',
 						  },
 						  {
 						   description => "Can we set parameter Vm_init of the segment ?",
-						   write => 'set_model_parameter /c/s Vm_init -0.0680',
+						   write => 'model_parameter_add /c/s Vm_init -0.0680',
 						  },
 						  {
 						   description => "Can we set parameter RM of the segment ?",
-						   write => 'set_model_parameter /c/s RM 1.000',
+						   write => 'model_parameter_add /c/s RM 1.000',
 						  },
 						  {
 						   description => "Can we set parameter RA of the segment ?",
-						   write => 'set_model_parameter /c/s RA 2.50',
+						   write => 'model_parameter_add /c/s RA 2.50',
 						  },
 						  {
 						   description => "Can we set parameter ELEAK of the segment ?",
-						   write => 'set_model_parameter /c/s ELEAK -0.080',
+						   write => 'model_parameter_add /c/s ELEAK -0.080',
 						  },
 						  {
 						   description => "Can we set parameter DIA of the segment ?",
-						   write => 'set_model_parameter /c/s DIA 2e-05',
+						   write => 'model_parameter_add /c/s DIA 2e-05',
 						  },
 						  {
 						   description => "Can we set parameter LENGTH of the segment ?",
-						   write => 'set_model_parameter /c/s LENGTH 4.47e-05',
+						   write => 'model_parameter_add /c/s LENGTH 4.47e-05',
 						  },
 						  {
 						   description => "Can we define the output ?",

@@ -92,11 +92,11 @@ Number of segment tips: 1474
 						  {
 						   description => "Can we get information about the number of branch points for a chosen dendritic segment ?",
 						   read => "value = 23",
-						   write => "show_parameter /Purkinje/segments/b1s06[182] SOMATOPETAL_BRANCHPOINTS",
+						   write => "parameter_show /Purkinje/segments/b1s06[182] SOMATOPETAL_BRANCHPOINTS",
 						  },
 						  {
 						   description => "Can we attach an event list to this dendritic segment ?",
-						   write => "set_runtime_parameter /Purkinje/segments/b1s06[182]/Purkinje_spine_0/head/par/synapse EVENT_FILENAME event_data/events.yml",
+						   write => "runtime_parameter_add /Purkinje/segments/b1s06[182]/Purkinje_spine_0/head/par/synapse EVENT_FILENAME event_data/events.yml",
 						  },
 						  {
 						   description => "Can we check the simulation ?",
