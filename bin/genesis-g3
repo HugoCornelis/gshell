@@ -245,7 +245,10 @@ sub main
 
     GENESIS3::Commands::set_verbose($option_verbose);
 
-    GENESIS3::header();
+    if (!$option_batch_mode)
+    {
+	GENESIS3::header();
+    }
 
     STDOUT->autoflush(1);
 
