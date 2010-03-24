@@ -56,7 +56,7 @@ my $test
 						  },
 						  {
 						   description => "Can we define the output ?",
-						   write => "add_output /c/s Vm",
+						   write => "output_add /c/s Vm",
 						  },
 						  {
 						   description => "Can we check the simulation ?",

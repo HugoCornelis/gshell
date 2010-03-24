@@ -62,9 +62,9 @@ all commands:
 						   description => "Can we find the command help for a specific command ?",
 						   read => "
 description: add a variable to the output file.
-synopsis: add_output <element_name> <field_name>
+synopsis: output_add <element_name> <field_name>
 ",
-						   write => "help command add_output",
+						   write => "help command output_add",
 						  },
 						  {
 						   description => "Can we find the component help subtopics ?",
@@ -113,9 +113,6 @@ synopsis: (you gave )
 						  {
 						   description => "Can we find commands ?",
 						   read => "all commands:
-  - add_input
-  - add_inputclass
-  - add_output
   - ce
   - check
   - component_load
@@ -125,6 +122,8 @@ synopsis: (you gave )
   - exit
   - explore
   - help
+  - input_add
+  - inputclass_add
   - list
   - list_elements
   - model_state_load
@@ -135,6 +134,7 @@ synopsis: (you gave )
   - ndf_save
   - npl_load
   - npy_load
+  - output_add
   - pwe
   - py_diagnose
   - pynn_load

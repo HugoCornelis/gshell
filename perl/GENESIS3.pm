@@ -9,119 +9,6 @@ use strict;
 package GENESIS3::Commands;
 
 
-sub add_input
-{
-    my $class_name = shift;
-
-    my $component_name = shift;
-
-    my $field = shift;
-
-    my $options = { @_, };
-
-    # find the input class
-
-    if (!exists $GENESIS3::inputclasses->{$class_name})
-    {
-	return "*** Error: inputclass_template $class_name not found";
-    }
-
-    my $inputclass = $GENESIS3::inputclasses->{$class_name};
-
-    # use it to create an actual input
-
-    push
-	@$GENESIS3::inputs,
-	{
-	 component_name => $component_name,
-	 field => $field,
-	 inputclass => $class_name,
-	};
-
-    return "*** Ok: add_input $component_name $field";
-}
-
-
-sub add_input_help
-{
-    print "description: connect an input with a model variable.
-synopsis: add_input <class_name> <element_name> <field_name>
-";
-
-    return "*** Ok";
-}
-
-
-sub add_inputclass
-{
-    my $template_name = shift;
-
-    my $class_name = shift;
-
-    my $options = { @_, };
-
-    # find the input class template
-
-    if (!exists $GENESIS3::all_inputclass_templates->{$template_name})
-    {
-	return "*** Error: inputclass_template $template_name not found";
-    }
-
-    my $inputclass_template = $GENESIS3::all_inputclass_templates->{$template_name};
-
-    # use it to create an actual input class and override the options
-
-    $GENESIS3::inputclasses->{$class_name}
-	= {
-	   %$inputclass_template,
-	   options => {
-		       %{$inputclass_template->{options}},
-		       %$options,
-		      },
-	  };
-
-    return "*** Ok: add_inputclass $template_name";
-}
-
-
-sub add_inputclass_help
-{
-    print "description: define an input class for subsequent use in a simulation.
-synopsis: add_inputclass <template_name> <class_name> <option> ...
-";
-
-    return "*** Ok";
-}
-
-
-sub add_output
-{
-    my $component_name = shift;
-
-    my $field = shift;
-
-    push
-	@$GENESIS3::outputs,
-	{
-	 component_name => $component_name,
-	 field => $field,
-	 outputclass => "double_2_ascii",
-	};
-
-    return "*** Ok: add_output $component_name $field";
-}
-
-
-sub add_output_help
-{
-    print "description: add a variable to the output file.
-synopsis: add_output <element_name> <field_name>
-";
-
-    return "*** Ok";
-}
-
-
 sub ce
 {
     my $path = shift;
@@ -697,6 +584,91 @@ sub help_help
 }
 
 
+sub input_add
+{
+    my $class_name = shift;
+
+    my $component_name = shift;
+
+    my $field = shift;
+
+    my $options = { @_, };
+
+    # find the input class
+
+    if (!exists $GENESIS3::inputclasses->{$class_name})
+    {
+	return "*** Error: inputclass_template $class_name not found";
+    }
+
+    my $inputclass = $GENESIS3::inputclasses->{$class_name};
+
+    # use it to create an actual input
+
+    push
+	@$GENESIS3::inputs,
+	{
+	 component_name => $component_name,
+	 field => $field,
+	 inputclass => $class_name,
+	};
+
+    return "*** Ok: input_add $component_name $field";
+}
+
+
+sub input_add_help
+{
+    print "description: connect an input with a model variable.
+synopsis: input_add <class_name> <element_name> <field_name>
+";
+
+    return "*** Ok";
+}
+
+
+sub inputclass_add
+{
+    my $template_name = shift;
+
+    my $class_name = shift;
+
+    my $options = { @_, };
+
+    # find the input class template
+
+    if (!exists $GENESIS3::all_inputclass_templates->{$template_name})
+    {
+	return "*** Error: inputclass_template $template_name not found";
+    }
+
+    my $inputclass_template = $GENESIS3::all_inputclass_templates->{$template_name};
+
+    # use it to create an actual input class and override the options
+
+    $GENESIS3::inputclasses->{$class_name}
+	= {
+	   %$inputclass_template,
+	   options => {
+		       %{$inputclass_template->{options}},
+		       %$options,
+		      },
+	  };
+
+    return "*** Ok: inputclass_add $template_name";
+}
+
+
+sub inputclass_add_help
+{
+    print "description: define an input class for subsequent use in a simulation.
+synopsis: inputclass_add <template_name> <class_name> <option> ...
+";
+
+    return "*** Ok";
+}
+
+
 sub list
 {
     my $type = shift;
@@ -958,6 +930,34 @@ sub npy_load_help
     print "description: load a model encoded in Python.\n";
 
     print "synopsis: npy_load\n";
+
+    return "*** Ok";
+}
+
+
+sub output_add
+{
+    my $component_name = shift;
+
+    my $field = shift;
+
+    push
+	@$GENESIS3::outputs,
+	{
+	 component_name => $component_name,
+	 field => $field,
+	 outputclass => "double_2_ascii",
+	};
+
+    return "*** Ok: output_add $component_name $field";
+}
+
+
+sub output_add_help
+{
+    print "description: add a variable to the output file.
+synopsis: output_add <element_name> <field_name>
+";
 
     return "*** Ok";
 }

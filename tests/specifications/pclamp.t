@@ -36,7 +36,7 @@ my $test
 						  },
 						  {
 						   description => "Can we create a voltage clamp circuitry object ?",
-						   write => "add_inputclass perfectclamp voltage_clamp_protocol name voltage_clamp_protocol command -0.060",
+						   write => "inputclass_add perfectclamp voltage_clamp_protocol name voltage_clamp_protocol command -0.060",
 						  },
 						  {
 						   description => "Can we find the input class we just created ?",
@@ -52,7 +52,7 @@ my $test
 						  },
 						  {
 						   description => "Can we connect the voltage clamp circuitry to the purkinje cell soma ?",
-						   write => "add_input voltage_clamp_protocol /Purkinje/segments/soma Vm",
+						   write => "input_add voltage_clamp_protocol /Purkinje/segments/soma Vm",
 						  },
 						  {
 						   description => "Can we get information about the applied inputs ?",
@@ -65,31 +65,31 @@ my $test
 						  },
 						  {
 						   description => 'Can we add an output for /Purkinje/segments/soma->Vm ?',
-						   write => "add_output /Purkinje/segments/soma Vm",
+						   write => "output_add /Purkinje/segments/soma Vm",
 						  },
 						  {
 						   description => 'Can we add an output for /Purkinje/segments/b0s01[0]->Vm ?',
-						   write => "add_output /Purkinje/segments/b0s01[0] Vm",
+						   write => "output_add /Purkinje/segments/b0s01[0] Vm",
 						  },
 						  {
 						   description => 'Can we add an output for /Purkinje/segments/b0s03[56]->Vm ?',
-						   write => "add_output /Purkinje/segments/b0s03[56] Vm",
+						   write => "output_add /Purkinje/segments/b0s03[56] Vm",
 						  },
 						  {
 						   description => 'Can we add an output for /Purkinje/segments/b1s06[137]->Vm ?',
-						   write => "add_output /Purkinje/segments/b1s06[137] Vm",
+						   write => "output_add /Purkinje/segments/b1s06[137] Vm",
 						  },
 						  {
 						   description => 'Can we add an output for /Purkinje/segments/b1s12[26]->Vm ?',
-						   write => "add_output /Purkinje/segments/b1s12[26] Vm",
+						   write => "output_add /Purkinje/segments/b1s12[26] Vm",
 						  },
 						  {
 						   description => 'Can we add an output for /Purkinje/segments/b2s30[3]->Vm ?',
-						   write => "add_output /Purkinje/segments/b2s30[3] Vm",
+						   write => "output_add /Purkinje/segments/b2s30[3] Vm",
 						  },
 						  {
 						   description => 'Can we add an output for /Purkinje/segments/b3s44[49]->Vm ?',
-						   write => "add_output /Purkinje/segments/b3s44[49] Vm",
+						   write => "output_add /Purkinje/segments/b3s44[49] Vm",
 						  },
 						  {
 						   description => "Can we check the simulation ?",
@@ -138,7 +138,7 @@ my $test
 						  },
 						  {
 						   description => "Can we create a current clamp circuitry object ?",
-						   write => "add_inputclass perfectclamp current_clamp_protocol name current_clamp_protocol command 1e-9",
+						   write => "inputclass_add perfectclamp current_clamp_protocol name current_clamp_protocol command 1e-9",
 						  },
 						  {
 						   description => "Can we find the input class we just created ?",
@@ -154,7 +154,7 @@ my $test
 						  },
 						  {
 						   description => "Can we connect the current clamp circuitry to the purkinje cell soma ?",
-						   write => "add_input current_clamp_protocol /Purkinje/segments/soma INJECT",
+						   write => "input_add current_clamp_protocol /Purkinje/segments/soma INJECT",
 						  },
 						  {
 						   description => "Can we get information about the applied inputs ?",
@@ -167,31 +167,31 @@ my $test
 						  },
 						  {
 						   description => 'Can we add an output for /Purkinje/segments/soma->Vm ?',
-						   write => "add_output /Purkinje/segments/soma Vm",
+						   write => "output_add /Purkinje/segments/soma Vm",
 						  },
 						  {
 						   description => 'Can we add an output for /Purkinje/segments/b0s01[0]->Vm ?',
-						   write => "add_output /Purkinje/segments/b0s01[0] Vm",
+						   write => "output_add /Purkinje/segments/b0s01[0] Vm",
 						  },
 						  {
 						   description => 'Can we add an output for /Purkinje/segments/b0s03[56]->Vm ?',
-						   write => "add_output /Purkinje/segments/b0s03[56] Vm",
+						   write => "output_add /Purkinje/segments/b0s03[56] Vm",
 						  },
 						  {
 						   description => 'Can we add an output for /Purkinje/segments/b1s06[137]->Vm ?',
-						   write => "add_output /Purkinje/segments/b1s06[137] Vm",
+						   write => "output_add /Purkinje/segments/b1s06[137] Vm",
 						  },
 						  {
 						   description => 'Can we add an output for /Purkinje/segments/b1s12[26]->Vm ?',
-						   write => "add_output /Purkinje/segments/b1s12[26] Vm",
+						   write => "output_add /Purkinje/segments/b1s12[26] Vm",
 						  },
 						  {
 						   description => 'Can we add an output for /Purkinje/segments/b2s30[3]->Vm ?',
-						   write => "add_output /Purkinje/segments/b2s30[3] Vm",
+						   write => "output_add /Purkinje/segments/b2s30[3] Vm",
 						  },
 						  {
 						   description => 'Can we add an output for /Purkinje/segments/b3s44[49]->Vm ?',
-						   write => "add_output /Purkinje/segments/b3s44[49] Vm",
+						   write => "output_add /Purkinje/segments/b3s44[49] Vm",
 						  },
 						  {
 						   description => "Can we check the simulation ?",

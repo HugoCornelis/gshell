@@ -48,17 +48,17 @@ runtime_parameters:
 						  {
 						   description => "Can we define the output /Purkinje/segments/soma ?",
 						   wait => 1,
-						   write => "add_output /Purkinje/segments/soma Vm",
+						   write => "output_add /Purkinje/segments/soma Vm",
 						  },
 						  {
 						   description => "Can we define the output /Purkinje/segments/soma/ca_pool ?",
 						   wait => 1,
-						   write => "add_output /Purkinje/segments/soma/ca_pool Ca",
+						   write => "output_add /Purkinje/segments/soma/ca_pool Ca",
 						  },
 						  {
 						   description => "Can we define the output /Purkinje/segments/b0s01[0] ?",
 						   wait => 1,
-						   write => "add_output /Purkinje/segments/b0s01[0] Vm",
+						   write => "output_add /Purkinje/segments/b0s01[0] Vm",
 						  },
 # 						  {
 # 						   description => "Can we check the simulation ?",
