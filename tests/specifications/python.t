@@ -70,7 +70,7 @@ PUBLIC_MODELS
       OUTPUT G,
       OUTPUT I,
     END BINDABLES
-    gate_kinetic "a"
+    GATE_KINETIC "a"
       PARAMETERS
         PARAMETER ( HH_AB_Tau = -0.01 ),
         PARAMETER ( HH_AB_Offset_E = 0.06 ),
@@ -79,8 +79,8 @@ PUBLIC_MODELS
         PARAMETER ( HH_AB_Mult = 10000 ),
         PARAMETER ( HH_AB_Scale = -600 ),
       END PARAMETERS
-    END gate_kinetic
-    gate_kinetic "b"
+    END GATE_KINETIC
+    GATE_KINETIC "b"
       PARAMETERS
         PARAMETER ( HH_AB_Tau = 0.08 ),
         PARAMETER ( HH_AB_Offset_E = 0.07 ),
@@ -89,7 +89,7 @@ PUBLIC_MODELS
         PARAMETER ( HH_AB_Mult = 0 ),
         PARAMETER ( HH_AB_Scale = 125 ),
       END PARAMETERS
-    END gate_kinetic
+    END GATE_KINETIC
   END CHANNEL
 END PUBLIC_MODELS
 ',
