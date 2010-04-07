@@ -29,6 +29,10 @@ RELEASE_MICRO=`release-extract --micro`
 clean-local:
 	$(RM) -rf $(top_srcdir)/docs/html
 	$(RM) -rf $(top_srcdir)/tests/html
+	$(RM) -rf *.deb
+	$(RM) -f *.changes
+	$(RM) -f *.dsc
+	$(RM) -f build_debian.log
 
 show-release-labels:
 	echo "Release information (major-minor-micro): $(RELEASE_MAJOR)-$(RELEASE_MINOR)-$(RELEASE_MICRO)"
