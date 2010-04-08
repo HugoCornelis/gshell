@@ -162,6 +162,7 @@ synopsis: (you gave )
   - sli_listcommands
   - sli_listobjects
   - sli_load
+  - sli_printcommandlist
   - sli_run
   - sli_script
   - ssp_load
