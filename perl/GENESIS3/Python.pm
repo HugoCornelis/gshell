@@ -23,6 +23,8 @@ BEGIN
 
 
 use Inline Python => <<'END';
+import sys
+sys.path.append('/usr/local/glue/swig/python')
 import Neurospaces
 import SwiggableNeurospaces
 import yaml
