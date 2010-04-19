@@ -95,9 +95,9 @@ my $test
 						    write => "printparameter /Purkinje TOTALVOLUME",
 						   },
 						   {
+						    comment => "even without spines, this value is very different from the value in table 2 of the Rapp paper, this is due to shrinkage correction, yet there is an unexplained anomaly in the difference for surface and volume.  This value changed from value = 2.61092e-07 to 2.60908e-07 after float to double accommodations in the model-container.",
 						    description => "Can we query the resulting model using the querymachine: total surface ?",
-						    read => "value = 2.61092e-07
-",
+						    read => 'value = 2.60908e-07',
 						    write => "printparameter /Purkinje TOTALSURFACE",
 						   },
 						   {
@@ -170,9 +170,9 @@ my $test
 						    write => "printparameter /Purkinje TOTALVOLUME",
 						   },
 						   {
+						    comment => "even without spines, this value is very different from the value in table 2 of the Rapp paper, this is due to shrinkage correction, yet there is an unexplained anomaly in the difference for surface and volume.  This value changed from value = 2.61092e-07 to 2.60908e-07 after float to double accommodations in the model-container.",
 						    description => "Can we query the resulting model using the querymachine: total surface ?",
-						    read => "value = 2.61092e-07
-",
+						    read => 'value = 2.60908e-07',
 						    write => "printparameter /Purkinje TOTALSURFACE",
 						   },
 						   {
