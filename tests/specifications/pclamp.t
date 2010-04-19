@@ -31,6 +31,12 @@ my $test
       command: command value
       name: name of this inputclass
     package: Heccer::PerfectClamp
+  pulsegen:
+    module_name: Heccer
+    options:
+      command: command value
+      name: name of this inputclass
+    package: Heccer::PulseGen
 ",
 						   write => "list inputclass_templates",
 						  },
@@ -133,6 +139,12 @@ my $test
       command: command value
       name: name of this inputclass
     package: Heccer::PerfectClamp
+  pulsegen:
+    module_name: Heccer
+    options:
+      command: command value
+      name: name of this inputclass
+    package: Heccer::PulseGen
 ",
 						   write => "list inputclass_templates",
 						  },

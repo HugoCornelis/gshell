@@ -3211,7 +3211,16 @@ our $all_inputclass_templates
 				   },
 			package => 'Heccer::PerfectClamp',
 		       },
+       pulsegen => {
+			module_name => 'Heccer',
+			options => {
+				    name => 'name of this inputclass',
+				    command => 'command value',
+				   },
+			package => 'Heccer::PulseGen',
+		       },
       };
+
 
 our $all_verbose
     = {
