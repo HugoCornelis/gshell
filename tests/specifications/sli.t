@@ -257,23 +257,23 @@ END PUBLIC_MODELS
 						 ],
 				comment => 'This test uses the original scripts of the Purkinje cell model',
 				description => "loading a model inside a GENESIS 2 script",
-# 				preparation => {
-# 						description => "Create the results directory",
-# 						preparer =>
-# 						sub
-# 						{
-# 						    `mkdir results`;
-# 						},
-# 					       },
-# 				reparation => {
-# 					       description => "Remove the generated output files in the results directory",
-# 					       reparer =>
-# 					       sub
-# 					       {
-#  						   `rm "$::config->{core_directory}/results/PurkM9_soma_1.5nA"`;
-# 						   `rmdir results`;
-# 					       },
-# 					      },
+				preparation => {
+						description => "Create the results directory",
+						preparer =>
+						sub
+						{
+						    `mkdir results`;
+						},
+					       },
+				reparation => {
+					       description => "Remove the generated output files in the results directory",
+					       reparer =>
+					       sub
+					       {
+ 						   `rm "$::config->{core_directory}/results/PurkM9_soma_1.5nA"`;
+						   `rmdir results`;
+					       },
+					      },
 				side_effects => 'loads a model into the model-contaier',
 			       },
 			      ],
