@@ -34,8 +34,15 @@ my $test
   pulsegen:
     module_name: Heccer
     options:
-      command: command value
+      baselevel: The pulse base level
+      delay1: First pulse delay
+      delay2: Second pulse delay
+      level1: First pulse level
+      level2: Second pulse level
       name: name of this inputclass
+      triggermode: \'The pulse triggermode, 0 - freerun, 1 - ext trig, 2 - ext gate\'
+      width1: First pulse width
+      width2: Second pulse width
     package: Heccer::PulseGen
 ",
 						   write => "list inputclass_templates",
@@ -142,8 +149,15 @@ my $test
   pulsegen:
     module_name: Heccer
     options:
-      command: command value
+      baselevel: The pulse base level
+      delay1: First pulse delay
+      delay2: Second pulse delay
+      level1: First pulse level
+      level2: Second pulse level
       name: name of this inputclass
+      triggermode: \'The pulse triggermode, 0 - freerun, 1 - ext trig, 2 - ext gate\'
+      width1: First pulse width
+      width2: Second pulse width
     package: Heccer::PulseGen
 ",
 						   write => "list inputclass_templates",
