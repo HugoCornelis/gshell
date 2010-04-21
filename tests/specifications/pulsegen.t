@@ -20,7 +20,7 @@ my $test
 						  },
 						  {
 						   description => "Can we load a simple soma model ?",
-						   write => 'ndf_load tests/segments/soma.ndf',
+						   write => 'ndf_load cells/purkinje/edsjb1994.ndf',
 						  },
 						  {
 						   description => "Can we find the input class template we would like to use ?",
@@ -49,7 +49,7 @@ my $test
 						  },
 						  {
 						   description => "Can we create a voltage clamp circuitry object ?",
-						   write => "inputclass_add pulsegen my_pulsegen_freerun name my_pulsegen_freerun level1 50.0 width1 3.0 delay 5.0 level2 -20.0 width2 5 delay2 8.0 baselevel 10.0 triggermode 0",
+						   write => "inputclass_add pulsegen my_pulsegen_freerun name my_pulsegen_freerun level1 50.0 width1 3.0 delay1 5.0 level2 -20.0 width2 5 delay2 8.0 baselevel 10.0 triggermode 0",
 						  },
 						  {
 						   description => "Can we find the input class we just created ?",
@@ -58,8 +58,7 @@ my $test
     module_name: Heccer
     options:
       baselevel: 10.0
-      delay: 5.0
-      delay1: First pulse delay
+      delay1: 5.0
       delay2: 8.0
       level1: 50.0
       level2: -20.0
@@ -73,17 +72,32 @@ my $test
 						  },
 						  {
 						   description => "Can we connect the pulsegen to the cell soma ?",
-						   write => "input_add my_pulsegen_freerun /soma Vm",
+						   write => "input_add my_pulsegen_freerun /Purkinje/segments/soma Vm",
 						  },
 						  {
 						   description => "Can we get information about the applied inputs ?",
 						   read => "
-- component_name: /soma
+- component_name: /Purkinje/segments/soma
   field: Vm
   inputclass: my_pulsegen_freerun
 ",
 						   write => "input_show",
 						  },
+
+						  {
+						   description => 'Can we add an output for /Purkinje/segments/soma->Vm ?',
+						   write => "output_add /Purkinje/segments/soma Vm",
+						  },
+
+						  {
+						   description => "Can we check the simulation ?",
+						   write => "check /Purkinje",
+						  },
+						  {
+						   description => "Can we run the simulation ?",
+						   write => "run /Purkinje 0.001",
+						  },
+
 						 ],
 				description => "commands load a simple soma model and connect it to a pulsegen solver object",
 				side_effects => "creates a model in the model container",
