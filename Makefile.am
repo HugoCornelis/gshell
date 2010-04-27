@@ -33,6 +33,7 @@ clean-local:
 	$(RM) -f *.changes
 	$(RM) -f *.dsc
 	$(RM) -f build_debian.log
+	$(RM) -rf ~/.genesis3/gshell/InlinePerlCode
 
 show-release-labels:
 	echo "Release information (major-minor-micro): $(RELEASE_MAJOR)-$(RELEASE_MINOR)-$(RELEASE_MICRO)"
