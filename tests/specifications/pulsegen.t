@@ -92,15 +92,30 @@ my $test
 						  {
 						   description => "Can we check the simulation ?",
 						   write => "check /Purkinje",
+						   wait => 15,
 						  },
 						  {
 						   description => "Can we run the simulation ?",
 						   write => "run /Purkinje 0.001",
+						   wait => 15,
 						  },
 
+
+						  {
+						   disable => "Previous command is not producing an output file for some reason",
+						   description => "Can we verify the output ?",
+						   wait => 10,
+						   read => {
+							    application_output_file => "/tmp/output",
+							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/pulsegen-freerun.txt",
+							   },
+						  },
 						 ],
 				description => "commands load a simple soma model and connect it to a pulsegen solver object",
 				side_effects => "creates a model in the model container",
+
+			      
+
 			       },
 			      ],
        description => "Attaching a pulsegen object to a simple soma model.",
