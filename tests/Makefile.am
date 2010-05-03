@@ -12,11 +12,6 @@
 ##'
 ##############################################################################
 
-#t automake does not allow to pass in arguments for tests ?
-
-check_SCRIPTS = \
-	$(srcdir)/neurospaces_harness
-
 dist_noinst_SCRIPTS = \
 	$(srcdir)/scripts/add_command_warning \
 	$(srcdir)/scripts/model_state_purkinje \
@@ -25,7 +20,9 @@ dist_noinst_SCRIPTS = \
 	$(srcdir)/scripts/simple_purkinje \
 	$(srcdir)/scripts/simple_purkinje.g3
 
-TESTS = $(srcdir)/neurospaces_harness
+#t automake does not allow to pass in arguments for tests ?
+
+TESTS = /usr/local/bin/neurospaces_harness
 
 test: check
 
