@@ -57,40 +57,48 @@ gkb.parameter("HH_AB_Tau", 80e-3 )
 
 NEUROSPACES NDF
 
-IMPORT
-END IMPORT
-
 PRIVATE_MODELS
-END PRIVATE_MODELS
-
-PUBLIC_MODELS
-  CHANNEL "k"
+  GATE_KINETIC "a_2_0"
+    PARAMETERS
+      PARAMETER ( HH_AB_Tau = -0.01 ),
+      PARAMETER ( HH_AB_Offset_E = 0.06 ),
+      PARAMETER ( HH_AB_Add = -1 ),
+      PARAMETER ( HH_AB_Factor_Flag = -1 ),
+      PARAMETER ( HH_AB_Mult = 10000 ),
+      PARAMETER ( HH_AB_Scale = -600 ),
+    END PARAMETERS
+  END GATE_KINETIC
+  CHILD "a_2_0" "a_inserted_2"
+  END CHILD
+  GATE_KINETIC "b_3_0"
+    PARAMETERS
+      PARAMETER ( HH_AB_Tau = 0.08 ),
+      PARAMETER ( HH_AB_Offset_E = 0.07 ),
+      PARAMETER ( HH_AB_Add = 0 ),
+      PARAMETER ( HH_AB_Factor_Flag = -1 ),
+      PARAMETER ( HH_AB_Mult = 0 ),
+      PARAMETER ( HH_AB_Scale = 125 ),
+    END PARAMETERS
+  END GATE_KINETIC
+  CHILD "b_3_0" "b_inserted_3"
+  END CHILD
+  CHANNEL "k_1_0"
     BINDABLES
       INPUT Vm,
       OUTPUT G,
       OUTPUT I,
     END BINDABLES
-    GATE_KINETIC "a"
-      PARAMETERS
-        PARAMETER ( HH_AB_Tau = -0.01 ),
-        PARAMETER ( HH_AB_Offset_E = 0.06 ),
-        PARAMETER ( HH_AB_Add = -1 ),
-        PARAMETER ( HH_AB_Factor_Flag = -1 ),
-        PARAMETER ( HH_AB_Mult = 10000 ),
-        PARAMETER ( HH_AB_Scale = -600 ),
-      END PARAMETERS
-    END GATE_KINETIC
-    GATE_KINETIC "b"
-      PARAMETERS
-        PARAMETER ( HH_AB_Tau = 0.08 ),
-        PARAMETER ( HH_AB_Offset_E = 0.07 ),
-        PARAMETER ( HH_AB_Add = 0 ),
-        PARAMETER ( HH_AB_Factor_Flag = -1 ),
-        PARAMETER ( HH_AB_Mult = 0 ),
-        PARAMETER ( HH_AB_Scale = 125 ),
-      END PARAMETERS
-    END GATE_KINETIC
+    CHILD "a_2_0" "a"
+    END CHILD
+    CHILD "b_3_0" "b"
+    END CHILD
   END CHANNEL
+  CHILD "k_1_0" "k_inserted_1"
+  END CHILD
+END PRIVATE_MODELS
+PUBLIC_MODELS
+  CHILD "k_1_0" "k"
+  END CHILD
 END PUBLIC_MODELS
 ',
 						   write => "ndf_save /** STDOUT",
