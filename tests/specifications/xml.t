@@ -36,17 +36,36 @@ my $test
 
 NEUROSPACES NDF
 
-IMPORT
-    FILE "mapper" "mappers/spikereceiver.ndf"
-END IMPORT
-
 PRIVATE_MODELS
-  ALIAS "mapper::/Synapse" "Synapse"
-  END ALIAS
-END PRIVATE_MODELS
-
-PUBLIC_MODELS
-  CHANNEL "Purk_GABA"
+  ATTACHMENT "Synapse_2_0"
+    BINDABLES
+      INPUT spike,
+      OUTPUT activation,
+    END BINDABLES
+    ATTRIBUTES       weight,       delay, END ATTRIBUTES
+  END ATTACHMENT
+  CHILD "Synapse_2_0" "Synapse_2_1"
+  END CHILD
+  CHILD "Synapse_2_1" "synapse_2_2"
+  END CHILD
+  CHILD "synapse_2_2" "synapse_inserted_2"
+  END CHILD
+  EQUATION_EXPONENTIAL "exp2_3_0"
+    BINDABLES
+      INPUT activation,
+      OUTPUT G,
+    END BINDABLES
+    BINDINGS
+      INPUT ../synapse->activation,
+    END BINDINGS
+    PARAMETERS
+      PARAMETER ( TAU1 = 0.00093 ),
+      PARAMETER ( TAU2 = 0.0265 ),
+    END PARAMETERS
+  END EQUATION_EXPONENTIAL
+  CHILD "exp2_3_0" "exp2_inserted_3"
+  END CHILD
+  CHANNEL "Purk_GABA_1_0"
     BINDABLES
       INPUT Vm,
       OUTPUT I,
@@ -55,22 +74,17 @@ PUBLIC_MODELS
       PARAMETER ( G_MAX = 1.077 ),
       PARAMETER ( Erev = -0.08 ),
     END PARAMETERS
-    CHILD "Synapse" "synapse"
+    CHILD "synapse_inserted_2" "synapse"
     END CHILD
-    EQUATION_EXPONENTIAL "exp2"
-      BINDABLES
-        INPUT activation,
-        OUTPUT G,
-      END BINDABLES
-      BINDINGS
-        INPUT ../synapse->activation,
-      END BINDINGS
-      PARAMETERS
-        PARAMETER ( TAU1 = 0.00093 ),
-        PARAMETER ( TAU2 = 0.0265 ),
-      END PARAMETERS
-    END EQUATION_EXPONENTIAL
+    CHILD "exp2_3_0" "exp2"
+    END CHILD
   END CHANNEL
+  CHILD "Purk_GABA_1_0" "Purk_GABA_inserted_1"
+  END CHILD
+END PRIVATE_MODELS
+PUBLIC_MODELS
+  CHILD "Purk_GABA_1_0" "Purk_GABA"
+  END CHILD
 END PUBLIC_MODELS
 ',
 							   },
@@ -88,17 +102,36 @@ END PUBLIC_MODELS
 							    application_output_file => '/tmp/1.xml',
 							    expected_output => '<neurospaces type="ndf"/>
 
-<import>
-    <file> <namespace>mapper</namespace> <filename>mappers/spikereceiver.ndf</filename> </file>
-</import>
-
 <private_models>
-  <alias> <namespace>mapper::</namespace><prototype>/Synapse</prototype> <name>Synapse</name>
-  </alias>
-</private_models>
-
-<public_models>
-  <CHANNEL> <name>Purk_GABA</name>
+  <ATTACHMENT> <name>Synapse_2_0</name>
+    <bindables>
+      <input> <name>spike</name> </input>
+      <output> <name>activation</name> </output>
+    </bindables>
+    <attributes>       <name>weight</name>       <name>delay</name> </attributes>
+  </ATTACHMENT>
+  <child> <prototype>Synapse_2_0</prototype> <name>Synapse_2_1</name>
+  </child>
+  <child> <prototype>Synapse_2_1</prototype> <name>synapse_2_2</name>
+  </child>
+  <child> <prototype>synapse_2_2</prototype> <name>synapse_inserted_2</name>
+  </child>
+  <EQUATION_EXPONENTIAL> <name>exp2_3_0</name>
+    <bindables>
+      <input> <name>activation</name> </input>
+      <output> <name>G</name> </output>
+    </bindables>
+    <bindings>
+      <input> <name>../synapse->activation</name> </input>
+    </bindings>
+    <parameters>
+      <parameter> <name>TAU1</name><value>0.00093</value> </parameter>
+      <parameter> <name>TAU2</name><value>0.0265</value> </parameter>
+    </parameters>
+  </EQUATION_EXPONENTIAL>
+  <child> <prototype>exp2_3_0</prototype> <name>exp2_inserted_3</name>
+  </child>
+  <CHANNEL> <name>Purk_GABA_1_0</name>
     <bindables>
       <input> <name>Vm</name> </input>
       <output> <name>I</name> </output>
@@ -107,22 +140,17 @@ END PUBLIC_MODELS
       <parameter> <name>G_MAX</name><value>1.077</value> </parameter>
       <parameter> <name>Erev</name><value>-0.08</value> </parameter>
     </parameters>
-    <child> <prototype>Synapse</prototype> <name>synapse</name>
+    <child> <prototype>synapse_inserted_2</prototype> <name>synapse</name>
     </child>
-    <EQUATION_EXPONENTIAL> <name>exp2</name>
-      <bindables>
-        <input> <name>activation</name> </input>
-        <output> <name>G</name> </output>
-      </bindables>
-      <bindings>
-        <input> <name>../synapse->activation</name> </input>
-      </bindings>
-      <parameters>
-        <parameter> <name>TAU1</name><value>0.00093</value> </parameter>
-        <parameter> <name>TAU2</name><value>0.0265</value> </parameter>
-      </parameters>
-    </EQUATION_EXPONENTIAL>
+    <child> <prototype>exp2_3_0</prototype> <name>exp2</name>
+    </child>
   </CHANNEL>
+  <child> <prototype>Purk_GABA_1_0</prototype> <name>Purk_GABA_inserted_1</name>
+  </child>
+</private_models>
+<public_models>
+  <child> <prototype>Purk_GABA_1_0</prototype> <name>Purk_GABA</name>
+  </child>
 </public_models>
 ',
 							   },
