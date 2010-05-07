@@ -37,20 +37,20 @@ my $test
 NEUROSPACES NDF
 
 PRIVATE_MODELS
-  ATTACHMENT "Synapse_2_0"
+  ATTACHMENT "Synapse_7_0"
     BINDABLES
       INPUT spike,
       OUTPUT activation,
     END BINDABLES
     ATTRIBUTES       weight,       delay, END ATTRIBUTES
   END ATTACHMENT
-  CHILD "Synapse_2_0" "Synapse_2_1"
+  CHILD "Synapse_7_0" "Synapse_7_1"
   END CHILD
-  CHILD "Synapse_2_1" "synapse_2_2"
+  CHILD "Synapse_7_1" "synapse_7_2"
   END CHILD
-  CHILD "synapse_2_2" "synapse_inserted_2"
+  CHILD "synapse_7_2" "synapse_inserted_7"
   END CHILD
-  EQUATION_EXPONENTIAL "exp2_3_0"
+  EQUATION_EXPONENTIAL "exp2_11_0"
     BINDABLES
       INPUT activation,
       OUTPUT G,
@@ -63,9 +63,9 @@ PRIVATE_MODELS
       PARAMETER ( TAU2 = 0.0265 ),
     END PARAMETERS
   END EQUATION_EXPONENTIAL
-  CHILD "exp2_3_0" "exp2_inserted_3"
+  CHILD "exp2_11_0" "exp2_inserted_11"
   END CHILD
-  CHANNEL "Purk_GABA_1_0"
+  CHANNEL "Purk_GABA_9_0"
     BINDABLES
       INPUT Vm,
       OUTPUT I,
@@ -74,16 +74,16 @@ PRIVATE_MODELS
       PARAMETER ( G_MAX = 1.077 ),
       PARAMETER ( Erev = -0.08 ),
     END PARAMETERS
-    CHILD "synapse_inserted_2" "synapse"
+    CHILD "synapse_inserted_7" "synapse"
     END CHILD
-    CHILD "exp2_3_0" "exp2"
+    CHILD "exp2_11_0" "exp2"
     END CHILD
   END CHANNEL
-  CHILD "Purk_GABA_1_0" "Purk_GABA_inserted_1"
+  CHILD "Purk_GABA_9_0" "Purk_GABA_inserted_9"
   END CHILD
 END PRIVATE_MODELS
 PUBLIC_MODELS
-  CHILD "Purk_GABA_1_0" "Purk_GABA"
+  CHILD "Purk_GABA_9_0" "Purk_GABA"
   END CHILD
 END PUBLIC_MODELS
 ',
@@ -103,20 +103,20 @@ END PUBLIC_MODELS
 							    expected_output => '<neurospaces type="ndf"/>
 
 <private_models>
-  <ATTACHMENT> <name>Synapse_2_0</name>
+  <ATTACHMENT> <name>Synapse_7_0</name>
     <bindables>
       <input> <name>spike</name> </input>
       <output> <name>activation</name> </output>
     </bindables>
     <attributes>       <name>weight</name>       <name>delay</name> </attributes>
   </ATTACHMENT>
-  <child> <prototype>Synapse_2_0</prototype> <name>Synapse_2_1</name>
+  <child> <prototype>Synapse_7_0</prototype> <name>Synapse_7_1</name>
   </child>
-  <child> <prototype>Synapse_2_1</prototype> <name>synapse_2_2</name>
+  <child> <prototype>Synapse_7_1</prototype> <name>synapse_7_2</name>
   </child>
-  <child> <prototype>synapse_2_2</prototype> <name>synapse_inserted_2</name>
+  <child> <prototype>synapse_7_2</prototype> <name>synapse_inserted_7</name>
   </child>
-  <EQUATION_EXPONENTIAL> <name>exp2_3_0</name>
+  <EQUATION_EXPONENTIAL> <name>exp2_11_0</name>
     <bindables>
       <input> <name>activation</name> </input>
       <output> <name>G</name> </output>
@@ -129,9 +129,9 @@ END PUBLIC_MODELS
       <parameter> <name>TAU2</name><value>0.0265</value> </parameter>
     </parameters>
   </EQUATION_EXPONENTIAL>
-  <child> <prototype>exp2_3_0</prototype> <name>exp2_inserted_3</name>
+  <child> <prototype>exp2_11_0</prototype> <name>exp2_inserted_11</name>
   </child>
-  <CHANNEL> <name>Purk_GABA_1_0</name>
+  <CHANNEL> <name>Purk_GABA_9_0</name>
     <bindables>
       <input> <name>Vm</name> </input>
       <output> <name>I</name> </output>
@@ -140,16 +140,16 @@ END PUBLIC_MODELS
       <parameter> <name>G_MAX</name><value>1.077</value> </parameter>
       <parameter> <name>Erev</name><value>-0.08</value> </parameter>
     </parameters>
-    <child> <prototype>synapse_inserted_2</prototype> <name>synapse</name>
+    <child> <prototype>synapse_inserted_7</prototype> <name>synapse</name>
     </child>
-    <child> <prototype>exp2_3_0</prototype> <name>exp2</name>
+    <child> <prototype>exp2_11_0</prototype> <name>exp2</name>
     </child>
   </CHANNEL>
-  <child> <prototype>Purk_GABA_1_0</prototype> <name>Purk_GABA_inserted_1</name>
+  <child> <prototype>Purk_GABA_9_0</prototype> <name>Purk_GABA_inserted_9</name>
   </child>
 </private_models>
 <public_models>
-  <child> <prototype>Purk_GABA_1_0</prototype> <name>Purk_GABA</name>
+  <child> <prototype>Purk_GABA_9_0</prototype> <name>Purk_GABA</name>
   </child>
 </public_models>
 ',
