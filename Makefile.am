@@ -29,17 +29,20 @@ RELEASE_MICRO=`release-extract --micro`
 clean-local:
 	$(RM) -rf $(top_srcdir)/docs/html
 	$(RM) -rf $(top_srcdir)/tests/html
-	$(RM) -rf *.deb
-	$(RM) -f *.changes
-	$(RM) -f *.dsc
 	$(RM) -f build_debian.log
 	$(RM) -rf ~/.genesis3/gshell/InlinePerlCode
+	$(RM) -rf RPM_BUILD
+	$(RM) -f $(top_srcdir)/*.dsc
+	$(RM) -f $(top_srcdir)/*.changes
+	$(RM) -f $(top_srcdir)/*.deb
+	$(RM) -f build_rpm.log
+	$(RM) -f gshell-*.tar.gz
 
 show-release-labels:
 	echo "Release information (major-minor-micro): $(RELEASE_MAJOR)-$(RELEASE_MINOR)-$(RELEASE_MICRO)"
 
 dist-keywords:
-	release-expand gshell $(RELEASE_MAJOR) $(RELEASE_MINOR) $(RELEASE_MICRO) $(RELEASE_MAJOR)-$(RELEASE_MINOR) hugo.cornelis@gmail.com --verbose
+	release-expand gshell $(RELEASE_MAJOR) $(RELEASE_MINOR) $(RELEASE_MICRO) $(RELEASE_MAJOR).$(RELEASE_MINOR) hugo.cornelis@gmail.com --verbose
 #	release-expand gshell des 10 0 des-10 hugo.cornelis@gmail.com --verbose
 
 am__tar = ${AMTAR} chf - --format=posix "$$tardir"
@@ -92,3 +95,6 @@ TMP_DIR = tmp
 # Create a deb package
 pkg-deb: dist
 	nspkg-deb $(TMP_DIR) $(PACKAGE) $(VERSION)
+
+pkg-rpm: dist
+	nspkg-rpm $(PACKAGE) $(VERSION)
