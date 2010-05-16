@@ -86,7 +86,7 @@ my $test
 						   {
 						    description => "Can the morphology be read ?",
 						    read => 'tests/scripts/PurkM9_model/Purk2M9.p read: 1600 compartments',
-						    timeout => 10,
+						    timeout => 20,
 						   },
 						   {
 						    description => "Can we query the resulting model using the querymachine: total volume ?",
