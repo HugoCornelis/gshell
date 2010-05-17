@@ -58,7 +58,7 @@ gkb.parameter("HH_AB_Tau", 80e-3 )
 NEUROSPACES NDF
 
 PRIVATE_MODELS
-  GATE_KINETIC "a_2_0"
+  GATE_KINETIC "a_2_2"
     PARAMETERS
       PARAMETER ( HH_AB_Tau = -0.01 ),
       PARAMETER ( HH_AB_Offset_E = 0.06 ),
@@ -68,9 +68,9 @@ PRIVATE_MODELS
       PARAMETER ( HH_AB_Scale = -600 ),
     END PARAMETERS
   END GATE_KINETIC
-  CHILD "a_2_0" "a_inserted_2"
+  CHILD "a_2_2" "a_inserted_2"
   END CHILD
-  GATE_KINETIC "b_3_0"
+  GATE_KINETIC "b_3_3"
     PARAMETERS
       PARAMETER ( HH_AB_Tau = 0.08 ),
       PARAMETER ( HH_AB_Offset_E = 0.07 ),
@@ -80,24 +80,24 @@ PRIVATE_MODELS
       PARAMETER ( HH_AB_Scale = 125 ),
     END PARAMETERS
   END GATE_KINETIC
-  CHILD "b_3_0" "b_inserted_3"
+  CHILD "b_3_3" "b_inserted_3"
   END CHILD
-  CHANNEL "k_1_0"
+  CHANNEL "k_1_1"
     BINDABLES
       INPUT Vm,
       OUTPUT G,
       OUTPUT I,
     END BINDABLES
-    CHILD "a_2_0" "a"
+    CHILD "a_2_2" "a"
     END CHILD
-    CHILD "b_3_0" "b"
+    CHILD "b_3_3" "b"
     END CHILD
   END CHANNEL
-  CHILD "k_1_0" "k_inserted_1"
+  CHILD "k_1_1" "k_inserted_1"
   END CHILD
 END PRIVATE_MODELS
 PUBLIC_MODELS
-  CHILD "k_1_0" "k"
+  CHILD "k_1_1" "k"
   END CHILD
 END PUBLIC_MODELS
 ',
