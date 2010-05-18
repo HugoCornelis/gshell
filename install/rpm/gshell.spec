@@ -9,7 +9,7 @@
 
 
 # $Format: "%define version 	${label}"$
-%define version 	35c7a77346427a1a59e24269179b0b4dc83094b5.0
+%define version 	6a979f6b8f0e02a0c91d6b7be129cd3f9c1355e3.0
 %define buildroot 	%{_topdir}/%{name}-%{version}-root
 
 BuildRoot:		%{buildroot}
@@ -64,7 +64,7 @@ make install prefix=$RPM_BUILD_ROOT/usr/local
 #/usr/share/
 
 
-%doc %attr(0444,root,root) docs
+#%doc %attr(0444,root,root) docs
 #%doc %attr(0444,root,root) /usr/local/share/man/man1/wget.1
 # need to put whatever docs to link to here.
 
