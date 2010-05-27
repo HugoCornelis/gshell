@@ -84,7 +84,7 @@ my $test
 						  },
 						  (
 						   {
-						    description => "Can the morphology be read ?",
+						    description => "Can the morphology be read (1)?",
 						    read => 'tests/scripts/PurkM9_model/Purk2M9.p read: 1600 compartments',
 						    timeout => 20,
 						   },
@@ -113,15 +113,19 @@ my $test
 						   {
 						    description => 'Do we see the simulation time after the simulation has finished ?',
 						    read => 'time = 0.500060 ; step = 25003',
-						    timeout => 200,
+						    timeout => 250,
+						   },
+						   {
+						    description => "quit the simulator",
+						    write => "quit",
 						   },
 						   {
 						    comment => "The output file is taken from the ns-sli installation.",
-						    description => "Is the generated output correct ?",
+						    description => "Is the generated output correct (1)?",
 						    numerical_compare => 'small differences between the output of different architectures',
 						    read => {
 							     application_output_file => "$::config->{core_directory}/results/PurkM9_soma_1.5nA",
-							     expected_output_file => "$::config->{core_directory}/tests/specifications/strings/PurkM9_soma_1.5nA.g3",
+							     expected_output_file => "/usr/local/ns-sli/tests/specifications/strings/PurkM9_soma_1.5nA.g3-double",
 							    },
 						    wait => 1,
 						   },
@@ -159,9 +163,9 @@ my $test
 						  },
 						  (
 						   {
-						    description => "Can the morphology be read ?",
+						    description => "Can the morphology be read (2)?",
 						    read => 'tests/scripts/PurkM9_model/Purk2M9.p read: 1600 compartments',
-						    timeout => 10,
+						    timeout => 20,
 						   },
 						   {
 						    description => "Can we query the resulting model using the querymachine: total volume ?",
@@ -191,16 +195,21 @@ my $test
 						    description => 'Do we see the simulation time after the simulation has finished ?',
 						    disabled => 'the sli_load command prevents the simulation from being run',
 						    read => 'time = 0.500060 ; step = 25003',
-						    timeout => 200,
+						    timeout => 250,
+						   },
+						   {
+						    description => "quit the simulator",
+						    disabled => "this test is here to make sure the output is flushed, but the test for the output is disabled.",
+						    write => "quit",
 						   },
 						   {
 						    comment => "The output file is taken from the ns-sli installation.",
-						    description => "Is the generated output correct ?",
+						    description => "Is the generated output correct (2)?",
 						    disabled => 'the sli_load command prevents the simulation from being run, so no output has been produced',
 						    numerical_compare => 'small differences between the output of different architectures',
 						    read => {
 							     application_output_file => "$::config->{core_directory}/results/PurkM9_soma_1.5nA",
-							     expected_output_file => "$::config->{core_directory}/tests/specifications/strings/PurkM9_soma_1.5nA.g3",
+							     expected_output_file => "/usr/local/ns-sli/tests/specifications/strings/PurkM9_soma_1.5nA.g3-double",
 							    },
 						    wait => 1,
 						   },
@@ -258,7 +267,7 @@ END PUBLIC_MODELS
 
 						 ],
 				comment => 'This test uses the original scripts of the Purkinje cell model',
-				description => "loading a model inside a GENESIS 2 script",
+				description => "loading a model that is coded inside a GENESIS 2 script without running the simulation in the script",
 				preparation => {
 						description => "Create the results directory",
 						preparer =>
