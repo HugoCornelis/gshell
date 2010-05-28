@@ -32,6 +32,8 @@ Group: 			Science
 Vendor: 		Hugo Cornelis <hugo.cornelis@gmail.com>
 Packager: 		Mando Rodriguez <mandorodriguez@gmail.com>
 URL:			http://www.neurospaces.org
+AutoReqProv:		no
+
 
 %description
 The GENESIS Interactive Shell, referred to as the G-Shell, provides an interactive command line interface that replaces the GENESIS-2 Script Language Interpreter.
