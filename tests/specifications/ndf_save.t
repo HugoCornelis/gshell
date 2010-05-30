@@ -18,9 +18,9 @@ my $test
 						   timeout => 5,
 						  },
 						  {
-						   description => "Can we load the traub91 model ?",
+						   description => "Can we load the traub91 model (1)?",
 						   read => "Using hsolve",
-						   timeout => 10,
+						   timeout => 15,
 						   write => "sli_load test-traub91-v0/traub91.g",
 						  },
 						  {
@@ -955,9 +955,9 @@ VM Membrane Potentials (pdVms[18]) : (-0.06)
 						   timeout => 5,
 						  },
 						  {
-						   description => "Can we load the traub91 model ?",
+						   description => "Can we load the traub91 model (2)?",
 						   read => "Using hsolve",
-						   timeout => 10,
+						   timeout => 15,
 						   write => "sli_load test-traub94cell-v0/traub94cell1.g",
 						  },
 						  {
