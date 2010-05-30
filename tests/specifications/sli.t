@@ -29,6 +29,7 @@ my $test
     - PASSIVE9-current.g
     - PASSIVE9-current1.g
     - PASSIVE9-current2.g
+    - PURKINJE_MODEL
     - Purk2M0.p
     - Purk2M0s.p
     - Purk2M0sA.p
