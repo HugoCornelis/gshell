@@ -915,7 +915,8 @@ VM Membrane Potentials (pdVms[18]) : (-0.06)
 						   timeout => 10,
 						  },
 						  {
-						   description => 'Does the simulation produce the correct output ?',
+						   description => 'Does the simulation produce the correct output (1)?',
+						   numerical_compare => "arithmetic differences on the automated tester",
 						   read => {
 							    application_output_file => "$::config->{core_directory}/output/cell.out",
 							    expected_output_file => "/usr/local/ns-sli/tests/specifications/strings/traub91_asym.ssp",
@@ -1081,7 +1082,7 @@ VM Membrane Potentials (pdVms[18]) : (-0.06)
 						   timeout => 30,
 						  },
 						  {
-						   description => 'Does the simulation produce the correct output (2)?',
+						   description => 'Does the simulation produce the correct output (3)?',
 						   read => {
 							    application_output_file => "$::config->{core_directory}/output/cell.out",
 							    expected_output_file => "/usr/local/ns-sli/tests/specifications/strings/PurkM9_soma_1.5nA.g3",
