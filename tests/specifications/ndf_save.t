@@ -25,7 +25,7 @@ my $test
 						  },
 						  {
 						   description => "Can we write the traub91 model to an NDF file ?",
-						   wait => 1,
+						   wait => 2,
 						   write => "ndf_save /** /tmp/traub91.ndf",
 						  },
 						 ],
@@ -963,7 +963,7 @@ VM Membrane Potentials (pdVms[18]) : (-0.06)
 						  },
 						  {
 						   description => "Can we write the traub94 model to an NDF file ?",
-						   wait => 1,
+						   wait => 2,
 						   write => "ndf_save /** /tmp/traub94cell1.ndf",
 						  },
 						 ],
@@ -1050,7 +1050,7 @@ VM Membrane Potentials (pdVms[18]) : (-0.06)
 						  },
 						  {
 						   description => "Can we write the purkinje cell model to an NDF file ?",
-						   wait => 1,
+						   wait => 2,
 						   write => "ndf_save /** /tmp/purkinje.ndf",
 						  },
 						 ],
