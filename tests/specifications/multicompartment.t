@@ -1530,6 +1530,7 @@ tips:
 						  },
 						 ],
 				description => "commands for working with and analyzing a multicompartmental model",
+				side_effects => "creates a model in the model container",
 			       },
 			      ],
        description => "working with a multicompartmental model",
