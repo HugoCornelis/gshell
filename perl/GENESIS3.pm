@@ -1576,7 +1576,7 @@ sub run
 	}
 
 	my $result
-	    = $scheduler->apply_granular_parameters
+	    = $scheduler->apply_runtime_parameters
 		(
 		 $scheduler,
 		 map
@@ -1599,7 +1599,7 @@ sub run
 
 	if ($result)
 	{
-	    return "*** Error: apply_granular_parameters() for $scheduler->{name} failed ($result)";
+	    return "*** Error: apply_runtime_parameters() for $scheduler->{name} failed ($result)";
 	}
 
 	# use the scheduler
