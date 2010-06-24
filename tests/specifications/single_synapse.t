@@ -87,7 +87,7 @@ Number of segments: 4548
 Number of segments without parents: 1
 Number of segment tips: 1474
 ',
-						   write => "morphology_summariz /Purkinje",
+						   write => "morphology_summarize /Purkinje",
 						  },
 						  {
 						   description => "Can we get information about the number of branch points for a chosen dendritic segment ?",
