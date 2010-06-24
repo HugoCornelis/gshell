@@ -1294,6 +1294,34 @@ synopsis: output_add <element_name> <field_name>
 }
 
 
+sub output_show
+{
+#     my $component_name = shift;
+
+#     my $field = shift;
+
+    print Dump( { outputs => $GENESIS3::outputs, }, );
+
+    return "*** Ok: output_show";
+
+#     return "*** Ok: output_show $component_name $field";
+}
+
+
+sub output_show_help
+{
+#     print "description: show what variables are in the output file.
+# synopsis: output_show <element_name>
+# ";
+
+    print "description: show what variables are in the output file.
+synopsis: output_show
+";
+
+    return "*** Ok";
+}
+
+
 sub parameter_show
 {
     my $element = shift;
