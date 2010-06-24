@@ -20,9 +20,15 @@ my $test
 						   description => "Can we find a python based model in the model library?",
 						   read => '#!/usr/bin/python
 
+print "import\n"
+
 import Neurospaces
 
+print "initialize\n"
+
 nmc = Neurospaces.getModelContainer()
+
+print "construct\n"
 
 c = nmc.Channel("/k")
 

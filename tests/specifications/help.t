@@ -143,6 +143,7 @@ synopsis: (you gave )
   - npl_load
   - npy_load
   - output_add
+  - output_show
   - parameter_scaled_show
   - parameter_show
   - pwe
