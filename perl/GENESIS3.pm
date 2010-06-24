@@ -866,6 +866,8 @@ sub library_show_help
 
     print "synopsis: library_show [ <library_type> ] [ <library_path> ]\n";
 
+    print "synopsis: <library_type> is one of 'ndf', 'sli', 'g2'\n";
+
     return "*** Ok";
 }
 
