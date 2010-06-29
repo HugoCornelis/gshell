@@ -29,13 +29,12 @@ RELEASE_MICRO=`release-extract --micro`
 clean-local:
 	$(RM) -rf $(top_srcdir)/docs/html
 	$(RM) -rf $(top_srcdir)/tests/html
-	$(RM) -f build_debian.log
+	$(RM) -f  $(top_srcdir)/build_*.log
 	$(RM) -rf ~/.genesis3/gshell/InlinePerlCode
-	$(RM) -rf RPM_BUILD
+	$(RM) -rf $(top_srcdir)/*_BUILD
 	$(RM) -f $(top_srcdir)/*.dsc
 	$(RM) -f $(top_srcdir)/*.changes
 	$(RM) -f $(top_srcdir)/*.deb
-	$(RM) -f build_rpm.log
 	$(RM) -f gshell-*.tar.gz
 
 show-release-labels:
@@ -102,3 +101,7 @@ pkg-deb: dist
 
 pkg-rpm: dist
 	nspkg-rpm $(PACKAGE) $(VERSION)
+
+pkg-osx: 
+	nspkg-osx 
+
