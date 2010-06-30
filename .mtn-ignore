@@ -19,4 +19,4 @@ Makefile\.in$
 ^tests/results
 _Inline
 gz$
-*_BUILD$
+_BUILD$
