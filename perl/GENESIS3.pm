@@ -1296,6 +1296,26 @@ synopsis: output_add <element_name> <field_name>
 }
 
 
+sub output_filename
+{
+    my $filename = shift;
+
+    $GENESIS3::output_filename = $filename;
+
+    return "*** Ok: output_filename $filename";
+}
+
+
+sub output_filename_help
+{
+    print "description: set the output filename
+synopsis: output_filename <filename>
+";
+
+    return "*** Ok";
+}
+
+
 sub output_show
 {
 #     my $component_name = shift;
@@ -1726,7 +1746,8 @@ sub run
 	       double_2_ascii => {
 				  module_name => 'Heccer',
 				  options => {
-					      filename => '/tmp/output',
+# 					      filename => "/tmp/output",
+					      filename => $GENESIS3::output_filename,
 					     },
 				  package => 'Heccer::Output',
 				 },
@@ -3290,6 +3311,8 @@ our $inputclasses = {};
 our $inputs = [];
 
 our $outputs = [];
+
+our $output_filename = '/tmp/output';
 
 our $runtime_parameters = [];
 

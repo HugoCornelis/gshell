@@ -104,6 +104,10 @@ my $test
 						   write => "output_add /Purkinje/segments/b3s44[49] Vm",
 						  },
 						  {
+						   description => 'Can we set the output filename ?',
+						   write => "output_filename /tmp/pclamp.out",
+						  },
+						  {
 						   description => "Can we check the simulation ?",
 						   write => "check /Purkinje",
 						  },
@@ -115,7 +119,7 @@ my $test
 						   description => "Can we find the output ?",
 						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-perfectclamp.txt`),
 						   timeout => 20,
-						   write => "sh cat /tmp/output",
+						   write => "sh cat /tmp/pclamp.out",
 						  },
 						 ],
 				description => "commands to run the purkinje cell from an ndf file, voltage clamp",
@@ -218,6 +222,10 @@ my $test
 						   write => "output_add /Purkinje/segments/b3s44[49] Vm",
 						  },
 						  {
+						   description => 'Can we set the output filename ?',
+						   write => "output_filename /tmp/pclamp.out",
+						  },
+						  {
 						   description => "Can we check the simulation ?",
 						   write => "check /Purkinje",
 						  },
@@ -232,7 +240,7 @@ my $test
 # 						   read => (join '', `cat /usr/local/ssp/tests/specifications/strings/purkinje/builtin-edsjb1994-soma-current.txt`),
 						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-current.txt`),
 						   timeout => 20,
-						   write => "sh cat /tmp/output",
+						   write => "sh cat /tmp/pclamp.out",
 						  },
 						 ],
 				description => "commands to run the purkinje cell from an ndf file, current clamp",
