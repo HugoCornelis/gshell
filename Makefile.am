@@ -35,7 +35,7 @@ clean-local:
 	$(RM) -f $(top_srcdir)/*.dsc
 	$(RM) -f $(top_srcdir)/*.changes
 	$(RM) -f $(top_srcdir)/*.deb
-	$(RM) -f gshell-*.tar.gz
+	$(RM) -f $(top_srcdir)/gshell-*.tar.gz
 
 show-release-labels:
 	echo "Release information (major-minor-micro): $(RELEASE_MAJOR)-$(RELEASE_MINOR)-$(RELEASE_MICRO)"
