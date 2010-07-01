@@ -247,6 +247,7 @@ my $test
 				side_effects => "creates a model in the model container",
 			       },
 			      ],
+       comment => "this test also tests the output_filename command.",
        description => "clamping parameters of a model to a (series of) predefined value(s)",
        name => 'pclamp.t',
       };
