@@ -413,6 +413,33 @@ sub explore_help
 }
 
 
+sub heccer_set_timestep
+{
+    my $timestep = shift;
+
+    if ($timestep =~ /-?[0-9\.e]+/)
+    {
+	$GENESIS3::heccer_time_step = $timestep;
+
+	return "*** Ok: heccer_set_clock";
+    }
+    else
+    {
+	return "*** Error: timestep must be numeric";
+    }
+}
+
+
+sub heccer_set_timestep_help
+{
+    print "description: set the time step for use by the heccer compartmental solver\n";
+
+    print "synopsis: heccer_set_timestep_help <arguments>\n";
+
+    return "*** Ok";
+}
+
+
 sub help
 {
     my $topic = shift;
