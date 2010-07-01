@@ -118,7 +118,7 @@ my $test
 						  {
 						   description => "Can we find the output ?",
 						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-perfectclamp.txt`),
-						   timeout => 20,
+						   timeout => 30,
 						   write => "sh cat /tmp/pclamp.out",
 						  },
 						 ],
@@ -239,7 +239,7 @@ my $test
 						   numerical_compare => 'differences',
 # 						   read => (join '', `cat /usr/local/ssp/tests/specifications/strings/purkinje/builtin-edsjb1994-soma-current.txt`),
 						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-current.txt`),
-						   timeout => 20,
+						   timeout => 30,
 						   write => "sh cat /tmp/pclamp.out",
 						  },
 						 ],
