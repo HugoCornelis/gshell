@@ -121,6 +121,7 @@ synopsis: (you gave )
   - echo
   - exit
   - explore
+  - heccer_set_timestep
   - help
   - input_add
   - input_delete
@@ -143,6 +144,7 @@ synopsis: (you gave )
   - npl_load
   - npy_load
   - output_add
+  - output_filename
   - output_show
   - parameter_scaled_show
   - parameter_show
