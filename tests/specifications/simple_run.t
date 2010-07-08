@@ -206,12 +206,14 @@ outputs:
 schedule:
   - !!perl/hash:SSP::Engine
     backend: !!perl/hash:Heccer
+      distributor: {}
       heccer: !!perl/hash:SwiggableHeccer::Heccer {}
       model_source:
         modelname: /singlep
         service_backend: &5 !!perl/hash:Neurospaces
           neurospaces: !!perl/hash:SwiggableNeurospaces::Neurospaces {}
         service_name: model_container
+      queuer: {}
     compilation_priority: numerical
     constructor_settings: &6
       dStep: 2e-05
