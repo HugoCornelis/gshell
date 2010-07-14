@@ -1,0 +1,30 @@
+$files = {
+           '_</usr/local/glue/swig/perl/SSP.pm' => [
+                                                     {
+                                                       'expr' => undef,
+                                                       'value' => '1',
+                                                       'text' => '	my $compilation_result = $engine->compile($self);
+',
+                                                       'fname' => '/usr/local/glue/swig/perl/SSP.pm',
+                                                       'type' => 'user',
+                                                       'line' => '391'
+                                                     },
+                                                     {
+                                                       'expr' => undef,
+                                                       'value' => '1',
+                                                       'text' => '	my $error = $object->$method($peer, @$arguments);
+',
+                                                       'fname' => '/usr/local/glue/swig/perl/SSP.pm',
+                                                       'type' => 'user',
+                                                       'line' => 1773
+                                                     }
+                                                   ]
+         };
+$expr_list = [
+               {
+                 'expr' => '$method',
+                 'depth' => -1
+               }
+             ];
+$eval_saved_text = undef;
+$main_win_geometry = '1309x909+177+107';

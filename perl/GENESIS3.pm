@@ -1343,6 +1343,66 @@ synopsis: output_filename <filename>
 }
 
 
+sub output_format
+{
+    my $output_format = shift;
+
+    $GENESIS3::output_format = " $output_format";
+
+    return "*** Ok: output_format $output_format";
+}
+
+
+sub output_format_help
+{
+    print "description: set the output format to a printf type of format eg \" %.5f\"
+synopsis: output_format <output_format>
+";
+
+    return "*** Ok";
+}
+
+
+sub output_mode
+{
+    my $output_mode = shift;
+
+    $GENESIS3::output_mode = $output_mode;
+
+    return "*** Ok: output_mode $output_mode";
+}
+
+
+sub output_mode_help
+{
+    print "description: set the output mode to one of \"steps\" or the empty string \"\"
+synopsis: output_mode <output_mode>
+";
+
+    return "*** Ok";
+}
+
+
+sub output_resolution
+{
+    my $output_resolution = shift;
+
+    $GENESIS3::output_resolution = $output_resolution;
+
+    return "*** Ok: output_resolution $output_resolution";
+}
+
+
+sub output_resolution_help
+{
+    print "description: reduce the output resolution with the specified (integer) amount
+synopsis: output_resolution <output_resolution>
+";
+
+    return "*** Ok";
+}
+
+
 sub output_show
 {
 #     my $component_name = shift;
@@ -1773,8 +1833,10 @@ sub run
 	       double_2_ascii => {
 				  module_name => 'Heccer',
 				  options => {
-# 					      filename => "/tmp/output",
 					      filename => $GENESIS3::output_filename,
+					      format => $GENESIS3::output_format,
+					      output_mode => $GENESIS3::output_mode,
+					      resolution => $GENESIS3::output_resolution,
 					     },
 				  package => 'Heccer::Output',
 				 },
@@ -3340,6 +3402,12 @@ our $inputs = [];
 our $outputs = [];
 
 our $output_filename = '/tmp/output';
+
+our $output_format = '';
+
+our $output_mode = '';
+
+our $output_resolution = '';
 
 our $runtime_parameters = [];
 
