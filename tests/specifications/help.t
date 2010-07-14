@@ -145,6 +145,9 @@ synopsis: (you gave )
   - npy_load
   - output_add
   - output_filename
+  - output_format
+  - output_mode
+  - output_resolution
   - output_show
   - parameter_scaled_show
   - parameter_show
