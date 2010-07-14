@@ -86,7 +86,7 @@ my $test
 							   },
 						  },
 						 ],
-				description => "simple output with simulation time",
+				description => "simple output with the steps mode",
 				side_effects => "creates a model in the model-container",
 			       },
 			       {
@@ -128,7 +128,7 @@ my $test
 							   },
 						  },
 						 ],
-				description => "simple output with simulation time",
+				description => "output with the steps mode at a coarser resolution",
 				side_effects => "creates a model in the model-container",
 			       },
 			       {
@@ -170,7 +170,7 @@ my $test
 							   },
 						  },
 						 ],
-				description => "simple output with simulation time",
+				description => "simple output with the steps mode and a format field",
 				side_effects => "creates a model in the model-container",
 			       },
 			      ],
