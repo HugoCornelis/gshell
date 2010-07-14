@@ -183,15 +183,21 @@ outputclasses:
     module_name: Heccer
     options: &3
       filename: /tmp/output
+      format: ''
+      output_mode: ''
+      resolution: ''
     package: Heccer::Output
     ssp_outputclass: &4 !!perl/hash:SSP::Output
       backend: !!perl/hash:Heccer::Output
         backend: !!perl/hash:SwiggableHeccer::OutputGenerator {}
         filename: /tmp/output
+        format: ''
         module_name: Heccer
         name: double_2_ascii
         options: *3
+        output_mode: ''
         package: Heccer::Output
+        resolution: ''
         scheduler: *1
       module_name: Heccer
       name: double_2_ascii
@@ -207,6 +213,10 @@ schedule:
   - !!perl/hash:SSP::Engine
     backend: !!perl/hash:Heccer
       distributor: {}
+      event_distributor:
+        event_distributor_backend: ~
+      event_queuer:
+        event_queuer_backend: ~
       heccer: !!perl/hash:SwiggableHeccer::Heccer {}
       model_source:
         modelname: /singlep
@@ -217,6 +227,8 @@ schedule:
     compilation_priority: numerical
     constructor_settings: &6
       dStep: 2e-05
+    event_distributor: {}
+    event_queuer: {}
     modelname: /singlep
     module_name: Heccer
     scheduler: *1
