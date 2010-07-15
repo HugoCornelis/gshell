@@ -116,6 +116,16 @@ my $test
 						    timeout => 250,
 						   },
 						   {
+						    description => "What is the contents of the current directory ?",
+						    read => "results",
+						    write => "sh ls -lastr",
+						   },
+						   {
+						    description => "What is the contents of the results directory ?",
+						    read => "PurkM9",
+						    write => "sh ls -lastr results",
+						   },
+						   {
 						    description => "quit the simulator",
 						    write => "quit",
 						   },
@@ -138,7 +148,8 @@ my $test
 						preparer =>
 						sub
 						{
-						    `mkdir results`;
+						    `pwd`;
+						    `mkdir "$::config->{core_directory}/results"`;
 						},
 					       },
 				reparation => {
