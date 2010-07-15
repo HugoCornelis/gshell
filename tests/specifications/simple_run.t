@@ -141,9 +141,9 @@ apply:
     - method: analyze
   initializers:
     - method: compile
-    - method: connect
     - method: instantiate_inputs
     - method: instantiate_outputs
+    - method: connect
     - method: initiate
     - method: optimize
   services:
@@ -159,11 +159,11 @@ history:
   - arguments: []
     method: compile
   - arguments: []
-    method: connect
-  - arguments: []
     method: instantiate_inputs
   - arguments: []
     method: instantiate_outputs
+  - arguments: []
+    method: connect
   - arguments: []
     method: initiate
   - arguments: []
