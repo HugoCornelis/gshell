@@ -46,6 +46,15 @@ my $test
 							    application_output_file => "/tmp/output",
 							    expected_output_file => "/usr/local/ssp/tests/specifications/strings/output1.txt",
 							   },
+						   reparation => {
+								  description => "Remove output file from test run.",
+								  reparer =>
+								  sub
+								  {
+								    `rm /tmp/output`;
+								  },
+								 },
+
 						  },
 						 ],
 				description => "simple output with simulation time",
@@ -84,6 +93,15 @@ my $test
 							    application_output_file => "/tmp/output",
 							    expected_output_file => "/usr/local/ssp/tests/specifications/strings/output2.txt",
 							   },
+						   reparation => {
+								  description => "Remove output file from test run.",
+								  reparer =>
+								  sub
+								  {
+								    `rm /tmp/output`;
+								  },
+								 },
+
 						  },
 						 ],
 				description => "simple output with the steps mode",
@@ -126,6 +144,15 @@ my $test
 							    application_output_file => "/tmp/output",
 							    expected_output_file => "/usr/local/ssp/tests/specifications/strings/output3.txt",
 							   },
+						   reparation => {
+								  description => "Remove output file from test run.",
+								  reparer =>
+								  sub
+								  {
+								    `rm /tmp/output`;
+								  },
+								 },
+
 						  },
 						 ],
 				description => "output with the steps mode at a coarser resolution",
@@ -168,6 +195,15 @@ my $test
 							    application_output_file => "/tmp/output",
 							    expected_output_file => "/usr/local/ssp/tests/specifications/strings/output4.txt",
 							   },
+						   reparation => {
+								  description => "Remove output file from test run.",
+								  reparer =>
+								  sub
+								  {
+								    `rm /tmp/output`;
+								  },
+								 },
+
 						  },
 						 ],
 				description => "simple output with the steps mode and a format field",
