@@ -3268,6 +3268,16 @@ package GENESIS3;
 
 our $all_components
     = {
+       exchange => {
+		    description => 'NeuroML and NineML exchange',
+		    disabled => 'immature and by default not loaded',
+		    integrator => 'Neurospaces::Exchange::Commands',
+		    module => 'Neurospaces::Exchange',
+		    type => {
+			     description => 'intermediary, model-container interface',
+			     layer => 2,
+			    },
+		   },
        gshell => {
 		  description => 'the GENESIS 3 shell allows convenient interaction with other components',
 		  disabled => 0,
@@ -3275,7 +3285,7 @@ our $all_components
 		  status => 'loaded',
 		  type => {
 			   description => 'scriptable user interface',
-			   layer => 2,
+			   layer => 3,
 			  },
 # 		  variables => {
 # 				verbose => $GENESIS3::verbose_level,
