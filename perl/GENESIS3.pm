@@ -511,6 +511,30 @@ synopsis: 'help component <component_name>'
 	{
 	    my $component_module = exists $GENESIS3::all_components->{$subtopic} ? $GENESIS3::all_components->{$subtopic}->{module} : '';
 
+	    {
+		use YAML;
+
+		local $YAML::UseHeader = 0;
+
+		if (exists $GENESIS3::all_components->{$subtopic})
+		{
+		    print Dump(
+			       {
+				"$subtopic" => $GENESIS3::all_components->{$subtopic},
+			       },
+			      );
+		}
+
+		if (exists $GENESIS3::all_cpan_components->{$subtopic})
+		{
+		    print Dump(
+			       {
+				"$subtopic" => $GENESIS3::all_cpan_components->{$subtopic},
+			       },
+			      );
+		}
+	    }
+
 	    no strict "refs";
 
 	    my $sub_name = "${component_module}::help";
@@ -522,13 +546,15 @@ synopsis: 'help component <component_name>'
 
 # 		my $sub = (\%{"::"})->{"GENESIS3::"}->{"Commands::"}->{"${subtopic}_help"};
 
+		print "  inline_help:\n";
+
 		return &$sub_name($topic, $subtopic, $subsubtopic, );
 	    }
 	    else
 	    {
-		my $error = "*** Error: no help found for command $subtopic\n";
+		print "  inline_help: no further help found\n";
 
-		return $error;
+		return undef;
 	    }
 	}
     }

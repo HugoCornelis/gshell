@@ -76,13 +76,13 @@ Core components:
 						  {
 						   description => "Can we find the component help for a specific component ?",
 						   read => "
-description: simple scheduler in perl
-usage: |-
-  The simple scheduler in perl binds together software components for
-  running simulations.  It is based on services and solvers: services
-  provide functionality to assist the solvers to construct an
-  efficient simulation run-time environment, solvers apply algorithms
-  to solve the problem posed, numerically or otherwise.
+    description: simple scheduler in perl
+    usage: |-
+      The simple scheduler in perl binds together software components for
+      running simulations.  It is based on services and solvers: services
+      provide functionality to assist the solvers to construct an
+      efficient simulation run-time environment, solvers apply algorithms
+      to solve the problem posed, numerically or otherwise.
 ",
 						   write => "help component ssp",
 						  },
