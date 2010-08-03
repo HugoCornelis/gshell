@@ -183,6 +183,15 @@ synopsis: (you gave )
 						  {
 						   description => "Can we find the loaded software components ?",
 						   read => "Core components:
+  exchange:
+    description: NeuroML and NineML exchange
+    disabled: immature and by default not loaded
+    integrator: Neurospaces::Exchange::Commands
+    module: Neurospaces::Exchange
+    status: disabled (immature and by default not loaded)
+    type:
+      description: 'intermediary, model-container interface'
+      layer: 2
   gshell:
     description: the GENESIS 3 shell allows convenient interaction with other components
     disabled: 0
