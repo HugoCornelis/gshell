@@ -199,7 +199,7 @@ synopsis: (you gave )
     status: loaded
     type:
       description: scriptable user interface
-      layer: 2
+      layer: 3
   heccer:
     description: single neuron equation solver
     module: Heccer
@@ -238,7 +238,7 @@ synopsis: (you gave )
     status: \"disabled (the Neurospaces studio is an experimental feature, try loading it with the 'component_load' command)\"
     type:
       description: graphical user interface
-      layer: 2
+      layer: 4
 Other components:
   python:
     description: interface to python scripting

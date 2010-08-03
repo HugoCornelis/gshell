@@ -3323,7 +3323,7 @@ our $all_components
 		  module => "Neurospaces::Studio",
 		  type => {
 			   description => 'graphical user interface',
-			   layer => 2,
+			   layer => 4,
 			  },
 		 },
        ssp => {
