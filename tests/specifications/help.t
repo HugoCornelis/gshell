@@ -26,7 +26,6 @@ options:
     --version            give version information.
 ",
 						   timeout => 5,
-						   write => undef,
 						  },
 						 ],
 				description => "the help command line option",
@@ -40,7 +39,6 @@ options:
 						   description => "Is startup successful ?",
 						   read => "GENESIS 3 shell",
 						   timeout => 5,
-						   write => undef,
 						  },
 						  {
 						   description => "Can we find the top level help topics ?",
@@ -100,7 +98,6 @@ usage: |-
 						   description => "Is startup successful ?",
 						   read => "GENESIS 3 shell",
 						   timeout => 5,
-						   write => undef,
 						  },
 						  {
 						   description => "Can we get a useful synopsis for the list command ?",
