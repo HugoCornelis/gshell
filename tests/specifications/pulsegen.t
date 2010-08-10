@@ -26,13 +26,13 @@ my $test
 						   description => "Can we find the input class template we would like to use ?",
 						   read => "all input class templates:
   perfectclamp:
-    module_name: Heccer
+    module_name: Experiment
     options:
       command: command value
       name: name of this inputclass
-    package: Heccer::PerfectClamp
+    package: Experiment::PerfectClamp
   pulsegen:
-    module_name: Heccer
+    module_name: Experiment
     options:
       baselevel: The pulse base level
       delay1: First pulse delay
@@ -43,7 +43,7 @@ my $test
       triggermode: 'The pulse triggermode, 0 - freerun, 1 - ext trig, 2 - ext gate'
       width1: First pulse width
       width2: Second pulse width
-    package: Heccer::PulseGen
+    package: Experiment::PulseGen
 ",
 						   write => "list inputclass_templates",
 						  },
@@ -55,7 +55,7 @@ my $test
 						   description => "Can we find the input class we just created ?",
 						   read => "all input classes:
   my_pulsegen_freerun:
-    module_name: Heccer
+    module_name: Experiment
     options:
       baselevel: 10.0
       delay1: 5.0
@@ -66,7 +66,7 @@ my $test
       triggermode: 0
       width1: 3.0
       width2: 5
-    package: Heccer::PulseGen
+    package: Experiment::PulseGen
 ",
 						   write => "list inputclasses",
 						  },

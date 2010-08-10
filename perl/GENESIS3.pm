@@ -1857,14 +1857,14 @@ sub run
 	my $outputclasses
 	    = {
 	       double_2_ascii => {
-				  module_name => 'Heccer',
+				  module_name => 'Experiment',
 				  options => {
 					      filename => $GENESIS3::output_filename,
 					      format => $GENESIS3::output_format,
 					      output_mode => $GENESIS3::output_mode,
 					      resolution => $GENESIS3::output_resolution,
 					     },
-				  package => 'Heccer::Output',
+				  package => 'Experiment::Output',
 				 },
 	      };
 
@@ -3304,6 +3304,16 @@ our $all_components
 			     layer => 2,
 			    },
 		   },
+       experiment => {
+		      description => 'Simulation objects implementing experiments',
+		      disabled => 'immature and by default not loaded',
+# 		      integrator => 'Neurospaces::Exchange::Commands',
+		      module => 'Experiment',
+		      type => {
+			       description => 'simulation objects for I/O',
+			       layer => 1,
+			      },
+		     },
        gshell => {
 		  description => 'the GENESIS 3 shell allows convenient interaction with other components',
 		  disabled => 0,
@@ -3380,15 +3390,15 @@ our $all_cpan_components
 our $all_inputclass_templates
     = {
        perfectclamp => {
-			module_name => 'Heccer',
+			module_name => 'Experiment',
 			options => {
 				    name => 'name of this inputclass',
 				    command => 'command value',
 				   },
-			package => 'Heccer::PerfectClamp',
+			package => 'Experiment::PerfectClamp',
 		       },
        pulsegen => {
-			module_name => 'Heccer',
+			module_name => 'Experiment',
 			options => {
 				    name => 'name of this inputclass',
 				    width1 => 'First pulse width',
@@ -3400,7 +3410,7 @@ our $all_inputclass_templates
 				    baselevel => 'The pulse base level',
 				    triggermode => 'The pulse triggermode, 0 - freerun, 1 - ext trig, 2 - ext gate',
 				   },
-			package => 'Heccer::PulseGen',
+			package => 'Experiment::PulseGen',
 		       },
       };
 

@@ -180,29 +180,29 @@ models:
 name: 'GENESIS3 SSP schedule initiated for /singlep, 0'
 outputclasses:
   double_2_ascii:
-    module_name: Heccer
+    module_name: Experiment
     options: &3
       filename: /tmp/output
       format: ''
       output_mode: ''
       resolution: ''
-    package: Heccer::Output
+    package: Experiment::Output
     ssp_outputclass: &4 !!perl/hash:SSP::Output
-      backend: !!perl/hash:Heccer::Output
-        backend: !!perl/hash:SwiggableHeccer::OutputGenerator {}
+      backend: !!perl/hash:Experiment::Output
+        backend: !!perl/hash:SwiggableExperiment::OutputGenerator {}
         filename: /tmp/output
         format: ''
-        module_name: Heccer
+        module_name: Experiment
         name: double_2_ascii
         options: *3
         output_mode: ''
-        package: Heccer::Output
+        package: Experiment::Output
         resolution: ''
         scheduler: *1
-      module_name: Heccer
+      module_name: Experiment
       name: double_2_ascii
       options: *3
-      package: Heccer::Output
+      package: Experiment::Output
       scheduler: *1
 outputs:
   - component_name: /singlep/segments/soma

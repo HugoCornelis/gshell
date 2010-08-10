@@ -63,6 +63,7 @@ my $test
     - Purk_syn.g
     - SYNCHRONORM9.g
     - SYNCHROPASS9.g
+    - VIVO.g
     - defaults.g
     - purkinje_simplifying.g
     - schedule.g

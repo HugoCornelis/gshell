@@ -189,6 +189,14 @@ synopsis: (you gave )
     type:
       description: 'intermediary, model-container interface'
       layer: 2
+  experiment:
+    description: Simulation objects implementing experiments
+    disabled: immature and by default not loaded
+    module: Experiment
+    status: disabled (immature and by default not loaded)
+    type:
+      description: simulation objects for I/O
+      layer: 1
   gshell:
     description: the GENESIS 3 shell allows convenient interaction with other components
     disabled: 0
