@@ -1114,6 +1114,7 @@ VM Membrane Potentials (pdVms[18]) : (-0.06)
 			      ],
        description => "various tests of the ndf_save command",
        name => 'ndf_save.t',
+       mac_report => 'Some of these tests will fail if the machine is under heavy load. Test cases are fine',
       };
 
 
