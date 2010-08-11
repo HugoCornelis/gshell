@@ -1457,6 +1457,27 @@ synopsis: output_show
 }
 
 
+# sub plot_data
+# {
+#     fplot.py Vm.out
+#     plotVm.py Vm.out pyr4*.out
+#         rasterplot.py spike_times.txt
+#         G3Plot.py pyr4*.out Vm.out
+#         rowrateplot.py spike_freq_HD2500-11p.txt
+
+# }
+
+
+# sub plot_data_help
+# {
+#     print "description: plot a signal trace of a file.
+# synopsis: plot_data <filename>
+# ";
+
+#     return "*** Ok";
+# }
+
+
 sub parameter_show
 {
     my $element = shift;
