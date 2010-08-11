@@ -94,6 +94,9 @@ PRIVATE_MODELS
       OUTPUT G,
       OUTPUT I,
     END BINDABLES
+    PARAMETERS
+      PARAMETER ( POWER = 4 ),
+    END PARAMETERS
     CHILD "a_2_2" "a"
     END CHILD
     CHILD "b_3_3" "b"
