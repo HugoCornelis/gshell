@@ -94,6 +94,7 @@ my $test
 						 ],
 				description => "commands for a simple simulation of the purkinje cell model",
 				side_effects => "creates a model in the model container",
+				mac_report => 'Test fails from a possible IO lock/lag. The output file /tmp/output is empty. When executing the commands of the test this case completes fine and the output matches the expected output.',
 			       },
 			      ],
        description => "simple simulations of parts of the purkinje cell model",

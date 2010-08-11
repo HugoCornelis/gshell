@@ -302,6 +302,7 @@ END PUBLIC_MODELS
 			      ],
        description => "running GENESIS 2 scripts and importing their models",
        name => 'sli.t',
+       mac_report => 'Several of these tests will fail if the machine is under a load. Test cases complete fine.',
       };
 
 
