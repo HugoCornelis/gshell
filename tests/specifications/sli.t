@@ -135,7 +135,7 @@ my $test
 						    description => "Is the generated output correct (1)?",
 						    numerical_compare => 'small differences between the output of different architectures',
 						    read => {
-							     application_output_file => "$::config->{core_directory}/tests/results/PurkM9_soma_1.5nA",
+							     application_output_file => "results/PurkM9_soma_1.5nA",
 							     expected_output_file => "/usr/local/ns-sli/tests/specifications/strings/PurkM9_soma_1.5nA.g3-double",
 							    },
 						    wait => 1,
@@ -150,7 +150,7 @@ my $test
 						sub
 						{
 						    `pwd`;
-						    `mkdir "$::config->{core_directory}/results"`;
+						    `mkdir "results"`;
 						},
 					       },
 				reparation => {
@@ -158,7 +158,7 @@ my $test
 					       reparer =>
 					       sub
 					       {
- 						   `rm "$::config->{core_directory}/results/PurkM9_soma_1.5nA"`;
+#  						   `rm "results/PurkM9_soma_1.5nA"`;
 						   `rmdir results`;
 					       },
 					      },
