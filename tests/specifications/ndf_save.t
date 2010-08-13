@@ -915,10 +915,11 @@ VM Membrane Potentials (pdVms[18]) : (-0.06)
 						   timeout => 10,
 						  },
 						  {
+						   comment => "Note that output is specified relative to the current directory",
 						   description => 'Does the simulation produce the correct output (1)?',
 						   numerical_compare => "arithmetic differences on the automated tester",
 						   read => {
-							    application_output_file => "$::config->{core_directory}/output/cell.out",
+							    application_output_file => "output/cell.out",
 							    expected_output_file => "/usr/local/ns-sli/tests/specifications/strings/traub91_asym.ssp",
 # 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/simplecell1-1-5e-10nA.txt",
 							   },
@@ -940,7 +941,7 @@ VM Membrane Potentials (pdVms[18]) : (-0.06)
 					       reparer =>
 					       sub
 					       {
-# 						   `rm "$::config->{core_directory}/output/cell.out"`;
+# 						   `rm "output/cell.out"`;
 						   `rmdir output`;
 					       },
 					      },
