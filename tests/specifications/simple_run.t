@@ -232,6 +232,7 @@ schedule:
     event_queuer: {}
     modelname: /singlep
     module_name: Heccer
+    name: /singlep
     scheduler: *1
     service: &7
       backend: *5
