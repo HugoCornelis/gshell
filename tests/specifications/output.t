@@ -88,7 +88,7 @@ my $test
 						   write => 'run /singlep 0.001',
 						  },
 						  {
-						   description => "Can we produce simple output with simulation time?",
+						   description => "Can we produce simple output with the steps mode?",
 						   read => {
 							    application_output_file => "/tmp/output",
 							    expected_output_file => "/usr/local/ssp/tests/specifications/strings/output2.txt",
@@ -105,6 +105,7 @@ my $test
 						  },
 						 ],
 				description => "simple output with the steps mode",
+				disabled => "steps mode interferes with ssp optimization, steps mode is currently disabled",
 				side_effects => "creates a model in the model-container",
 			       },
 			       {
@@ -139,7 +140,7 @@ my $test
 						   write => 'run /singlep 0.001',
 						  },
 						  {
-						   description => "Can we produce simple output with simulation time?",
+						   description => "Can we produce simple output with steps mode and lower temporal resolution?",
 						   read => {
 							    application_output_file => "/tmp/output",
 							    expected_output_file => "/usr/local/ssp/tests/specifications/strings/output3.txt",
@@ -156,6 +157,7 @@ my $test
 						  },
 						 ],
 				description => "output with the steps mode at a coarser resolution",
+				disabled => "steps mode interferes with ssp optimization, steps mode is currently disabled",
 				side_effects => "creates a model in the model-container",
 			       },
 			       {
@@ -190,7 +192,7 @@ my $test
 						   write => 'run /singlep 0.001',
 						  },
 						  {
-						   description => "Can we produce simple output with simulation time?",
+						   description => "Can we produce simple output with the steps mode?",
 						   read => {
 							    application_output_file => "/tmp/output",
 							    expected_output_file => "/usr/local/ssp/tests/specifications/strings/output4.txt",
@@ -207,6 +209,7 @@ my $test
 						  },
 						 ],
 				description => "simple output with the steps mode and a format field",
+				disabled => "steps mode interferes with ssp optimization, steps mode is currently disabled",
 				side_effects => "creates a model in the model-container",
 			       },
 			      ],

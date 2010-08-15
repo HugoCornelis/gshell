@@ -178,6 +178,7 @@ models:
   - modelname: /singlep
     solverclass: heccer
 name: 'GENESIS3 SSP schedule initiated for /singlep, 0'
+optimize: 'by default turned on, ignored when running in verbose mode'
 outputclasses:
   double_2_ascii:
     module_name: Experiment
