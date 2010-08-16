@@ -1743,7 +1743,7 @@ sub run
 	#! does not expect it when applying run time settings during
 	#! compilation)
 
-	my $conceptual_parameters
+	my $runtime_parameters
 	    = [
 	       grep
 	       {
@@ -1752,11 +1752,11 @@ sub run
 	       @$GENESIS3::runtime_parameters,
 	      ];
 
-	if (@$conceptual_parameters)
+	if (@$runtime_parameters)
 	{
 	    print "warning: ignoring parameter settings that contain a namespace in their address\n";
 
-	    print Dump( { conceptual_parameters => $conceptual_parameters, }, );
+	    print Dump( { runtime_parameters => $runtime_parameters, }, );
 	}
 
 	my $result
@@ -1828,21 +1828,8 @@ sub run
 
 	# fill in runtime_parameters
 
-	$schedule->{models}->[0]->{conceptual_parameters}
+	$schedule->{models}->[0]->{runtime_parameters}
 	    = [
-	       grep
-	       {
-		   $_->{component_name} =~ /::/
-	       }
-	       @$GENESIS3::runtime_parameters,
-	      ];
-
-	$schedule->{models}->[0]->{granular_parameters}
-	    = [
-	       grep
-	       {
-		   $_->{component_name} !~ /::/
-	       }
 	       @$GENESIS3::runtime_parameters,
 	      ];
 
