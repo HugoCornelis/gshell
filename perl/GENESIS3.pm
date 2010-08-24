@@ -1013,7 +1013,12 @@ sub list_elements
 	}
     }
 
-    my $query = "expand $element/*";
+    my $query = "expand $element";
+
+    if ($element !~ /\*/)
+    {
+	$query .= "/*";
+    }
 
     querymachine($query);
 
