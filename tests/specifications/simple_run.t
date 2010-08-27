@@ -213,7 +213,8 @@ outputs:
 schedule:
   - !!perl/hash:SSP::Engine
     backend: !!perl/hash:Heccer
-      distributor: {}
+      distributor:
+        backend: []
       event_distributor:
         event_distributor_backend: ~
       event_queuer:
