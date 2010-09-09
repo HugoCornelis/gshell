@@ -44,6 +44,8 @@ use Getopt::Long;
 
 use Term::ReadLine;
 
+use Text::ParseWords;
+
 
 $SIG{__DIE__}
     = sub {
@@ -79,7 +81,18 @@ sub interprete
 
     my $line = shift ;
 
-    my $arguments = [ split /\s/, $line, ];
+    my @args = quotewords(" ", 1, $line);
+
+    if($#args == -1)
+    {
+      return;
+    }
+
+    chomp @args;
+
+    my $arguments = \@args;
+
+#    my $arguments = [ split /\s/, $line, ];
 
     #t join hash and array arguments
 
