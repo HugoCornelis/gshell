@@ -53,7 +53,7 @@ my $test
 						  {
 						   description => 'Can we compile the converted model description from SSP, traub91.ndf ?',
 						   read => '
-Heccer (pcName) : (unnamed test)
+Heccer (pcName) : (/cell)
 Heccer (iStatus) : (20)
 Heccer (iErrorCount) : (0)
 Heccer Options (iOptions) : (0)
