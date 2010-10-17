@@ -146,6 +146,7 @@ ndf_library:
 ndf_library:
   cells:
     - cell1.ndf
+    - izhikevich.ndf
     - purkinje/
     - stand_alone.ndf
 ",
