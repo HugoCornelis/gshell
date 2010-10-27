@@ -357,7 +357,8 @@ stop                strcat              strcmp              strlen
 strncmp             strsub              substituteinfo      substring           
 swapdump            tan                 trunc               tset                
 tweakalpha          tweaktau            useclock            version             
-warning             where               writefile',
+volumeconnect       warning             where               writefile           
+',
 						  },
 						  {
 						   description => "Can we get a list of available GENESIS 2 objects?",
