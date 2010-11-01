@@ -67,6 +67,7 @@ ndf_library:
     - edsjb1994.ndf
     - edsjb1994_dendrogram.ndf
     - edsjb1994_partitioned.ndf
+    - edsjb1994_passive.ndf
     - edsjb1994_spinesurface.ndf
 ",
 						   write => "library_show ndf cells/purkinje",
