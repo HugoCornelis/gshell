@@ -18,7 +18,7 @@ my $test
 						  },
 						  {
 						   description => "Can we find a python based model in the model library?",
-						   read => '#!/usr/bin/python
+						   read => '#! /usr/bin/env python
 
 print "import\n"
 
