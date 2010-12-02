@@ -213,7 +213,7 @@ outputs:
 schedule:
   - !!perl/hash:SSP::Engine
     backend: !!perl/hash:Heccer
-      heccer: !!perl/hash:SwiggableHeccer::Heccer {}
+      heccer: !!perl/hash:SwiggableHeccer::simobj_Heccer {}
       model_source:
         modelname: /singlep
         service_backend: &5 !!perl/hash:Neurospaces
