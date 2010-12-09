@@ -35,7 +35,7 @@ c = nmc.Channel("/k")
 gka = nmc.GateKinetic("/k/a")
 
 gka.parameter("HH_AB_Scale", -600.0 )
-gka.parameter("HH_AB_Mult", 10000 )
+gka.parameter("HH_AB_Mult", -10000 )
 gka.parameter("HH_AB_Factor_Flag", -1.0 )
 gka.parameter("HH_AB_Add", -1.0 )
 gka.parameter("HH_AB_Offset_E", 60e-3 )
@@ -70,7 +70,7 @@ PRIVATE_MODELS
       PARAMETER ( HH_AB_Offset_E = 0.06 ),
       PARAMETER ( HH_AB_Add = -1 ),
       PARAMETER ( HH_AB_Factor_Flag = -1 ),
-      PARAMETER ( HH_AB_Mult = 10000 ),
+      PARAMETER ( HH_AB_Mult = -10000 ),
       PARAMETER ( HH_AB_Scale = -600 ),
     END PARAMETERS
   END GATE_KINETIC
