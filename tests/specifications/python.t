@@ -34,21 +34,21 @@ c = nmc.Channel("/k")
 
 gka = nmc.GateKinetic("/k/a")
 
-gka.parameter("HH_AB_Scale", -600.0 )
+gka.parameter("HH_AB_Add_Num", -600.0 )
 gka.parameter("HH_AB_Mult", -10000 )
 gka.parameter("HH_AB_Factor_Flag", -1.0 )
-gka.parameter("HH_AB_Add", -1.0 )
+gka.parameter("HH_AB_Add_Den", -1.0 )
 gka.parameter("HH_AB_Offset_E", 60e-3 )
-gka.parameter("HH_AB_Tau", -10.0e-3 )
+gka.parameter("HH_AB_Div_E", -10.0e-3 )
 
 gkb = nmc.GateKinetic("/k/b")
 
-gkb.parameter("HH_AB_Scale", 125.0 )
+gkb.parameter("HH_AB_Add_Num", 125.0 )
 gkb.parameter("HH_AB_Mult", 0.0 )
 gkb.parameter("HH_AB_Factor_Flag", -1.0 )
-gkb.parameter("HH_AB_Add", 0.0 )
+gkb.parameter("HH_AB_Add_Den", 0.0 )
 gkb.parameter("HH_AB_Offset_E", 70e-3 )
-gkb.parameter("HH_AB_Tau", 80e-3 )
+gkb.parameter("HH_AB_Div_E", 80e-3 )
 ',
 						   write => "sh cat /usr/local/neurospaces/models/library/channels/hodgkin-huxley/k.npy",
 						  },
@@ -66,24 +66,24 @@ NEUROSPACES NDF
 PRIVATE_MODELS
   GATE_KINETIC "a_2_2"
     PARAMETERS
-      PARAMETER ( HH_AB_Tau = -0.01 ),
+      PARAMETER ( HH_AB_Div_E = -0.01 ),
       PARAMETER ( HH_AB_Offset_E = 0.06 ),
-      PARAMETER ( HH_AB_Add = -1 ),
+      PARAMETER ( HH_AB_Add_Den = -1 ),
       PARAMETER ( HH_AB_Factor_Flag = -1 ),
       PARAMETER ( HH_AB_Mult = -10000 ),
-      PARAMETER ( HH_AB_Scale = -600 ),
+      PARAMETER ( HH_AB_Add_Num = -600 ),
     END PARAMETERS
   END GATE_KINETIC
   CHILD "a_2_2" "a_inserted_2"
   END CHILD
   GATE_KINETIC "b_3_3"
     PARAMETERS
-      PARAMETER ( HH_AB_Tau = 0.08 ),
+      PARAMETER ( HH_AB_Div_E = 0.08 ),
       PARAMETER ( HH_AB_Offset_E = 0.07 ),
-      PARAMETER ( HH_AB_Add = 0 ),
+      PARAMETER ( HH_AB_Add_Den = 0 ),
       PARAMETER ( HH_AB_Factor_Flag = -1 ),
       PARAMETER ( HH_AB_Mult = 0 ),
-      PARAMETER ( HH_AB_Scale = 125 ),
+      PARAMETER ( HH_AB_Add_Num = 125 ),
     END PARAMETERS
   END GATE_KINETIC
   CHILD "b_3_3" "b_inserted_3"
