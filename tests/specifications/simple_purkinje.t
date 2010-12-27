@@ -28,6 +28,7 @@ ndf_library:
     - channels/
     - contours/
     - conversions/
+    - descriptor.yml
     - event_data/
     - examples/
     - fibers/
