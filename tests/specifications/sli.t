@@ -301,8 +301,13 @@ END PUBLIC_MODELS
 			       },
 			      ],
        description => "running GENESIS 2 scripts and importing their models",
-       name => 'sli.t',
+       disabled => (
+		    $^O =~ /^darwin/i
+		    ? "this test is disabled on darwin (aka MAC) based systems"
+		    : ""
+		   ),
        mac_report => 'Several of these tests will fail if the machine is under a load. Test cases complete fine.',
+       name => 'sli.t',
       };
 
 
