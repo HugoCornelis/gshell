@@ -58,6 +58,7 @@ gkb.parameter("HH_AB_Div_E", 80e-3 )
 						  },
 						  {
 						   description => "Can we export the model to an NDF file ?",
+						   mac_report => "This test reads in the data correctly, however the NDF output it produces is in a different order than the expected on linux. Most likely needs a more strict preservation of order when traversing the model.",
 						   read => '#!neurospacesparse
 // -*- NEUROSPACES -*-
 
