@@ -1,35 +1,37 @@
 $files = {
+           '_<perl/GENESIS3.pm' => [
+                                     {
+                                       'expr' => undef,
+                                       'value' => '1',
+                                       'text' => '    foreach my $component_name (keys %{$GENESIS3::Configuration::configuration->{all_components}->{core_components}})
+',
+                                       'fname' => 'perl/GENESIS3.pm',
+                                       'type' => 'user',
+                                       'line' => '3714'
+                                     }
+                                   ],
            '_<bin/genesis-g3' => [
                                    {
                                      'expr' => undef,
                                      'value' => '1',
-                                     'text' => '    my $arguments = [ split /\\s/, $line, ];
+                                     'text' => 'main();
 ',
                                      'fname' => 'bin/genesis-g3',
                                      'type' => 'user',
-                                     'line' => 67
-                                   },
-                                   {
-                                     'expr' => undef,
-                                     'value' => '1',
-                                     'text' => '    my $result = eval($quoted_line);
-',
-                                     'fname' => 'bin/genesis-g3',
-                                     'type' => 'user',
-                                     'line' => 144
+                                     'line' => '367'
                                    }
                                  ],
-           '_</usr/local/glue/swig/perl/SSP.pm' => [
-                                                     {
-                                                       'expr' => undef,
-                                                       'value' => '1',
-                                                       'text' => '	my $success = $object->$method($peer, @$arguments);
+           '_</usr/local/neurospaces/instrumentor/hierarchy/symbols' => [
+                                                                          {
+                                                                            'expr' => undef,
+                                                                            'value' => '1',
+                                                                            'text' => 'return $definitions;
 ',
-                                                       'fname' => '/usr/local/glue/swig/perl/SSP.pm',
-                                                       'type' => 'user',
-                                                       'line' => '1565'
-                                                     }
-                                                   ]
+                                                                            'fname' => '/usr/local/neurospaces/instrumentor/hierarchy/symbols',
+                                                                            'type' => 'user',
+                                                                            'line' => '3020'
+                                                                          }
+                                                                        ]
          };
 $expr_list = [
                {
@@ -42,4 +44,4 @@ $expr_list = [
                }
              ];
 $eval_saved_text = undef;
-$main_win_geometry = '1592x1114+0+0';
+$main_win_geometry = '1592x820+0+0';
