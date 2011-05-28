@@ -2586,6 +2586,38 @@ our $configuration
 			      },
       };
 
+{
+    my $fs_configuration;
+
+    use YAML;
+
+    if (-f '/etc/neurospaces/gshell/software_components.yml')
+    {
+	eval
+	{
+	    $fs_configuration = YAML::LoadFile('/etc/neurospaces/gshell/software_components.yml');
+	};
+
+	if ($@)
+	{
+	    die "$0: *** Error: reading file /etc/neurospaces/gshell/software_components.yml ($@)";
+	}
+    }
+
+
+    # if there is a local package configuration
+
+    if ($fs_configuration)
+    {
+	# merge
+
+	require Data::Utilities;
+
+	my $merged_configuration = Data::Merger::merger($configuration, $fs_configuration);
+    }
+};
+
+
 my $filename = "$GENESIS3::Configuration::configuration->{symbols}->{directory}$GENESIS3::Configuration::configuration->{symbols}->{filename}";
 
 our $symbols_definitions = do $filename;
