@@ -509,27 +509,27 @@ synopsis: 'help component <component_name>'
 	}
 	else
 	{
-	    my $component_module = exists $GENESIS3::all_components->{$subtopic} ? $GENESIS3::all_components->{$subtopic}->{module} : '';
+	    my $component_module = exists $GENESIS3::all_components->{core_components}->{$subtopic} ? $GENESIS3::all_components->{core_components}->{$subtopic}->{module} : '';
 
 	    {
 		use YAML;
 
 		local $YAML::UseHeader = 0;
 
-		if (exists $GENESIS3::all_components->{$subtopic})
+		if (exists $GENESIS3::all_components->{core_components}->{$subtopic})
 		{
 		    print Dump(
 			       {
-				"$subtopic" => $GENESIS3::all_components->{$subtopic},
+				"$subtopic" => $GENESIS3::all_components->{core_components}->{$subtopic},
 			       },
 			      );
 		}
 
-		if (exists $GENESIS3::all_cpan_components->{$subtopic})
+		if (exists $GENESIS3::all_components->{other_components}->{$subtopic})
 		{
 		    print Dump(
 			       {
-				"$subtopic" => $GENESIS3::all_cpan_components->{$subtopic},
+				"$subtopic" => $GENESIS3::all_components->{other_components}->{$subtopic},
 			       },
 			      );
 		}
@@ -2334,8 +2334,8 @@ sub list_components
 
     print Dump(
 	       {
-		"Core components" => $GENESIS3::all_components,
-		"Other components" => $GENESIS3::all_cpan_components,
+		"Core components" => $GENESIS3::all_components->{core_components},
+		"Other components" => $GENESIS3::all_components->{other_components},
 	       },
 	      );
 
@@ -3303,102 +3303,100 @@ xupdate
 package GENESIS3;
 
 
-#t this info should be coming from the installer script.
+#t some of this info should be coming from the installer script.
 
 our $all_components
     = {
-       exchange => {
-		    description => 'NeuroML and NineML exchange',
-		    disabled => 'immature and by default not loaded',
-		    integrator => 'Neurospaces::Exchange::Commands',
-		    module => 'Neurospaces::Exchange',
-		    type => {
-			     description => 'intermediary, model-container interface',
-			     layer => 2,
-			    },
-		   },
-       experiment => {
-		      description => 'Simulation objects implementing experiments',
-		      disabled => 'immature and by default not loaded',
-# 		      integrator => 'Neurospaces::Exchange::Commands',
-		      module => 'Experiment',
-		      type => {
-			       description => 'simulation objects for I/O',
-			       layer => 1,
-			      },
-		     },
-       gshell => {
-		  description => 'the GENESIS 3 shell allows convenient interaction with other components',
-		  disabled => 0,
-		  module => 'GENESIS3',
-		  status => 'loaded',
-		  type => {
-			   description => 'scriptable user interface',
-			   layer => 3,
-			  },
-# 		  variables => {
-# 				verbose => $GENESIS3::verbose_level,
-# 			       },
-		 },
-       heccer => {
-		  description => 'single neuron equation solver',
-		  module => 'Heccer',
-		  type => {
-			   description => 'simulation object',
-			   layer => 1,
-			  },
-		 },
-       'model-container' => {
-			     description => 'internal storage for neuronal models',
-			     integrator => 'Neurospaces::Integrators::Commands',
-			     module => 'Neurospaces',
-			     type => {
-				      description => 'intermediary',
-				      layer => 2,
+       core_components => {
+			   exchange => {
+					description => 'NeuroML and NineML exchange',
+					disabled => 'immature and by default not loaded',
+					integrator => 'Neurospaces::Exchange::Commands',
+					module => 'Neurospaces::Exchange',
+					type => {
+						 description => 'intermediary, model-container interface',
+						 layer => 2,
+						},
+				       },
+			   experiment => {
+					  description => 'Simulation objects implementing experiments',
+					  disabled => 'immature and by default not loaded',
+					  # 		      integrator => 'Neurospaces::Exchange::Commands',
+					  module => 'Experiment',
+					  type => {
+						   description => 'simulation objects for I/O',
+						   layer => 1,
+						  },
+					 },
+			   gshell => {
+				      description => 'the GENESIS 3 shell allows convenient interaction with other components',
+				      disabled => 0,
+				      module => 'GENESIS3',
+				      status => 'loaded',
+				      type => {
+					       description => 'scriptable user interface',
+					       layer => 3,
+					      },
+				      # 		  variables => {
+				      # 				verbose => $GENESIS3::verbose_level,
+				      # 			       },
 				     },
-			    },
-       sli => {
-	       description => "GENESIS 2 backward compatible scripting interface",
-	       integrator => 'SLI::Integrators::Commands',
-	       module => "SLI",
-	       type => {
-			description => 'scriptable user interface',
-			layer => 2,
-		       },
-	      },
-       studio => {
-		  disabled => "the Neurospaces studio is an experimental feature, try loading it with the 'component_load' command",
-		  description => "Graphical interface that allows to explore models",
-		  module => "Neurospaces::Studio",
-		  type => {
-			   description => 'graphical user interface',
-			   layer => 4,
+			   heccer => {
+				      description => 'single neuron equation solver',
+				      module => 'Heccer',
+				      type => {
+					       description => 'simulation object',
+					       layer => 1,
+					      },
+				     },
+			   'model-container' => {
+						 description => 'internal storage for neuronal models',
+						 integrator => 'Neurospaces::Integrators::Commands',
+						 module => 'Neurospaces',
+						 type => {
+							  description => 'intermediary',
+							  layer => 2,
+							 },
+						},
+			   sli => {
+				   description => "GENESIS 2 backward compatible scripting interface",
+				   integrator => 'SLI::Integrators::Commands',
+				   module => "SLI",
+				   type => {
+					    description => 'scriptable user interface',
+					    layer => 2,
+					   },
+				  },
+			   studio => {
+				      disabled => "the Neurospaces studio is an experimental feature, try loading it with the 'component_load' command",
+				      description => "Graphical interface that allows to explore models",
+				      module => "Neurospaces::Studio",
+				      type => {
+					       description => 'graphical user interface',
+					       layer => 4,
+					      },
+				     },
+			   ssp => {
+				   description => 'binds the software components of a simulation together',
+				   integrator => 'SSP::Integrators::Commands',
+				   module => 'SSP',
+				   type => {
+					    description => 'simulation controller',
+					    layer => 1,
+					   },
+				  },
 			  },
-		 },
-       ssp => {
-	       description => 'binds the software components of a simulation together',
-	       integrator => 'SSP::Integrators::Commands',
-	       module => 'SSP',
-	       type => {
-			description => 'simulation controller',
-			layer => 1,
-		       },
-	      },
+       other_components => {
+			    python => {
+				       description => 'interface to python scripting',
+				       module => 'GENESIS3::Python',
+				       type => {
+						description => 'scriptable user interface',
+						layer => 2,
+					       },
+				      },
+			   },
       };
-
-
-our $all_cpan_components
-    = {
-       python => {
-		  description => 'interface to python scripting',
-		  module => 'GENESIS3::Python',
-		  type => {
-			   description => 'scriptable user interface',
-			   layer => 2,
-			  },
-		 },
-      };
-
 
 our $all_inputclass_templates
     = {
@@ -3653,7 +3651,7 @@ sub component_load
 {
     my $component_name = shift;
 
-    my $component = $GENESIS3::all_components->{$component_name};
+    my $component = $GENESIS3::all_components->{core_components}->{$component_name};
 
     my $component_module = $component->{module} || $component_name;
 
@@ -3715,9 +3713,9 @@ sub component_load
 
 sub profile_environment
 {
-    foreach my $component_name (keys %$GENESIS3::all_components)
+    foreach my $component_name (keys %{$GENESIS3::all_components->{core_components}})
     {
-	my $component = $GENESIS3::all_components->{$component_name};
+	my $component = $GENESIS3::all_components->{core_components}->{$component_name};
 
 	if (defined $component->{status}
 	    and $component->{status} eq 'loaded')
@@ -3739,11 +3737,11 @@ sub profile_environment
 
     if ($@)
     {
-	$GENESIS3::all_cpan_components->{python}->{status} = $@;
+	$GENESIS3::all_components->{other_components}->{python}->{status} = $@;
     }
     else
     {
-	$GENESIS3::all_cpan_components->{python}->{status} = 'loaded';
+	$GENESIS3::all_components->{other_components}->{python}->{status} = 'loaded';
     }
 
     return 1;
