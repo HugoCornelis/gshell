@@ -2615,7 +2615,7 @@ our $configuration
 
 	my $merged_configuration = Data::Merger::merger($configuration, $fs_configuration);
     }
-};
+}
 
 
 my $filename = "$GENESIS3::Configuration::configuration->{symbols}->{directory}$GENESIS3::Configuration::configuration->{symbols}->{filename}";
