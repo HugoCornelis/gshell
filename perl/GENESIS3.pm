@@ -2491,7 +2491,7 @@ our $configuration
     = {
        symbols => {
 		   directory => "/usr/local/neurospaces/instrumentor/hierarchy/",
-		   filename => "symbols",
+		   filename => "symbols.pl",
 		  },
        software_components => {
 			       core_components => {
