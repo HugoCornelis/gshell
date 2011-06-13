@@ -26,6 +26,7 @@ ndf_library:
     - algorithm_data/
     - cells/
     - channels/
+    - chemesis/
     - contours/
     - conversions/
     - descriptor.yml
