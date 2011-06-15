@@ -3,11 +3,11 @@ $files = {
                                      {
                                        'expr' => undef,
                                        'value' => '1',
-                                       'text' => '    foreach my $component_name (keys %{$GENESIS3::Configuration::configuration->{all_components}->{core_components}})
+                                       'text' => 'foreach my $purpose qw(
 ',
                                        'fname' => 'perl/GENESIS3.pm',
                                        'type' => 'user',
-                                       'line' => '3714'
+                                       'line' => '2963'
                                      }
                                    ],
            '_<bin/genesis-g3' => [
@@ -18,20 +18,36 @@ $files = {
 ',
                                      'fname' => 'bin/genesis-g3',
                                      'type' => 'user',
-                                     'line' => '367'
-                                   }
-                                 ],
-           '_</usr/local/neurospaces/instrumentor/hierarchy/symbols' => [
-                                                                          {
-                                                                            'expr' => undef,
-                                                                            'value' => '1',
-                                                                            'text' => 'return $definitions;
+                                     'line' => 367
+                                   },
+                                   {
+                                     'expr' => undef,
+                                     'value' => '1',
+                                     'text' => '	loop();
 ',
-                                                                            'fname' => '/usr/local/neurospaces/instrumentor/hierarchy/symbols',
-                                                                            'type' => 'user',
-                                                                            'line' => '3020'
-                                                                          }
-                                                                        ]
+                                     'fname' => 'bin/genesis-g3',
+                                     'type' => 'user',
+                                     'line' => 309
+                                   },
+                                   {
+                                     'expr' => undef,
+                                     'value' => '1',
+                                     'text' => '    foreach my $script (@ARGV)
+',
+                                     'fname' => 'bin/genesis-g3',
+                                     'type' => 'user',
+                                     'line' => 282
+                                   },
+                                   {
+                                     'expr' => undef,
+                                     'value' => '1',
+                                     'text' => '	interprete($line);
+',
+                                     'fname' => 'bin/genesis-g3',
+                                     'type' => 'user',
+                                     'line' => 242
+                                   }
+                                 ]
          };
 $expr_list = [
                {
@@ -40,6 +56,14 @@ $expr_list = [
                },
                {
                  'expr' => '$method',
+                 'depth' => -1
+               },
+               {
+                 'expr' => '$purpose',
+                 'depth' => -1
+               },
+               {
+                 'expr' => '$component',
                  'depth' => -1
                }
              ];
