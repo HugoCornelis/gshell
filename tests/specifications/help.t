@@ -284,6 +284,7 @@ Other components:
   - PROJECTION
   - PULSE_GEN
   - RANDOMVALUE
+  - REACTION
   - SEGMENT
   - SEGMENT_GROUP
 ",
