@@ -81,6 +81,8 @@ sub interprete
 
     my $line = shift ;
 
+    $line =~ s/^\s*//;
+
     my @args = quotewords(" ", 1, $line);
 
     if($#args == -1)
