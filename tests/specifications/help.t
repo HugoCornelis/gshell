@@ -277,6 +277,7 @@ Other components:
   - GROUPED_PARAMETERS
   - HH_GATE
   - IZHIKEVICH
+  - KINETICS
   - NETWORK
   - NEURON
   - POOL
