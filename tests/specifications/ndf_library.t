@@ -96,6 +96,8 @@ ndf_library:
 						   read => "
 ndf_library:
   channels:
+    - K_hh_tchan.ndf
+    - Na_hh_tchan.ndf
     - gaba.ndf
     - gaba.xml
     - golgi_ampa.ndf
@@ -113,6 +115,7 @@ ndf_library:
     - purkinje/
     - purkinje_basket.ndf
     - purkinje_climb.ndf
+    - traub/
 ",
 						   write => 'library_show ndf channels',
 						  },
@@ -149,10 +152,16 @@ ndf_library:
 						   read => "
 ndf_library:
   cells:
+    - BDK5cell2-nolib.ndf
+    - RScell-nolib.ndf
     - cell1.ndf
     - izhikevich.ndf
     - purkinje/
+    - simplecell-nolib.ndf
     - stand_alone.ndf
+    - traub91-nolib.ndf
+    - traub94-nolib.ndf
+    - traub95-nolib.ndf
 ",
 						   write => 'library_show ndf cells',
 						  },
