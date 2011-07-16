@@ -54,10 +54,16 @@ ndf_library:
 						   read => "
 ndf_library:
   cells:
+    - BDK5cell2-nolib.ndf
+    - RScell-nolib.ndf
     - cell1.ndf
     - izhikevich.ndf
     - purkinje/
+    - simplecell-nolib.ndf
     - stand_alone.ndf
+    - traub91-nolib.ndf
+    - traub94-nolib.ndf
+    - traub95-nolib.ndf
 ",
 						   write => "library_show ndf cells",
 						  },
