@@ -46,13 +46,15 @@ use GENESIS3;
 package GENESIS3::Commands;
 
 
-ndf_load("tests/cells/singlep.ndf");
+component_load("chemesis3");
 
-output_mode("steps");
+ndf_load("chemesis/cal1.ndf");
 
-output_format(" %.3f");
+chemesis3_set_timestep(0.002);
 
-heccer_set_timestep(1e-5);
+output_add("/cal1/somaCa", "concentration");
+output_add("/cal1/somaCabuf", "concentration");
+output_add("/cal1/somabuf", "concentration");
 
-run("/singlep", 0.001);
+run("/cal1", 0.2);
 

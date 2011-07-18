@@ -737,6 +737,52 @@ sub input_show_help
 }
 
 
+sub inputbinding_add
+{
+    my $element = shift;
+
+    my $binding = shift;
+
+    my $type = shift;
+
+    if (!defined $element)
+    {
+	$element = $GENESIS3::current_working_element;
+    }
+    else
+    {
+	if ($element =~ m(^/))
+	{
+	}
+	else
+	{
+	    $element = "$GENESIS3::current_working_element/$element";
+	}
+    }
+
+    my $error = Neurospaces::Bindings::input_add($element, $binding, $type);
+
+    if ($error)
+    {
+	return "*** Error: $error";
+    }
+    else
+    {
+	return "*** Ok: inputbinding_add $element, $binding, $type";
+    }
+}
+
+
+sub inputbinding_add_help
+{
+    print "description: add a binding to the given element (. for the current working element)\n";
+
+    print "synopsis: binding_add <element_name> <field_name> [ <binding_type> ]\n";
+
+    return "*** Ok";
+}
+
+
 sub inputclass_add
 {
     my $template_name = shift;
@@ -2495,6 +2541,15 @@ our $configuration
 		  },
        software_components => {
 			       core_components => {
+						   chemesis3 => {
+								 description => 'biochemical pathway solver',
+								 disabled => 'experimental, working on it',
+								 module => 'Chemesis3',
+								 type => {
+									  description => 'simulation object',
+									  layer => 1,
+									 },
+								},
 						   exchange => {
 								description => 'NeuroML and NineML exchange',
 								disabled => 'immature and by default not loaded',
