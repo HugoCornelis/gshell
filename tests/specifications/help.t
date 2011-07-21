@@ -112,6 +112,7 @@ synopsis: (you gave )
 						   read => "all commands:
   - ce
   - check
+  - chemesis3_set_timestep
   - component_load
   - create
   - delete

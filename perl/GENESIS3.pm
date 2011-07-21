@@ -147,6 +147,35 @@ sub check_help
 }
 
 
+sub chemesis3_set_timestep
+{
+    my $timestep = shift;
+
+    if ($timestep =~ /-?[0-9\.e]+/)
+    {
+	$GENESIS3::chemesis3_time_step = $timestep;
+
+	$GENESIS3::global_solver = 'chemesis3';
+
+	return "*** Ok: chemesis3_set_timestep";
+    }
+    else
+    {
+	return "*** Error: timestep must be numeric";
+    }
+}
+
+
+sub chemesis3_set_timestep_help
+{
+    print "description: set the time step for use by the chemesis3 reaction-diffusion solver\n";
+
+    print "synopsis: chemesis3_set_timestep_help <arguments>\n";
+
+    return "*** Ok";
+}
+
+
 sub component_load
 {
     my $component_name = shift;
@@ -421,7 +450,9 @@ sub heccer_set_timestep
     {
 	$GENESIS3::heccer_time_step = $timestep;
 
-	return "*** Ok: heccer_set_clock";
+	$GENESIS3::global_solver = 'heccer';
+
+	return "*** Ok: heccer_set_timestep";
     }
     else
     {
@@ -1888,9 +1919,9 @@ sub run
 
 	$schedule->{models}->[0]->{modelname} = $modelname;
 
-	#t only heccer supported for the moment
+	#t only a restricted set of solvers supported for the moment
 
-	$schedule->{models}->[0]->{solverclass} = 'heccer';
+	$schedule->{models}->[0]->{solverclass} = $GENESIS3::global_solver;
 
 	# fill in the solverclasses
 
@@ -1898,13 +1929,25 @@ sub run
 
 	my $solverclasses
 	    = {
-	       heccer => {
-			  constructor_settings => {
-						   dStep => $GENESIS3::heccer_time_step,
-						  },
-			  module_name => 'Heccer',
-			  service_name => 'model_container',
-			 },
+	       $GENESIS3::global_solver eq 'chemesis3'
+	       ? (
+		  chemesis3 => {
+				constructor_settings => {
+							 dStep => $GENESIS3::chemesis3_time_step,
+							},
+				module_name => 'Chemesis3',
+				service_name => 'model_container',
+			       },
+		 )
+	       : (
+		  heccer => {
+			     constructor_settings => {
+						      dStep => $GENESIS3::heccer_time_step,
+						     },
+			     module_name => 'Heccer',
+			     service_name => 'model_container',
+			    },
+		 ),
 	      };
 
 	$schedule->{solverclasses} = $solverclasses;
@@ -3199,7 +3242,11 @@ our $all_verbose
       };
 
 
+our $chemesis3_time_step = 2e-02;
+
 our $current_working_element = '/';
+
+our $global_solver = 'heccer';
 
 our $global_time = 0;
 

@@ -51,10 +51,9 @@ my $test
 								  reparer =>
 								  sub
 								  {
-								    `rm /tmp/output`;
+								      `rm /tmp/output`;
 								  },
 								 },
-
 						  },
 						 ],
 				description => "simple output with simulation time",

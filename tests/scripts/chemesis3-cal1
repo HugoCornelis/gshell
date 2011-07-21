@@ -56,5 +56,5 @@ output_add("/cal1/somaCa", "concentration");
 output_add("/cal1/somaCabuf", "concentration");
 output_add("/cal1/somabuf", "concentration");
 
-run("/cal1", 0.2);
+run("/cal1", 2);
 
