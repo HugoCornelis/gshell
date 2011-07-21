@@ -29,6 +29,14 @@ Core components:
 						  {
 						   description => "Can we find the loaded software components ?",
 						   read => "Core components:
+  chemesis3:
+    description: biochemical pathway solver
+    disabled: 'experimental, working on it'
+    module: Chemesis3
+    status: 'disabled (experimental, working on it)'
+    type:
+      description: simulation object
+      layer: 1
   exchange:
     description: NeuroML and NineML exchange
     disabled: immature and by default not loaded
