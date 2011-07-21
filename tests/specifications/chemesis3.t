@@ -19,6 +19,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a chemesis3 model solved correctly, cal1, three pools one reaction ?",
+						   numerical_compare => "arithmetic rounding differences expected",
 						   read => {
 							    application_output_file => "/tmp/output",
 							    expected_output_file => "/usr/local/ssp/tests/specifications/strings/chemesis3/cal1.txt",
@@ -74,6 +75,7 @@ my $test
 						  },
 						  {
 						   description => "Can we run the simulation?",
+						   numerical_compare => "arithmetic rounding differences expected",
 						   read => {
 							    application_output_file => "/tmp/output",
 							    expected_output_file => "/usr/local/ssp/tests/specifications/strings/chemesis3/cal1.txt",
@@ -91,6 +93,7 @@ my $test
 						   `rm /tmp/output`;
 					       },
 					      },
+				side_effects => 'creates a model in the model-container',
 			       },
 			       {
 				arguments => [
@@ -99,6 +102,7 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a chemesis3 model solved correctly, cal2, twice three pools one reaction ?",
+						   numerical_compare => "arithmetic rounding differences expected",
 						   read => {
 							    application_output_file => "/tmp/output",
 							    expected_output_file => "/usr/local/ssp/tests/specifications/strings/chemesis3/cal2.txt",
@@ -155,6 +159,7 @@ my $test
 						  },
 						  {
 						   description => "Can we run the simulation?",
+						   numerical_compare => "arithmetic rounding differences expected",
 						   read => {
 							    application_output_file => "/tmp/output",
 							    expected_output_file => "/usr/local/ssp/tests/specifications/strings/chemesis3/cal2.txt",
@@ -173,6 +178,7 @@ my $test
 						   `rm /tmp/output`;
 					       },
 					      },
+				side_effects => 'creates a model in the model-container',
 			       },
 			      ],
        description => "chemesis3",
