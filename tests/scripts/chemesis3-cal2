@@ -48,13 +48,12 @@ package GENESIS3::Commands;
 
 component_load("chemesis3");
 
-ndf_load("chemesis/cal1.ndf");
+ndf_load("chemesis/cal2.ndf");
 
 chemesis3_set_timestep(0.002);
 
-output_add("/cal1/somaCa", "concentration");
-output_add("/cal1/somaCabuf", "concentration");
-output_add("/cal1/somabuf", "concentration");
+output_add("/soma/cal1/somaCa", "concentration");
+output_add("/soma/cal1/somabuf", "concentration");
 
-run("/cal1", 2);
+run("/cal2", 2);
 
