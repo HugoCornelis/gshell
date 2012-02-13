@@ -111,7 +111,7 @@ my $test
 						  },
 						 ],
 				description => "chemesis3, cal2, twice three pools one reaction",
-				disabled => "the model-container integrator does not instantiate diffusion elements correctly, working on it",
+# 				disabled => "the model-container integrator does not instantiate diffusion elements correctly, working on it",
 				reparation => {
 					       description => "Remove output file from test run.",
 					       reparer =>
@@ -147,15 +147,15 @@ my $test
 						  },
 						  {
 						   description => "Can we add the somaCa output?",
-						   write => "output_add /cal2/somaCa concentration",
+						   write => "output_add /cal2/soma/Ca concentration",
 						  },
 						  {
 						   description => "Can we add the somaCabuf output?",
-						   write => "output_add /cal2/somaCabuf concentration",
+						   write => "output_add /cal2/soma/Cabuf concentration",
 						  },
 						  {
 						   description => "Can we add the somabuf output?",
-						   write => "output_add /cal2/somabuf concentration",
+						   write => "output_add /cal2/soma/buf concentration",
 						  },
 						  {
 						   description => "Can we run the simulation?",
@@ -169,7 +169,7 @@ my $test
 						  },
 						 ],
 				description => "chemesis3, cal2, twice three pools one reaction",
-				disabled => "the model-container integrator does not instantiate diffusion elements correctly, working on it",
+# 				disabled => "the model-container integrator does not instantiate diffusion elements correctly, working on it",
 				reparation => {
 					       description => "Remove output file from test run.",
 					       reparer =>

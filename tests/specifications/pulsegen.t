@@ -16,7 +16,6 @@ my $test
 						   description => "Is startup successful ?",
 						   read => "GENESIS 3 shell",
 						   timeout => 5,
-						   write => undef,
 						  },
 						  {
 						   description => "Can we load a simple soma model ?",
@@ -112,9 +111,6 @@ my $test
 						 ],
 				description => "commands load a simple soma model and connect it to a pulsegen solver object",
 				side_effects => "creates a model in the model container",
-
-			      
-
 			       },
 			      ],
        description => "Attaching a pulsegen object to a simple soma model.",
