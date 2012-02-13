@@ -82,7 +82,6 @@ my $test
 # 						   write => "sh ls -l /tmp/",
 # 						  },
 						  {
-						   comment => "only testing the last line of output",
 						   description => "Can we find the output ?",
 						   read => {
 							    application_output_file => '/tmp/output',
