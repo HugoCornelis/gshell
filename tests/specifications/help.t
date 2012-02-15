@@ -139,6 +139,7 @@ synopsis: (you gave )
   - morphology_list_spine_heads
   - morphology_summarize
   - ndf_load
+  - ndf_load_library
   - ndf_save
   - npl_load
   - npy_load
