@@ -94,7 +94,7 @@ runtime_parameters:
 				command => 'bin/genesis-g3',
 				command_tests => [
 						  {
-						   description => "Can we run the purkinje cell with endogenous / poissonian activation from a G3 batch file ?",
+						   description => "Can we run the purkinje cell with endogenous / poissonian activation from a G-3 batch file ?",
 						   disabled => (`cat /usr/local/include/heccer/config.h` !~ m/define RANDOM.*ran1/ ? 'not using ran1() as heccer random number generator' : 0),
 						   read => {
 							    application_output_file => "/tmp/output",
@@ -104,7 +104,7 @@ runtime_parameters:
 						   wait => 100,
 						  },
 						 ],
-				description => "running the purkinje cell with endogenous / poissonian activation from a G3 batch file",
+				description => "running the purkinje cell with endogenous / poissonian activation from a G-3 batch file",
 				numerical_compare => 'arithmetic rounding differences between different architectures',
 			       },
 			       {

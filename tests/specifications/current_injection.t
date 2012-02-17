@@ -121,12 +121,12 @@ runtime_parameters:
 				command => 'bin/genesis-g3',
 				command_tests => [
 						  {
-						   description => "Can we run the purkinje cell with current injection from a G3 batch file ?",
+						   description => "Can we run the purkinje cell with current injection from a G-3 batch file ?",
 						   read => $simple_purkinje_txt,
 						   timeout => 100,
 						  },
 						 ],
-				description => "running the purkinje cell with current injection from a G3 batch file",
+				description => "running the purkinje cell with current injection from a G-3 batch file",
 			       },
 			       {
 				arguments => [
