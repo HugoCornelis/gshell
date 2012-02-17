@@ -115,6 +115,7 @@ synopsis: (you gave )
   - chemesis3_set_timestep
   - component_load
   - create
+  - createmap
   - delete
   - echo
   - exit
