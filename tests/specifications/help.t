@@ -132,6 +132,7 @@ synopsis: (you gave )
   - library_show
   - list
   - list_elements
+  - list_namespaces
   - model_parameter_add
   - model_parameter_show
   - model_state_load

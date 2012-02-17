@@ -1113,6 +1113,54 @@ sub list_elements_help
 }
 
 
+sub list_namespaces
+{
+#     my $namespaces = $GENESIS3::model_container->list_namespaces($GENESIS3::current_working_namespace);
+
+#     use YAML;
+
+#     print Dump( { $GENESIS3::current_working_namespace => $namespaces, }, );
+
+    my $namespace = shift;
+
+    if (!defined $namespace)
+    {
+	$namespace = $GENESIS3::current_working_namespace;
+    }
+    else
+    {
+# 	if ($namespace =~ m(^/))
+# 	{
+# 	}
+# 	else
+# 	{
+# 	    $namespace = "$GENESIS3::current_working_namespace::$namespace";
+# 	}
+    }
+
+    my $query = "expand $namespace";
+
+    if ($namespace !~ /\*/)
+    {
+	$query .= "/*";
+    }
+
+    querymachine($query);
+
+    return "*** Ok: list_namespaces $namespace";
+}
+
+
+sub list_namespaces_help
+{
+    print "description: list model namespaces.\n";
+
+    print "synopsis: list_namespaces [ <namespace_name> ]\n";
+
+    return "*** Ok";
+}
+
+
 sub model_parameter_add
 {
     my $element = shift;
@@ -3245,6 +3293,8 @@ our $all_verbose
 our $chemesis3_time_step = 2e-02;
 
 our $current_working_element = '/';
+
+our $current_working_namespace = '::';
 
 our $global_solver = 'heccer';
 
