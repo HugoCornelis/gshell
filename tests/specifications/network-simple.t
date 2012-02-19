@@ -58,7 +58,7 @@ my $test
 						   wait => 2,
 						  },
 						 ],
-				description => "preparation commands for network simulations",
+				description => "preparation commands for network simulations, basic sanity of the cell of the RScell model",
 				side_effects => "creates a model in the model container",
 			       },
 			       {
