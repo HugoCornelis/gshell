@@ -73,19 +73,19 @@ my $test
 						  },
 						  {
 						   description => "Can we load a simple cell model?",
-						   write => 'ndf_load_library rscell cells/RScell-nolib.ndf',
+						   write => 'ndf_load_library rscell1 cells/RScell-nolib.ndf',
 						  },
 						  {
 						   description => "Was the namespace created (1)?",
 						   read => '
-- ::rscell::/cell',
-						   write => 'list_namespaces rscell::',
+- ::rscell1::/cell',
+						   write => 'list_namespaces rscell1::',
 						  },
 						  {
 						   description => "Was the namespace created (2)?",
 						   read => '
-- ::rscell::/cell',
-						   write => 'list_namespaces ::rscell::',
+- ::rscell1::/cell',
+						   write => 'list_namespaces ::rscell1::',
 						  },
 						  {
 						   comment => "The loaded file does not show up because EXPORTER_FLAG_LIBRARY is not turned on during ndf_save.",
@@ -103,9 +103,13 @@ END PUBLIC_MODELS
 						   write => 'ndf_save /** STDOUT',
 						  },
 						  {
-						   description => "Can we create now a population of cells?",
-						   read => 'created a new private component with name /network',
-						   write => 'createmap ::rscell::/cell /network 2 2 0.002 0.002',
+						   description => "Can we create the top level network component?",
+						   write => "create network /network",
+						  },
+						  {
+						   description => "Can we create a first population of neurons?",
+						   read => 'created a new private component with name /network/population1',
+						   write => 'createmap ::rscell1::/cell /network/population1 2 2 0.002 0.002',
 						  },
 						  {
 						   comment => "This needs to be simplified",
@@ -116,6 +120,10 @@ END PUBLIC_MODELS
 NEUROSPACES NDF
 
 PRIVATE_MODELS
+  NETWORK "network_74_74"
+  END NETWORK
+  CHILD "network_74_74" "network_inserted_74"
+  END CHILD
   GATE_KINETIC "A_7_7_5_5"
     PARAMETERS
       PARAMETER ( HH_AB_Div_E = -0.004 ),
@@ -476,16 +484,16 @@ PRIVATE_MODELS
   END GROUP
   CHILD "cell_24_24_70_70" "cell_70_73"
   END CHILD
-  CHILD "cell_70_73" "cell_70_74"
+  CHILD "cell_70_73" "cell_70_75"
   END CHILD
-  CHILD "cell_70_74" "0_70_77"
+  CHILD "cell_70_75" "0_70_78"
     PARAMETERS
       PARAMETER ( Z = 0 ),
       PARAMETER ( Y = 0 ),
       PARAMETER ( X = 0 ),
     END PARAMETERS
   END CHILD
-  CHILD "0_70_77" "0_inserted_77"
+  CHILD "0_70_78" "0_inserted_78"
   END CHILD
   SEGMENT "compartment_4_4_62_62"
     PARAMETERS
@@ -541,16 +549,16 @@ PRIVATE_MODELS
   END GROUP
   CHILD "cell_24_24_70_70" "cell_70_73"
   END CHILD
-  CHILD "cell_70_73" "cell_70_74"
+  CHILD "cell_70_73" "cell_70_75"
   END CHILD
-  CHILD "cell_70_74" "1_70_78"
+  CHILD "cell_70_75" "1_70_79"
     PARAMETERS
       PARAMETER ( Z = 0 ),
       PARAMETER ( Y = 0 ),
       PARAMETER ( X = 0.002 ),
     END PARAMETERS
   END CHILD
-  CHILD "1_70_78" "1_inserted_78"
+  CHILD "1_70_79" "1_inserted_79"
   END CHILD
   SEGMENT "compartment_4_4_62_62"
     PARAMETERS
@@ -606,16 +614,16 @@ PRIVATE_MODELS
   END GROUP
   CHILD "cell_24_24_70_70" "cell_70_73"
   END CHILD
-  CHILD "cell_70_73" "cell_70_74"
+  CHILD "cell_70_73" "cell_70_75"
   END CHILD
-  CHILD "cell_70_74" "2_70_79"
+  CHILD "cell_70_75" "2_70_80"
     PARAMETERS
       PARAMETER ( Z = 0 ),
       PARAMETER ( Y = 0.002 ),
       PARAMETER ( X = 0 ),
     END PARAMETERS
   END CHILD
-  CHILD "2_70_79" "2_inserted_79"
+  CHILD "2_70_80" "2_inserted_80"
   END CHILD
   SEGMENT "compartment_4_4_62_62"
     PARAMETERS
@@ -671,19 +679,19 @@ PRIVATE_MODELS
   END GROUP
   CHILD "cell_24_24_70_70" "cell_70_73"
   END CHILD
-  CHILD "cell_70_73" "cell_70_74"
+  CHILD "cell_70_73" "cell_70_75"
   END CHILD
-  CHILD "cell_70_74" "3_70_80"
+  CHILD "cell_70_75" "3_70_81"
     PARAMETERS
       PARAMETER ( Z = 0 ),
       PARAMETER ( Y = 0.002 ),
       PARAMETER ( X = 0.002 ),
     END PARAMETERS
   END CHILD
-  CHILD "3_70_80" "3_inserted_80"
+  CHILD "3_70_81" "3_inserted_81"
   END CHILD
-  NETWORK "network_76_76"
-    ALGORITHM "Grid3D" "createmap__network"
+  NETWORK "network/population1_77_77"
+    ALGORITHM "Grid3D" "createmap__network_population1"
       PARAMETERS
         PARAMETER ( Z_COUNT = 1 ),
         PARAMETER ( Y_COUNT = 2 ),
@@ -694,24 +702,52 @@ PRIVATE_MODELS
         PARAMETER ( PROTOTYPE = "cell" ),
       END PARAMETERS
     END ALGORITHM
-    CHILD "0_inserted_77" "0"
+    CHILD "0_inserted_78" "0"
     END CHILD
-    CHILD "1_inserted_78" "1"
+    CHILD "1_inserted_79" "1"
     END CHILD
-    CHILD "2_inserted_79" "2"
+    CHILD "2_inserted_80" "2"
     END CHILD
-    CHILD "3_inserted_80" "3"
+    CHILD "3_inserted_81" "3"
     END CHILD
   END NETWORK
-  CHILD "network_76_76" "network_inserted_76"
+  CHILD "network/population1_77_77" "network/population1_inserted_77"
   END CHILD
 END PRIVATE_MODELS
 PUBLIC_MODELS
-  CHILD "network_76_76" "network"
+  CHILD "network_74_74" "network"
+  END CHILD
+  CHILD "network/population1_77_77" "network/population1"
   END CHILD
 END PUBLIC_MODELS
 ',
 						   write => "ndf_save /** STDOUT",
+						  },
+						  {
+						   description => "Can we load a simple cell model?",
+						   write => 'ndf_load_library rscell2 cells/RScell-nolib.ndf',
+						  },
+						  {
+						   description => "Was the namespace created (3)?",
+						   read => '
+- ::rscell2::/cell',
+						   write => 'list_namespaces rscell2::',
+						  },
+						  {
+						   description => "Was the namespace created (4)?",
+						   read => '
+- ::rscell2::/cell',
+						   write => 'list_namespaces ::rscell2::',
+						  },
+						  {
+						   description => "Can we create a second population of neurons?",
+						   read => 'created a new private component with name /network/population2',
+						   write => 'createmap ::rscell2::/cell /network/population2 2 2 0.002 0.002',
+						  },
+						  {
+						   description => "Can we create a third population of neurons?",
+						   read => 'created a new private component with name /network/population3',
+						   write => 'createmap ::rscell2::/cell /network/population3 2 2 0.002 0.002',
 						  },
 						  {
 						   description => "Can we create a current clamp circuitry object?",
@@ -753,7 +789,6 @@ END PUBLIC_MODELS
 				description => "preparation commands for network simulations",
 				side_effects => "creates a model in the model container",
 			       },
-# createmap "/library/cell" "/network" $NX $NY -delta $SEP_X $SEP_Y
 			      ],
        description => "A simple network model (in preparation).",
        name => 'network-simple.t',
