@@ -120,10 +120,6 @@ END PUBLIC_MODELS
 NEUROSPACES NDF
 
 PRIVATE_MODELS
-  NETWORK "network_74_74"
-  END NETWORK
-  CHILD "network_74_74" "network_inserted_74"
-  END CHILD
   GATE_KINETIC "A_7_7_5_5"
     PARAMETERS
       PARAMETER ( HH_AB_Div_E = -0.004 ),
@@ -690,7 +686,7 @@ PRIVATE_MODELS
   END CHILD
   CHILD "3_70_81" "3_inserted_81"
   END CHILD
-  NETWORK "network/population1_77_77"
+  POPULATION "population1_77_77"
     ALGORITHM "Grid3D" "createmap__network_population1"
       PARAMETERS
         PARAMETER ( Z_COUNT = 1 ),
@@ -710,14 +706,18 @@ PRIVATE_MODELS
     END CHILD
     CHILD "3_inserted_81" "3"
     END CHILD
+  END POPULATION
+  CHILD "population1_77_77" "population1_inserted_77"
+  END CHILD
+  NETWORK "network_74_74"
+    CHILD "population1_77_77" "population1"
+    END CHILD
   END NETWORK
-  CHILD "network/population1_77_77" "network/population1_inserted_77"
+  CHILD "network_74_74" "network_inserted_74"
   END CHILD
 END PRIVATE_MODELS
 PUBLIC_MODELS
   CHILD "network_74_74" "network"
-  END CHILD
-  CHILD "network/population1_77_77" "network/population1"
   END CHILD
 END PUBLIC_MODELS
 ',
