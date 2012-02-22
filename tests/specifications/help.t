@@ -177,6 +177,7 @@ synopsis: (you gave )
   - ssp_save
   - swc_load
   - tabulate
+  - volumeconnect
   - xml_load
   - xml_save
 ",
