@@ -55,7 +55,7 @@ my $test
 							    application_output_file => '/tmp/output',
 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/network-simple.txt",
 							   },
-						   wait => 2,
+						   wait => 1,
 						  },
 						 ],
 				description => "preparation commands for network simulations, basic sanity of the cell of the RScell model",
@@ -110,6 +110,99 @@ END PUBLIC_MODELS
 						   description => "Can we create a first population of neurons?",
 						   read => 'created a new private component with name /network/population1',
 						   write => 'createmap ::rscell1::/cell /network/population1 2 2 0.002 0.002',
+						  },
+						  {
+						   description => 'Do we find all the components of the population in the created population?',
+						   read => '
+- /network
+- /network/population1
+- /network/population1/createmap__network_population1
+- /network/population1/0
+- /network/population1/0/soma
+- /network/population1/0/soma/Na_pyr_dp
+- /network/population1/0/soma/Na_pyr_dp/HH_activation
+- /network/population1/0/soma/Na_pyr_dp/HH_activation/A
+- /network/population1/0/soma/Na_pyr_dp/HH_activation/B
+- /network/population1/0/soma/Na_pyr_dp/HH_inactivation
+- /network/population1/0/soma/Na_pyr_dp/HH_inactivation/A
+- /network/population1/0/soma/Na_pyr_dp/HH_inactivation/B
+- /network/population1/0/soma/Kdr_pyr_dp
+- /network/population1/0/soma/Kdr_pyr_dp/HH_activation
+- /network/population1/0/soma/Kdr_pyr_dp/HH_activation/A
+- /network/population1/0/soma/Kdr_pyr_dp/HH_activation/B
+- /network/population1/0/soma/KM_pyr_dp
+- /network/population1/0/soma/KM_pyr_dp/HH_activation
+- /network/population1/0/soma/KM_pyr_dp/HH_activation/A
+- /network/population1/0/soma/KM_pyr_dp/HH_activation/B
+- /network/population1/0/soma/Ex_channel
+- /network/population1/0/soma/Ex_channel/eq2
+- /network/population1/0/soma/Ex_channel/synapse
+- /network/population1/0/soma/spike
+- /network/population1/1
+- /network/population1/1/soma
+- /network/population1/1/soma/Na_pyr_dp
+- /network/population1/1/soma/Na_pyr_dp/HH_activation
+- /network/population1/1/soma/Na_pyr_dp/HH_activation/A
+- /network/population1/1/soma/Na_pyr_dp/HH_activation/B
+- /network/population1/1/soma/Na_pyr_dp/HH_inactivation
+- /network/population1/1/soma/Na_pyr_dp/HH_inactivation/A
+- /network/population1/1/soma/Na_pyr_dp/HH_inactivation/B
+- /network/population1/1/soma/Kdr_pyr_dp
+- /network/population1/1/soma/Kdr_pyr_dp/HH_activation
+- /network/population1/1/soma/Kdr_pyr_dp/HH_activation/A
+- /network/population1/1/soma/Kdr_pyr_dp/HH_activation/B
+- /network/population1/1/soma/KM_pyr_dp
+- /network/population1/1/soma/KM_pyr_dp/HH_activation
+- /network/population1/1/soma/KM_pyr_dp/HH_activation/A
+- /network/population1/1/soma/KM_pyr_dp/HH_activation/B
+- /network/population1/1/soma/Ex_channel
+- /network/population1/1/soma/Ex_channel/eq2
+- /network/population1/1/soma/Ex_channel/synapse
+- /network/population1/1/soma/spike
+- /network/population1/2
+- /network/population1/2/soma
+- /network/population1/2/soma/Na_pyr_dp
+- /network/population1/2/soma/Na_pyr_dp/HH_activation
+- /network/population1/2/soma/Na_pyr_dp/HH_activation/A
+- /network/population1/2/soma/Na_pyr_dp/HH_activation/B
+- /network/population1/2/soma/Na_pyr_dp/HH_inactivation
+- /network/population1/2/soma/Na_pyr_dp/HH_inactivation/A
+- /network/population1/2/soma/Na_pyr_dp/HH_inactivation/B
+- /network/population1/2/soma/Kdr_pyr_dp
+- /network/population1/2/soma/Kdr_pyr_dp/HH_activation
+- /network/population1/2/soma/Kdr_pyr_dp/HH_activation/A
+- /network/population1/2/soma/Kdr_pyr_dp/HH_activation/B
+- /network/population1/2/soma/KM_pyr_dp
+- /network/population1/2/soma/KM_pyr_dp/HH_activation
+- /network/population1/2/soma/KM_pyr_dp/HH_activation/A
+- /network/population1/2/soma/KM_pyr_dp/HH_activation/B
+- /network/population1/2/soma/Ex_channel
+- /network/population1/2/soma/Ex_channel/eq2
+- /network/population1/2/soma/Ex_channel/synapse
+- /network/population1/2/soma/spike
+- /network/population1/3
+- /network/population1/3/soma
+- /network/population1/3/soma/Na_pyr_dp
+- /network/population1/3/soma/Na_pyr_dp/HH_activation
+- /network/population1/3/soma/Na_pyr_dp/HH_activation/A
+- /network/population1/3/soma/Na_pyr_dp/HH_activation/B
+- /network/population1/3/soma/Na_pyr_dp/HH_inactivation
+- /network/population1/3/soma/Na_pyr_dp/HH_inactivation/A
+- /network/population1/3/soma/Na_pyr_dp/HH_inactivation/B
+- /network/population1/3/soma/Kdr_pyr_dp
+- /network/population1/3/soma/Kdr_pyr_dp/HH_activation
+- /network/population1/3/soma/Kdr_pyr_dp/HH_activation/A
+- /network/population1/3/soma/Kdr_pyr_dp/HH_activation/B
+- /network/population1/3/soma/KM_pyr_dp
+- /network/population1/3/soma/KM_pyr_dp/HH_activation
+- /network/population1/3/soma/KM_pyr_dp/HH_activation/A
+- /network/population1/3/soma/KM_pyr_dp/HH_activation/B
+- /network/population1/3/soma/Ex_channel
+- /network/population1/3/soma/Ex_channel/eq2
+- /network/population1/3/soma/Ex_channel/synapse
+- /network/population1/3/soma/spike
+',
+						   write => 'list_elements /**',
 						  },
 						  {
 						   comment => "This needs to be simplified",
