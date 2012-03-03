@@ -844,9 +844,8 @@ END PUBLIC_MODELS
 						  },
 						  {
 						   description => "Can we create a projection between the first and the second population?",
-						   disabled => "Currently generates an error",
 						   read => 'created a new projection with name /network/projection12',
-						   write => 'volumeconnect /network/projection12 spikegen mf_AMPA box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -5.0 -5.0 -5.0 5.0 5.0 5.0 1.0',
+						   write => 'volumeconnect /network/projection12 /network/population1 /network/population2 spikegen mf_AMPA box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -5.0 -5.0 -5.0 5.0 5.0 5.0 1.0',
 						  },
 
 						  # got here
