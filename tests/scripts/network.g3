@@ -8,6 +8,6 @@ insert_alias ::Fibers::/MossyFiberArray /network
 insert_alias ::Granule::/GranulePopulation /network/Granules
 insert_alias ::Golgi::/GolgiPopulation /network/Golgis
 insert_alias ::Purkinje::/PurkinjePopulation /network/Purkinjes
-volumeconnect /network/ForwardProjection /network/Granules /network/Golgis spikegen mf_AMPA box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -0.0025 -0.0003 -0.0025 0.0025 0.0003 0.0025 weight 45.0 delay radial velocity 0.5 1.0 1212.0
-volumeconnect /network/BackwardProjection/GABAA /network/Golgis /network/Granules spikegen GABAA box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -0.00015 -0.00015 -0.00015 0.00015 0.00015 0.00015 weight 45.0 delay fixed 0.0 1.0 1212.0
-volumeconnect /network/BackwardProjection/GABAB /network/Golgis /network/Granules spikegen GABAB box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -0.00015 -0.00015 -0.00015 0.00015 0.00015 0.00015 weight 9.0 delay fixed 0.0 1.0 1212.0
+volumeconnect /network /network/ForwardProjection /network/Granules /network/Golgis spikegen mf_AMPA box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -0.0025 -0.0003 -0.0025 0.0025 0.0003 0.0025 weight 45.0 delay radial 0.0 velocity 0.5 1.0 1212.0
+volumeconnect /network /network/BackwardProjection/GABAA /network/Golgis /network/Granules spikegen GABAA box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -0.00015 -0.00015 -0.00015 0.00015 0.00015 0.00015 weight 45.0 delay fixed 0.0 velocity 0.0 1.0 1212.0
+volumeconnect /network /network/BackwardProjection/GABAB /network/Golgis /network/Granules spikegen GABAB box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -0.00015 -0.00015 -0.00015 0.00015 0.00015 0.00015 weight 9.0 delay fixed 0.0 velocity 0.0 1.0 1212.0
