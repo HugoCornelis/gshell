@@ -62,6 +62,10 @@ END PUBLIC_MODELS
 						   write => "create network /network",
 						  },
 						  {
+						   description => "Can we create the main projection to hold the two subcomponents of the backward projection?",
+						   write => "create projection /network/BackwardProjection",
+						  },
+						  {
 						   comment => "This disabled command is only here to show how the createmap command works.  Because the populations have been imported from NDF files, this command is not necessary here.  Similar commands would be given to instantiate the other populations.",
 						   description => "Can we create a first population of neurons?",
 						   disabled => "This disabled command is only here to show how the createmap command works.  Because the populations have been imported from NDF files, this command is not necessary here.  Similar commands would be given to instantiate the other populations",
@@ -186,8 +190,20 @@ END PUBLIC_MODELS
 						  {
 						   description => "Can we create a projection from the Granule cell population to the Golgi cell population?",
 						   read => 'created a new projection with name /network/ForwardProjection',
-						   timeout => 100,
-						   write => 'volumeconnect /network/ForwardProjection /network/Granules /network/Golgis spikegen mf_AMPA box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -0.0025 -0.003 -0.0025 0.0025 0.0003 0.0025 1.0 1212.0',
+						   timeout => 10,
+						   write => 'volumeconnect /network/ForwardProjection /network/Granules /network/Golgis spikegen mf_AMPA box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -0.0025 -0.0003 -0.0025 0.0025 0.0003 0.0025 weight 45.0 delay radial velocity 0.5 1.0 1212.0',
+						  },
+						  {
+						   description => "Can we create a projection from the Golgi cell population to the Granule cell population, GABAA component?",
+						   read => 'created a new projection with name /network/BackwardProjection/GABAA',
+						   timeout => 10,
+						   write => 'volumeconnect /network/BackwardProjection/GABAA /network/Golgis /network/Granules spikegen GABAA box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -0.00015 -0.00015 -0.00015 0.00015 0.00015 0.00015 weight 45.0 delay fixed 0.0 1.0 1212.0',
+						  },
+						  {
+						   description => "Can we create a projection from the Golgi cell population to the Granule cell population, GABAB component?",
+						   read => 'created a new projection with name /network/BackwardProjection/GABAB',
+						   timeout => 10,
+						   write => 'volumeconnect /network/BackwardProjection/GABAB /network/Golgis /network/Granules spikegen GABAB box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -0.00015 -0.00015 -0.00015 0.00015 0.00015 0.00015 weight 9.0 delay fixed 0.0 1.0 1212.0',
 						  },
 						 ],
 				description => "preparation commands for network simulations",
