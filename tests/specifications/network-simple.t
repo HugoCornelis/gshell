@@ -51,6 +51,7 @@ my $test
 						  },
 						  {
 						   description => "Do we see the expected output?",
+						   numerical_compare => "small rounding differences on the tester",
 						   read => {
 							    application_output_file => '/tmp/output',
 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/network-simple.txt",
@@ -79,13 +80,7 @@ my $test
 						   description => "Was the namespace created (1)?",
 						   read => '
 - ::rscell1::/cell',
-						   write => 'list_namespaces rscell1::',
-						  },
-						  {
-						   description => "Was the namespace created (2)?",
-						   read => '
-- ::rscell1::/cell',
-						   write => 'list_namespaces ::rscell1::',
+						   write => 'list_elements ::rscell1::',
 						  },
 						  {
 						   comment => "The loaded file does not show up because EXPORTER_FLAG_LIBRARY is not turned on during ndf_save.",
@@ -821,16 +816,10 @@ END PUBLIC_MODELS
 						   write => 'ndf_load_library rscell2 cells/RScell-nolib.ndf',
 						  },
 						  {
-						   description => "Was the namespace created (3)?",
+						   description => "Was the namespace created (2)?",
 						   read => '
 - ::rscell2::/cell',
-						   write => 'list_namespaces rscell2::',
-						  },
-						  {
-						   description => "Was the namespace created (4)?",
-						   read => '
-- ::rscell2::/cell',
-						   write => 'list_namespaces ::rscell2::',
+						   write => 'list_elements ::rscell2::',
 						  },
 						  {
 						   description => "Can we create a second population of neurons?",

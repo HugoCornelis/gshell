@@ -1081,7 +1081,7 @@ sub list_elements
     }
     else
     {
-	if ($element =~ m(^/))
+	if ($element =~ m(^(/|:)))
 	{
 	}
 	else
@@ -1138,7 +1138,7 @@ sub list_namespaces
 # 	}
     }
 
-    my $query = "expand $namespace";
+    my $query = "namespaces $namespace";
 
     if ($namespace !~ /\*/)
     {

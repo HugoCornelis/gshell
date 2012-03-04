@@ -130,6 +130,7 @@ synopsis: (you gave )
   - inputclass_delete
   - inputclass_show
   - inputclass_template_show
+  - insert_alias
   - library_show
   - list
   - list_elements
