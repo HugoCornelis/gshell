@@ -2,12 +2,13 @@ ndf_load_library Fibers fibers/mossyfiber.ndf
 ndf_load_library Golgi legacy/populations/golgi.ndf
 ndf_load_library Granule legacy/populations/granule.ndf
 ndf_load_library Purkinje legacy/populations/purkinje.ndf
-create network /network
-create projection /network/BackwardProjection
-insert_alias ::Fibers::/MossyFiberArray /network
-insert_alias ::Granule::/GranulePopulation /network/Granules
-insert_alias ::Golgi::/GolgiPopulation /network/Golgis
-insert_alias ::Purkinje::/PurkinjePopulation /network/Purkinjes
-volumeconnect /network /network/ForwardProjection /network/Granules /network/Golgis spikegen mf_AMPA box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -0.0025 -0.0003 -0.0025 0.0025 0.0003 0.0025 weight 45.0 delay radial 0.0 velocity 0.5 1.0 1212.0
-volumeconnect /network /network/BackwardProjection/GABAA /network/Golgis /network/Granules spikegen GABAA box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -0.00015 -0.00015 -0.00015 0.00015 0.00015 0.00015 weight 45.0 delay fixed 0.0 velocity 0.0 1.0 1212.0
-volumeconnect /network /network/BackwardProjection/GABAB /network/Golgis /network/Granules spikegen GABAB box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -0.00015 -0.00015 -0.00015 0.00015 0.00015 0.00015 weight 9.0 delay fixed 0.0 velocity 0.0 1.0 1212.0
+create network /CerebellarCortex
+create projection /CerebellarCortex/BackwardProjection
+insert_alias ::Fibers::/MossyFiberArray /CerebellarCortex/MossyFibers
+insert_alias ::Granule::/GranulePopulation /CerebellarCortex/Granules
+insert_alias ::Golgi::/GolgiPopulation /CerebellarCortex/Golgis
+insert_alias ::Purkinje::/PurkinjePopulation /CerebellarCortex/Purkinjes
+volumeconnect /CerebellarCortex /CerebellarCortex/ForwardProjection ../Granules ../Golgis /CerebellarCortex/Granules /CerebellarCortex/Golgis spikegen mf_AMPA box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -0.0025 -0.0003 -0.0025 0.0025 0.0003 0.0025 weight 45.0 delay radial 0.0 velocity 0.5 1.0 1212.0
+volumeconnect /CerebellarCortex /CerebellarCortex/BackwardProjection/GABAA ../../Golgis ../../Granules /CerebellarCortex/Golgis /CerebellarCortex/Granules spikegen GABAA box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -0.00015 -0.00015 -0.00015 0.00015 0.00015 0.00015 weight 45.0 delay fixed 0.0 velocity 0.0 1.0 1212.0
+volumeconnect /CerebellarCortex /CerebellarCortex/BackwardProjection/GABAB ../../Golgis ../../Granules /CerebellarCortex/Golgis /CerebellarCortex/Granules spikegen GABAB box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -0.00015 -0.00015 -0.00015 0.00015 0.00015 0.00015 weight 9.0 delay fixed 0.0 velocity 0.0 1.0 1212.0
+querymachine 'spikereceivercount /CerebellarCortex/ForwardProjection /CerebellarCortex/Golgis/0/Golgi_soma/pf_AMPA/synapse'

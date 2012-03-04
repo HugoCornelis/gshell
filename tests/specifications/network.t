@@ -74,105 +74,105 @@ END PUBLIC_MODELS
 						  },
 						  {
 						   description => "Can we alias the imported mossy fiber population?",
-						   write => 'insert_alias ::Fibers::/MossyFiberArray /CerebellarCortex',
+						   write => 'insert_alias ::Fibers::/MossyFiberArray /CerebellarCortex/MossyFibers',
 						  },
 						  {
 						   description => 'Do we find all the components of the created mossy fiber population?',
 						   read => '
 - /CerebellarCortex
 - /CerebellarCortex/BackwardProjection
-- /CerebellarCortex
-- /CerebellarCortex/MossyGrid
-- /CerebellarCortex/0
-- /CerebellarCortex/0/value
-- /CerebellarCortex/0/spikegen
-- /CerebellarCortex/1
-- /CerebellarCortex/1/value
-- /CerebellarCortex/1/spikegen
-- /CerebellarCortex/2
-- /CerebellarCortex/2/value
-- /CerebellarCortex/2/spikegen
-- /CerebellarCortex/3
-- /CerebellarCortex/3/value
-- /CerebellarCortex/3/spikegen
-- /CerebellarCortex/4
-- /CerebellarCortex/4/value
-- /CerebellarCortex/4/spikegen
-- /CerebellarCortex/5
-- /CerebellarCortex/5/value
-- /CerebellarCortex/5/spikegen
-- /CerebellarCortex/6
-- /CerebellarCortex/6/value
-- /CerebellarCortex/6/spikegen
-- /CerebellarCortex/7
-- /CerebellarCortex/7/value
-- /CerebellarCortex/7/spikegen
-- /CerebellarCortex/8
-- /CerebellarCortex/8/value
-- /CerebellarCortex/8/spikegen
-- /CerebellarCortex/9
-- /CerebellarCortex/9/value
-- /CerebellarCortex/9/spikegen
-- /CerebellarCortex/10
-- /CerebellarCortex/10/value
-- /CerebellarCortex/10/spikegen
-- /CerebellarCortex/11
-- /CerebellarCortex/11/value
-- /CerebellarCortex/11/spikegen
-- /CerebellarCortex/12
-- /CerebellarCortex/12/value
-- /CerebellarCortex/12/spikegen
-- /CerebellarCortex/13
-- /CerebellarCortex/13/value
-- /CerebellarCortex/13/spikegen
-- /CerebellarCortex/14
-- /CerebellarCortex/14/value
-- /CerebellarCortex/14/spikegen
-- /CerebellarCortex/15
-- /CerebellarCortex/15/value
-- /CerebellarCortex/15/spikegen
-- /CerebellarCortex/16
-- /CerebellarCortex/16/value
-- /CerebellarCortex/16/spikegen
-- /CerebellarCortex/17
-- /CerebellarCortex/17/value
-- /CerebellarCortex/17/spikegen
-- /CerebellarCortex/18
-- /CerebellarCortex/18/value
-- /CerebellarCortex/18/spikegen
-- /CerebellarCortex/19
-- /CerebellarCortex/19/value
-- /CerebellarCortex/19/spikegen
-- /CerebellarCortex/20
-- /CerebellarCortex/20/value
-- /CerebellarCortex/20/spikegen
-- /CerebellarCortex/21
-- /CerebellarCortex/21/value
-- /CerebellarCortex/21/spikegen
-- /CerebellarCortex/22
-- /CerebellarCortex/22/value
-- /CerebellarCortex/22/spikegen
-- /CerebellarCortex/23
-- /CerebellarCortex/23/value
-- /CerebellarCortex/23/spikegen
-- /CerebellarCortex/24
-- /CerebellarCortex/24/value
-- /CerebellarCortex/24/spikegen
-- /CerebellarCortex/25
-- /CerebellarCortex/25/value
-- /CerebellarCortex/25/spikegen
-- /CerebellarCortex/26
-- /CerebellarCortex/26/value
-- /CerebellarCortex/26/spikegen
-- /CerebellarCortex/27
-- /CerebellarCortex/27/value
-- /CerebellarCortex/27/spikegen
-- /CerebellarCortex/28
-- /CerebellarCortex/28/value
-- /CerebellarCortex/28/spikegen
-- /CerebellarCortex/29
-- /CerebellarCortex/29/value
-- /CerebellarCortex/29/spikegen
+- /CerebellarCortex/MossyFibers
+- /CerebellarCortex/MossyFibers/MossyGrid
+- /CerebellarCortex/MossyFibers/0
+- /CerebellarCortex/MossyFibers/0/value
+- /CerebellarCortex/MossyFibers/0/spikegen
+- /CerebellarCortex/MossyFibers/1
+- /CerebellarCortex/MossyFibers/1/value
+- /CerebellarCortex/MossyFibers/1/spikegen
+- /CerebellarCortex/MossyFibers/2
+- /CerebellarCortex/MossyFibers/2/value
+- /CerebellarCortex/MossyFibers/2/spikegen
+- /CerebellarCortex/MossyFibers/3
+- /CerebellarCortex/MossyFibers/3/value
+- /CerebellarCortex/MossyFibers/3/spikegen
+- /CerebellarCortex/MossyFibers/4
+- /CerebellarCortex/MossyFibers/4/value
+- /CerebellarCortex/MossyFibers/4/spikegen
+- /CerebellarCortex/MossyFibers/5
+- /CerebellarCortex/MossyFibers/5/value
+- /CerebellarCortex/MossyFibers/5/spikegen
+- /CerebellarCortex/MossyFibers/6
+- /CerebellarCortex/MossyFibers/6/value
+- /CerebellarCortex/MossyFibers/6/spikegen
+- /CerebellarCortex/MossyFibers/7
+- /CerebellarCortex/MossyFibers/7/value
+- /CerebellarCortex/MossyFibers/7/spikegen
+- /CerebellarCortex/MossyFibers/8
+- /CerebellarCortex/MossyFibers/8/value
+- /CerebellarCortex/MossyFibers/8/spikegen
+- /CerebellarCortex/MossyFibers/9
+- /CerebellarCortex/MossyFibers/9/value
+- /CerebellarCortex/MossyFibers/9/spikegen
+- /CerebellarCortex/MossyFibers/10
+- /CerebellarCortex/MossyFibers/10/value
+- /CerebellarCortex/MossyFibers/10/spikegen
+- /CerebellarCortex/MossyFibers/11
+- /CerebellarCortex/MossyFibers/11/value
+- /CerebellarCortex/MossyFibers/11/spikegen
+- /CerebellarCortex/MossyFibers/12
+- /CerebellarCortex/MossyFibers/12/value
+- /CerebellarCortex/MossyFibers/12/spikegen
+- /CerebellarCortex/MossyFibers/13
+- /CerebellarCortex/MossyFibers/13/value
+- /CerebellarCortex/MossyFibers/13/spikegen
+- /CerebellarCortex/MossyFibers/14
+- /CerebellarCortex/MossyFibers/14/value
+- /CerebellarCortex/MossyFibers/14/spikegen
+- /CerebellarCortex/MossyFibers/15
+- /CerebellarCortex/MossyFibers/15/value
+- /CerebellarCortex/MossyFibers/15/spikegen
+- /CerebellarCortex/MossyFibers/16
+- /CerebellarCortex/MossyFibers/16/value
+- /CerebellarCortex/MossyFibers/16/spikegen
+- /CerebellarCortex/MossyFibers/17
+- /CerebellarCortex/MossyFibers/17/value
+- /CerebellarCortex/MossyFibers/17/spikegen
+- /CerebellarCortex/MossyFibers/18
+- /CerebellarCortex/MossyFibers/18/value
+- /CerebellarCortex/MossyFibers/18/spikegen
+- /CerebellarCortex/MossyFibers/19
+- /CerebellarCortex/MossyFibers/19/value
+- /CerebellarCortex/MossyFibers/19/spikegen
+- /CerebellarCortex/MossyFibers/20
+- /CerebellarCortex/MossyFibers/20/value
+- /CerebellarCortex/MossyFibers/20/spikegen
+- /CerebellarCortex/MossyFibers/21
+- /CerebellarCortex/MossyFibers/21/value
+- /CerebellarCortex/MossyFibers/21/spikegen
+- /CerebellarCortex/MossyFibers/22
+- /CerebellarCortex/MossyFibers/22/value
+- /CerebellarCortex/MossyFibers/22/spikegen
+- /CerebellarCortex/MossyFibers/23
+- /CerebellarCortex/MossyFibers/23/value
+- /CerebellarCortex/MossyFibers/23/spikegen
+- /CerebellarCortex/MossyFibers/24
+- /CerebellarCortex/MossyFibers/24/value
+- /CerebellarCortex/MossyFibers/24/spikegen
+- /CerebellarCortex/MossyFibers/25
+- /CerebellarCortex/MossyFibers/25/value
+- /CerebellarCortex/MossyFibers/25/spikegen
+- /CerebellarCortex/MossyFibers/26
+- /CerebellarCortex/MossyFibers/26/value
+- /CerebellarCortex/MossyFibers/26/spikegen
+- /CerebellarCortex/MossyFibers/27
+- /CerebellarCortex/MossyFibers/27/value
+- /CerebellarCortex/MossyFibers/27/spikegen
+- /CerebellarCortex/MossyFibers/28
+- /CerebellarCortex/MossyFibers/28/value
+- /CerebellarCortex/MossyFibers/28/spikegen
+- /CerebellarCortex/MossyFibers/29
+- /CerebellarCortex/MossyFibers/29/value
+- /CerebellarCortex/MossyFibers/29/spikegen
 ',
 						   write => 'list_elements /**',
 						  },
@@ -193,21 +193,21 @@ END PUBLIC_MODELS
 						   read => '
 created a new projection with name /CerebellarCortex/ForwardProjection',
 						   timeout => 10,
-						   write => 'volumeconnect /CerebellarCortex /CerebellarCortex/ForwardProjection /CerebellarCortex/Granules /CerebellarCortex/Golgis spikegen mf_AMPA box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -0.0025 -0.0003 -0.0025 0.0025 0.0003 0.0025 weight 45.0 delay radial 0.0 velocity 0.5 1.0 1212.0',
+						   write => 'volumeconnect /CerebellarCortex /CerebellarCortex/ForwardProjection ../Granules ../Golgis /CerebellarCortex/Granules /CerebellarCortex/Golgis spikegen mf_AMPA box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -0.0025 -0.0003 -0.0025 0.0025 0.0003 0.0025 weight 45.0 delay radial 0.0 velocity 0.5 1.0 1212.0',
 						  },
 						  {
 						   description => "Can we create a projection from the Golgi cell population to the Granule cell population, GABAA component?",
 						   read => '
 created a new projection with name /CerebellarCortex/BackwardProjection/GABAA',
 						   timeout => 10,
-						   write => 'volumeconnect /CerebellarCortex /CerebellarCortex/BackwardProjection/GABAA /CerebellarCortex/Golgis /CerebellarCortex/Granules spikegen GABAA box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -0.00015 -0.00015 -0.00015 0.00015 0.00015 0.00015 weight 45.0 delay fixed 0.0 velocity 0.0 1.0 1212.0',
+						   write => 'volumeconnect /CerebellarCortex /CerebellarCortex/BackwardProjection/GABAA ../../Golgis ../../Granules /CerebellarCortex/Golgis /CerebellarCortex/Granules spikegen GABAA box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -0.00015 -0.00015 -0.00015 0.00015 0.00015 0.00015 weight 45.0 delay fixed 0.0 velocity 0.0 1.0 1212.0',
 						  },
 						  {
 						   description => "Can we create a projection from the Golgi cell population to the Granule cell population, GABAB component?",
 						   read => '
 created a new projection with name /CerebellarCortex/BackwardProjection/GABAB',
 						   timeout => 10,
-						   write => 'volumeconnect /CerebellarCortex /CerebellarCortex/BackwardProjection/GABAB /CerebellarCortex/Golgis /CerebellarCortex/Granules spikegen GABAB box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -0.00015 -0.00015 -0.00015 0.00015 0.00015 0.00015 weight 9.0 delay fixed 0.0 velocity 0.0 1.0 1212.0',
+						   write => 'volumeconnect /CerebellarCortex /CerebellarCortex/BackwardProjection/GABAB ../../Golgis ../../Granules /CerebellarCortex/Golgis /CerebellarCortex/Granules spikegen GABAB box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -0.00015 -0.00015 -0.00015 0.00015 0.00015 0.00015 weight 9.0 delay fixed 0.0 velocity 0.0 1.0 1212.0',
 						  },
 
 						  # copied and adapted from the network.t test in the model container.
@@ -260,6 +260,23 @@ created a new projection with name /CerebellarCortex/BackwardProjection/GABAB',
 						    read => "value = 3e-05
 ",
 						    write => "querymachine 'printparameter /CerebellarCortex/Golgis/0/Golgi_soma DIA'",
+						   },
+						  ),
+
+						  # copied from the connections.t test of the model-container
+
+						  (
+						   {
+						    description => "What is the number of connections on the AMPA channel of the first Golgi cell ?",
+						    read => 'Number of connections : 4452
+',
+						    write => "querymachine 'spikereceivercount /CerebellarCortex/ForwardProjection /CerebellarCortex/Golgis/0/Golgi_soma/pf_AMPA/synapse'",
+						   },
+						   {
+						    description => "What is the number of connections on the domain translator of the second granule cell ?",
+						    read => 'Number of connections : 8
+',
+						    write => "querymachine 'spikesendercount /CerebellarCortex/ForwardProjection /CerebellarCortex/Granules/1/Granule_soma/spikegen'",
 						   },
 						  ),
 						 ],
