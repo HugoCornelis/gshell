@@ -3,12 +3,21 @@ ndf_load_library Golgi legacy/populations/golgi.ndf
 ndf_load_library Granule legacy/populations/granule.ndf
 ndf_load_library Purkinje legacy/populations/purkinje.ndf
 create network /CerebellarCortex
-create projection /CerebellarCortex/BackwardProjection
 insert_alias ::Fibers::/MossyFiberArray /CerebellarCortex/MossyFibers
+model_parameter_add /CerebellarCortex/MossyFibers X -0.00012
+model_parameter_add /CerebellarCortex/MossyFibers Y -0.000075
+model_parameter_add /CerebellarCortex/MossyFibers Z -0.0001
 insert_alias ::Granule::/GranulePopulation /CerebellarCortex/Granules
+model_parameter_add /CerebellarCortex/Granules X 2.5e-05
+model_parameter_add /CerebellarCortex/Granules Y 1.875e-05
+model_parameter_add /CerebellarCortex/Granules Z -0.00005
 insert_alias ::Golgi::/GolgiPopulation /CerebellarCortex/Golgis
+model_parameter_add /CerebellarCortex/Golgis X 0.00015
+model_parameter_add /CerebellarCortex/Golgis Y 0.00010
+model_parameter_add /CerebellarCortex/Golgis Z 0.00005
 insert_alias ::Purkinje::/PurkinjePopulation /CerebellarCortex/Purkinjes
 volumeconnect /CerebellarCortex /CerebellarCortex/ForwardProjection ../Granules ../Golgis /CerebellarCortex/Granules /CerebellarCortex/Golgis spikegen mf_AMPA box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -0.0025 -0.0003 -0.0025 0.0025 0.0003 0.0025 weight 45.0 delay radial 0.0 velocity 0.5 1.0 1212.0
+create projection /CerebellarCortex/BackwardProjection
 volumeconnect /CerebellarCortex /CerebellarCortex/BackwardProjection/GABAA ../../Golgis ../../Granules /CerebellarCortex/Golgis /CerebellarCortex/Granules spikegen GABAA box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -0.00015 -0.00015 -0.00015 0.00015 0.00015 0.00015 weight 45.0 delay fixed 0.0 velocity 0.0 1.0 1212.0
 volumeconnect /CerebellarCortex /CerebellarCortex/BackwardProjection/GABAB ../../Golgis ../../Granules /CerebellarCortex/Golgis /CerebellarCortex/Granules spikegen GABAB box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -0.00015 -0.00015 -0.00015 0.00015 0.00015 0.00015 weight 9.0 delay fixed 0.0 velocity 0.0 1.0 1212.0
-querymachine 'spikereceivercount /CerebellarCortex/ForwardProjection /CerebellarCortex/Golgis/0/Golgi_soma/pf_AMPA/synapse'
+querymachine 'projectionquery c /CerebellarCortex/Golgis/0/Golgi_soma/spikegen /CerebellarCortex/ForwardProjection /CerebellarCortex/BackwardProjection/GABAA /CerebellarCortex/BackwardProjection/GABAB'
