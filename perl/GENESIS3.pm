@@ -860,7 +860,7 @@ sub inputclass_delete
 {
     my $inputclass_name = shift;
 
-    delete $GENESIS3::all_inputclasses->{$inputclass_name};
+    delete $GENESIS3::inputclasses->{$inputclass_name};
 
     return "*** Ok: inputclass_delete $inputclass_name";
 }
@@ -1949,7 +1949,7 @@ sub run
 
 	my $schedule
 	    = {
-	       name => "GENESIS3 SSP schedule initiated for $modelname, $time",
+	       name => "GENESIS3 SSP schedule initialized for $modelname, $time",
 	      };
 
 	# tell ssp that the model-container service has been initialized
@@ -1967,11 +1967,9 @@ sub run
 
 	$schedule->{models}->[0]->{modelname} = $modelname;
 
-	#t only a restricted set of solvers supported for the moment
+	# fill in the solverclasses
 
 	$schedule->{models}->[0]->{solverclass} = $GENESIS3::global_solver;
-
-	# fill in the solverclasses
 
 	#t make this configurable
 
@@ -2342,11 +2340,198 @@ sub show_verbose_help
 }
 
 
+sub solverset
+{
+    my $modelname = shift;
+
+    my $solverclass = shift;
+
+    my $schedule_name = shift;
+
+    if ($modelname =~ m((.*)/(.*)))
+    {
+	if (! defined $schedule_name)
+	{
+	    $schedule_name = $1;
+	}
+
+	# get access to the scheduler to use
+
+	my $scheduler;
+
+	# if there is a scheduler with this name
+
+	if (defined $GENESIS3::schedulers->{$schedule_name})
+	{
+	    $scheduler = $GENESIS3::schedulers->{$schedule_name};
+	}
+
+	# if there is no scheduler with this name
+
+	else
+	{
+	    # construct a simulation schedule from scratch
+
+	    my $schedule
+		= {
+		   name => "GENESIS3 SSP schedule initialized for $modelname",
+		  };
+
+	    # tell ssp that the model-container service has been initialized
+
+	    $schedule->{services}->{model_container}->{backend} = $GENESIS3::model_container;
+
+	    # fill in / copy runtime_parameters
+
+	    $schedule->{models}->[0]->{runtime_parameters}
+		= [
+		   @$GENESIS3::runtime_parameters,
+		  ];
+
+	    $scheduler = SSP->new($schedule);
+	}
+
+	# add the mapping of the model
+
+	my $models = $scheduler->{models} || [];
+
+	push
+	    @$models,
+	    {
+	     modelname => $modelname,
+	     solverclass => $solverclass,
+	    };
+
+	# if the solverclass does not exist yet
+
+	if (! defined $scheduler->{solverclasses}->{$solverclass})
+	{
+	    use Clone;
+
+	    # add the solver class to the scheduler
+
+	    $scheduler->{solverclasses}->{$solverclass}
+		= Clone::clone($GENESIS3::registered_solverclasses->{$solverclass});
+	}
+
+	# fill in the outputclasses
+
+	#t make this configurable
+
+	my $outputclasses
+	    = {
+	       double_2_ascii => {
+				  module_name => 'Experiment',
+				  options => {
+					      filename => $GENESIS3::output_filename,
+					      format => $GENESIS3::output_format,
+					      output_mode => $GENESIS3::output_mode,
+					      resolution => $GENESIS3::output_resolution,
+					     },
+				  package => 'Experiment::Output',
+				 },
+	      };
+
+	$scheduler->{outputclasses} = $outputclasses;
+
+	# fill in the intput classes and inputs
+
+	$scheduler->{inputclasses} = $GENESIS3::inputclasses;
+
+	$scheduler->{inputs} = $GENESIS3::inputs;
+
+	# fill in the outputs
+
+	if (!@$GENESIS3::outputs)
+	{
+	    # default is the soma Vm of a 'segments' group
+
+	    $scheduler->{outputs}
+		= [
+		   {
+		    component_name => "$modelname/segments/soma",
+		    field => "Vm",
+		    outputclass => "double_2_ascii",
+
+		    # but we are tolerant if this output cannot be found
+
+		    warn_only => "the default output ($modelname/segments/soma) was generated automatically and is not always available",
+		   },
+		  ];
+	}
+
+	# or
+
+	else
+	{
+	    # from the user settings
+
+	    $scheduler->{outputs} = $GENESIS3::outputs;
+	}
+
+	# application configuration
+
+	#t for the tests, should be configurable such that it can use the 'steps' method to.
+
+	my $time = 0;
+
+	my $simulation
+	    = [
+	       {
+		arguments => [ $time, { verbose => 2 }, ],
+		arguments => [ $time, ],
+		method => 'advance',
+	       },
+	       {
+		method => 'pause',
+	       },
+	      ];
+
+	if ($GENESIS3::verbose_level
+	    and $GENESIS3::verbose_level eq 'debug')
+	{
+	    $simulation->[0]->{arguments}->[1]->{verbose} = 2;
+	}
+
+	#! finishers are set empty to preserve interactivity.
+	#! the pause method is assumed to flush buffers where applicable.
+
+	$scheduler->{apply}
+	    = {
+	       simulation => $simulation,
+	       finishers => [],
+	      };
+
+	# register the created scheduler
+
+	$GENESIS3::schedulers->{$schedule_name} = $scheduler;
+
+# 	$GENESIS3::solvermapping->{$modelname} = $solverclass;
+
+	return "*** Ok: solverset $modelname $solverclass $schedule_name";
+    }
+    else
+    {
+	return "*** Ok: error: $modelname not recognized as a modelcomponent";
+    }
+}
+
+
+sub solverset_help
+{
+    print "description: associate a solverclass with the selected components of a model.\n";
+
+    print "synopsis: solverset <modelname> <solverclass> [ <schedule_name> ]\n";
+
+    return "*** Ok: solverset_help";
+}
+
+
 sub swc_load
 {
     print "Not implemented yet.  Please contribute by providing a use case.\n";
 
-    return "*** Ok: pwd";
+    return "*** Ok: swc_load";
 }
 
 
@@ -3321,6 +3506,26 @@ our $output_resolution = '';
 our $runtime_parameters = [];
 
 our $schedulers = {};
+
+# our $solvermapping = {};
+
+our $registered_solverclasses
+    = {
+       chemesis3 => {
+		     constructor_settings => {
+					      dStep => $GENESIS3::chemesis3_time_step,
+					     },
+		     module_name => 'Chemesis3',
+		     service_name => 'model_container',
+		    },
+       heccer => {
+		  constructor_settings => {
+					   dStep => $GENESIS3::heccer_time_step,
+					  },
+		  module_name => 'Heccer',
+		  service_name => 'model_container',
+		 },
+      };
 
 our $verbose_level;
 

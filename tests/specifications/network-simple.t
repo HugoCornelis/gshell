@@ -833,35 +833,49 @@ END PUBLIC_MODELS
 						  },
 						  {
 						   description => "Can we create a projection between the first and the second population?",
-						   read => 'created a new projection with name /network/projection12',
-						   write => 'volumeconnect /network /network/projection12 ../population1 ../population2 /network/population1 /network/population2 spikegen mf_AMPA box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -5.0 -5.0 -5.0 5.0 5.0 5.0 1.0',
+						   read => 'created a new projection with name /RSNet/projection12',
+						   write => 'volumeconnect /RSNet /RSNet/projection12 ../population1 ../population2 /RSNet/population1 /RSNet/population2 spikegen mf_AMPA box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -5.0 -5.0 -5.0 5.0 5.0 5.0 weight 45.0 delay radial 0.0 velocity 0.5 1.0 1212.0',
 						  },
-
-						  # got here
-
 						  {
 						   description => "Can we create a current clamp circuitry object?",
 						   write => "inputclass_add perfectclamp current_injection_protocol name current_injection command 1e-9",
 						  },
 						  {
+						   comment => 'There is an efferent connection from /RSNet/population1/3/soma/spike to /RSNet/population2/0/soma/Ex_channel/synapse.',
 						   description => "Can we connect the current clamp circuitry to the simple cell's soma?",
-						   write => "input_add current_injection_protocol /cell/soma INJECT",
+						   write => "input_add current_injection_protocol /RSNet/population1/3/soma INJECT",
 						  },
 						  {
 						   description => "Can we add an output to the soma's Vm?",
-						   write => "output_add /cell/soma Vm",
+						   write => "output_add /RSNet/population1/3/soma Vm",
 						  },
 						  {
-						   description => "Can we set the output mode to \"steps\"?",
-						   write => 'output_mode steps',
+						   description => "Can we add an output to the soma's Vm?",
+						   write => "output_add /RSNet/population2/0/soma Vm",
+						  },
+# 						  {
+# 						   description => "Can we set the output mode to \"steps\"?",
+# 						   write => 'output_mode steps',
+# 						  },
+# 						  {
+# 						   description => "Can we set the output resolution to 10?",
+# 						   write => 'output_resolution 10',
+# 						  },
+						  {
+						   description => "Can assign a solver to the source neuron?",
+						   write => 'solverset /RSNet/population1/3 heccer /RSNet',
 						  },
 						  {
-						   description => "Can we set the output resolution to 10?",
-						   write => 'output_resolution 10',
+						   description => "Can assign a solver to the target neuron?",
+						   write => 'solverset /RSNet/population2/0 heccer /RSNet',
+						  },
+						  {
+						   description => "Can assign a solver to the projection?",
+						   write => 'solverset /RSNet/projection12 DES /RSNet',
 						  },
 						  {
 						   description => "Can we run the simulation for a limited amount of time?",
-						   write => "run /cell 0.2",
+						   write => "run /RSNet 0.2",
 						  },
 						  {
 						   description => "Can we quit the simulator?",

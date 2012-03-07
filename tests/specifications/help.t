@@ -174,6 +174,7 @@ synopsis: (you gave )
   - sli_printcommandlist
   - sli_run
   - sli_script
+  - solverset
   - ssp_load
   - ssp_save
   - swc_load
