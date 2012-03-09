@@ -1916,6 +1916,18 @@ sub run
 	    return "*** Error: apply_runtime_parameters() for $scheduler->{name} failed ($result)";
 	}
 
+	# if the scheduler was constructed using the run call, it has already been compiled.
+	# if the scheduler was constructed using the solverset command, it is not compile yet.
+
+	my $schedulees = $scheduler->{schedule} || [];
+
+	if (!@$schedulees)
+	{
+	    # I assume that the default application_classes will compile, connect and optimize, but not run.
+
+	    $scheduler->run();
+	}
+
 	# use the scheduler
 
 	$result = $scheduler->advance($scheduler, $time, ); # { verbose => 2 } );
@@ -2381,12 +2393,12 @@ sub solverset
 
 	    $schedule->{services}->{model_container}->{backend} = $GENESIS3::model_container;
 
-	    # fill in / copy runtime_parameters
+# 	    # fill in / copy runtime_parameters
 
-	    $schedule->{models}->[0]->{runtime_parameters}
-		= [
-		   @$GENESIS3::runtime_parameters,
-		  ];
+# 	    $schedule->{models}->[0]->{runtime_parameters}
+# 		= [
+# 		   @$GENESIS3::runtime_parameters,
+# 		  ];
 
 	    $scheduler = SSP->new($schedule);
 	}
