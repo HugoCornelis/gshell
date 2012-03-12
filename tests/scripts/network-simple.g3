@@ -12,4 +12,5 @@ output_add /RSNet/population2/0/soma Vm
 solverset /RSNet/population1/3 heccer /RSNet
 solverset /RSNet/population2/0 heccer /RSNet
 solverset /RSNet/projection12 DES /RSNet
+ssp_save /RSNet /tmp/network-simple.ssp
 run /RSNet 0.2
