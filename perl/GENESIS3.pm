@@ -2414,6 +2414,8 @@ sub solverset
 	     solverclass => $solverclass,
 	    };
 
+	$scheduler->{models} = $models;
+
 	# if the solverclass does not exist yet
 
 	if (! defined $scheduler->{solverclasses}->{$solverclass})
