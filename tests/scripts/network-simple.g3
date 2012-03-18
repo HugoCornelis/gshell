@@ -1,7 +1,7 @@
-ndf_load_library rscell1 cells/RScell-nolib.ndf
+ndf_load_library rscell1 cells/RScell-nolib2.ndf
 create network /RSNet
 createmap ::rscell1::/cell /RSNet/population1 2 2 0.002 0.002
-ndf_load_library rscell2 cells/RScell-nolib.ndf
+ndf_load_library rscell2 cells/RScell-nolib2.ndf
 createmap ::rscell2::/cell /RSNet/population2 2 2 0.002 0.002
 createmap ::rscell2::/cell /RSNet/population3 2 2 0.002 0.002
 volumeconnect /RSNet /RSNet/projection12 ../population1 ../population2 /RSNet/population1 /RSNet/population2 spike Ex_channel box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -5.0 -5.0 -5.0 5.0 5.0 5.0 weight 45.0 delay radial 0.0 velocity 0.5 1.0 1212.0

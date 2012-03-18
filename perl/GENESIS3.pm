@@ -3539,6 +3539,22 @@ our $registered_solverclasses
 		  module_name => 'Heccer',
 		  service_name => 'model_container',
 		 },
+       des => {
+	       constructor_settings => {
+					configuration => {
+							  reporting => {
+									granularity => 10000,
+									tested_things => (
+											  $SwiggableHeccer::DES_DUMP_ALL
+# 											  | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_DATA
+											 ),
+								       },
+							 },
+				       },
+	       module_name => 'Heccer',
+	       package => 'Heccer::DES',
+	       service_name => 'model_container',
+	      },
       };
 
 our $verbose_level;
