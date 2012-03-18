@@ -1,6 +1,10 @@
 #!/usr/local/bin/genesis-g3
 #!
 
+heccer_set_config disassem_simple
+
+set_verbose debug
+
 create cell /n
 create segment /n/soma
 

@@ -442,6 +442,53 @@ sub explore_help
 }
 
 
+sub heccer_set_config
+{
+    my $config_name = shift;
+
+    my $heccer_configs
+	= {
+	   disassem_simple => {
+			       configuration => {
+						 reporting => {
+							       granularity => 100,
+							       tested_things => (
+										 $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX
+										 | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_MATRIX_DIAGONALS
+										 | $SwiggableHeccer::HECCER_DUMP_VM_COMPARTMENT_OPERATIONS
+										 | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_DATA
+										 | $SwiggableHeccer::HECCER_DUMP_VM_MECHANISM_OPERATIONS
+										 | $SwiggableHeccer::HECCER_DUMP_VM_SUMMARY
+										),
+							      },
+						},
+			      },
+	   };
+
+    if (! exists $heccer_configs->{$config_name})
+    {
+	print STDERR "*** Error: $config_name is not a heccer configuration";
+
+	return "*** Error: $config_name is not a heccer configuration";
+    }
+
+    $GENESIS3::registered_solverclasses->{heccer}->{constructor_settings}->{configuration}
+	= $heccer_configs->{$config_name}->{configuration};
+
+    return "*** Ok: heccer_set_config $config_name";
+}
+
+
+sub heccer_set_config_help
+{
+    print "description: set the configuration for use by the heccer compartmental solver\n";
+
+    print "synopsis: heccer_set_config <config_name>\n";
+
+    return "*** Ok: heccer_set_config_help";
+}
+
+
 sub heccer_set_timestep
 {
     my $timestep = shift;
@@ -467,7 +514,7 @@ sub heccer_set_timestep_help
 
     print "synopsis: heccer_set_timestep_help <arguments>\n";
 
-    return "*** Ok";
+    return "*** Ok: heccer_set_timestep_help";
 }
 
 
@@ -2000,6 +2047,9 @@ sub run
 	       : (
 		  heccer => {
 			     constructor_settings => {
+						      ($GENESIS3::registered_solverclasses->{heccer}->{constructor_settings}->{configuration}
+						       ? (configuration => $GENESIS3::registered_solverclasses->{heccer}->{constructor_settings}->{configuration})
+						       : ()),
 						      dStep => $GENESIS3::heccer_time_step,
 						     },
 			     module_name => 'Heccer',
@@ -2388,6 +2438,11 @@ sub solverset
 		= {
 		   name => "GENESIS3 SSP schedule initialized for $modelname",
 		  };
+
+	    if ($GENESIS3::verbose_level eq 'debug')
+	    {
+		$schedule->{verbose} = 'gshell debug enabled';
+	    }
 
 	    # tell ssp that the model-container service has been initialized
 

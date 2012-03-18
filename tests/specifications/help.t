@@ -120,6 +120,7 @@ synopsis: (you gave )
   - echo
   - exit
   - explore
+  - heccer_set_config
   - heccer_set_timestep
   - help
   - input_add
