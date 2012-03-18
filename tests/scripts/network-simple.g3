@@ -19,4 +19,6 @@ solverset /RSNet/population2/2 heccer /RSNet
 solverset /RSNet/population2/3 heccer /RSNet
 solverset /RSNet/projection12 des /RSNet
 ssp_save /RSNet /tmp/network-simple.ssp
+heccer_set_config disassem_simple
+set_verbose debug
 run /RSNet 0.2
