@@ -9,8 +9,14 @@ inputclass_add perfectclamp current_injection_protocol name current_injection co
 input_add current_injection_protocol /RSNet/population1/3/soma INJECT
 output_add /RSNet/population1/3/soma Vm
 output_add /RSNet/population2/0/soma Vm
+solverset /RSNet/population1/0 heccer /RSNet
+solverset /RSNet/population1/1 heccer /RSNet
+solverset /RSNet/population1/2 heccer /RSNet
 solverset /RSNet/population1/3 heccer /RSNet
 solverset /RSNet/population2/0 heccer /RSNet
+solverset /RSNet/population2/1 heccer /RSNet
+solverset /RSNet/population2/2 heccer /RSNet
+solverset /RSNet/population2/3 heccer /RSNet
 solverset /RSNet/projection12 des /RSNet
 ssp_save /RSNet /tmp/network-simple.ssp
 run /RSNet 0.2
