@@ -154,6 +154,7 @@ ndf_library:
   cells:
     - BDK5cell2-nolib.ndf
     - RScell-nolib.ndf
+    - RScell-nolib2.ndf
     - cell1.ndf
     - izhikevich.ndf
     - purkinje/
