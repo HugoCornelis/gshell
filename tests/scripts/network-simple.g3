@@ -21,4 +21,6 @@ solverset /RSNet/projection12 des /RSNet
 ssp_save /RSNet /tmp/network-simple.ssp
 heccer_set_config disassem_simple
 set_verbose debug
+model_parameter_add rscell1::cell/soma/Ex_channel G_MAX 1.5e-8
+model_parameter_add rscell1::cell/soma/Ex_channel Erev 0
 run /RSNet 0.2

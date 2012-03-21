@@ -829,7 +829,8 @@ sub inputbinding_add
     }
     else
     {
-	if ($element =~ m(^/))
+	if ($element =~ m(^/)
+	    || $element =~ m(::))
 	{
 	}
 	else
@@ -1128,7 +1129,8 @@ sub list_elements
     }
     else
     {
-	if ($element =~ m(^(/|:)))
+	if ($element =~ m(^/)
+	    || $element =~ m(::))
 	{
 	}
 	else
@@ -1262,7 +1264,8 @@ sub model_parameter_add
 	}
 	else
 	{
-	    if ($element =~ m(^/))
+	    if ($element =~ m(^/)
+		|| $element =~ m(::))
 	    {
 	    }
 	    else
@@ -1308,7 +1311,8 @@ sub model_parameter_show
     }
     else
     {
-	if ($element =~ m(^/))
+	if ($element =~ m(^/)
+	    || $element =~ m(::))
 	{
 	}
 	else
@@ -1667,7 +1671,8 @@ sub parameter_show
     }
     else
     {
-	if ($element =~ m(^/))
+	if ($element =~ m(^/)
+	    || $element =~ m(::))
 	{
 	}
 	else
@@ -1708,7 +1713,8 @@ sub parameter_scaled_show
     }
     else
     {
-	if ($element =~ m(^/))
+	if ($element =~ m(^/)
+	    || $element =~ m(::))
 	{
 	}
 	else
