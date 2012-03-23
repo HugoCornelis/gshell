@@ -1276,7 +1276,9 @@ sub model_parameter_add
 
 	my $query = "setparameterconcept $element $parameter $value_type $value";
 
-	querymachine($query);
+	if (querymachine($query))
+	{
+	}
 
 	return "*** Ok: model_parameter_add $element $parameter $value_type $value";
     }
