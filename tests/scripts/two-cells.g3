@@ -16,9 +16,10 @@ output_add /two_cells/1/soma Vm
 output_add /two_cells/2/soma Vm
 output_add /two_cells/2/soma/Ex_channel G
 heccer_set_config disassem_simple
+des_set_config disassem_simple
 set_verbose debug
-solverset /two_cells/1 heccer /two_cells
-solverset /two_cells/2 heccer /two_cells
-solverset /two_cells/projection des /two_cells
+solverset /two_cells/1 heccer
+solverset /two_cells/2 heccer
+solverset /two_cells/projection des
 ssp_save /two_cells /tmp/two_cells.ssp
 run /two_cells 0.2
