@@ -4,6 +4,8 @@ set args tests/scripts/simple_purkinje
 set args bin/genesis-g3
 file /usr/bin/perl
 # break parsererror
+# break HeccerEventSet
+# break HeccerEventReceive
 echo .gdbinit: Done .gdbinit\n
 
 # set args

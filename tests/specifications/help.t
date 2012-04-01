@@ -118,6 +118,7 @@ synopsis: (you gave )
   - createmap
   - delete
   - echo
+  - element_type
   - exit
   - explore
   - heccer_set_config

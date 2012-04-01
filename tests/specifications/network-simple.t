@@ -862,11 +862,11 @@ END PUBLIC_MODELS
 # 						   write => 'output_resolution 10',
 # 						  },
 						  {
-						   description => "Can assign a solver to the source neuron?",
+						   description => "Can we assign a solver to the source neuron?",
 						   write => 'solverset /RSNet/population1/3 heccer /RSNet',
 						  },
 						  {
-						   description => "Can assign a solver to the target neuron?",
+						   description => "Can we assign a solver to the target neuron?",
 						   write => 'solverset /RSNet/population2/0 heccer /RSNet',
 						  },
 						  {

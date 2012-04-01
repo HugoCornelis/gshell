@@ -399,6 +399,53 @@ sub echo_help
 }
 
 
+sub element_type
+{
+    my $element = shift;
+
+    my $original = shift;
+
+    if (!defined $element)
+    {
+	$element = $GENESIS3::current_working_element;
+    }
+    else
+    {
+	if ($element =~ m(^/)
+	    || $element =~ m(::))
+	{
+	}
+	else
+	{
+	    $element = "$GENESIS3::current_working_element/$element";
+	}
+    }
+
+    my $type = $GENESIS3::model_container->component_type($element);
+
+    if ($type =~ /not found/)
+    {
+	return "*** Error: element_type $original";
+    }
+    else
+    {
+	print "$element: $type\n";
+
+	return "*** Ok: element_type $original";
+    }
+}
+
+
+sub element_type_help
+{
+    print "description: determine the type of a created model component\n";
+
+    print "synopsis: element_type <modelname>\n";
+
+    return "*** Ok: element_type_help";
+}
+
+
 sub exit
 {
     my $exit_code = shift;
@@ -418,7 +465,7 @@ sub exit_help
 
     print "synopsis: exit [ <exit_code> ]\n";
 
-    return "*** Ok";
+    return "*** Ok: exit_help";
 }
 
 
@@ -2424,6 +2471,8 @@ sub solverset
 	{
 	    $schedule_name = $1;
 	}
+
+	my $component_type = $GENESIS3::model_container->component_type($modelname);
 
 	# get access to the scheduler to use
 
