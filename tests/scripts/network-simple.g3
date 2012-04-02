@@ -15,14 +15,14 @@ output_add /RSNet/population2/0/soma Vm
 output_add /RSNet/population2/1/soma Vm
 output_add /RSNet/population2/2/soma Vm
 output_add /RSNet/population2/3/soma Vm
-output_add /RSNet/population1/0/soma/Ex_channel G
-output_add /RSNet/population1/1/soma/Ex_channel G
-output_add /RSNet/population1/2/soma/Ex_channel G
-output_add /RSNet/population1/3/soma/Ex_channel G
-output_add /RSNet/population2/0/soma/Ex_channel G
-output_add /RSNet/population2/1/soma/Ex_channel G
-output_add /RSNet/population2/2/soma/Ex_channel G
-output_add /RSNet/population2/3/soma/Ex_channel G
+output_add /RSNet/population1/0/soma/Ex_channel Gsyn
+output_add /RSNet/population1/1/soma/Ex_channel Gsyn
+output_add /RSNet/population1/2/soma/Ex_channel Gsyn
+output_add /RSNet/population1/3/soma/Ex_channel Gsyn
+output_add /RSNet/population2/0/soma/Ex_channel Gsyn
+output_add /RSNet/population2/1/soma/Ex_channel Gsyn
+output_add /RSNet/population2/2/soma/Ex_channel Gsyn
+output_add /RSNet/population2/3/soma/Ex_channel Gsyn
 solverset /RSNet/population1/0 heccer /RSNet
 solverset /RSNet/population1/1 heccer /RSNet
 solverset /RSNet/population1/2 heccer /RSNet

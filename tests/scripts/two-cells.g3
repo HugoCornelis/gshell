@@ -9,12 +9,12 @@ create connection_symbol /two_cells/projection/1
 model_parameter_add /two_cells/projection/1 PRE 1/soma/spike
 model_parameter_add /two_cells/projection/1 POST 2/soma/Ex_channel/synapse
 model_parameter_add /two_cells/projection/1 WEIGHT 2.0
-model_parameter_add /two_cells/projection/1 DELAY 0.3
+model_parameter_add /two_cells/projection/1 DELAY 0.03
 inputclass_add perfectclamp current_injection_protocol name current_injection command 1e-9
 input_add current_injection_protocol /two_cells/1/soma INJECT
 output_add /two_cells/1/soma Vm
 output_add /two_cells/2/soma Vm
-output_add /two_cells/2/soma/Ex_channel G
+output_add /two_cells/2/soma/Ex_channel Gsyn
 heccer_set_config disassem_simple
 des_set_config disassem_simple
 set_verbose debug
