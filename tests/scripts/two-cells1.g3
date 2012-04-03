@@ -13,8 +13,9 @@ model_parameter_add /two_cells/projection/1 DELAY 0.03
 inputclass_add perfectclamp current_injection_protocol name current_injection command 1e-9
 input_add current_injection_protocol /two_cells/1/soma INJECT
 output_add /two_cells/1/soma Vm
-output_add /two_cells/2/soma Vm
 output_add /two_cells/2/soma/Ex_channel Gsyn
+output_add /two_cells/2/soma/Ex_channel Isyn
+output_add /two_cells/2/soma Vm
 heccer_set_config disassem_simple
 des_set_config disassem_simple
 set_verbose debug
