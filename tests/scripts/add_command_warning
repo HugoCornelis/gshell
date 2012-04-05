@@ -19,10 +19,6 @@ BEGIN
     #! normal run
 
     push @INC, './perl';
-
-    #! after install
-
-    push @INC, '/usr/local/glue/swig/perl';
 }
 
 
