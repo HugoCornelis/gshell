@@ -78,14 +78,17 @@ my $exit_code = 0;
 
 sub interprete
 {
-
     my $line = shift ;
 
-    $line =~ s/^\s*//;
+    $line =~ s/^\s*//g;
+
+    $line =~ s/\s*$//g;
+
+    $line =~ s/\s+/ /g;
 
     my @args = quotewords(" ", 1, $line);
 
-    if($#args == -1)
+    if ($#args == -1)
     {
       return;
     }
@@ -215,25 +218,22 @@ sub loop
 
     if ($option_output_tags)
     {
+	my $line;
 
-      my $line;
-
-      while(<>){
-
-	$line = $_;
-
-	interprete($line);
-
+	while(<>)
 	{
-	    open H, ">>$historyfile";
-	    print H "$line\n";
-	    close H;
+	    $line = $_;
+
+	    interprete($line);
+
+	    {
+		open H, ">>$historyfile";
+		print H "$line\n";
+		close H;
+	    }
+
+	    $term->addhistory($line) if /\S/;
 	}
-
-	$term->addhistory($line) if /\S/;
-
-      }
-
     }
 
 

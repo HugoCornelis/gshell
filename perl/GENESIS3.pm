@@ -1348,6 +1348,8 @@ sub model_parameter_show
 
     my $parameter = shift;
 
+    my $all = shift;
+
     if (defined $element
 	and defined $parameter)
     {
@@ -1370,11 +1372,13 @@ sub model_parameter_show
 	}
     }
 
-
-    my $query = "symbolparameters $element";
-
-    if (querymachine($query))
+    if ($all)
     {
+	my $query = "symbolparameters $element";
+
+	if (querymachine($query))
+	{
+	}
     }
 
     return "*** Ok: model_parameter_show $element $parameter";
