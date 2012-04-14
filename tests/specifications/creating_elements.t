@@ -158,7 +158,7 @@ my $test
     type: number
     value: 0.0164
 ",
-						   write => 'model_parameter_show /c/s',
+						   write => 'model_parameter_show /c/s *',
 						  },
 						 ],
 				description => "commands for creating a model",

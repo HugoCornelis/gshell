@@ -184,7 +184,7 @@ ndf_library:
     type: number
     value: -0.08
 ",
-						   write => 'model_parameter_show',
+						   write => 'model_parameter_show .',
 						  },
 						  {
 						   description => "Can we obtain the value of the parameters of the cat channel inside the soma segment ?",
@@ -219,7 +219,7 @@ ndf_library:
         type: number
         value: 37
 ",
-						   write => 'model_parameter_show cat',
+						   write => 'model_parameter_show cat *',
 						  },
 						  {
 						   description => "Can we find the segments in /Purkinje/segments/main ?",

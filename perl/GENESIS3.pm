@@ -1350,15 +1350,12 @@ sub model_parameter_show
 
     my $all = shift;
 
-    if (defined $element
-	and defined $parameter)
-    {
-	parameter_show($element, $parameter);
-    }
-
-    if (!defined $element)
+    if (!defined $element
+        || $element eq '.')
     {
 	$element = $GENESIS3::current_working_element;
+
+	$parameter = '*';
     }
     else
     {
@@ -1370,6 +1367,17 @@ sub model_parameter_show
 	{
 	    $element = "$GENESIS3::current_working_element/$element";
 	}
+    }
+
+    if ($parameter eq '*')
+    {
+	$all = 'true';
+    }
+
+    if (defined $element
+	and defined $parameter)
+    {
+	parameter_show($element, $parameter);
     }
 
     if ($all)
