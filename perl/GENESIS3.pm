@@ -1295,7 +1295,7 @@ sub model_parameter_add
 	    {
 		$value_type = 'symbolic';
 	    }
-	    elsif ($value =~ /^(\+|-)?([0-9]+)(\.[0-9]+)?(e(\+|-)?([0-9]+))?$/)
+	    elsif ($value =~ /^(\+|-)?([0-9]+)(\.[0-9]+)?(e(\+|-)?([0-9]+))?$/i)
 	    {
 		$value_type = 'number';
 	    }
