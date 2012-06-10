@@ -1,12 +1,14 @@
 .changes$
 .deb$
 .dsc$
-\.log$
 Makefile$
 Makefile\.in$
+\.log$
 ^aclocal.m4$
+^config.guess$
 ^config.log$
 ^config.status$
+^config.sub$
 ^configure$
 ^example.out$
 ^html
@@ -17,6 +19,6 @@ Makefile\.in$
 ^tests/html
 ^tests/output
 ^tests/results
+_BUILD$
 _Inline
 gz$
-_BUILD$

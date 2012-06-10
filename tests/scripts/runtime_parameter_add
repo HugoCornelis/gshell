@@ -1,0 +1,6 @@
+# this is not part of any test, but similar tests are found in simple_purkinje.t
+ndf_load cells/purkinje/edsjb1994.ndf
+runtime_parameter_add /Purkinje/segments/soma  INJECT 0.0
+run /Purkinje 0.05
+runtime_parameter_add /Purkinje/segments/soma  INJECT 0.5e-9
+run /Purkinje 0.2
