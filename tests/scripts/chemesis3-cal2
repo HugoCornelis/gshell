@@ -52,8 +52,13 @@ ndf_load("chemesis/cal2.ndf");
 
 chemesis3_set_timestep(0.002);
 
-output_add("/soma/cal1/somaCa", "concentration");
-output_add("/soma/cal1/somabuf", "concentration");
+output_add("/cal2/soma/cal1/Ca", "concentration");
+output_add("/cal2/soma/cal1/Cabuf", "concentration");
+output_add("/cal2/soma/cal1/buf", "concentration");
+
+output_add("/cal2/dend/cal1/Ca", "concentration");
+output_add("/cal2/dend/cal1/Cabuf", "concentration");
+output_add("/cal2/dend/cal1/buf", "concentration");
 
 run("/cal2", 2);
 
