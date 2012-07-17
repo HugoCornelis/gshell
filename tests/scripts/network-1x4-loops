@@ -81,21 +81,24 @@ foreach my $target (@targets)
 # create the projection between the two populations
 
 create('projection', '/n_cells/projection');
-model_parameter_add('/n_cells/projection', 'SOURCE', '/n_cells');
-model_parameter_add('/n_cells/projection', 'TARGET', '/n_cells');
+ce('/n_cells/projection');
+model_parameter_add('.', 'SOURCE', '/n_cells');
+model_parameter_add('.', 'TARGET', '/n_cells');
 
 
 # create the connections inside the projection
 # and give each connection appropriate parameters
 
+ce('/n_cells/projection');
+
 foreach my $connection (@connections)
 {
     create('connection_symbol', '/n_cells/projection/' . $connection);
 
-    model_parameter_add('/n_cells/projection/' . $connection, 'PRE', 's1/soma/spike');
-    model_parameter_add('/n_cells/projection/' . $connection, 'POST', 't' . $connection . '/soma/Ex_channel/synapse');
-    model_parameter_add('/n_cells/projection/' . $connection, 'WEIGHT', '2.0');
-    model_parameter_add('/n_cells/projection/' . $connection, 'DELAY', '0.03');
+    model_parameter_add($connection, 'PRE', 's1/soma/spike');
+    model_parameter_add($connection, 'POST', 't' . $connection . '/soma/Ex_channel/synapse');
+    model_parameter_add($connection, 'WEIGHT', '2.0');
+    model_parameter_add($connection, 'DELAY', '0.03');
 }
 
 ##########
@@ -105,17 +108,20 @@ foreach my $connection (@connections)
 
 inputclass_add('perfectclamp', 'current_injection_protocol', 'name', 'current_injection', 'command', '1e-9');
 
+ce('/n_cells');
+
 foreach my $source (@sources)
 {
     input_add('current_injection_protocol', '/n_cells/s' . $source . '/soma', 'INJECT');
-    output_add('/n_cells/s' . $source . '/soma', 'Vm');
+
+    output_add('s' . $source . '/soma', 'Vm');
 }
 
 foreach my $target (@targets)
 {
-    output_add('/n_cells/t' . $target . '/soma/Ex_channel', 'Gsyn');
-    output_add('/n_cells/t' . $target . '/soma/Ex_channel', 'Isyn');
-    output_add('/n_cells/t' . $target . '/soma', 'Vm');
+    output_add('t' . $target . '/soma/Ex_channel', 'Gsyn');
+    output_add('t' . $target . '/soma/Ex_channel', 'Isyn');
+    output_add('t' . $target . '/soma', 'Vm');
 }
 
 
@@ -136,7 +142,7 @@ set_verbose('debug');
 
 foreach my $source (@sources)
 {
-    solverset('/n_cells/s' . $source, 'heccer');
+    solverset('s' . $source, 'heccer');
 }
 
 
@@ -144,7 +150,7 @@ foreach my $source (@sources)
 
 foreach my $target (@targets)
 {
-    solverset('/n_cells/t' . $target, 'heccer');
+    solverset('t' . $target, 'heccer');
 }
 
 

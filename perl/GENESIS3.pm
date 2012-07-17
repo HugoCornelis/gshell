@@ -405,7 +405,8 @@ sub element_type
 
     my $original = shift;
 
-    if (!defined $element)
+    if (!defined $element
+        || $element eq '.')
     {
 	$element = $GENESIS3::current_working_element;
     }
@@ -870,7 +871,8 @@ sub inputbinding_add
 
     my $type = shift;
 
-    if (!defined $element)
+    if (!defined $element
+        || $element eq '.')
     {
 	$element = $GENESIS3::current_working_element;
     }
@@ -1170,7 +1172,8 @@ sub list_elements
 
     my $element = shift;
 
-    if (!defined $element)
+    if (!defined $element
+        || $element eq '.')
     {
 	$element = $GENESIS3::current_working_element;
     }
@@ -1305,7 +1308,8 @@ sub model_parameter_add
 	    }
 	}
 
-	if (!defined $element)
+	if (!defined $element
+	    || $element eq '.')
 	{
 	    $element = $GENESIS3::current_working_element;
 	}
@@ -1567,6 +1571,23 @@ sub output_add
 {
     my $component_name = shift;
 
+    if (!defined $component_name
+        || $component_name eq '.')
+    {
+	$component_name = $GENESIS3::current_working_element;
+    }
+    else
+    {
+	if ($component_name =~ m(^/)
+	    || $component_name =~ m(::))
+	{
+	}
+	else
+	{
+	    $component_name = "$GENESIS3::current_working_element/$component_name";
+	}
+    }
+
     my $field = shift;
 
     push
@@ -1726,7 +1747,8 @@ sub parameter_show
 
     my $parameter = shift;
 
-    if (!defined $element)
+    if (!defined $element
+        || $element eq '.')
     {
 	$element = $GENESIS3::current_working_element;
     }
@@ -1768,7 +1790,8 @@ sub parameter_scaled_show
 
     my $parameter = shift;
 
-    if (!defined $element)
+    if (!defined $element
+        || $element eq '.')
     {
 	$element = $GENESIS3::current_working_element;
     }
@@ -2288,7 +2311,8 @@ sub runtime_parameter_add
 	}
     }
 
-    if (!defined $element)
+    if (!defined $element
+        || $element eq '.')
     {
 	$element = $GENESIS3::current_working_element;
     }
@@ -2476,6 +2500,23 @@ sub solverset
     my $solverclass = shift;
 
     my $schedule_name = shift;
+
+    if (!defined $modelname
+        || $modelname eq '.')
+    {
+	$modelname = $GENESIS3::current_working_element;
+    }
+    else
+    {
+	if ($modelname =~ m(^/)
+	    || $modelname =~ m(::))
+	{
+	}
+	else
+	{
+	    $modelname = "$GENESIS3::current_working_element/$modelname";
+	}
+    }
 
     if ($modelname =~ m((.*)/(.*)))
     {
