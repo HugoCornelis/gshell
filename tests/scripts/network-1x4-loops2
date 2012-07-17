@@ -1,0 +1,198 @@
+#!/usr/bin/perl -w
+#!/usr/bin/perl -d:ptkdb
+#!
+
+
+use strict;
+
+
+$ENV{NEUROSPACES_NMC_MODELS} = '/usr/local/neurospaces/models/library';
+
+
+$SIG{__DIE__}
+    = sub {
+	use Carp;
+
+	confess @_;
+    };
+
+
+require GENESIS3;
+
+
+package GENESIS3::Commands;
+
+
+##########
+# user workflow: create the model
+
+# parameters of our network model
+
+# one source neuron
+
+my @sources = ( 1 );
+
+# four target neurons
+
+my @targets = ( 1 .. 4 );
+
+# four connections
+
+my $connections
+    = {
+       1 => {
+	     PRE => 's1/soma/spike',
+	     POST => 't1/soma/Ex_channel/synapse',
+	     WEIGHT => '2.0',
+	     DELAY => '0.03',
+	    },
+       2 => {
+	     PRE => 's1/soma/spike',
+	     POST => 't2/soma/Ex_channel/synapse',
+	     WEIGHT => '1.0',
+	     DELAY => '0.02',
+	    },
+       3 => {
+	     PRE => 's1/soma/spike',
+	     POST => 't3/soma/Ex_channel/synapse',
+	     WEIGHT => '0.1',
+	     DELAY => '2',
+	    },
+       4 => {
+	     PRE => 's1/soma/spike',
+	     POST => 't4/soma/Ex_channel/synapse',
+	     WEIGHT => '10.0',
+	     DELAY => '0.02',
+	    },
+      };
+
+# you can inspect arrays by using the data dumper:
+
+# use Data::Dumper; print Dumper('targets: ', \@targets);
+
+
+# load the neuron prototype
+
+ndf_load_library("rscell", "cells/RScell-nolib2.ndf");
+
+
+# modify it to our taste
+
+model_parameter_add('::rscell::/cell/soma/Ex_channel', 'G_MAX', '0.04330736624');
+model_parameter_add('::rscell::/cell/soma/Ex_channel', 'Erev', '0');
+
+
+# start creating the network
+
+create('network', '/n_cells');
+
+
+# create source neurons
+
+foreach my $source (@sources)
+{
+    insert_alias('::rscell::/cell', '/n_cells/s' . $source);
+}
+
+
+# create target neurons
+
+foreach my $target (@targets)
+{
+    insert_alias('::rscell::/cell', '/n_cells/t' . $target);
+}
+
+
+# create the projection between the two populations
+
+create('projection', '/n_cells/projection');
+ce('/n_cells/projection');
+model_parameter_add('.', 'SOURCE', '/n_cells');
+model_parameter_add('.', 'TARGET', '/n_cells');
+
+
+# create the connections inside the projection
+# and give each connection appropriate parameters
+
+ce('/n_cells/projection');
+
+foreach my $connection_number (keys %$connections)
+{
+    my $connection_parameters = $connections->{$connection_number};
+
+    create('connection_symbol', '/n_cells/projection/' . $connection_number);
+
+    foreach my $connection_parameter_name (keys %$connection_parameters)
+    {
+	my $connection_parameter_value = $connection_parameters->{$connection_parameter_name};
+
+	model_parameter_add($connection_number, $connection_parameter_name, $connection_parameter_value);
+    }
+}
+
+##########
+# user workflow: create the experiment
+
+# create a current injection protocol
+
+inputclass_add('perfectclamp', 'current_injection_protocol', 'name', 'current_injection', 'command', '1e-9');
+
+ce('/n_cells');
+
+foreach my $source (@sources)
+{
+    input_add('current_injection_protocol', '/n_cells/s' . $source . '/soma', 'INJECT');
+
+    output_add('s' . $source . '/soma', 'Vm');
+}
+
+foreach my $target (@targets)
+{
+    output_add('t' . $target . '/soma/Ex_channel', 'Gsyn');
+    output_add('t' . $target . '/soma/Ex_channel', 'Isyn');
+    output_add('t' . $target . '/soma', 'Vm');
+}
+
+
+##########
+# user workflow: configure the simulation
+
+# configure the numerical solver
+
+heccer_set_config('disassem_simple');
+# des_set_config('disassem_simple');
+
+# we run this in verbose mode to enable the disassemble feature
+
+set_verbose('debug');
+
+
+# configure the scheduler to schedule the numerical solver for each source neuron
+
+foreach my $source (@sources)
+{
+    solverset('s' . $source, 'heccer');
+}
+
+
+# configure the scheduler to schedule the numerical solver for each target neuron
+
+foreach my $target (@targets)
+{
+    solverset('t' . $target, 'heccer');
+}
+
+
+# configure the scheduler to schedule the discrete event system for each projection (we have only one in this model)
+
+solverset('/n_cells/projection', 'des');
+
+
+# save the schedule for later use
+
+ssp_save('/n_cells', '/tmp/n_cells.ssp');
+
+
+# run the simulation
+
+run('/n_cells', '0.2');
