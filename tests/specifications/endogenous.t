@@ -122,7 +122,7 @@ runtime_parameters:
 						   wait => 100,
 						  },
 						 ],
-				description => "running the purkinje cell with current injection from a perl script",
+				description => "running the purkinje cell with endogenous / poissonian activation from a perl script",
 				numerical_compare => 'arithmetic rounding differences between different architectures',
 			       },
 			      ],
