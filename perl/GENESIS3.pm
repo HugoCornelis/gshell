@@ -1952,7 +1952,7 @@ sub reset_help
 
     print "synopsis: reset <modelname>\n";
 
-    return "*** Ok";
+    return "*** Ok: reset";
 }
 
 
@@ -3681,7 +3681,7 @@ our $registered_solverclasses
 	      },
       };
 
-our $verbose_level;
+our $verbose_level = 0;
 
 
 sub check_runtime_environment
