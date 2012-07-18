@@ -2,6 +2,7 @@
 # set env NEUROSPACES_NMC_PROJECT_MODELS = /local_home/local_home/hugo/EM/models
 set args tests/scripts/simple_purkinje
 set args bin/genesis-g3 two-cells1.g3
+set args tests/scripts/network-simple
 file /usr/bin/perl
 # break parsererror
 # break HeccerEventSet
