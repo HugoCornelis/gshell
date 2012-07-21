@@ -63,6 +63,8 @@ for (my $counter = 0 ; $counter < $NX * $NY ; $counter++)
     output_add($counter . '/soma/Ex_channel', 'Gsyn');
 }
 
+# ndf_save("/**", "/tmp/network-simple.ndf");
+
 ##########
 # user workflow: configure the simulation
 
