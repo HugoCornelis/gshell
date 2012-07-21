@@ -92,5 +92,5 @@ ssp_save('/RSNet', '/tmp/network-simple.ssp');
 
 run('/RSNet', '0.2');
 
-explore();
+# explore();
 
