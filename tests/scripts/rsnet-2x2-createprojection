@@ -54,7 +54,7 @@ createprojection
       source => {
 		 context => '/RSNet/population',
 		 include => {
-			     type => 'box',
+			     type => 'box', # type => 'all' would remove the need for the line below
 			     coordinates => [ '-1e10', '-1e10', '-1e10', '1e10', '1e10', '1e10', ],
 			    },
 		},
