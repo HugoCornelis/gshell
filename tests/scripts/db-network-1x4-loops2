@@ -1,3 +1,4 @@
+#!/usr/bin/perl -d:ptkdb
 #!/usr/bin/perl -w
 #!/usr/bin/perl -d:ptkdb
 #!
@@ -116,8 +117,6 @@ output_filename('db-network-1x4-loops2-Vm.txt');
 
 # input_add('current_injection_protocol', '/n_cells/s1/soma', 'INJECT');
 
-model_parameter_add('/n_cells/s1/soma', 'INJECT', '1e-9');
-
 foreach my $source (@sources)
 {
     output_add('s' . $source . '/soma', 'Vm');
@@ -171,9 +170,11 @@ ssp_save('/n_cells', '/tmp/n_cells.ssp');
 
 # run('/n_cells', '0.2');
 
+runtime_parameter_add('/n_cells/s1/soma', 'INJECT', '1e-9');
+
 run('/n_cells', '0.05');
 
-model_parameter_add('/n_cells/s1/soma', 'INJECT', '0.0');
+runtime_parameter_add('/n_cells/s1/soma', 'INJECT', '0.0');
 
 run('/n_cells', '0.15');
 
