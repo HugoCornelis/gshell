@@ -110,7 +110,7 @@ inputclass_add('perfectclamp', 'current_injection_protocol', 'name', 'current_in
 
 ce('/n_cells');
 
-output_filename('network-1x4-loops-db1-Vm.txt');
+output_filename('db-network-1x4-loops1-Vm.txt');
 
 # add injection to only one source
 

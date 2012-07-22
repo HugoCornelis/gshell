@@ -110,7 +110,7 @@ foreach my $connection (@connections)
 
 ce('/n_cells');
 
-output_filename('network-1x4-loops-db2-Vm.txt');
+output_filename('db-network-1x4-loops2-Vm.txt');
 
 # add injection to only one source
 
@@ -169,11 +169,11 @@ ssp_save('/n_cells', '/tmp/n_cells.ssp');
 
 # run the simulation
 
-run('/n_cells', '0.2');
+# run('/n_cells', '0.2');
 
-# run('/n_cells', '0.05');
+run('/n_cells', '0.05');
 
-# model_parameter_add('/n_cells/s1/soma', 'INJECT', '0.0');
+model_parameter_add('/n_cells/s1/soma', 'INJECT', '0.0');
 
-# run('/n_cells', '0.15');
+run('/n_cells', '0.15');
 
