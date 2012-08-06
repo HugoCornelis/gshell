@@ -116,6 +116,7 @@ synopsis: (you gave )
   - component_load
   - create
   - createmap
+  - createprojection
   - delete
   - echo
   - element_type
