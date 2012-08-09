@@ -2026,6 +2026,12 @@ sub run
 	    print Dump( { runtime_parameters => $runtime_parameters, }, );
 	}
 
+	# the default target model is the same as the name of the schedule
+
+	my $target_model = $modelname;
+
+	#t start matching the component_name with the registered solvers
+
 	my $result
 	    = $scheduler->apply_runtime_parameters
 		(
@@ -2033,7 +2039,7 @@ sub run
 		 map
 		 {
 		     {
-			 modelname => $modelname,
+			 modelname => $target_model,
 			 %$_,
 		     };
 		 }
@@ -2098,7 +2104,7 @@ sub run
 
 	my $schedule
 	    = {
-	       name => "GENESIS3 SSP schedule initialized for $modelname, $time",
+	       name => "GENESIS-3 SSP schedule initialized for $modelname, $time",
 	      };
 
 	# tell ssp that the model-container service has been initialized

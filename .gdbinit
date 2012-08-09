@@ -3,6 +3,7 @@
 set args tests/scripts/simple_purkinje
 set args bin/genesis-g3 two-cells1.g3
 set args tests/scripts/network-simple
+set args tests/scripts/db-rsnet-32x32-volumeconnect
 file /usr/bin/perl
 # break parsererror
 # break HeccerEventSet

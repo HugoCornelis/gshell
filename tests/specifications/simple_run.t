@@ -16,7 +16,6 @@ my $test
 						   description => "Is startup successful ?",
 						   read => "GENESIS 3 shell",
 						   timeout => 5,
-						   write => undef,
 						  },
 						  {
 						   description => "Can we create a cell ?",
@@ -177,7 +176,7 @@ history:
 models:
   - modelname: /singlep
     solverclass: heccer
-name: 'GENESIS3 SSP schedule initialized for /singlep, 0'
+name: 'GENESIS-3 SSP schedule initialized for /singlep, 0'
 optimize: 'by default turned on, ignored when running in verbose mode'
 outputclasses:
   double_2_ascii:
