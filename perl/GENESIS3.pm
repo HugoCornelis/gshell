@@ -3146,10 +3146,12 @@ package GENESIS3::Help;
 
 # loop over all lexical purposes
 
-foreach my $purpose qw(
-		       physical
-		       structure
+foreach my $purpose (
+		     qw(
+			   physical
+			   structure
 		      )
+		    )
 {
     # construct a list function for this lexical purpose
 
