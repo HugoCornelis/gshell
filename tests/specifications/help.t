@@ -150,11 +150,13 @@ synopsis: (you gave )
   - npl_load
   - npy_load
   - output_add
+  - output_emit_time
   - output_filename
   - output_format
   - output_mode
   - output_resolution
   - output_show
+  - output_time_step
   - parameter_scaled_show
   - parameter_show
   - pwe

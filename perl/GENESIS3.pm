@@ -1612,6 +1612,26 @@ synopsis: output_add <element_name> <field_name>
 }
 
 
+sub output_emit_time
+{
+    my $output_emit_time = shift;
+
+    $GENESIS3::output_emit_time = $output_emit_time;
+
+    return "*** Ok: output_emit_time $output_emit_time";
+}
+
+
+sub output_emit_time_help
+{
+    print "description: specify whether to emit time in the output files, 1 for yes.
+synopsis: output_emit_time <output_emit_time>
+";
+
+    return "*** Ok: output_emit_time_help";
+}
+
+
 sub output_filename
 {
     my $filename = shift;
@@ -1668,7 +1688,7 @@ sub output_mode_help
 synopsis: output_mode <output_mode>
 ";
 
-    return "*** Ok";
+    return "*** Ok: output_mode_help";
 }
 
 
@@ -1688,7 +1708,7 @@ sub output_resolution_help
 synopsis: output_resolution <output_resolution>
 ";
 
-    return "*** Ok";
+    return "*** Ok: output_resolution_help";
 }
 
 
@@ -1716,7 +1736,27 @@ sub output_show_help
 synopsis: output_show
 ";
 
-    return "*** Ok";
+    return "*** Ok: output_show_help";
+}
+
+
+sub output_time_step
+{
+    my $output_time_step = shift;
+
+    $GENESIS3::output_time_step = $output_time_step;
+
+    return "*** Ok: output_time_step $output_time_step";
+}
+
+
+sub output_time_step_help
+{
+    print "description: specify the time step for emitting output to the output files.
+synopsis: output_time_step <output_time_step>
+";
+
+    return "*** Ok: output_time_step_help";
 }
 
 
@@ -2165,10 +2205,12 @@ sub run
 	       double_2_ascii => {
 				  module_name => 'Experiment',
 				  options => {
+					      emit_time => $GENESIS3::output_emit_time,
 					      filename => $GENESIS3::output_filename,
 					      format => $GENESIS3::output_format,
 					      output_mode => $GENESIS3::output_mode,
 					      resolution => $GENESIS3::output_resolution,
+					      time_step => $GENESIS3::output_time_step,
 					     },
 				  package => 'Experiment::Output',
 				 },
@@ -2608,10 +2650,12 @@ sub solverset
 	       double_2_ascii => {
 				  module_name => 'Experiment',
 				  options => {
+					      emit_time => $GENESIS3::output_emit_time,
 					      filename => $GENESIS3::output_filename,
 					      format => $GENESIS3::output_format,
 					      output_mode => $GENESIS3::output_mode,
 					      resolution => $GENESIS3::output_resolution,
+					      time_step => $GENESIS3::output_time_step,
 					     },
 				  package => 'Experiment::Output',
 				 },
