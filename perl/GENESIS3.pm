@@ -3726,6 +3726,8 @@ our $inputs = [];
 
 our $outputs = [];
 
+our $output_emit_time = 1;
+
 our $output_filename = '/tmp/output';
 
 our $output_format = '';
@@ -3733,6 +3735,8 @@ our $output_format = '';
 our $output_mode = '';
 
 our $output_resolution = '';
+
+our $output_time_step;
 
 our $runtime_parameters = [];
 

@@ -4,6 +4,7 @@ set args tests/scripts/simple_purkinje
 set args bin/genesis-g3 two-cells1.g3
 set args tests/scripts/network-simple
 set args tests/scripts/db-rsnet-32x32-volumeconnect
+set args tests/scripts/rsnet-2x2-createprojection-outputtimestep
 file /usr/bin/perl
 # break parsererror
 # break HeccerEventSet
