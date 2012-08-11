@@ -182,14 +182,17 @@ outputclasses:
   double_2_ascii:
     module_name: Experiment
     options: &3
+      emit_time: 1
       filename: /tmp/output
       format: ''
       output_mode: ''
       resolution: ''
+      time_step: ~
     package: Experiment::Output
     ssp_outputclass: &4 !!perl/hash:SSP::Output
       backend: !!perl/hash:Experiment::Output
         backend: !!perl/hash:SwiggableExperiment::OutputGenerator {}
+        emit_time: 1
         filename: /tmp/output
         format: ''
         module_name: Experiment
@@ -199,6 +202,7 @@ outputclasses:
         package: Experiment::Output
         resolution: ''
         scheduler: *1
+        time_step: ~
       module_name: Experiment
       name: double_2_ascii
       options: *3
