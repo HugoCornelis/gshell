@@ -2061,16 +2061,54 @@ sub run
 
 	if (@$runtime_parameters)
 	{
-	    print "warning: ignoring parameter settings that contain a namespace in their address\n";
+	    print STDERR "*** Warning: ignoring parameter settings that contain a namespace in their address\n";
 
 	    print Dump( { runtime_parameters => $runtime_parameters, }, );
 	}
 
-	# the default target model is the same as the name of the schedule
+	# construct a hash that maps component_names of
+	# runtime_parameters to modelnames that are mapped to solvers.
 
-	my $target_model = $modelname;
+	my $component_names_2_solved_models
+	    = {
+	       map
+	       {
+		   # access the runtime_parameter
 
-	#t start matching the component_name with the registered solvers
+		   my $runtime_parameter = $_;
+
+		   # construct a list of solved models that match with this runtime_parameter
+
+		   my $models = $scheduler->{models} || [];
+
+		   my $matching_models
+		       = [
+			  grep
+			  {
+			      my $model = $_;
+
+			      $runtime_parameter->{component_name} =~ $model->{modelname};
+			  }
+			  @$models,
+			 ];
+
+		   if (scalar @$matching_models ne 1)
+		   {
+		       print STDERR "$0: *** Warning: runtime_parameter found that applies to more than one solver: $runtime_parameter->{component_name}\n";
+		   }
+
+		   # use the first model in this list
+
+		   my $solved_model = $matching_models->[0];
+
+		   # construct a mapping from the runtime_parameter component_name to the solved model name.
+
+		   {
+		       $runtime_parameter->{component_name} => $solved_model->{modelname},
+		   };
+	       }
+	       @$GENESIS3::runtime_parameters,
+	      };
 
 	my $result
 	    = $scheduler->apply_runtime_parameters
@@ -2078,6 +2116,16 @@ sub run
 		 $scheduler,
 		 map
 		 {
+		     # convert the name of the schedule to the target model
+
+		     #t breaks current_injection.t
+
+		     my $target_model = $component_names_2_solved_models->{$modelname};
+
+		     $target_model = $modelname;
+
+		     # construct a valid runtime_parameter for the target model in this schedule
+
 		     {
 			 modelname => $target_model,
 			 %$_,
@@ -2085,10 +2133,14 @@ sub run
 		 }
 		 grep
 		 {
+		     # only those runtime_parameters that apply to this schedule
+
 		     $_->{component_name} =~ /^$modelname/
 		 }
 		 grep
 		 {
+		     # ignore namespaced parameters
+
 		     $_->{component_name} !~ /::/
 		 }
 		 @$GENESIS3::runtime_parameters,
@@ -2100,7 +2152,7 @@ sub run
 	}
 
 	# if the scheduler was constructed using the run call, it has already been compiled.
-	# if the scheduler was constructed using the solverset command, it is not compile yet.
+	# if the scheduler was constructed using the solverset command, it is not compiled yet.
 
 	my $schedulees = $scheduler->{schedule} || [];
 
@@ -3804,7 +3856,7 @@ sub check_runtime_environment
 
 	if (!exists  ((\%{"::"})->{"GENESIS3::"}->{"Commands::"}->{"${command}_help"}))
 	{
-	    print "*** Warning: command $command found, but no help available for it\n";
+	    print STDERR "$0: *** Warning: command $command found, but no help available for it\n";
 	}
     }
 
@@ -3821,7 +3873,7 @@ sub create_all_tokens
     }
     else
     {
-	print STDERR "$0: warning: could not load Neurospaces::Tokens::Physical\n";
+	print STDERR "$0: Warning: could not load Neurospaces::Tokens::Physical\n";
     }
 
     my $symbols_definitions = $GENESIS3::Configuration::symbols_definitions;
@@ -3941,7 +3993,7 @@ sub initialize
 
 	if ($@)
 	{
-	    print "$0: *** Warning: GENESIS3::Python loaded, but its initialize() method failed ($@)\n";
+	    print STDERR "$0: *** Warning: GENESIS3::Python loaded, but its initialize() method failed ($@)\n";
 	}
     }
 
