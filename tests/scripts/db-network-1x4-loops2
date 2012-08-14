@@ -87,6 +87,27 @@ model_parameter_add('.', 'SOURCE', '/n_cells');
 model_parameter_add('.', 'TARGET', '/n_cells');
 
 
+# implement a subroutine that creates a single connection, given its
+# name and its parameters
+
+sub createconnection
+{
+    my $connection_name = shift;
+
+    my $connection_parameters = shift;
+
+    # connection_symbol is a token known to the model-container, create it
+
+    create('connection_symbol', $connection_name);
+
+    # set well known parameters of a connection_symbol
+
+    model_parameter_add($connection, 'PRE', $connection_parameters->{pre});
+    model_parameter_add($connection, 'POST', $connection_parameters->{post});
+    model_parameter_add($connection, 'WEIGHT', $connection_parameters->{weight});
+    model_parameter_add($connection, 'DELAY', $connection_parameters->{delay});
+}
+
 # create the connections inside the projection
 # and give each connection appropriate parameters
 
@@ -94,12 +115,21 @@ ce('/n_cells/projection');
 
 foreach my $connection (@connections)
 {
-    create('connection_symbol', '/n_cells/projection/' . $connection);
+    # define the name of the connection
 
-    model_parameter_add($connection, 'PRE', 's1/soma/spike');
-    model_parameter_add($connection, 'POST', 't' . $connection . '/soma/Ex_channel/synapse');
-    model_parameter_add($connection, 'WEIGHT', '10.0');
-    model_parameter_add($connection, 'DELAY', '0.03');
+    my $connection_name = '/n_cells/projection/' . $connection;
+
+    # define its parameters
+
+    my $connection_parameters
+	= {
+	   pre => 's1/soma/spike',
+	   post => 't' . $connection . '/soma/Ex_channel/synapse',
+	   weight => 10.0,
+	   delay => 0.03,
+	  };
+
+    createconnection($connection_name, $connection_parameters);
 }
 
 ##########
