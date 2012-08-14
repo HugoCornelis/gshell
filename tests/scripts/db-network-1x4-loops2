@@ -129,6 +129,8 @@ foreach my $connection (@connections)
 	   delay => 0.03,
 	  };
 
+    # call the subroutine that creates a single connection given its name and parameters
+
     createconnection($connection_name, $connection_parameters);
 }
 
