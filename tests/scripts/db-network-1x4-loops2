@@ -102,10 +102,10 @@ sub createconnection
 
     # set well known parameters of a connection_symbol
 
-    model_parameter_add($connection, 'PRE', $connection_parameters->{pre});
-    model_parameter_add($connection, 'POST', $connection_parameters->{post});
-    model_parameter_add($connection, 'WEIGHT', $connection_parameters->{weight});
-    model_parameter_add($connection, 'DELAY', $connection_parameters->{delay});
+    model_parameter_add($connection_name, 'PRE', $connection_parameters->{pre});
+    model_parameter_add($connection_name, 'POST', $connection_parameters->{post});
+    model_parameter_add($connection_name, 'WEIGHT', $connection_parameters->{weight});
+    model_parameter_add($connection_name, 'DELAY', $connection_parameters->{delay});
 }
 
 # create the connections inside the projection
