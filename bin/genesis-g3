@@ -42,8 +42,6 @@ use Data::Dumper;
 
 use Getopt::Long;
 
-use Term::ReadLine;
-
 
 $SIG{__DIE__}
     = sub {

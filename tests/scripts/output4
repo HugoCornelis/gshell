@@ -56,3 +56,6 @@ heccer_set_timestep(1e-5);
 
 run("/singlep", 0.001);
 
+
+GENESIS3::Interactive::loop();
+

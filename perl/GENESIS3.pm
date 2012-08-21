@@ -3292,6 +3292,8 @@ foreach my $purpose (
 package GENESIS3::Interactive;
 
 
+use Term::ReadLine;
+
 use Text::ParseWords;
 
 
