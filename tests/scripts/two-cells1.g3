@@ -24,5 +24,5 @@ set_verbose debug
 solverset /two_cells/1 heccer
 solverset /two_cells/2 heccer
 solverset /two_cells/projection des
-ssp_save /two_cells /tmp/two_cells.ssp
+# ssp_save /two_cells /tmp/two_cells.ssp
 run /two_cells 0.2

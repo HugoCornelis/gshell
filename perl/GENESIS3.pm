@@ -3289,6 +3289,190 @@ foreach my $purpose (
 }
 
 
+package GENESIS3::Interactive;
+
+
+use Text::ParseWords;
+
+
+sub interprete
+{
+    my $line = shift ;
+
+    $line =~ s/^\s*//g;
+
+    $line =~ s/\s*$//g;
+
+    $line =~ s/\s+/ /g;
+
+    my @args = quotewords(" ", 1, $line);
+
+    if ($#args == -1)
+    {
+      return;
+    }
+
+    chomp @args;
+
+    my $arguments = \@args;
+
+#    my $arguments = [ split /\s/, $line, ];
+
+    #t join hash and array arguments
+
+    # create a perl function call
+
+    my $quoted_line = $arguments->[0];
+
+    if ($arguments->[1])
+    {
+	$quoted_line
+	    .= (
+		join
+		' ',
+		"(",
+		(
+		 map
+		 {
+		     (
+		      /^('|")/
+		      ? "$_, "
+		      : "'$_',"
+		     )
+		  }
+		 (@$arguments)[1 .. $#$arguments]
+		),
+		")"
+	       );
+
+	$quoted_line =~ s/\\n/\n/g;
+    }
+
+    if ($quoted_line =~ /^\s*(#.*)?$/)
+    {
+	return;
+    }
+
+    # start to prepare to execute of the command
+
+    my $genesis_command;
+
+    {
+	$genesis_command = $arguments->[0];
+
+	if ($::option_output_tags)
+	{
+	    print "<" .  $genesis_command . ">\n";
+
+	    my @args = @$arguments;
+
+	    shift @args;
+
+	    my $genesis_command_args = join " ", @args;
+
+	    print "<args>\n" . $genesis_command_args . "\n</args>\n"
+	}
+
+	no strict "refs";
+
+	if (!exists ((\%{"::"})->{"GENESIS3::"}->{"Commands::"}->{$genesis_command}))
+	{
+	    print "*** Error: command $genesis_command not found,\n*** Error: use 'list commands' to get a list of available commands,\n*** Error: use the help function to obtain help about each command\n";
+
+	    if ($::option_output_tags)
+	    {
+		print "</" .  $genesis_command . ">\n";
+	    }
+
+	    return;
+	}
+    }
+
+    my $package = "GENESIS3::Commands::";
+
+    $quoted_line =~ s/^\s*/$package/;
+
+    my $result = eval($quoted_line);
+
+    if ($@)
+    {
+	warn $@;
+
+	print Data::Dumper->Dump( [ $result, ], [ 'Result', ]);
+    }
+
+    if ($result =~ /^\*\*\* Ok/)
+    {
+
+    }
+    else
+    {
+	print "$result\n";
+    }
+
+    if ($::option_output_tags)
+    {
+	print "</" .  $genesis_command . ">\n";
+    }
+}
+
+
+sub loop
+{
+    my $historyfile = $ENV{HOME} . '/.phistory';
+
+    my $term = Term::ReadLine->new('genesis > ');
+
+    if (open H, $historyfile)
+    {
+	my %h;
+
+	my @h = <H>;
+	chomp @h;
+	close H;
+
+	$h{$_} = 1 foreach @h;
+	$term->addhistory($_) foreach keys %h;
+    }
+
+    if ($::option_output_tags)
+    {
+	my $line;
+
+	while(<>)
+	{
+	    $line = $_;
+
+	    interprete($line);
+
+	    {
+		open H, ">>$historyfile";
+		print H "$line\n";
+		close H;
+	    }
+
+	    $term->addhistory($line) if /\S/;
+	}
+    }
+
+
+    while ( defined ($_ = $term->readline("genesis > ")) )
+    {
+	my $line = $_;
+
+	interprete($line);
+
+	{
+	    open H, ">>$historyfile";
+	    print H "$line\n";
+	    close H;
+	}
+
+	$term->addhistory($line) if /\S/;
+    }
+}
+
+
 package GENESIS3::Tokens::Physical;
 
 
