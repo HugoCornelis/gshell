@@ -100,7 +100,6 @@ my $test
 								    `rm /tmp/output`;
 								  },
 								 },
-
 						  },
 						 ],
 				description => "simple output with the steps mode",
@@ -152,7 +151,6 @@ my $test
 								    `rm /tmp/output`;
 								  },
 								 },
-
 						  },
 						 ],
 				description => "output with the steps mode at a coarser resolution",
@@ -204,7 +202,6 @@ my $test
 								    `rm /tmp/output`;
 								  },
 								 },
-
 						  },
 						 ],
 				description => "simple output with the steps mode and a format field",

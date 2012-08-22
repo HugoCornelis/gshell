@@ -100,13 +100,14 @@ my $test
 
 
 						  {
-						   disabled => "Previous command is not producing an output file for some reason",
+# 						   disabled => "Previous command is not producing an output file for some reason",
 						   description => "Can we verify the output ?",
 
 						   read => {
 							    application_output_file => "/tmp/output",
 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/pulsegen-freerun.txt",
 							   },
+						   wait => 10,
 						  },
 						 ],
 				description => "commands load a simple soma model and connect it to a pulsegen solver object",

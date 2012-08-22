@@ -6,6 +6,18 @@
 use strict;
 
 
+BEGIN
+{
+    if (!$ENV{NEUROSPACES_NMC_USER_MODELS}
+	and !$ENV{NEUROSPACES_NMC_PROJECT_MODELS}
+	and !$ENV{NEUROSPACES_NMC_SYSTEM_MODELS}
+	and !$ENV{NEUROSPACES_NMC_MODELS})
+    {
+	$ENV{NEUROSPACES_NMC_MODELS} = '/usr/local/neurospaces/models/library';
+    }
+}
+
+
 package GENESIS3::Commands;
 
 
@@ -383,7 +395,12 @@ sub delete_help
 
 sub echo
 {
-    print join " ", @_;
+    my $output = (join " ", @_);
+
+    # note: without a newline, so the output may get buffered
+    # add the newline to the arguments if you need it.
+
+    print "$output";
 
     return "*** Ok: echo";
 }

@@ -1,0 +1,52 @@
+#!/usr/bin/perl -w
+#!/usr/bin/perl -d:ptkdb
+#!
+
+
+use strict;
+
+
+# these commands are not needed in a normal script.  They allow to run
+# this script when the libraries of the gshell are not installed on
+# the system yet.  The regression tester needs these commands when
+# running the tests.
+#
+# It is important that these statements are executed before the 'use
+# GENESIS3' statement (which is implicitly wrapped in a BEGIN block).
+# So these statements should come at the beginning of the script.
+
+BEGIN
+{
+    #! make check
+
+    push @INC, '../perl';
+
+    #! make distcheck
+
+    push @INC, '../../perl';
+
+    #! normal run
+
+    push @INC, './perl';
+}
+
+
+# this statement tells the perl system to catch errors and convert
+# them to messages useful to developers.  They are useful for large
+# scripts, but for simple scripts of a few lines of code, they are
+# more overhead than good.
+
+$SIG{__DIE__}
+    = sub {
+	use Carp;
+
+	confess @_;
+    };
+
+
+use GENESIS3;
+
+
+GENESIS3::Interactive::loop();
+
+
