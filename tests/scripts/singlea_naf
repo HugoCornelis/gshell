@@ -28,6 +28,8 @@ use Neurospaces::Bindings;
 package GENESIS3::Commands;
 
 
+# create cell with a single segment
+
 create("cell", "/singlea_naf");
 create("segment_group", "/singlea_naf/segments");
 create("segment", "/singlea_naf/segments/soma");
@@ -37,10 +39,6 @@ model_parameter_add("/singlea_naf/segments/soma", "rel_Y", 0.000e-6);
 model_parameter_add("/singlea_naf/segments/soma", "rel_Z", 0.000e-6);
 
 model_parameter_add("/singlea_naf/segments/soma", "DIA", 29.80e-6);
-
-echo("# passive NDF with only positions\n");
-
-ndf_save("/**", "STDOUT");
 
 model_parameter_add("/singlea_naf/segments/soma", "Vm_init", -0.0680);
 model_parameter_add("/singlea_naf/segments/soma", "RM", 1.000);
@@ -54,7 +52,7 @@ Neurospaces::Bindings::assign_bindable_IO
      [
       {
        field => "Vm",
-       type => undef,
+#        type => undef,
        direction => 'out',
       },
      ],
@@ -64,10 +62,276 @@ Neurospaces::Bindings::assign_inputs
     (
      "/singlea_naf/segments/soma",
      [
+      {
+       field => "naf->I",
+#        type => undef,
+       direction => 'in',
+      },
      ],
     );
 
-echo("# passive NDF\n");
+echo("# a neuron model with a single passive segment\n");
 
 ndf_save("/**", "STDOUT");
+
+# add a channel to the segment
+
+create("channel", "/singlea_naf/segments/soma/naf");
+
+model_parameter_add("/singlea_naf/segments/soma/naf", "G_MAX", 75000.0);
+model_parameter_add("/singlea_naf/segments/soma/naf", "Erev", 0.045);
+
+Neurospaces::Bindings::assign_bindable_IO
+    (
+     "/singlea_naf/segments/soma/naf",
+     [
+      {
+       field => "Vm",
+#        type => undef,
+       direction => 'in',
+      },
+      {
+       field => "G",
+#        type => undef,
+       direction => 'out',
+      },
+      {
+       field => "I",
+#        type => undef,
+       direction => 'out',
+      },
+     ],
+    );
+
+
+echo("# a neuron model with a segment with a channel without gates\n");
+
+ndf_save("/**", "STDOUT");
+
+create("hh_gate", "/singlea_naf/segments/soma/naf/naf_gate_activation");
+
+Neurospaces::Bindings::assign_bindable_IO
+    (
+     "/singlea_naf/segments/soma/naf/naf_gate_activation",
+     [
+      {
+       field => "Vm",
+#        type => undef,
+       direction => 'in',
+      },
+      {
+       field => "activation",
+#        type => undef,
+       direction => 'out',
+      },
+     ],
+    );
+
+Neurospaces::Bindings::assign_inputs
+    (
+     "/singlea_naf/segments/soma/naf/naf_gate_activation",
+     [
+      {
+       field => "..->Vm",
+#        type => undef,
+       direction => 'in',
+      },
+     ],
+    );
+
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_activation", "state_init", 0.0078406449371415214);
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_activation", "POWER", 3.0);
+
+create("gate_kinetic", "/singlea_naf/segments/soma/naf/naf_gate_activation/forward");
+
+Neurospaces::Bindings::assign_bindable_IO
+    (
+     "/singlea_naf/segments/soma/naf/naf_gate_activation/forward",
+     [
+      {
+       field => "Vm",
+#        type => undef,
+       direction => 'in',
+      },
+      {
+       field => "rate",
+#        type => undef,
+       direction => 'out',
+      },
+     ],
+    );
+
+Neurospaces::Bindings::assign_inputs
+    (
+     "/singlea_naf/segments/soma/naf/naf_gate_activation/forward",
+     [
+      {
+       field => "..->Vm",
+#        type => undef,
+       direction => 'in',
+      },
+     ],
+    );
+
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_activation/forward", "HH_AB_Add_Num", 75000.0);
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_activation/forward", "HH_AB_Add_Num", 35.0e3);
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_activation/forward", "HH_AB_Mult", 0.0);
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_activation/forward", "HH_AB_Factor_Flag", -1.0);
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_activation/forward", "HH_AB_Add_Den", 0.0);
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_activation/forward", "HH_AB_Offset_E", 5.0e-3);
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_activation/forward", "HH_AB_Div_E", -10.0e-3);
+
+create("gate_kinetic", "/singlea_naf/segments/soma/naf/naf_gate_activation/backward");
+
+Neurospaces::Bindings::assign_bindable_IO
+    (
+     "/singlea_naf/segments/soma/naf/naf_gate_activation/backward",
+     [
+      {
+       field => "Vm",
+#        type => undef,
+       direction => 'in',
+      },
+      {
+       field => "rate",
+#        type => undef,
+       direction => 'out',
+      },
+     ],
+    );
+
+Neurospaces::Bindings::assign_inputs
+    (
+     "/singlea_naf/segments/soma/naf/naf_gate_activation/backward",
+     [
+      {
+       field => "..->Vm",
+#        type => undef,
+       direction => 'in',
+      },
+     ],
+    );
+
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_activation/backward", "HH_AB_Add_Num", 7.0e3);
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_activation/backward", "HH_AB_Mult", 0.0);
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_activation/backward", "HH_AB_Factor_Flag", -1.0);
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_activation/backward", "HH_AB_Add_Den", 0.0);
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_activation/backward", "HH_AB_Offset_E", 65.0e-3);
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_activation/backward", "HH_AB_Div_E", 20.0e-3);
+
+create("hh_gate", "/singlea_naf/segments/soma/naf/naf_gate_inactivation");
+
+Neurospaces::Bindings::assign_bindable_IO
+    (
+     "/singlea_naf/segments/soma/naf/naf_gate_inactivation",
+     [
+      {
+       field => "Vm",
+#        type => undef,
+       direction => 'in',
+      },
+      {
+       field => "activation",
+#        type => undef,
+       direction => 'out',
+      },
+     ],
+    );
+
+Neurospaces::Bindings::assign_inputs
+    (
+     "/singlea_naf/segments/soma/naf/naf_gate_inactivation",
+     [
+      {
+       field => "..->Vm",
+#        type => undef,
+       direction => 'in',
+      },
+     ],
+    );
+
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_inactivation", "state_init", 0.26397776926502026);
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_inactivation", "POWER", 1.0);
+
+create("gate_kinetic", "/singlea_naf/segments/soma/naf/naf_gate_inactivation/forward");
+
+Neurospaces::Bindings::assign_bindable_IO
+    (
+     "/singlea_naf/segments/soma/naf/naf_gate_inactivation/forward",
+     [
+      {
+       field => "Vm",
+#        type => undef,
+       direction => 'in',
+      },
+      {
+       field => "rate",
+#        type => undef,
+       direction => 'out',
+      },
+     ],
+    );
+
+Neurospaces::Bindings::assign_inputs
+    (
+     "/singlea_naf/segments/soma/naf/naf_gate_inactivation/forward",
+     [
+      {
+       field => "..->Vm",
+#        type => undef,
+       direction => 'in',
+      },
+     ],
+    );
+
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_inactivation/forward", "HH_AB_Add_Num", 75000.0);
+
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_inactivation/forward", "HH_AB_Add_Num", 0.225e3);
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_inactivation/forward", "HH_AB_Mult", 0.0);
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_inactivation/forward", "HH_AB_Factor_Flag", -1.0);
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_inactivation/forward", "HH_AB_Add_Den", 1.0);
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_inactivation/forward", "HH_AB_Offset_E", 80.0e-3);
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_inactivation/forward", "HH_AB_Div_E", 10.0e-3);
+
+create("gate_kinetic", "/singlea_naf/segments/soma/naf/naf_gate_inactivation/backward");
+
+Neurospaces::Bindings::assign_bindable_IO
+    (
+     "/singlea_naf/segments/soma/naf/naf_gate_inactivation/backward",
+     [
+      {
+       field => "Vm",
+#        type => undef,
+       direction => 'in',
+      },
+      {
+       field => "rate",
+#        type => undef,
+       direction => 'out',
+      },
+     ],
+    );
+
+Neurospaces::Bindings::assign_inputs
+    (
+     "/singlea_naf/segments/soma/naf/naf_gate_inactivation/backward",
+     [
+      {
+       field => "..->Vm",
+#        type => undef,
+       direction => 'in',
+      },
+     ],
+    );
+
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_inactivation/backward", "HH_AB_Add_Num", 7.5e3);
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_inactivation/backward", "HH_AB_Mult", 0.0);
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_inactivation/backward", "HH_AB_Factor_Flag", -1.0);
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_inactivation/backward", "HH_AB_Add_Den", 0.0);
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_inactivation/backward", "HH_AB_Offset_E", -3.0e-3);
+model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_inactivation/backward", "HH_AB_Div_E", -18.0e-3);
+
+echo("# a neuron model with a segment with a channel with gates\n");
+
+ndf_save("/**", "/tmp/singlea_naf.ndf");
 
