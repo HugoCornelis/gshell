@@ -1,0 +1,73 @@
+#!/usr/bin/perl -w
+#!/usr/bin/perl -d:ptkdb
+#!
+
+
+use strict;
+
+
+# this statement tells the perl system to catch errors and convert
+# them to messages useful to developers.  They are useful for large
+# scripts, but for simple scripts of a few lines of code, they are
+# more overhead than good.
+
+$SIG{__DIE__}
+    = sub {
+	use Carp;
+
+	confess @_;
+    };
+
+# import the GENESIS3 functions
+
+use GENESIS3;
+
+use Neurospaces::Bindings;
+
+
+package GENESIS3::Commands;
+
+
+create("cell", "/singlea_naf");
+create("segment_group", "/singlea_naf/segments");
+create("segment", "/singlea_naf/segments/soma");
+
+model_parameter_add("/singlea_naf/segments/soma", "rel_X", 0.000e-6);
+model_parameter_add("/singlea_naf/segments/soma", "rel_Y", 0.000e-6);
+model_parameter_add("/singlea_naf/segments/soma", "rel_Z", 0.000e-6);
+
+model_parameter_add("/singlea_naf/segments/soma", "DIA", 29.80e-6);
+
+echo("# passive NDF with only positions\n");
+
+ndf_save("/**", "STDOUT");
+
+model_parameter_add("/singlea_naf/segments/soma", "Vm_init", -0.0680);
+model_parameter_add("/singlea_naf/segments/soma", "RM", 1.000);
+model_parameter_add("/singlea_naf/segments/soma", "RA", 2.50);
+model_parameter_add("/singlea_naf/segments/soma", "CM", 0.0164);
+model_parameter_add("/singlea_naf/segments/soma", "ELEAK", -0.0800);
+
+Neurospaces::Bindings::assign_bindable_IO
+    (
+     "/singlea_naf/segments/soma",
+     [
+      {
+       field => "Vm",
+       type => undef,
+       direction => 'out',
+      },
+     ],
+    );
+
+Neurospaces::Bindings::assign_inputs
+    (
+     "/singlea_naf/segments/soma",
+     [
+     ],
+    );
+
+echo("# passive NDF\n");
+
+ndf_save("/**", "STDOUT");
+
