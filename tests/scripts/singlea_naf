@@ -28,6 +28,9 @@ use Neurospaces::Bindings;
 package GENESIS3::Commands;
 
 
+##########
+# user workflow: create the model
+
 # create cell with a single segment
 
 create("cell", "/singlea_naf");
@@ -334,4 +337,18 @@ model_parameter_add("/singlea_naf/segments/soma/naf/naf_gate_inactivation/backwa
 echo("# a neuron model with a segment with a channel with gates\n");
 
 ndf_save("/**", "/tmp/singlea_naf.ndf");
+
+##########
+# user workflow: create the experiment
+
+##########
+# user workflow: configure the simulation
+
+heccer_set_config('disassem_simple');
+
+solverset('/singlea_naf', 'heccer', '/singlea_naf');
+
+##########
+# user workflow: run the simulation
+
 

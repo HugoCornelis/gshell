@@ -137,6 +137,9 @@ ssp_save('/RSNet', '/tmp/network-simple.ssp');
 # model_parameter_add('rscell1::cell/soma/Ex_channel', 'Erev', '0');
 
 
+##########
+# user workflow: run the simulation
+
 # run the simulation
 
 run('/RSNet', '0.2');
