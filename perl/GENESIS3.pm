@@ -3205,6 +3205,7 @@ our $configuration
 			       other_components => {
 						    python => {
 							       description => 'interface to python scripting',
+							       disabled => "this component is currently unused, it will be interfaced with SSPy which is still under development.",
 							       module => 'GENESIS3::Python',
 							       type => {
 									description => 'scriptable user interface',
@@ -4296,16 +4297,16 @@ sub profile_environment
 	component_load($component_name);
     }
 
-    eval "require GENESIS3::Python";
+#     eval "require GENESIS3::Python";
 
-    if ($@)
-    {
-	$GENESIS3::Configuration::configuration->{software_components}->{other_components}->{python}->{status} = $@;
-    }
-    else
-    {
-	$GENESIS3::Configuration::configuration->{software_components}->{other_components}->{python}->{status} = 'loaded';
-    }
+#     if ($@)
+#     {
+# 	$GENESIS3::Configuration::configuration->{software_components}->{other_components}->{python}->{status} = $@;
+#     }
+#     else
+#     {
+# 	$GENESIS3::Configuration::configuration->{software_components}->{other_components}->{python}->{status} = 'loaded';
+#     }
 
     return 1;
 }
