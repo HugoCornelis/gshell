@@ -81,6 +81,7 @@ ndf_save("/**", "STDOUT");
 
 create("channel", "/singlea_naf/segments/soma/naf");
 
+model_parameter_add("/singlea_naf/segments/soma/naf", "CHANNEL_TYPE", "ChannelActInact");
 model_parameter_add("/singlea_naf/segments/soma/naf", "G_MAX", 75000.0);
 model_parameter_add("/singlea_naf/segments/soma/naf", "Erev", 0.045);
 
@@ -338,6 +339,8 @@ echo("# a neuron model with a segment with a channel with gates\n");
 
 ndf_save("/**", "/tmp/singlea_naf.ndf");
 
+explore();
+
 ##########
 # user workflow: create the experiment
 
@@ -351,4 +354,9 @@ solverset('/singlea_naf', 'heccer', '/singlea_naf');
 ##########
 # user workflow: run the simulation
 
+# run the simulation
+
+run('/singlea_naf', '0.2e-4');
+
+# explore();
 

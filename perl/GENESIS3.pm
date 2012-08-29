@@ -731,13 +731,13 @@ synopsis: 'help documentation <document_name>'
 		
 		my $command = "";
 
-		if( $os eq "darwin")
+		if ($os eq "darwin")
 		{
-		  $command = "/Applications/Firefox.app/Contents/MacOS/firefox \"$filename\" &";
+		    $command = "/Applications/Firefox.app/Contents/MacOS/firefox \"$filename\" &";
 		}
 		else
 		{
-		  $command = "firefox \"$filename\" &";
+		    $command = "firefox -new-window \"$filename\" &";
 	        }
 
 		my $error = `$command`;
@@ -2663,7 +2663,7 @@ sub solverset
 
 	    my $schedule
 		= {
-		   name => "GENESIS3 SSP schedule initialized for $modelname",
+		   name => "GENESIS-3 SSP schedule initialized for $modelname",
 		  };
 
 	    if ($GENESIS3::verbose_level eq 'debug')
