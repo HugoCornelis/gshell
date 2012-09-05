@@ -104,6 +104,7 @@ Core components:
 Other components:
   python:
     description: interface to python scripting
+    disabled: 'this component is currently unused, it will be interfaced with SSPy which is still under development.'
     module: GENESIS3::Python
 ",
 						   write => 'help components',
