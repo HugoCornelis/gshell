@@ -39,7 +39,7 @@ my $cond_vel = 0.5; # m/sec
 my $prop_delay = $SEP_X / $cond_vel; # = 2 msec
 
 # load the neuron prototype
-ndf_load_library('rscell', 'cells/RScell-nolib2.ndf');
+ndf_load_namespace('rscell', 'cells/RScell-nolib2.ndf');
 
 # modify it to our taste
 # with a soma area of 3.463609149e-08, this gives gmax = 1.5e-9

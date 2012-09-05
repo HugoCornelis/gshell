@@ -74,7 +74,7 @@ my $test
 						  },
 						  {
 						   description => "Can we load a simple cell model?",
-						   write => 'ndf_load_library rscell1 cells/RScell-nolib.ndf',
+						   write => 'ndf_load_namespace rscell1 cells/RScell-nolib.ndf',
 						  },
 						  {
 						   description => "Was the namespace created (1)?",
@@ -813,7 +813,7 @@ END PUBLIC_MODELS
 						  },
 						  {
 						   description => "Can we load a simple cell model?",
-						   write => 'ndf_load_library rscell2 cells/RScell-nolib.ndf',
+						   write => 'ndf_load_namespace rscell2 cells/RScell-nolib.ndf',
 						  },
 						  {
 						   description => "Was the namespace created (2)?",

@@ -19,7 +19,7 @@ my $test
 						  },
 						  {
 						   description => "Can we load the model neuron?",
-						   write => 'ndf_load_library rscell cells/RScell-nolib2.ndf',
+						   write => 'ndf_load_namespace rscell cells/RScell-nolib2.ndf',
 						  },
 						  {
 						   description => "Can we create the first neuron out of two?",

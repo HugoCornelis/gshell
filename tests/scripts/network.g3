@@ -1,7 +1,7 @@
-ndf_load_library Fibers fibers/mossyfiber.ndf
-ndf_load_library Golgi legacy/populations/golgi.ndf
-ndf_load_library Granule legacy/populations/granule.ndf
-ndf_load_library Purkinje legacy/populations/purkinje.ndf
+ndf_load_namespace Fibers fibers/mossyfiber.ndf
+ndf_load_namespace Golgi legacy/populations/golgi.ndf
+ndf_load_namespace Granule legacy/populations/granule.ndf
+ndf_load_namespace Purkinje legacy/populations/purkinje.ndf
 create network /CerebellarCortex
 insert_alias ::Fibers::/MossyFiberArray /CerebellarCortex/MossyFibers
 model_parameter_add /CerebellarCortex/MossyFibers X -0.00012

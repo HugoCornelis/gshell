@@ -40,7 +40,7 @@ my $cond_vel = 0.5; # m/sec
 
 my $prop_delay = $SEP_X / $cond_vel;
 
-ndf_load_library('rscell', 'cells/RScell-nolib2.ndf');
+ndf_load_namespace('rscell', 'cells/RScell-nolib2.ndf');
 create('network', '/RSNet');
 createmap('::rscell::/cell', '/RSNet/population', $NX, $NY, $SEP_X, $SEP_Y);
 volumeconnect('/RSNet', '/RSNet/projection', '../population', '../population', '/RSNet/population', '/RSNet/population', 'spike', 'Ex_channel', 'box', '-1e10', '-1e10', '-1e10', '1e10', '1e10', '1e10', 'ellipse', 0, 0, 0, $SEP_X * 1.2, $SEP_Y * 1.2, $SEP_Z * 0.5, 'weight', $syn_weight, 'delay', 'fixed', $prop_delay, 'velocity', '0.5', 'destination_hole', 'box', - $SEP_X * 0.5, - $SEP_Y * 0.5, - $SEP_Z * 0.5, $SEP_X * 0.5, $SEP_Y * 0.5, $SEP_Z * 0.5, '1.0', '1212.0');
