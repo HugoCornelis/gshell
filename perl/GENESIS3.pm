@@ -4147,6 +4147,22 @@ sub create_all_tokens
 		      return "*** Ok: creating $physical_name of type $lc_token_name";
 		  }
 	      };
+
+# 	print "Checking for the creation of a constructor alias for $subname\n";
+
+	my $duplicates
+	    = {
+	       create_connection_symbol => 'create_single_connection',
+	       create_connection_symbol_group => 'create_single_connection_group',
+	      };
+
+	if ($duplicates->{$subname})
+	{
+# 	    print "Create a constructor alias $duplicates->{$subname} for $subname\n";
+
+	    ((\%{"::"})->{"GENESIS3::"}->{"Tokens::"}->{"Physical::"}->{$duplicates->{$subname}})
+		= ((\%{"::"})->{"GENESIS3::"}->{"Tokens::"}->{"Physical::"}->{$subname});
+	}
     }
 }
 

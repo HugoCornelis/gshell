@@ -7,7 +7,8 @@ insert_alias ::rscell::/cell /two_cells/2
 create projection /two_cells/projection
 model_parameter_add /two_cells/projection SOURCE /two_cells
 model_parameter_add /two_cells/projection TARGET /two_cells
-create connection_symbol /two_cells/projection/1
+# create connection_symbol /two_cells/projection/1
+create single_connection /two_cells/projection/1
 model_parameter_add /two_cells/projection/1 PRE 1/soma/spike
 model_parameter_add /two_cells/projection/1 POST 2/soma/Ex_channel/synapse
 model_parameter_add /two_cells/projection/1 WEIGHT 2.0
