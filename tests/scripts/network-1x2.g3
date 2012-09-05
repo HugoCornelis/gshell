@@ -8,12 +8,12 @@ insert_alias ::rscell::/cell /n_cells/t2
 create projection /n_cells/projection
 model_parameter_add /n_cells/projection SOURCE /n_cells
 model_parameter_add /n_cells/projection TARGET /n_cells
-create connection_symbol /n_cells/projection/1
+create single_connection /n_cells/projection/1
 model_parameter_add /n_cells/projection/1 PRE s1/soma/spike
 model_parameter_add /n_cells/projection/1 POST t1/soma/Ex_channel/synapse
 model_parameter_add /n_cells/projection/1 WEIGHT 2.0
 model_parameter_add /n_cells/projection/1 DELAY 0.03
-create connection_symbol /n_cells/projection/2
+create single_connection /n_cells/projection/2
 model_parameter_add /n_cells/projection/2 PRE s1/soma/spike
 model_parameter_add /n_cells/projection/2 POST t2/soma/Ex_channel/synapse
 model_parameter_add /n_cells/projection/2 WEIGHT 1.0

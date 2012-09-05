@@ -96,11 +96,11 @@ sub createconnection
 
     my $connection_parameters = shift;
 
-    # connection_symbol is a token known to the model-container, create it
+    # single_connection and connection_symbol are tokens known to the model-container, create it
 
-    create('connection_symbol', $connection_name);
+    create('single_connection', $connection_name);
 
-    # set well known parameters of a connection_symbol
+    # set well known parameters of a single_connection / connection_symbol
 
     model_parameter_add($connection_name, 'PRE', $connection_parameters->{pre});
     model_parameter_add($connection_name, 'POST', $connection_parameters->{post});

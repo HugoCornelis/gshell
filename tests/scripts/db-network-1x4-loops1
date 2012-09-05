@@ -93,7 +93,7 @@ ce('/n_cells/projection');
 
 foreach my $connection (@connections)
 {
-    create('connection_symbol', '/n_cells/projection/' . $connection);
+    create('single_connection', '/n_cells/projection/' . $connection);
 
     model_parameter_add($connection, 'PRE', 's1/soma/spike');
     model_parameter_add($connection, 'POST', 't' . $connection . '/soma/Ex_channel/synapse');

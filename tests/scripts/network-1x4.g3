@@ -10,22 +10,22 @@ insert_alias ::rscell::/cell /n_cells/t4
 create projection /n_cells/projection
 model_parameter_add /n_cells/projection SOURCE /n_cells
 model_parameter_add /n_cells/projection TARGET /n_cells
-create connection_symbol /n_cells/projection/1
+create single_connection /n_cells/projection/1
 model_parameter_add /n_cells/projection/1 PRE s1/soma/spike
 model_parameter_add /n_cells/projection/1 POST t1/soma/Ex_channel/synapse
 model_parameter_add /n_cells/projection/1 WEIGHT 2.0
 model_parameter_add /n_cells/projection/1 DELAY 0.03
-create connection_symbol /n_cells/projection/2
+create single_connection /n_cells/projection/2
 model_parameter_add /n_cells/projection/2 PRE s1/soma/spike
 model_parameter_add /n_cells/projection/2 POST t2/soma/Ex_channel/synapse
 model_parameter_add /n_cells/projection/2 WEIGHT 1.0
 model_parameter_add /n_cells/projection/2 DELAY 0.02
-create connection_symbol /n_cells/projection/3
+create single_connection /n_cells/projection/3
 model_parameter_add /n_cells/projection/3 PRE s1/soma/spike
 model_parameter_add /n_cells/projection/3 POST t3/soma/Ex_channel/synapse
 model_parameter_add /n_cells/projection/3 WEIGHT 0.1
 model_parameter_add /n_cells/projection/3 DELAY 2
-create connection_symbol /n_cells/projection/4
+create single_connection /n_cells/projection/4
 model_parameter_add /n_cells/projection/4 PRE s1/soma/spike
 model_parameter_add /n_cells/projection/4 POST t4/soma/Ex_channel/synapse
 model_parameter_add /n_cells/projection/4 WEIGHT 10.0
