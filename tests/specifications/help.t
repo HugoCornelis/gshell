@@ -300,6 +300,7 @@ Other components:
   - HH_GATE
   - IZHIKEVICH
   - KINETICS
+  - MEMBRANE_LEAK
   - NETWORK
   - NEURON
   - POOL
@@ -310,6 +311,7 @@ Other components:
   - REACTION
   - SEGMENT
   - SEGMENT_GROUP
+  - SPECIES
 ",
 						   write => 'list physical',
 						  },
@@ -387,9 +389,23 @@ volumeconnect       warning             where               writefile
 						  {
 						   description => "Can we get a list of available GENESIS 2 objects?",
 						   write => 'sli_listobjects',
-						   read => 'AVAILABLE OBJECTS:
-asc_file            hsolve              neurospaces         neutral             
-nsintegrator',
+						   read => 'known G-2 objects and their associated G-3 implementation:
+  Ca_concen: NSINTEGRATOR_POOL (40)
+  asc_file: NSINTEGRATOR_ASCFILE (70)
+  channelC2: NSINTEGRATOR_SYNCHAN (60)
+  channelC3: NSINTEGRATOR_SYNCHAN (60)
+  compartment: NSINTEGRATOR_COMPARTMENT (10)
+  hsolve: NSINTEGRATOR_NEUTRAL (20)
+  nernst: NSINTEGRATOR_NERNST (50)
+  projection: NSINTEGRATOR_NEUTRAL (20)
+  spikegen: NSINTEGRATOR_SPIKEGEN (90)
+  symcompartment: NSINTEGRATOR_COMPARTMENT (10)
+  synchan: NSINTEGRATOR_SYNCHAN (60)
+  tabchannel: NSINTEGRATOR_TABCHANNEL (30)
+  leakage: NSINTEGRATOR_LEAKAGE (110)
+  -1: NSINTEGRATOR_NEUTRAL (20)
+  -1: NSINTEGRATOR_PULSEGEN (100)
+',
 						  },
 						 ],
 				description => "backward compatibility list commands",
