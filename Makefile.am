@@ -22,7 +22,8 @@ dist_bin_SCRIPTS = \
 	bin/genesis-g3 \
 	bin/plotVm.py \
 	bin/rasterplot.py \
-	bin/rowrateplot.py
+	bin/rowrateplot.py \
+	bin/netview.py
 
 gshelltestdir=$(prefix)/gshell
 nobase_dist_gshelltest_DATA=@TEST_SPECIFICATION_FILES@
