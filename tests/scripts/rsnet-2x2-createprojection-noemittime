@@ -38,7 +38,7 @@ my $cond_vel = 0.5; # m/sec
 
 my $prop_delay = $SEP_X / $cond_vel;
 
-ndf_load_namespace('rscell', 'cells/RScell-nolib2.ndf');
+ndf_namespace_load('rscell', 'cells/RScell-nolib2.ndf');
 create('network', '/RSNet');
 createmap('::rscell::/cell', '/RSNet/population', $NX, $NY, $SEP_X, $SEP_Y);
 

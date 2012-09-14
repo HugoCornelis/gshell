@@ -19,19 +19,19 @@ my $test
 						  },
 						  {
 						   description => "Can we load the mossy fiber population?",
-						   write => 'ndf_load_namespace Fibers fibers/mossyfiber.ndf',
+						   write => 'ndf_namespace_load Fibers fibers/mossyfiber.ndf',
 						  },
 						  {
 						   description => "Can we load the Golgi cell population?",
-						   write => 'ndf_load_namespace Golgi legacy/populations/golgi.ndf',
+						   write => 'ndf_namespace_load Golgi legacy/populations/golgi.ndf',
 						  },
 						  {
 						   description => "Can we load the granule cell population?",
-						   write => 'ndf_load_namespace Granule legacy/populations/granule.ndf',
+						   write => 'ndf_namespace_load Granule legacy/populations/granule.ndf',
 						  },
 						  {
 						   description => "Can we load the Purkinje cell population?",
-						   write => 'ndf_load_namespace Purkinje legacy/populations/purkinje.ndf',
+						   write => 'ndf_namespace_load Purkinje legacy/populations/purkinje.ndf',
 						  },
 						  {
 						   description => "Were the namespaces created (1)?",

@@ -48,7 +48,7 @@ my @connections = ( 1 .. 4 );
 
 # load the neuron prototype
 
-ndf_load_namespace("rscell", "cells/RScell-nolib2.ndf");
+ndf_namespace_load("rscell", "cells/RScell-nolib2.ndf");
 
 
 # modify it to our taste
