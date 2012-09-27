@@ -1607,6 +1607,11 @@ sub output_add
 
     my $field = shift;
 
+    if (!defined $field)
+    {
+	return "*** Error: <field> is required";
+    }
+
     push
 	@$GENESIS3::outputs,
 	{
