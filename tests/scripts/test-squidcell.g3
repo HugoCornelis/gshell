@@ -1,0 +1,6 @@
+ndf_load cells/squidcell.ndf
+runtime_parameter_add /cell/soma INJECT 100e-9
+output_add /cell/soma/Na_hh_tchan/HH_activation state_m
+output_add /cell/soma/Na_hh_tchan/HH_inactivation state_h
+output_add /cell/soma/K_hh_tchan/HH_activation state_n
+run /cell 0.05

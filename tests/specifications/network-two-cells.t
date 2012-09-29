@@ -62,8 +62,103 @@ my $test
 # 				numerical_compare => 'arithmetic rounding differences between different architectures',
 				side_effects => "creates a model in the model container",
 			       },
+			       {
+				arguments => [
+					      "$::config->{core_directory}/tests/scripts/two-baskcells.g3",
+					     ],
+				command => 'bin/genesis-g3',
+				command_tests => [
+						  {
+						   description => "Can we run a G-3 batch file that instantiates two model neurons and connects them with a single connection?",
+						   read => {
+							    application_output_file => "/tmp/output",
+							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/two-baskcells.txt",
+							   },
+						   wait => 3,
+						  },
+						 ],
+				description => "running a G-3 batch file that instantiates two model neurons and connects them with a single connection",
+# 				numerical_compare => 'arithmetic rounding differences between different architectures',
+				side_effects => "creates a model in the model container",
+			       },
+			       {
+				arguments => [
+					      "$::config->{core_directory}/tests/scripts/two-BDK5cells.g3",
+					     ],
+				command => 'bin/genesis-g3',
+				command_tests => [
+						  {
+						   description => "Can we run a G-3 batch file that instantiates two model neurons and connects them with a single connection?",
+						   read => {
+							    application_output_file => "/tmp/output",
+							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/two-BDK5cells.txt",
+							   },
+						   wait => 3,
+						  },
+						 ],
+				description => "running a G-3 batch file that instantiates two model neurons and connects them with a single connection",
+# 				numerical_compare => 'arithmetic rounding differences between different architectures',
+				side_effects => "creates a model in the model container",
+			       },
+			       {
+				arguments => [
+					      "$::config->{core_directory}/tests/scripts/two-pyrcells.g3",
+					     ],
+				command => 'bin/genesis-g3',
+				command_tests => [
+						  {
+						   description => "Can we run a G-3 batch file that instantiates two model neurons and connects them with a single connection?",
+						   read => {
+							    application_output_file => "/tmp/output",
+							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/two-pyrcells.txt",
+							   },
+						   wait => 3,
+						  },
+						 ],
+				description => "running a G-3 batch file that instantiates two model neurons and connects them with a single connection",
+# 				numerical_compare => 'arithmetic rounding differences between different architectures',
+				side_effects => "creates a model in the model container",
+			       },
+			       {
+				arguments => [
+					      "$::config->{core_directory}/tests/scripts/two-simplecells.g3",
+					     ],
+				command => 'bin/genesis-g3',
+				command_tests => [
+						  {
+						   description => "Can we run a G-3 batch file that instantiates two model neurons and connects them with a single connection?",
+						   read => {
+							    application_output_file => "/tmp/output",
+							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/two-simplecells.txt",
+							   },
+						   wait => 3,
+						  },
+						 ],
+				description => "running a G-3 batch file that instantiates two model neurons and connects them with a single connection",
+# 				numerical_compare => 'arithmetic rounding differences between different architectures',
+				side_effects => "creates a model in the model container",
+			       },
+			       {
+				arguments => [
+					      "$::config->{core_directory}/tests/scripts/two-VAcells.g3",
+					     ],
+				command => 'bin/genesis-g3',
+				command_tests => [
+						  {
+						   description => "Can we run a G-3 batch file that instantiates two model neurons and connects them with a single connection?",
+						   read => {
+							    application_output_file => "/tmp/output",
+							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/two-VAcells.txt",
+							   },
+						   wait => 3,
+						  },
+						 ],
+				description => "running a G-3 batch file that instantiates two model neurons and connects them with a single connection",
+# 				numerical_compare => 'arithmetic rounding differences between different architectures',
+				side_effects => "creates a model in the model container",
+			       },
 			      ],
-       description => "A network consisting of two model neurons.",
+       description => "Various networks consisting of two model neurons of different types.",
        name => 'network-two-cells.t',
       };
 
