@@ -16,7 +16,6 @@ my $test
 						   description => "Is startup successful ?",
 						   read => "GENESIS 3 shell",
 						   timeout => 5,
-						   write => undef,
 						  },
 						  {
 						   description => "Can we find the library ?",
@@ -55,12 +54,19 @@ ndf_library:
 ndf_library:
   cells:
     - BDK5cell2-nolib.ndf
+    - BDK5cell2.ndf
     - RScell-nolib.ndf
     - RScell-nolib2.ndf
+    - RScell.ndf
+    - VA_HHcell.ndf
+    - baskcell.ndf
     - cell1.ndf
+    - deep_pyrcell.ndf
     - izhikevich.ndf
     - purkinje/
     - simplecell-nolib.ndf
+    - simplecell.ndf
+    - squidcell.ndf
     - stand_alone.ndf
     - traub91-nolib.ndf
     - traub94-nolib.ndf
@@ -330,7 +336,6 @@ ndf_library:
 						   description => "Is startup successful ?",
 						   read => "GENESIS 3 shell",
 						   timeout => 5,
-						   write => undef,
 						  },
 						  {
 						   description => "Can we load the version of the purkinje cell with the partitioned dendritic tree ?",

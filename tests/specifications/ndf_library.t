@@ -153,12 +153,19 @@ ndf_library:
 ndf_library:
   cells:
     - BDK5cell2-nolib.ndf
+    - BDK5cell2.ndf
     - RScell-nolib.ndf
     - RScell-nolib2.ndf
+    - RScell.ndf
+    - VA_HHcell.ndf
+    - baskcell.ndf
     - cell1.ndf
+    - deep_pyrcell.ndf
     - izhikevich.ndf
     - purkinje/
     - simplecell-nolib.ndf
+    - simplecell.ndf
+    - squidcell.ndf
     - stand_alone.ndf
     - traub91-nolib.ndf
     - traub94-nolib.ndf
