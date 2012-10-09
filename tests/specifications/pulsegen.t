@@ -48,7 +48,7 @@ my $test
 						  },
 						  {
 						   description => "Can we create a pulsegen object ?",
-						   write => "inputclass_add pulsegen my_pulsegen_freerun name my_pulsegen_freerun baselevel 0.0 level1 1e-9 width1 3.0 delay1 0.001 level2 -20.0 width2 5 delay2 8.0 triggermode 0",
+						   write => "inputclass_add pulsegen my_pulsegen_freerun name my_pulsegen_freerun baselevel 0.0 level1 1e-10 width1 0.001 delay1 0.001 level2 1e-9 width2 0.005 delay2 0.002 triggermode 0",
 						  },
 						  {
 						   description => "Can we find the pulsegen input class we just created ?",
@@ -58,13 +58,13 @@ my $test
     options:
       baselevel: 0.0
       delay1: 0.001
-      delay2: 8.0
-      level1: 1e-9
-      level2: -20.0
+      delay2: 0.002
+      level1: 1e-10
+      level2: 1e-9
       name: my_pulsegen_freerun
       triggermode: 0
-      width1: 3.0
-      width2: 5
+      width1: 0.001
+      width2: 0.005
     package: Experiment::PulseGen
 ",
 						   write => "list inputclasses",
@@ -87,12 +87,16 @@ my $test
 						   write => "output_add /Purkinje/segments/soma Vm",
 						  },
 						  {
+						   description => 'Can we add an output for /Purkinje/segments/soma->INJECT ?',
+						   write => "output_add /Purkinje/segments/soma INJECT",
+						  },
+						  {
 						   description => "Can we check the simulation ?",
 						   write => "check /Purkinje",
 						  },
 						  {
 						   description => "Has correct output been produced?",
-						   write => "run /Purkinje 0.01",
+						   write => "run /Purkinje 0.1",
 						  },
 						  {
 						   description => "Can we verify the output ?",
@@ -100,7 +104,7 @@ my $test
 							    application_output_file => "/tmp/output",
 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/pulsegen-freerun.txt",
 							   },
-						   wait => 10,
+						   wait => 20,
 						  },
 						 ],
 				description => "simple application of a pulsegen protocol",
