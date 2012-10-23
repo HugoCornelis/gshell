@@ -18,6 +18,8 @@ output_add /two_cells/1/soma Vm
 output_add /two_cells/2/soma Vm
 output_add /two_cells/2/dend/Ex_channel Gsyn
 output_add /two_cells/2/dend/Ex_channel Isyn
+output_add /two_cells/2/dend/Ex_channel conductance
+output_add /two_cells/2/dend/Ex_channel current
 heccer_set_config disassem_simple
 # des_set_config disassem_simple
 set_verbose debug
