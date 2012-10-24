@@ -138,6 +138,7 @@ synopsis: (you gave )
   - list
   - list_elements
   - list_namespaces
+  - manager_gui
   - model_parameter_add
   - model_parameter_show
   - model_state_load

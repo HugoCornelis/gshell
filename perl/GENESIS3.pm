@@ -1273,7 +1273,29 @@ sub list_namespaces_help
 
     print "synopsis: list_namespaces [ <namespace_name> ]\n";
 
-    return "*** Ok";
+    return "*** Ok: list_namespaces_help";
+}
+
+
+sub manager_gui
+{
+    require Neurospaces::Developer;
+
+    my $packages_tags = Neurospaces::Developer::package_tags();
+
+    Neurospaces::Developer::Manager::GUI::create($packages_tags);
+
+    return "*** Ok: manager_gui";
+}
+
+
+sub manager_gui_help
+{
+    print "description: show the manager_gui window (currently blocks further command execution).\n";
+
+    print "synopsis: manager_gui\n";
+
+    return "*** Ok: manager_gui_help";
 }
 
 
@@ -1359,7 +1381,7 @@ sub model_parameter_add_help
 
     print "synopsis: model_parameter_add <element_name> <parameter_name> <value> [ <value_type> ]\n";
 
-    return "*** Ok";
+    return "*** Ok: model_parameter_add_help";
 }
 
 
