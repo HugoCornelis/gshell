@@ -22,6 +22,7 @@ my $test
 						  },
 						  {
 						   description => "Can we get access to the fast sodium activation tables ?",
+						   disabled => "Working on it.",
 # 						   numerical_compare => "arithmetic rounding differences on the tester",
 						   read => "
 tau:

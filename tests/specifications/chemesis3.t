@@ -102,6 +102,8 @@ my $test
 				command_tests => [
 						  {
 						   description => "Is a chemesis3 model solved correctly, cal2, twice three pools one reaction ?",
+						   disabled => "the expected_output_file does not exist in the SSP package, needs a careful check and correction",
+
 						   numerical_compare => "arithmetic rounding differences expected",
 						   read => {
 							    application_output_file => "/tmp/output",
@@ -159,6 +161,7 @@ my $test
 						  },
 						  {
 						   description => "Can we run the simulation?",
+						   disabled => "this test seems to compare an empty output file with a missing expected file, meaning that the test erroneous succeeds",
 						   numerical_compare => "arithmetic rounding differences expected",
 						   read => {
 							    application_output_file => "/tmp/output",
