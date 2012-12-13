@@ -562,22 +562,53 @@ PRIVATE_MODELS
   END CHILD
   CHILD "soma_62_71" "soma_inserted_71"
   END CHILD
-  GROUP "cell_24_24_70_70"
-    CHILD "soma_inserted_71" "soma"
-    END CHILD
-  END GROUP
-  CHILD "cell_24_24_70_70" "cell_70_73"
-  END CHILD
-  CHILD "cell_70_73" "cell_70_75"
-  END CHILD
-  CHILD "cell_70_75" "0_70_78"
+  SEGMENT "compartment_4_4_62_62"
     PARAMETERS
-      PARAMETER ( Z = 0 ),
-      PARAMETER ( Y = 0 ),
-      PARAMETER ( X = 0 ),
+      PARAMETER ( RA = 0.3 ),
+      PARAMETER ( RM = 0.33333 ),
+      PARAMETER ( CM = 0.00999999 ),
+      PARAMETER ( INJECT = 0 ),
+      PARAMETER ( LENGTH = 0.0001 ),
+      PARAMETER ( DIA = 2e-06 ),
+      PARAMETER ( ELEAK = -0.07 ),
     END PARAMETERS
+  END SEGMENT
+  CHILD "compartment_4_4_62_62" "soma_4_25_62_68"
+    BINDINGS
+      INPUT Na_pyr_dp->Vm,
+      INPUT Kdr_pyr_dp->Vm,
+      INPUT KM_pyr_dp->Vm,
+      INPUT Ex_channel->Vm,
+    END BINDINGS
+    PARAMETERS
+      PARAMETER ( ELEAK = -0.08 ),
+      PARAMETER ( Vm_init = -0.07 ),
+      PARAMETER ( RM = 2.2 ),
+      PARAMETER ( CM = 0.01 ),
+      PARAMETER ( SURFACE = 3.46361e-08 ),
+      PARAMETER ( rel_Z = 0.000105 ),
+      PARAMETER ( rel_Y = 0 ),
+      PARAMETER ( rel_X = 0 ),
+      PARAMETER ( LENGTH = 0.000105 ),
+      PARAMETER ( DIA = 0.000105 ),
+      PARAMETER ( RA = 2.5 ),
+    END PARAMETERS
+    CHILD "Na_pyr_dp_inserted_63" "Na_pyr_dp"
+    END CHILD
+    CHILD "Kdr_pyr_dp_inserted_64" "Kdr_pyr_dp"
+    END CHILD
+    CHILD "KM_pyr_dp_inserted_65" "KM_pyr_dp"
+    END CHILD
+    CHILD "Ex_channel_inserted_66" "Ex_channel"
+    END CHILD
+    CHILD "spike_inserted_67" "spike"
+    END CHILD
   END CHILD
-  CHILD "0_70_78" "0_inserted_78"
+  CHILD "soma_4_25_62_68" "soma_inserted_25_62_69"
+  END CHILD
+  CHILD "soma_inserted_25_62_69" "soma_62_71"
+  END CHILD
+  CHILD "soma_62_71" "soma_inserted_71"
   END CHILD
   SEGMENT "compartment_4_4_62_62"
     PARAMETERS
@@ -627,23 +658,6 @@ PRIVATE_MODELS
   END CHILD
   CHILD "soma_62_71" "soma_inserted_71"
   END CHILD
-  GROUP "cell_24_24_70_70"
-    CHILD "soma_inserted_71" "soma"
-    END CHILD
-  END GROUP
-  CHILD "cell_24_24_70_70" "cell_70_73"
-  END CHILD
-  CHILD "cell_70_73" "cell_70_75"
-  END CHILD
-  CHILD "cell_70_75" "1_70_79"
-    PARAMETERS
-      PARAMETER ( Z = 0 ),
-      PARAMETER ( Y = 0 ),
-      PARAMETER ( X = 0.002 ),
-    END PARAMETERS
-  END CHILD
-  CHILD "1_70_79" "1_inserted_79"
-  END CHILD
   SEGMENT "compartment_4_4_62_62"
     PARAMETERS
       PARAMETER ( RA = 0.3 ),
@@ -691,88 +705,6 @@ PRIVATE_MODELS
   CHILD "soma_inserted_25_62_69" "soma_62_71"
   END CHILD
   CHILD "soma_62_71" "soma_inserted_71"
-  END CHILD
-  GROUP "cell_24_24_70_70"
-    CHILD "soma_inserted_71" "soma"
-    END CHILD
-  END GROUP
-  CHILD "cell_24_24_70_70" "cell_70_73"
-  END CHILD
-  CHILD "cell_70_73" "cell_70_75"
-  END CHILD
-  CHILD "cell_70_75" "2_70_80"
-    PARAMETERS
-      PARAMETER ( Z = 0 ),
-      PARAMETER ( Y = 0.002 ),
-      PARAMETER ( X = 0 ),
-    END PARAMETERS
-  END CHILD
-  CHILD "2_70_80" "2_inserted_80"
-  END CHILD
-  SEGMENT "compartment_4_4_62_62"
-    PARAMETERS
-      PARAMETER ( RA = 0.3 ),
-      PARAMETER ( RM = 0.33333 ),
-      PARAMETER ( CM = 0.00999999 ),
-      PARAMETER ( INJECT = 0 ),
-      PARAMETER ( LENGTH = 0.0001 ),
-      PARAMETER ( DIA = 2e-06 ),
-      PARAMETER ( ELEAK = -0.07 ),
-    END PARAMETERS
-  END SEGMENT
-  CHILD "compartment_4_4_62_62" "soma_4_25_62_68"
-    BINDINGS
-      INPUT Na_pyr_dp->Vm,
-      INPUT Kdr_pyr_dp->Vm,
-      INPUT KM_pyr_dp->Vm,
-      INPUT Ex_channel->Vm,
-    END BINDINGS
-    PARAMETERS
-      PARAMETER ( ELEAK = -0.08 ),
-      PARAMETER ( Vm_init = -0.07 ),
-      PARAMETER ( RM = 2.2 ),
-      PARAMETER ( CM = 0.01 ),
-      PARAMETER ( SURFACE = 3.46361e-08 ),
-      PARAMETER ( rel_Z = 0.000105 ),
-      PARAMETER ( rel_Y = 0 ),
-      PARAMETER ( rel_X = 0 ),
-      PARAMETER ( LENGTH = 0.000105 ),
-      PARAMETER ( DIA = 0.000105 ),
-      PARAMETER ( RA = 2.5 ),
-    END PARAMETERS
-    CHILD "Na_pyr_dp_inserted_63" "Na_pyr_dp"
-    END CHILD
-    CHILD "Kdr_pyr_dp_inserted_64" "Kdr_pyr_dp"
-    END CHILD
-    CHILD "KM_pyr_dp_inserted_65" "KM_pyr_dp"
-    END CHILD
-    CHILD "Ex_channel_inserted_66" "Ex_channel"
-    END CHILD
-    CHILD "spike_inserted_67" "spike"
-    END CHILD
-  END CHILD
-  CHILD "soma_4_25_62_68" "soma_inserted_25_62_69"
-  END CHILD
-  CHILD "soma_inserted_25_62_69" "soma_62_71"
-  END CHILD
-  CHILD "soma_62_71" "soma_inserted_71"
-  END CHILD
-  GROUP "cell_24_24_70_70"
-    CHILD "soma_inserted_71" "soma"
-    END CHILD
-  END GROUP
-  CHILD "cell_24_24_70_70" "cell_70_73"
-  END CHILD
-  CHILD "cell_70_73" "cell_70_75"
-  END CHILD
-  CHILD "cell_70_75" "3_70_81"
-    PARAMETERS
-      PARAMETER ( Z = 0 ),
-      PARAMETER ( Y = 0.002 ),
-      PARAMETER ( X = 0.002 ),
-    END PARAMETERS
-  END CHILD
-  CHILD "3_70_81" "3_inserted_81"
   END CHILD
   POPULATION "population1_77_77"
     ALGORITHM "Grid3D" "createmap__network_population1"
@@ -786,14 +718,6 @@ PRIVATE_MODELS
         PARAMETER ( PROTOTYPE = "cell" ),
       END PARAMETERS
     END ALGORITHM
-    CHILD "0_inserted_78" "0"
-    END CHILD
-    CHILD "1_inserted_79" "1"
-    END CHILD
-    CHILD "2_inserted_80" "2"
-    END CHILD
-    CHILD "3_inserted_81" "3"
-    END CHILD
   END POPULATION
   CHILD "population1_77_77" "population1_inserted_77"
   END CHILD
@@ -833,25 +757,25 @@ END PUBLIC_MODELS
 						  },
 						  {
 						   description => "Can we create a projection between the first and the second population?",
-						   read => 'created a new projection with name /RSNet/projection12',
-						   write => 'volumeconnect /RSNet /RSNet/projection12 ../population1 ../population2 /RSNet/population1 /RSNet/population2 spikegen mf_AMPA box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -5.0 -5.0 -5.0 5.0 5.0 5.0 weight 45.0 delay radial 0.0 velocity 0.5 1.0 1212.0',
+						   read => 'created a new projection with name /network/projection12',
+						   write => 'volumeconnect /network /network/projection12 ../population1 ../population2 /network/population1 /network/population2 spikegen mf_AMPA box -1e10 -1e10 -1e10 1e10 1e10 1e10 box -5.0 -5.0 -5.0 5.0 5.0 5.0 weight 45.0 delay radial 0.0 velocity 0.5 1.0 1212.0',
 						  },
 						  {
 						   description => "Can we create a current clamp circuitry object?",
 						   write => "inputclass_add perfectclamp current_injection_protocol name current_injection command 1e-9",
 						  },
 						  {
-						   comment => 'There is an efferent connection from /RSNet/population1/3/soma/spike to /RSNet/population2/0/soma/Ex_channel/synapse.',
+						   comment => 'There is an efferent connection from /network/population1/3/soma/spike to /network/population2/0/soma/Ex_channel/synapse.',
 						   description => "Can we connect the current clamp circuitry to the simple cell's soma?",
-						   write => "input_add current_injection_protocol /RSNet/population1/3/soma INJECT",
+						   write => "input_add current_injection_protocol /network/population1/3/soma INJECT",
 						  },
 						  {
 						   description => "Can we add an output to the soma's Vm?",
-						   write => "output_add /RSNet/population1/3/soma Vm",
+						   write => "output_add /network/population1/3/soma Vm",
 						  },
 						  {
 						   description => "Can we add an output to the soma's Vm?",
-						   write => "output_add /RSNet/population2/0/soma Vm",
+						   write => "output_add /network/population2/0/soma Vm",
 						  },
 # 						  {
 # 						   description => "Can we set the output mode to \"steps\"?",
@@ -863,19 +787,19 @@ END PUBLIC_MODELS
 # 						  },
 						  {
 						   description => "Can we assign a solver to the source neuron?",
-						   write => 'solverset /RSNet/population1/3 heccer /RSNet',
+						   write => 'solverset /network/population1/3 heccer /network',
 						  },
 						  {
 						   description => "Can we assign a solver to the target neuron?",
-						   write => 'solverset /RSNet/population2/0 heccer /RSNet',
+						   write => 'solverset /network/population2/0 heccer /network',
 						  },
 						  {
 						   description => "Can assign a solver to the projection?",
-						   write => 'solverset /RSNet/projection12 DES /RSNet',
+						   write => 'solverset /network/projection12 DES /network',
 						  },
 						  {
 						   description => "Can we run the simulation for a limited amount of time?",
-						   write => "run /RSNet 0.2",
+						   write => "run /network 0.2",
 						  },
 						  {
 						   description => "Can we quit the simulator?",
