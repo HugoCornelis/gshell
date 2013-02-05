@@ -242,6 +242,15 @@ synopsis: (you gave )
     type:
       description: intermediary
       layer: 2
+  neuron:
+    description: Neuron compatible scripting interface
+    disabled: \"the Neuron compatible interface is an experimental feature, try loading it with the 'component_load' command\"
+    integrator: Neuron::Integrators::Commands
+    module: Neuron
+    status: \"disabled (the Neuron compatible interface is an experimental feature, try loading it with the 'component_load' command)\"
+    type:
+      description: scriptable user interface
+      layer: 2
   sli:
     description: GENESIS 2 backward compatible scripting interface
     integrator: SLI::Integrators::Commands
@@ -271,6 +280,9 @@ Other components:
     description: interface to python scripting
     disabled: 'this component is currently unused, it will be interfaced with SSPy which is still under development.'
     module: GENESIS3::Python
+    type:
+      description: scriptable user interface
+      layer: 2
 ",
 						   write => 'list components',
 						  },
