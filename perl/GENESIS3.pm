@@ -3201,6 +3201,16 @@ our $configuration
 										  layer => 2,
 										 },
 									},
+						   neuron => {
+							      description => "Neuron compatible scripting interface",
+							      disabled => "the Neuron compatible interface is an experimental feature, try loading it with the 'component_load' command",
+							      integrator => 'Neuron::Integrators::Commands',
+							      module => "Neuron",
+							      type => {
+								       description => 'scriptable user interface',
+								       layer => 2,
+								      },
+							     },
 						   sli => {
 							   description => "GENESIS 2 backward compatible scripting interface",
 							   integrator => 'SLI::Integrators::Commands',
