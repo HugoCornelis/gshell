@@ -4319,7 +4319,7 @@ sub component_load
 
     if ($errors)
     {
-	return "*** Error: failed to load $component_name";
+	return "*** Error: failed to load $component_name ($errors)";
     }
     else
     {
