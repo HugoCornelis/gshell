@@ -16,7 +16,6 @@ my $test
 						   description => "Is startup successful ?",
 						   read => "GENESIS 3 shell",
 						   timeout => 5,
-						   write => undef,
 						  },
 						  {
 						   description => "Can we find information about the different verbosity levels ?",
@@ -31,6 +30,7 @@ my $test
     comment: this is the default
     description: display warning and error state information (a warning state allows an application to continue but you should thoroughly check any output)
 ",
+						   timeout => 5,
 						   write => 'list verbose',
 						  },
 						  {
