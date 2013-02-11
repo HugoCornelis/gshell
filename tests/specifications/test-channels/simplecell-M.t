@@ -78,7 +78,6 @@ my $test
 					      },
 			       },
 			      ],
-       comment => "NOTE: THE OUTPUT IS KNOWN TO BE INCORRECT!!",
        description => "testing of the 'HH_TABLE_START' and 'HH_TABLE_END' options",
        overview => `cat "/usr/local/ns-sli/tests/scripts/test-channels/simplecell-M/README.rst"`,
        name => 'simplecell-M.t',
