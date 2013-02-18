@@ -16,7 +16,7 @@ should perhaps be mapped to specific commands:
 ** ndf_save_channel
 ** ndf_save
 
-* tests_2_html
+* neurospaces_harness_2_html
 does not convert perl scripts to html,
 eg. tests/scripts/model_state_purkinje.
 
