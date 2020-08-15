@@ -15,7 +15,7 @@ my $test
 			       {
 				arguments => [
 					     ],
-				command => "$::config->{core_directory}/tests/scripts/interactive",
+				command => "$::global_config->{core_directory}/tests/scripts/interactive",
 				command_tests => [
 						  {
 						   description => "Is startup of the interactive environment successful ?",
@@ -33,7 +33,7 @@ my $test
 			       {
 				arguments => [
 					     ],
-				command => "$::config->{core_directory}/tests/scripts/interactive.g3",
+				command => "$::global_config->{core_directory}/tests/scripts/interactive.g3",
 				command_tests => [
 						  {
 						   description => "Is startup successful ?",

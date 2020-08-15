@@ -102,7 +102,7 @@ my $test
 						   description => "Can we verify the output ?",
 						   read => {
 							    application_output_file => "/tmp/output",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/pulsegen-freerun.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/pulsegen-freerun.txt",
 							   },
 						   wait => 20,
 						  },

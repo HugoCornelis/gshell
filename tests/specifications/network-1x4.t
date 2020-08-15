@@ -9,7 +9,7 @@ my $test
        command_definitions => [
 			       {
 				arguments => [
-					      "$::config->{core_directory}/tests/scripts/network-1x4.g3",
+					      "$::global_config->{core_directory}/tests/scripts/network-1x4.g3",
 					     ],
 				command => 'bin/genesis-g3',
 				command_tests => [
@@ -17,7 +17,7 @@ my $test
 						   description => "Can we run a G-3 batch file that instantiates a 1x4 network?",
 						   read => {
 							    application_output_file => "/tmp/output",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/network-1x4.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/network-1x4.txt",
 							   },
 						   wait => 3,
 						  },
@@ -29,13 +29,13 @@ my $test
 			       {
 				arguments => [
 					     ],
-				command => "$::config->{core_directory}/tests/scripts/network-1x4",
+				command => "$::global_config->{core_directory}/tests/scripts/network-1x4",
 				command_tests => [
 						  {
 						   description => "Can we run a G-3 perl script that instantiates a 1x4 network?",
 						   read => {
 							    application_output_file => "/tmp/output",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/network-1x4.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/network-1x4.txt",
 							   },
 						   wait => 3,
 						  },
@@ -47,13 +47,13 @@ my $test
 			       {
 				arguments => [
 					     ],
-				command => "$::config->{core_directory}/tests/scripts/network-1x4-loops",
+				command => "$::global_config->{core_directory}/tests/scripts/network-1x4-loops",
 				command_tests => [
 						  {
 						   description => "Can we run a G-3 perl script with loops that instantiates a 1x4 network?",
 						   read => {
 							    application_output_file => "/tmp/output",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/network-1x4-loops.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/network-1x4-loops.txt",
 							   },
 						   wait => 3,
 						  },
@@ -65,13 +65,13 @@ my $test
 			       {
 				arguments => [
 					     ],
-				command => "$::config->{core_directory}/tests/scripts/network-1x4-loops2",
+				command => "$::global_config->{core_directory}/tests/scripts/network-1x4-loops2",
 				command_tests => [
 						  {
 						   description => "Can we run a G-3 perl script with loops that instantiates a 1x4 network, different connection parameters?",
 						   read => {
 							    application_output_file => "/tmp/output",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/network-1x4.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/network-1x4.txt",
 							   },
 						   wait => 3,
 						  },

@@ -120,7 +120,7 @@ Number of segment tips: 1474
 			       },
 			       {
 				arguments => [
-					      "$::config->{core_directory}/tests/scripts/simple_purkinje.g3",
+					      "$::global_config->{core_directory}/tests/scripts/simple_purkinje.g3",
 					     ],
 				command => 'bin/genesis-g3',
 				command_tests => [
@@ -135,7 +135,7 @@ Number of segment tips: 1474
 			       {
 				arguments => [
 					     ],
-				command => "$::config->{core_directory}/tests/scripts/simple_purkinje",
+				command => "$::global_config->{core_directory}/tests/scripts/simple_purkinje",
 				command_tests => [
 						  {
 						   description => "Can we run the purkinje cell with single synaptic stimulation from a perl script ?",

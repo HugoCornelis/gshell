@@ -9,7 +9,7 @@ my $test
        command_definitions => [
 			       {
 				arguments => [
-					      "$::config->{core_directory}/tests/scripts/network-1x2.g3",
+					      "$::global_config->{core_directory}/tests/scripts/network-1x2.g3",
 					     ],
 				command => 'bin/genesis-g3',
 				command_tests => [
@@ -17,7 +17,7 @@ my $test
 						   description => "Can we run a G-3 batch file that instantiates a 1x2 network?",
 						   read => {
 							    application_output_file => "/tmp/output",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/network-1x2.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/network-1x2.txt",
 							   },
 						   wait => 3,
 						  },

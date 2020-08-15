@@ -10,13 +10,13 @@ my $test
 			       {
 				arguments => [
 					     ],
-				command => "$::config->{core_directory}/tests/scripts/db-rsnet-4x4-volumeconnect-refract",
+				command => "$::global_config->{core_directory}/tests/scripts/db-rsnet-4x4-volumeconnect-refract",
 				command_tests => [
 						  {
 						   description => "Is the default refractory period used correctly?",
 						   read => {
 							    application_output_file => "/tmp/output",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/output_refract.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/output_refract.txt",
 							   },
 						   wait => 3,
 						  },
@@ -29,13 +29,13 @@ my $test
 			       {
 				arguments => [
 					     ],
-				command => "$::config->{core_directory}/tests/scripts/db-rsnet-4x4-volumeconnect-refract004",
+				command => "$::global_config->{core_directory}/tests/scripts/db-rsnet-4x4-volumeconnect-refract004",
 				command_tests => [
 						  {
 						   description => "Is a refractory period of 004 used correctly?",
 						   read => {
 							    application_output_file => "/tmp/output",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/output_refract_004.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/output_refract_004.txt",
 							   },
 						   wait => 3,
 						  },
@@ -48,13 +48,13 @@ my $test
 			       {
 				arguments => [
 					     ],
-				command => "$::config->{core_directory}/tests/scripts/db-rsnet-4x4-volumeconnect-refract010",
+				command => "$::global_config->{core_directory}/tests/scripts/db-rsnet-4x4-volumeconnect-refract010",
 				command_tests => [
 						  {
 						   description => "Is refractory period of 010 used correctly?",
 						   read => {
 							    application_output_file => "/tmp/output",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/output_refract_010.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/output_refract_010.txt",
 							   },
 						   wait => 3,
 						  },
@@ -67,13 +67,13 @@ my $test
 			       {
 				arguments => [
 					     ],
-				command => "$::config->{core_directory}/tests/scripts/db-rsnet-4x4-volumeconnect-refract020",
+				command => "$::global_config->{core_directory}/tests/scripts/db-rsnet-4x4-volumeconnect-refract020",
 				command_tests => [
 						  {
 						   description => "Is refractory period of 020 used correctly?",
 						   read => {
 							    application_output_file => "/tmp/output",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/output_refract_020.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/output_refract_020.txt",
 							   },
 						   wait => 3,
 						  },

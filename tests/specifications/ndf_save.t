@@ -893,7 +893,7 @@ VM Membrane Potentials (pdVms[18]) : (-0.06)
 						   read => {
 							    application_output_file => "output/cell.out",
 							    expected_output_file => "/usr/local/ns-sli/tests/specifications/strings/traub91_asym.ssp",
-# 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/simplecell1-1-5e-10nA.txt",
+# 							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/simplecell1-1-5e-10nA.txt",
 							   },
 						   wait => 1,
 						  },
@@ -972,9 +972,9 @@ VM Membrane Potentials (pdVms[18]) : (-0.06)
 						  {
 						   description => 'Does the simulation produce the correct output (2)?',
 						   read => {
-							    application_output_file => "$::config->{core_directory}/output/cell.out",
+							    application_output_file => "$::global_config->{core_directory}/output/cell.out",
 							    expected_output_file => "/usr/local/ns-sli/tests/specifications/strings/traub94_Vm.out.ssp",
-# 							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/simplecell1-1-5e-10nA.txt",
+# 							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/simplecell1-1-5e-10nA.txt",
 							   },
 						   wait => 20,
 						  },
@@ -995,7 +995,7 @@ VM Membrane Potentials (pdVms[18]) : (-0.06)
 					       reparer =>
 					       sub
 					       {
-# 						   `rm "$::config->{core_directory}/output/cell.out"`;
+# 						   `rm "$::global_config->{core_directory}/output/cell.out"`;
 						   `rmdir output`;
 					       },
 					      },
@@ -1057,7 +1057,7 @@ VM Membrane Potentials (pdVms[18]) : (-0.06)
 						  {
 						   description => 'Does the simulation produce the correct output (3)?',
 						   read => {
-							    application_output_file => "$::config->{core_directory}/output/cell.out",
+							    application_output_file => "$::global_config->{core_directory}/output/cell.out",
 							    expected_output_file => "/usr/local/ns-sli/tests/specifications/strings/PurkM9_soma_1.5nA.g3",
 							   },
 						   wait => 40,
@@ -1078,7 +1078,7 @@ VM Membrane Potentials (pdVms[18]) : (-0.06)
 					       reparer =>
 					       sub
 					       {
-# 						   `rm "$::config->{core_directory}/output/cell.out"`;
+# 						   `rm "$::global_config->{core_directory}/output/cell.out"`;
 						   `rmdir output`;
 					       },
 					      },

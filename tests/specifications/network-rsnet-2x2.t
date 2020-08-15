@@ -10,13 +10,13 @@ my $test
 			       {
 				arguments => [
 					     ],
-				command => "$::config->{core_directory}/tests/scripts/rsnet-2x2-volumeconnect",
+				command => "$::global_config->{core_directory}/tests/scripts/rsnet-2x2-volumeconnect",
 				command_tests => [
 						  {
 						   description => "Can we run a 2x2 instance of the rsnet network, uses the volumeconnect command?",
 						   read => {
 							    application_output_file => "/tmp/output",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/rsnet-2x2.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/rsnet-2x2.txt",
 							   },
 						   wait => 3,
 						  },
@@ -28,13 +28,13 @@ my $test
 			       {
 				arguments => [
 					     ],
-				command => "$::config->{core_directory}/tests/scripts/rsnet-2x2-createprojection",
+				command => "$::global_config->{core_directory}/tests/scripts/rsnet-2x2-createprojection",
 				command_tests => [
 						  {
 						   description => "Can we run a 2x2 instance of the rsnet network, uses the createprojection command?",
 						   read => {
 							    application_output_file => "/tmp/output",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/rsnet-2x2.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/rsnet-2x2.txt",
 							   },
 						   wait => 3,
 						  },
@@ -46,13 +46,13 @@ my $test
 			       {
 				arguments => [
 					     ],
-				command => "$::config->{core_directory}/tests/scripts/rsnet-2x2-createprojection-noemittime",
+				command => "$::global_config->{core_directory}/tests/scripts/rsnet-2x2-createprojection-noemittime",
 				command_tests => [
 						  {
 						   description => "Can we run a 2x2 instance of the rsnet network, uses the createprojection command, no time emitted in the output?",
 						   read => {
 							    application_output_file => "/tmp/output",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/rsnet-2x2-noemittime.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/rsnet-2x2-noemittime.txt",
 							   },
 						   wait => 3,
 						  },
@@ -64,13 +64,13 @@ my $test
 			       {
 				arguments => [
 					     ],
-				command => "$::config->{core_directory}/tests/scripts/rsnet-2x2-createprojection-outputtimestep",
+				command => "$::global_config->{core_directory}/tests/scripts/rsnet-2x2-createprojection-outputtimestep",
 				command_tests => [
 						  {
 						   description => "Can we run a 2x2 instance of the rsnet network, uses the createprojection command and sets a specific output time step?",
 						   read => {
 							    application_output_file => "/tmp/output",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/rsnet-2x2-outputtimestep.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/rsnet-2x2-outputtimestep.txt",
 							   },
 						   wait => 3,
 						  },

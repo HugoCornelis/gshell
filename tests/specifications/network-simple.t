@@ -54,7 +54,7 @@ my $test
 						   numerical_compare => "small rounding differences on the tester",
 						   read => {
 							    application_output_file => '/tmp/output',
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/network-simple.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/network-simple.txt",
 							   },
 						   wait => 1,
 						  },
@@ -809,7 +809,7 @@ END PUBLIC_MODELS
 						   description => "Do we see the expected output?",
 						   read => {
 							    application_output_file => '/tmp/output',
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/network-simple.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/network-simple.txt",
 							   },
 						   wait => 2,
 						  },

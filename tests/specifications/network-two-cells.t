@@ -45,7 +45,7 @@ my $test
 			       },
 			       {
 				arguments => [
-					      "$::config->{core_directory}/tests/scripts/two-cells1.g3",
+					      "$::global_config->{core_directory}/tests/scripts/two-cells1.g3",
 					     ],
 				command => 'bin/genesis-g3',
 				command_tests => [
@@ -53,7 +53,7 @@ my $test
 						   description => "Can we run a G-3 batch file that instantiates two model neurons and connects them with a single connection?",
 						   read => {
 							    application_output_file => "/tmp/output",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/two-cells1.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/two-cells1.txt",
 							   },
 						   wait => 3,
 						  },
@@ -64,7 +64,7 @@ my $test
 			       },
 			       {
 				arguments => [
-					      "$::config->{core_directory}/tests/scripts/two-baskcells.g3",
+					      "$::global_config->{core_directory}/tests/scripts/two-baskcells.g3",
 					     ],
 				command => 'bin/genesis-g3',
 				command_tests => [
@@ -72,7 +72,7 @@ my $test
 						   description => "Can we run a G-3 batch file that instantiates two model neurons and connects them with a single connection?",
 						   read => {
 							    application_output_file => "/tmp/output",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/two-baskcells.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/two-baskcells.txt",
 							   },
 						   wait => 3,
 						  },
@@ -83,7 +83,7 @@ my $test
 			       },
 			       {
 				arguments => [
-					      "$::config->{core_directory}/tests/scripts/two-BDK5cells.g3",
+					      "$::global_config->{core_directory}/tests/scripts/two-BDK5cells.g3",
 					     ],
 				command => 'bin/genesis-g3',
 				command_tests => [
@@ -91,7 +91,7 @@ my $test
 						   description => "Can we run a G-3 batch file that instantiates two model neurons and connects them with a single connection?",
 						   read => {
 							    application_output_file => "/tmp/output",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/two-BDK5cells.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/two-BDK5cells.txt",
 							   },
 						   wait => 3,
 						  },
@@ -102,7 +102,7 @@ my $test
 			       },
 			       {
 				arguments => [
-					      "$::config->{core_directory}/tests/scripts/two-pyrcells.g3",
+					      "$::global_config->{core_directory}/tests/scripts/two-pyrcells.g3",
 					     ],
 				command => 'bin/genesis-g3',
 				command_tests => [
@@ -110,7 +110,7 @@ my $test
 						   description => "Can we run a G-3 batch file that instantiates two model neurons and connects them with a single connection?",
 						   read => {
 							    application_output_file => "/tmp/output",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/two-pyrcells.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/two-pyrcells.txt",
 							   },
 						   wait => 3,
 						  },
@@ -121,7 +121,7 @@ my $test
 			       },
 			       {
 				arguments => [
-					      "$::config->{core_directory}/tests/scripts/two-simplecells.g3",
+					      "$::global_config->{core_directory}/tests/scripts/two-simplecells.g3",
 					     ],
 				command => 'bin/genesis-g3',
 				command_tests => [
@@ -129,7 +129,7 @@ my $test
 						   description => "Can we run a G-3 batch file that instantiates two model neurons and connects them with a single connection?",
 						   read => {
 							    application_output_file => "/tmp/output",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/two-simplecells.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/two-simplecells.txt",
 							   },
 						   wait => 3,
 						  },
@@ -140,7 +140,7 @@ my $test
 			       },
 			       {
 				arguments => [
-					      "$::config->{core_directory}/tests/scripts/two-VAcells.g3",
+					      "$::global_config->{core_directory}/tests/scripts/two-VAcells.g3",
 					     ],
 				command => 'bin/genesis-g3',
 				command_tests => [
@@ -148,7 +148,7 @@ my $test
 						   description => "Can we run a G-3 batch file that instantiates two model neurons and connects them with a single connection?",
 						   read => {
 							    application_output_file => "/tmp/output",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/two-VAcells.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/two-VAcells.txt",
 							   },
 						   wait => 3,
 						  },

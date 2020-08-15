@@ -75,7 +75,7 @@ runtime_parameters:
 						   disabled => (`cat /usr/local/include/heccer/config.h` !~ m/define RANDOM.*ran1/ ? 'not using ran1() as heccer random number generator' : 0),
 						   read => {
 							    application_output_file => "/tmp/output",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-endogenous.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-endogenous.txt",
 							   },
 						   todo => "make this test work with the other heccer rng",
 						   wait => 100,
@@ -89,7 +89,7 @@ runtime_parameters:
 			       },
 			       {
 				arguments => [
-					      "$::config->{core_directory}/tests/scripts/simple_purkinje_endogenous.g3",
+					      "$::global_config->{core_directory}/tests/scripts/simple_purkinje_endogenous.g3",
 					     ],
 				command => 'bin/genesis-g3',
 				command_tests => [
@@ -98,7 +98,7 @@ runtime_parameters:
 						   disabled => (`cat /usr/local/include/heccer/config.h` !~ m/define RANDOM.*ran1/ ? 'not using ran1() as heccer random number generator' : 0),
 						   read => {
 							    application_output_file => "/tmp/output",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-endogenous.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-endogenous.txt",
 							   },
 						   todo => "make this test work with the other heccer rng",
 						   wait => 100,
@@ -110,14 +110,14 @@ runtime_parameters:
 			       {
 				arguments => [
 					     ],
-				command => "$::config->{core_directory}/tests/scripts/simple_purkinje_endogenous",
+				command => "$::global_config->{core_directory}/tests/scripts/simple_purkinje_endogenous",
 				command_tests => [
 						  {
 						   description => "Can we run the purkinje cell with endogenous / poissonian activation from a perl script ?",
 						   disabled => (`cat /usr/local/include/heccer/config.h` !~ m/define RANDOM.*ran1/ ? 'not using ran1() as heccer random number generator' : 0),
 						   read => {
 							    application_output_file => "/tmp/output",
-							    expected_output_file => "$::config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-endogenous.txt",
+							    expected_output_file => "$::global_config->{core_directory}/tests/specifications/strings/purkinje/edsjb1994-endogenous.txt",
 							   },
 						   wait => 100,
 						  },

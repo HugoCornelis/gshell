@@ -116,7 +116,7 @@ runtime_parameters:
 			       },
 			       {
 				arguments => [
-					      "$::config->{core_directory}/tests/scripts/simple_purkinje.g3",
+					      "$::global_config->{core_directory}/tests/scripts/simple_purkinje.g3",
 					     ],
 				command => 'bin/genesis-g3',
 				command_tests => [
@@ -131,7 +131,7 @@ runtime_parameters:
 			       {
 				arguments => [
 					     ],
-				command => "$::config->{core_directory}/tests/scripts/simple_purkinje",
+				command => "$::global_config->{core_directory}/tests/scripts/simple_purkinje",
 				command_tests => [
 						  {
 						   description => "Can we run the purkinje cell with current injection from a perl script ?",

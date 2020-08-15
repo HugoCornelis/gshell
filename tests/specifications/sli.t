@@ -220,7 +220,7 @@ my $test
 						    disabled => 'the sli_load command prevents the simulation from being run, so no output has been produced',
 						    numerical_compare => 'small differences between the output of different architectures',
 						    read => {
-							     application_output_file => "$::config->{core_directory}/results/PurkM9_soma_1.5nA",
+							     application_output_file => "$::global_config->{core_directory}/results/PurkM9_soma_1.5nA",
 							     expected_output_file => "/usr/local/ns-sli/tests/specifications/strings/PurkM9_soma_1.5nA.g3-double",
 							    },
 						    wait => 1,
@@ -293,7 +293,7 @@ END PUBLIC_MODELS
 # 					       reparer =>
 # 					       sub
 # 					       {
-#  						   `rm "$::config->{core_directory}/results/PurkM9_soma_1.5nA"`;
+#  						   `rm "$::global_config->{core_directory}/results/PurkM9_soma_1.5nA"`;
 # 						   `rmdir results`;
 # 					       },
 # 					      },

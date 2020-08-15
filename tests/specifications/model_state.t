@@ -13,7 +13,7 @@ my $test
 			       {
 				arguments => [
 					     ],
-				command => "$::config->{core_directory}/tests/scripts/model_state_singlep",
+				command => "$::global_config->{core_directory}/tests/scripts/model_state_singlep",
 				command_tests => [
 						  {
 						   description => "Can we reinitialize using the serialized state of a single passive compartment, saved state ?",
@@ -43,7 +43,7 @@ my $test
 			       {
 				arguments => [
 					     ],
-				command => "$::config->{core_directory}/tests/scripts/model_state_purkinje",
+				command => "$::global_config->{core_directory}/tests/scripts/model_state_purkinje",
 				command_tests => [
 						  {
 						   description => "Can we reinitialize using the serialized state of the purkinje cell, saved state ?",
